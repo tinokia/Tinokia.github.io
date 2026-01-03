@@ -1,1 +1,1 @@
-# Tinokia.github.io
+# tinokia.github.io
