@@ -1,0 +1,859 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head><meta charset="UTF-8">
+<title>Bài trắc nghiệm</title>
+<style>
+body{
+  font-family: Arial, sans-serif;
+  background:#f2f8ff;
+  padding:20px;
+}
+h1{
+  text-align:center;
+  color:#2b5aa0;
+}
+/* ===== GRID 2 CÂU / 1 HÀNG ===== */
+#questions{
+  display:grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap:20px;
+}
+/* Mobile về 1 cột */
+@media (max-width: 768px){
+  #questions{
+    grid-template-columns: 1fr;
+  }
+}
+.question{
+  background:#fff;
+  padding:15px;
+  border-radius:6px;
+}
+.q-title{
+  margin-bottom:8px;
+  font-weight:bold;
+}
+.answers label{
+  display:block;
+  margin-left:15px;
+  cursor:pointer;
+}
+.dung{
+  color:green;
+  font-weight:bold;
+}
+.sai{
+  color:red;
+  text-decoration:line-through;
+}
+#controls{
+  margin-top:25px;
+}
+button{
+  padding:8px 15px;
+  font-size:16px;
+  cursor:pointer;
+}
+#ketqua{
+  margin-top:15px;
+  font-size:18px;
+  font-weight:bold;
+}
+</style>
+</head>
+<body>
+<h1>Trắc nghiệm Vi Diệu Pháp</h1>
+<button><a href="../index.html">Trang Chủ</a></button>
+<div id="questions">
+<!-- ===== CÂU 1 ===== -->
+<div class="question">
+  <p class="q-title"><span class="stt"></span>Tâm Vương có mấy loại tâm lớn ?</p>
+  <div class="answers">
+    <label><input type="radio" name="q1" value="A">2</label>
+    <label><input type="radio" name="q1" value="B">3</label>
+    <label><input type="radio" name="q1" value="C">1</label>
+    <label><input type="radio" name="q1" value="D">4</label>
+  </div><input type="hidden" value="D"></div>
+<!-- ===== CÂU 2 ===== -->
+<div class="question">
+  <p class="q-title"><span class="stt"></span>Tâm Dục Giới có mấy loại tâm nhỏ ?</p>
+  <div class="answers">
+    <label><input type="radio" name="q2" value="A">53</label>
+    <label><input type="radio" name="q2" value="B">54</label>
+    <label><input type="radio" name="q2" value="C">55</label>
+    <label><input type="radio" name="q2" value="D">56</label>
+  </div><input type="hidden" value="B"></div>
+<!-- ===== CÂU 3 ===== -->
+<div class="question">
+  <p class="q-title"><span class="stt"></span>Tâm Bất Thiện có mấy loại tâm nhỏ ?</p>
+  <div class="answers">
+    <label><input type="radio" name="q3" value="A">16</label>
+    <label><input type="radio" name="q3" value="B">10</label>
+    <label><input type="radio" name="q3" value="C">12</label>
+    <label><input type="radio" name="q3" value="D">18</label>
+  </div><input type="hidden" value="C"></div>
+<!-- ===== CÂU 4 ===== -->
+<div class="question">
+  <p class="q-title"><span class="stt"></span>Tâm Vô Nhân có mấy loại tâm nhỏ ?</p>
+  <div class="answers">
+    <label><input type="radio" name="q4" value="A">18</label>
+    <label><input type="radio" name="q4" value="B">16</label>
+    <label><input type="radio" name="q4" value="C">14</label>
+    <label><input type="radio" name="q4" value="D">20</label>
+  </div><input type="hidden" value="A"></div>
+<!-- ===== CÂU 5 ===== -->
+<div class="question">
+  <p class="q-title"><span class="stt"></span>Tâm Dục Giới Tịnh Hảo có mấy loại tâm nhỏ ?</p>
+  <div class="answers">
+    <label><input type="radio" name="q5" value="A">23</label>
+    <label><input type="radio" name="q5" value="B">24</label>
+    <label><input type="radio" name="q5" value="C">25</label>
+    <label><input type="radio" name="q5" value="D">26</label>
+  </div><input type="hidden" value="B"></div>
+<!-- ===== CÂU 6 ===== -->
+<div class="question">
+  <p class="q-title"><span class="stt"></span>Tâm tham có mấy loại ?</p>
+  <div class="answers">
+    <label><input type="radio" name="q6" value="A">8</label>
+    <label><input type="radio" name="q6" value="B">9</label>
+    <label><input type="radio" name="q6" value="C">5</label>
+    <label><input type="radio" name="q6" value="D">6</label>
+  </div><input type="hidden" value="A"></div>
+<!-- ===== CÂU 7 ===== -->
+<div class="question">
+  <p class="q-title"><span class="stt"></span>Tâm sân có mấy loại ?</p>
+  <div class="answers">
+    <label><input type="radio" name="q7" value="A">2</label>
+    <label><input type="radio" name="q7" value="B">3</label>
+    <label><input type="radio" name="q7" value="C">5</label>
+    <label><input type="radio" name="q7" value="D">4</label>
+  </div><input type="hidden" value="A"></div>
+<!-- ===== CÂU 8 ===== -->
+<div class="question">
+  <p class="q-title"><span class="stt"></span>Tâm si có mấy loại ?</p>
+  <div class="answers">
+    <label><input type="radio" name="q8" value="A">1</label>
+    <label><input type="radio" name="q8" value="B">2</label>
+    <label><input type="radio" name="q8" value="C">6</label>
+    <label><input type="radio" name="q8" value="D">4</label>
+  </div><input type="hidden" value="B"></div>
+<!-- ===== CÂU 9 ===== -->
+<div class="question">
+  <p class="q-title"><span class="stt"></span>Tâm Quả bất thiện vô nhân có mấy loại ?</p>
+  <div class="answers">
+    <label><input type="radio" name="q9" value="A">5</label>
+    <label><input type="radio" name="q9" value="B">6</label>
+    <label><input type="radio" name="q9" value="C">7</label>
+    <label><input type="radio" name="q9" value="D">8</label>
+  </div><input type="hidden" value="C"></div>
+<!-- ===== CÂU 10 ===== -->
+<div class="question">
+  <p class="q-title"><span class="stt"></span>Tâm Quả thiện vô nhân có mấy loại ?</p>
+  <div class="answers">
+    <label><input type="radio" name="q10" value="A">10</label>
+    <label><input type="radio" name="q10" value="B">9</label>
+    <label><input type="radio" name="q10" value="C">7</label>
+    <label><input type="radio" name="q10" value="D">8</label>
+  </div><input type="hidden" value="D"></div>
+<!-- ===== CÂU 11 ===== -->
+<div class="question">
+  <p class="q-title"><span class="stt"></span>Tâm Duy Tác vô nhân có mấy loại ?</p>
+  <div class="answers">
+    <label><input type="radio" name="q11" value="A">9</label>
+    <label><input type="radio" name="q11" value="B">3</label>
+    <label><input type="radio" name="q11" value="C">7</label>
+    <label><input type="radio" name="q11" value="D">5</label>
+  </div><input type="hidden" value="B"></div>
+<!-- ===== CÂU 12 ===== -->
+<div class="question">
+  <p class="q-title"><span class="stt"></span>Tâm Thiện dục giới tịnh hảo có mấy loại ?</p>
+  <div class="answers">
+    <label><input type="radio" name="q12" value="A">8</label>
+    <label><input type="radio" name="q12" value="B">6</label>
+    <label><input type="radio" name="q12" value="C">7</label>
+    <label><input type="radio" name="q12" value="D">5</label>
+  </div><input type="hidden" value="A"></div>
+<!-- ===== CÂU 13 ===== -->
+<div class="question">
+  <p class="q-title"><span class="stt"></span>Tâm Quả dục giới tịnh hảo có mấy loại ?</p>
+  <div class="answers">
+    <label><input type="radio" name="q13" value="A">5</label>
+    <label><input type="radio" name="q13" value="B">9</label>
+    <label><input type="radio" name="q13" value="C">8</label>
+    <label><input type="radio" name="q13" value="D">6</label>
+  </div><input type="hidden" value="C"></div>
+<!-- ===== CÂU 14 ===== -->
+<div class="question">
+  <p class="q-title"><span class="stt"></span>Tâm Duy tác dục giới tịnh hảo có mấy loại ?</p>
+  <div class="answers">
+    <label><input type="radio" name="q14" value="A">2</label>
+    <label><input type="radio" name="q14" value="B">3</label>
+    <label><input type="radio" name="q14" value="C">5</label>
+    <label><input type="radio" name="q14" value="D">8</label>
+  </div><input type="hidden" value="D"></div>
+<!-- ===== CÂU 15 ===== -->
+<div class="question">
+  <p class="q-title"><span class="stt"></span>Tâm Sắc Giới có mấy loại tâm nhỏ ?</p>
+  <div class="answers">
+    <label><input type="radio" name="q15" value="A">15</label>
+    <label><input type="radio" name="q15" value="B">16</label>
+    <label><input type="radio" name="q15" value="C">17</label>
+    <label><input type="radio" name="q15" value="D">14</label>
+  </div><input type="hidden" value="A"></div>
+<!-- ===== CÂU 16 ===== -->
+<div class="question">
+  <p class="q-title"><span class="stt"></span>Tâm Thiện Sắc Giới có mấy loại ?</p>
+  <div class="answers">
+    <label><input type="radio" name="q16" value="A">4</label>
+    <label><input type="radio" name="q16" value="B">5</label>
+    <label><input type="radio" name="q16" value="C">8</label>
+    <label><input type="radio" name="q16" value="D">6</label>
+  </div><input type="hidden" value="B"></div>
+<!-- ===== CÂU 17 ===== -->
+<div class="question">
+  <p class="q-title"><span class="stt"></span>Tâm Quả Sắc Giới có mấy loại ?</p>
+  <div class="answers">
+    <label><input type="radio" name="q17" value="A">2</label>
+    <label><input type="radio" name="q17" value="B">3</label>
+    <label><input type="radio" name="q17" value="C">5</label>
+    <label><input type="radio" name="q17" value="D">8</label>
+  </div><input type="hidden" value="C"></div>
+<!-- ===== CÂU 18 ===== -->
+<div class="question">
+  <p class="q-title"><span class="stt"></span>Tâm Duy Tác Sắc Giới có mấy loại ?</p>
+  <div class="answers">
+    <label><input type="radio" name="q18" value="A">1</label>
+    <label><input type="radio" name="q18" value="B">2</label>
+    <label><input type="radio" name="q18" value="C">6</label>
+    <label><input type="radio" name="q18" value="D">5</label>
+  </div><input type="hidden" value="D"></div>
+<!-- ===== CÂU 19 ===== -->
+<div class="question">
+  <p class="q-title"><span class="stt"></span>Tâm Vô Sắc Giới có mấy loại Tâm nhỏ ?</p>
+  <div class="answers">
+    <label><input type="radio" name="q19" value="A">12</label>
+    <label><input type="radio" name="q19" value="B">13</label>
+    <label><input type="radio" name="q19" value="C">15</label>
+    <label><input type="radio" name="q19" value="D">14</label>
+  </div><input type="hidden" value="A"></div>
+<!-- ===== CÂU 20 ===== -->
+<div class="question">
+  <p class="q-title"><span class="stt"></span>Tâm Thiện vô sắc giới có mấy loại ?</p>
+  <div class="answers">
+    <label><input type="radio" name="q20" value="A">5</label>
+    <label><input type="radio" name="q20" value="B">4</label>
+    <label><input type="radio" name="q20" value="C">7</label>
+    <label><input type="radio" name="q20" value="D">6</label>
+  </div><input type="hidden" value="B"></div>
+<!-- ===== CÂU 21 ===== -->
+<div class="question">
+  <p class="q-title"><span class="stt"></span>Tâm Quả vô sắc giới có mấy loại ?</p>
+  <div class="answers">
+    <label><input type="radio" name="q21" value="A">2</label>
+    <label><input type="radio" name="q21" value="B">3</label>
+    <label><input type="radio" name="q21" value="C">4</label>
+    <label><input type="radio" name="q21" value="D">8</label>
+  </div><input type="hidden" value="C"></div>
+<!-- ===== CÂU 22 ===== -->
+<div class="question">
+  <p class="q-title"><span class="stt"></span>Tâm Duy Tác vô sắc giới có mấy loại ?</p>
+  <div class="answers">
+    <label><input type="radio" name="q22" value="A">1</label>
+    <label><input type="radio" name="q22" value="B">2</label>
+    <label><input type="radio" name="q22" value="C">6</label>
+    <label><input type="radio" name="q22" value="D">4</label>
+  </div><input type="hidden" value="D"></div>
+<!-- ===== CÂU 23 ===== -->
+<div class="question">
+  <p class="q-title"><span class="stt"></span>Tâm Siêu Thế có mấy loại Tâm nhỏ ?</p>
+  <div class="answers">
+    <label><input type="radio" name="q23" value="A">40</label>
+    <label><input type="radio" name="q23" value="B">41</label>
+    <label><input type="radio" name="q23" value="C">39</label>
+    <label><input type="radio" name="q23" value="D">38</label>
+  </div><input type="hidden" value="A"></div>
+<!-- ===== CÂU 24 ===== -->
+<div class="question">
+  <p class="q-title"><span class="stt"></span>Tâm Đạo siêu thế có mấy loại Tâm nhỏ ?</p>
+  <div class="answers">
+    <label><input type="radio" name="q24" value="A">19</label>
+    <label><input type="radio" name="q24" value="B">20</label>
+    <label><input type="radio" name="q24" value="C">21</label>
+    <label><input type="radio" name="q24" value="D">22</label>
+  </div><input type="hidden" value="B"></div>
+<!-- ===== CÂU 25 ===== -->
+<div class="question">
+  <p class="q-title"><span class="stt"></span>Tâm Quả siêu thế có mấy loại Tâm nhỏ ?</p>
+  <div class="answers">
+    <label><input type="radio" name="q25" value="A">18</label>
+    <label><input type="radio" name="q25" value="B">19</label>
+    <label><input type="radio" name="q25" value="C">20</label>
+    <label><input type="radio" name="q25" value="D">22</label>
+  </div><input type="hidden" value="C"></div>
+<!-- ===== CÂU 26 ===== -->
+<div class="question">
+  <p class="q-title"><span class="stt"></span>Tâm Sơ Đạo có mấy loại ?</p>
+  <div class="answers">
+    <label><input type="radio" name="q26" value="A">7</label>
+    <label><input type="radio" name="q26" value="B">4</label>
+    <label><input type="radio" name="q26" value="C">6</label>
+    <label><input type="radio" name="q26" value="D">5</label>
+  </div><input type="hidden" value="D"></div>
+<!-- ===== CÂU 27 ===== -->
+<div class="question">
+  <p class="q-title"><span class="stt"></span>Tâm Nhị Đạo có mấy loại ?</p>
+  <div class="answers">
+    <label><input type="radio" name="q27" value="A">5</label>
+    <label><input type="radio" name="q27" value="B">4</label>
+    <label><input type="radio" name="q27" value="C">6</label>
+    <label><input type="radio" name="q27" value="D">8</label>
+  </div><input type="hidden" value="A"></div>
+<!-- ===== CÂU 28 ===== -->
+<div class="question">
+  <p class="q-title"><span class="stt"></span>Tâm Tam Đạo có mấy loại ?</p>
+  <div class="answers">
+    <label><input type="radio" name="q28" value="A">9</label>
+    <label><input type="radio" name="q28" value="B">5</label>
+    <label><input type="radio" name="q28" value="C">7</label>
+    <label><input type="radio" name="q28" value="D">6</label>
+  </div><input type="hidden" value="B"></div>
+<!-- ===== CÂU 29 ===== -->
+<div class="question">
+  <p class="q-title"><span class="stt"></span>Tâm Tứ Đạo có mấy loại ?</p>
+  <div class="answers">
+    <label><input type="radio" name="q29" value="A">6</label>
+    <label><input type="radio" name="q29" value="B">3</label>
+    <label><input type="radio" name="q29" value="C">5</label>
+    <label><input type="radio" name="q29" value="D">8</label>
+  </div><input type="hidden" value="C"></div>
+<!-- ===== CÂU 30 ===== -->
+<div class="question">
+  <p class="q-title"><span class="stt"></span>Tâm Sơ Quả có mấy loại ?</p>
+  <div class="answers">
+    <label><input type="radio" name="q30" value="A">1</label>
+    <label><input type="radio" name="q30" value="B">2</label>
+    <label><input type="radio" name="q30" value="C">6</label>
+    <label><input type="radio" name="q30" value="D">5</label>
+  </div><input type="hidden" value="D"></div>
+<!-- ===== CÂU 31 ===== -->
+<div class="question">
+  <p class="q-title"><span class="stt"></span>Tâm Nhị Quả có mấy loại ?</p>
+  <div class="answers">
+    <label><input type="radio" name="q31" value="A">5</label>
+    <label><input type="radio" name="q31" value="B">6</label>
+    <label><input type="radio" name="q31" value="C">7</label>
+    <label><input type="radio" name="q31" value="D">3</label>
+  </div><input type="hidden" value="A"></div>
+<!-- ===== CÂU 32 ===== -->
+<div class="question">
+  <p class="q-title"><span class="stt"></span>Tâm Tam Quả có mấy loại ?</p>
+  <div class="answers">
+    <label><input type="radio" name="q32" value="A">4</label>
+    <label><input type="radio" name="q32" value="B">5</label>
+    <label><input type="radio" name="q32" value="C">8</label>
+    <label><input type="radio" name="q32" value="D">9</label>
+  </div><input type="hidden" value="B"></div>
+<!-- ===== CÂU 33 ===== -->
+<div class="question">
+  <p class="q-title"><span class="stt"></span>Tâm Tứ Quả có mấy loại ?</p>
+  <div class="answers">
+    <label><input type="radio" name="q33" value="A">8</label>
+    <label><input type="radio" name="q33" value="B">7</label>
+    <label><input type="radio" name="q33" value="C">5</label>
+    <label><input type="radio" name="q33" value="D">6</label>
+  </div><input type="hidden" value="C"></div>
+<!-- ===== CÂU 34 ===== -->
+<div class="question">
+  <p class="q-title"><span class="stt"></span>Tâm Bất Thiện có mấy loại tâm lớn ?</p>
+  <div class="answers">
+    <label><input type="radio" name="q34" value="A">2</label>
+    <label><input type="radio" name="q34" value="B">3</label>
+    <label><input type="radio" name="q34" value="C">4</label>
+    <label><input type="radio" name="q34" value="D">5</label>
+  </div><input type="hidden" value="B"></div>
+<!-- ===== CÂU 35 ===== -->
+<div class="question">
+  <p class="q-title"><span class="stt"></span>Tâm Vô Nhân có mấy loại tâm lớn ?</p>
+  <div class="answers">
+    <label><input type="radio" name="q35" value="A">6</label>
+    <label><input type="radio" name="q35" value="B">5</label>
+    <label><input type="radio" name="q35" value="C">4</label>
+    <label><input type="radio" name="q35" value="D">3</label>
+  </div><input type="hidden" value="D"></div>
+<!-- ===== CÂU 36 ===== -->
+<div class="question">
+  <p class="q-title"><span class="stt"></span>Tâm Dục Giới Tịnh Hảo có mấy loại tâm lớn ?</p>
+  <div class="answers">
+    <label><input type="radio" name="q36" value="A">1</label>
+    <label><input type="radio" name="q36" value="B">2</label>
+    <label><input type="radio" name="q36" value="C">3</label>
+    <label><input type="radio" name="q36" value="D">5</label>
+  </div><input type="hidden" value="C"></div>
+<!-- ===== CÂU 37 ===== -->
+<div class="question">
+  <p class="q-title"><span class="stt"></span>Tâm Sắc Giới có mấy loại tâm lớn ?</p>
+  <div class="answers">
+    <label><input type="radio" name="q37" value="A">7</label>
+    <label><input type="radio" name="q37" value="B">6</label>
+    <label><input type="radio" name="q37" value="C">4</label>
+    <label><input type="radio" name="q37" value="D">3</label>
+  </div><input type="hidden" value="D"></div>
+<!-- ===== CÂU 38 ===== -->
+<div class="question">
+  <p class="q-title"><span class="stt"></span>Tâm Vô Sắc Giới có mấy loại Tâm lớn ?</p>
+  <div class="answers">
+    <label><input type="radio" name="q38" value="A">2</label>
+    <label><input type="radio" name="q38" value="B">1</label>
+    <label><input type="radio" name="q38" value="C">3</label>
+    <label><input type="radio" name="q38" value="D">5</label>
+  </div><input type="hidden" value="C"></div>
+<!-- ===== CÂU 39 ===== -->
+<div class="question">
+  <p class="q-title"><span class="stt"></span>Tâm Siêu Thế có mấy loại Tâm lớn ?</p>
+  <div class="answers">
+    <label><input type="radio" name="q39" value="A">1</label>
+    <label><input type="radio" name="q39" value="B">2</label>
+    <label><input type="radio" name="q39" value="C">3</label>
+    <label><input type="radio" name="q39" value="D">4</label>
+  </div><input type="hidden" value="B"></div>
+<!-- ===== CÂU 40 ===== -->
+<div class="question">
+  <p class="q-title"><span class="stt"></span>Tâm Đạo siêu thế có mấy loại Tâm lớn ?</p>
+  <div class="answers">
+    <label><input type="radio" name="q40" value="A">5</label>
+    <label><input type="radio" name="q40" value="B">7</label>
+    <label><input type="radio" name="q40" value="C">4</label>
+    <label><input type="radio" name="q40" value="D">8</label>
+  </div>
+  <input type="hidden" value="C">
+</div>
+<!-- ===== CÂU 41 ===== -->
+<div class="question">
+  <p class="q-title"><span class="stt"></span>Tâm Quả siêu thế có mấy loại Tâm lớn ?</p>
+  <div class="answers">
+    <label><input type="radio" name="q41" value="A">6</label>
+    <label><input type="radio" name="q41" value="B">5</label>
+    <label><input type="radio" name="q41" value="C">3</label>
+    <label><input type="radio" name="q41" value="D">4</label>
+  </div>
+  <input type="hidden" value="D">
+</div>
+<!-- ===== CÂU 42 ===== -->
+<div class="question">
+  <p class="q-title"><span class="stt"></span>Tâm Sở có mấy loại Tâm lớn ?</p>
+  <div class="answers">
+    <label><input type="radio" name="q42" value="A">3</label>
+    <label><input type="radio" name="q42" value="B">6</label>
+    <label><input type="radio" name="q42" value="C">7</label>
+    <label><input type="radio" name="q42" value="D">4</label>
+  </div>
+  <input type="hidden" value="A">
+</div>
+<!-- ===== CÂU 43 ===== -->
+<div class="question">
+  <p class="q-title"><span class="stt"></span>Tâm Sở hữu Tợ Tha có mấy loại tâm lớn ?</p>
+  <div class="answers">
+    <label><input type="radio" name="q43" value="A">1</label>
+    <label><input type="radio" name="q43" value="B">2</label>
+    <label><input type="radio" name="q43" value="C">4</label>
+    <label><input type="radio" name="q43" value="D">3</label>
+  </div>
+  <input type="hidden" value="B">
+</div>
+<!-- ===== CÂU 44 ===== -->
+<div class="question">
+  <p class="q-title"><span class="stt"></span>Tâm Sở hữu Tợ Tha có mấy loại tâm nhỏ ?</p>
+  <div class="answers">
+    <label><input type="radio" name="q44" value="A">11</label>
+    <label><input type="radio" name="q44" value="B">12</label>
+    <label><input type="radio" name="q44" value="C">13</label>
+    <label><input type="radio" name="q44" value="D">10</label>
+  </div>
+  <input type="hidden" value="C">
+</div>
+<!-- ===== CÂU 45 ===== -->
+<div class="question">
+  <p class="q-title"><span class="stt"></span>Tâm Sở Hữu Biến Hành có mấy loại ?</p>
+  <div class="answers">
+    <label><input type="radio" name="q45" value="A">8</label>
+    <label><input type="radio" name="q45" value="B">4</label>
+    <label><input type="radio" name="q45" value="C">6</label>
+    <label><input type="radio" name="q45" value="D">7</label>
+  </div>
+  <input type="hidden" value="D">
+</div>
+<!-- ===== CÂU 46 ===== -->
+<div class="question">
+  <p class="q-title"><span class="stt"></span>Tâm Sở Hữu Biệt Cảnh có mấy loại ?</p>
+  <div class="answers">
+    <label><input type="radio" name="q46" value="A">6</label>
+    <label><input type="radio" name="q46" value="B">4</label>
+    <label><input type="radio" name="q46" value="C">5</label>
+    <label><input type="radio" name="q46" value="D">8</label>
+  </div>
+  <input type="hidden" value="A">
+</div>
+<!-- ===== CÂU 47 ===== -->
+<div class="question">
+  <p class="q-title"><span class="stt"></span>Tâm Sở Hữu Bất Thiện có mấy loại Tâm lớn ?</p>
+  <div class="answers">
+    <label><input type="radio" name="q47" value="A">9</label>
+    <label><input type="radio" name="q47" value="B">5</label>
+    <label><input type="radio" name="q47" value="C">7</label>
+    <label><input type="radio" name="q47" value="D">6</label>
+  </div>
+  <input type="hidden" value="B">
+</div>
+<!-- ===== CÂU 48 ===== -->
+<div class="question">
+  <p class="q-title"><span class="stt"></span>Tâm Sở Hữu Bất Thiện có mấy loại Tâm nhỏ ?</p>
+  <div class="answers">
+    <label><input type="radio" name="q48" value="A">16</label>
+    <label><input type="radio" name="q48" value="B">13</label>
+    <label><input type="radio" name="q48" value="C">14</label>
+    <label><input type="radio" name="q48" value="D">15</label>
+  </div>
+  <input type="hidden" value="C">
+</div>
+<!-- ===== CÂU 49 ===== -->
+<div class="question">
+  <p class="q-title"><span class="stt"></span>Tâm Sở Hữu Bất Thiện Si Phần có mấy loại ?</p>
+  <div class="answers">
+    <label><input type="radio" name="q49" value="A">4</label>
+    <label><input type="radio" name="q49" value="B">6</label>
+    <label><input type="radio" name="q49" value="C">7</label>
+    <label><input type="radio" name="q49" value="D">5</label>
+  </div>
+  <input type="hidden" value="A">
+</div>
+<!-- ===== CÂU 50 ===== -->
+<div class="question">
+  <p class="q-title"><span class="stt"></span>Tâm Sở Hữu Bất Thiện Tham Phần có mấy loại ?</p>
+  <div class="answers">
+    <label><input type="radio" name="q50" value="A">1</label>
+    <label><input type="radio" name="q50" value="B">3</label>
+    <label><input type="radio" name="q50" value="C">4</label>
+    <label><input type="radio" name="q50" value="D">5</label>
+  </div>
+  <input type="hidden" value="B">
+</div>
+<!-- ===== CÂU 51 ===== -->
+<div class="question">
+  <p class="q-title"><span class="stt"></span>Tâm Sở Hữu Bất Thiện Sân Phần có mấy loại ?</p>
+  <div class="answers">
+    <label><input type="radio" name="q51" value="A">1</label>
+    <label><input type="radio" name="q51" value="B">2</label>
+    <label><input type="radio" name="q51" value="C">4</label>
+    <label><input type="radio" name="q51" value="D">5</label>
+  </div>
+  <input type="hidden" value="C">
+</div>
+<!-- ===== CÂU 52 ===== -->
+<div class="question">
+  <p class="q-title"><span class="stt"></span>Tâm Sở Hữu Bất Thiện Hôn Phần có mấy loại ?</p>
+  <div class="answers">
+    <label><input type="radio" name="q52" value="A">1</label>
+    <label><input type="radio" name="q52" value="B">4</label>
+    <label><input type="radio" name="q52" value="C">3</label>
+    <label><input type="radio" name="q52" value="D">2</label>
+  </div>
+  <input type="hidden" value="D">
+</div>
+<!-- ===== CÂU 53 ===== -->
+<div class="question">
+  <p class="q-title"><span class="stt"></span>Tâm Sở Hữu Bất Thiện Hoài Nghi có mấy loại ?</p>
+  <div class="answers">
+    <label><input type="radio" name="q53" value="A">1</label>
+    <label><input type="radio" name="q53" value="B">2</label>
+    <label><input type="radio" name="q53" value="C">5</label>
+    <label><input type="radio" name="q53" value="D">4</label>
+  </div>
+  <input type="hidden" value="A">
+</div>
+-- ===== CÂU 54 ===== -->
+<div class="question">
+  <p class="q-title"><span class="stt"></span>Tâm Sở Hữu Tịnh Hảo có mấy loại Tâm lớn ?</p>
+  <div class="answers">
+    <label><input type="radio" name="q54" value="A">4</label>
+    <label><input type="radio" name="q54" value="B">6</label>
+    <label><input type="radio" name="q54" value="C">7</label>
+    <label><input type="radio" name="q54" value="D">5</label>
+  </div>
+  <input type="hidden" value="A">
+</div>
+<!-- ===== CÂU 55 ===== -->
+<div class="question">
+  <p class="q-title"><span class="stt"></span>Tâm Sở Hữu Tịnh Hảo có mấy loại Tâm nhỏ ?</p>
+  <div class="answers">
+    <label><input type="radio" name="q55" value="A">24</label>
+    <label><input type="radio" name="q55" value="B">25</label>
+    <label><input type="radio" name="q55" value="C">26</label>
+    <label><input type="radio" name="q55" value="D">27</label>
+  </div>
+  <input type="hidden" value="B">
+</div>
+<!-- ===== CÂU 56 ===== -->
+<div class="question">
+  <p class="q-title"><span class="stt"></span>Tâm Sở Hữu Tịnh Hảo Biến Hành có mấy loại ?</p>
+  <div class="answers">
+    <label><input type="radio" name="q56" value="A">21</label>
+    <label><input type="radio" name="q56" value="B">20</label>
+    <label><input type="radio" name="q56" value="C">19</label>
+    <label><input type="radio" name="q56" value="D">18</label>
+  </div>
+  <input type="hidden" value="C">
+</div>
+<!-- ===== CÂU 57 ===== -->
+<div class="question">
+  <p class="q-title"><span class="stt"></span>Tâm Sở Hữu Tịnh Hảo Tiết Chế (Giới Phần) có mấy loại ?</p>
+  <div class="answers">
+    <label><input type="radio" name="q57" value="A">1</label>
+    <label><input type="radio" name="q57" value="B">4</label>
+    <label><input type="radio" name="q57" value="C">2</label>
+    <label><input type="radio" name="q57" value="D">3</label>
+  </div>
+  <input type="hidden" value="D">
+</div>
+<!-- ===== CÂU 58 ===== -->
+<div class="question">
+  <p class="q-title"><span class="stt"></span>Tâm Sở Hữu Tịnh Hảo Vô Lượng Phần có mấy loại ?</p>
+  <div class="answers">
+    <label><input type="radio" name="q58" value="A">2</label>
+    <label><input type="radio" name="q58" value="B">3</label>
+    <label><input type="radio" name="q58" value="C">5</label>
+    <label><input type="radio" name="q58" value="D">4</label>
+  </div>
+  <input type="hidden" value="A">
+</div>
+<!-- ===== CÂU 59 ===== -->
+<div class="question">
+  <p class="q-title"><span class="stt"></span>Tâm Sở Hữu Tịnh Hảo Trí Tuệ có mấy loại ?</p>
+  <div class="answers">
+    <label><input type="radio" name="q59" value="A">2</label>
+    <label><input type="radio" name="q59" value="B">1</label>
+    <label><input type="radio" name="q59" value="C">4</label>
+    <label><input type="radio" name="q59" value="D">5</label>
+  </div>
+  <input type="hidden" value="B">
+</div>
+<!-- ===== CÂU 60 ===== -->
+<div class="question">
+  <p class="q-title"><span class="stt"></span>Sắc Pháp có mấy loại lớn ?</p>
+  <div class="answers">
+    <label><input type="radio" name="q60" value="A">2</label>
+    <label><input type="radio" name="q60" value="B">3</label>
+    <label><input type="radio" name="q60" value="C">4</label>
+    <label><input type="radio" name="q60" value="D">5</label>
+  </div>
+  <input type="hidden" value="A">
+</div>
+<!-- ===== CÂU 61 ==== -->
+<div class="question">
+  <p class="q-title"><span class="stt"></span>Sắc Pháp có mấy loại nhỏ ?</p>
+  <div class="answers">
+    <label><input type="radio" name="q61" value="A">24</label>
+    <label><input type="radio" name="q61" value="B">28</label>
+    <label><input type="radio" name="q61" value="C">26</label>
+    <label><input type="radio" name="q61" value="D">27</label>
+  </div>
+  <input type="hidden" value="B">
+</div>
+<!-- ===== CÂU 62 ===== -->
+<div class="question">
+  <p class="q-title"><span class="stt"></span>Sắc Pháp Tứ Đại có mấy loại ?</p>
+  <div class="answers">
+    <label><input type="radio" name="q62" value="A">2</label>
+    <label><input type="radio" name="q62" value="B">3</label>
+    <label><input type="radio" name="q62" value="C">4</label>
+    <label><input type="radio" name="q62" value="D">5</label>
+  </div>
+  <input type="hidden" value="C">
+</div>
+<!-- ===== CÂU 63 ===== -->
+<div class="question">
+  <p class="q-title"><span class="stt"></span>Sắc Pháp Y Ðại Sinh có mấy loại ?</p>
+  <div class="answers">
+    <label><input type="radio" name="q63" value="A">24</label>
+    <label><input type="radio" name="q63" value="B">23</label>
+    <label><input type="radio" name="q63" value="C">25</label>
+    <label><input type="radio" name="q63" value="D">26/label>
+  </div>
+  <input type="hidden" value="A">
+</div>
+<!-- ===== CÂU 64 ===== -->
+<div class="question">
+  <p class="q-title"><span class="stt"></span>Sắc Pháp Y Ðại Sinh Thần Kinh có mấy loại ?</p>
+  <div class="answers">
+    <label><input type="radio" name="q64" value="A">5</label>
+    <label><input type="radio" name="q64" value="B">3</label>
+    <label><input type="radio" name="q64" value="C">4</label>
+    <label><input type="radio" name="q64" value="D">6</label>
+  </div>
+  <input type="hidden" value="A">
+</div>
+<!-- ===== CÂU 65 ==== -->
+<div class="question">
+  <p class="q-title"><span class="stt"></span>Sắc Pháp Y Ðại Sinh Cảnh Giới có mấy loại ?</p>
+  <div class="answers">
+    <label><input type="radio" name="q65" value="A">5</label>
+    <label><input type="radio" name="q65" value="B">4</label>
+    <label><input type="radio" name="q65" value="C">3</label>
+    <label><input type="radio" name="q65" value="D">6</label>
+  </div>
+  <input type="hidden" value="B">
+</div>
+<!-- ===== CÂU 66 ===== -->
+<div class="question">
+  <p class="q-title"><span class="stt"></span>Sắc Pháp Y Ðại Sinh Tính có mấy loại ?</p>
+  <div class="answers">
+    <label><input type="radio" name="q66" value="A">4</label>
+    <label><input type="radio" name="q66" value="B">3</label>
+    <label><input type="radio" name="q66" value="C">2</label>
+    <label><input type="radio" name="q66" value="D">5</label>
+  </div>
+  <input type="hidden" value="C">
+</div>
+<!-- ===== CÂU 67 ===== -->
+<div class="question">
+  <p class="q-title"><span class="stt"></span>Sắc Pháp Y Ðại Sinh Biểu Tri có mấy loại ?</p>
+  <div class="answers">
+    <label><input type="radio" name="q67" value="A">5</label>
+    <label><input type="radio" name="q67" value="B">4</label>
+    <label><input type="radio" name="q67" value="C">3</label>
+    <label><input type="radio" name="q67" value="D">2</label>
+  </div>
+  <input type="hidden" value="D">
+</div>
+<!-- ===== CÂU 68 ===== -->
+<div class="question">
+  <p class="q-title"><span class="stt"></span>Sắc Pháp Y Ðại Sinh Ðặc Biệt có mấy loại ?</p>
+  <div class="answers">
+    <label><input type="radio" name="q68" value="A">3</label>
+    <label><input type="radio" name="q68" value="B">4</label>
+    <label><input type="radio" name="q68" value="C">5</label>
+    <label><input type="radio" name="q68" value="D">7</label>
+  </div>
+  <input type="hidden" value="A">
+</div>
+<!-- ===== CÂU 69 ===== -->
+<div class="question">
+  <p class="q-title"><span class="stt"></span>Sắc Pháp Y Ðại Sinh Tứ Tướng có mấy loại ?</p>
+  <div class="answers">
+    <label><input type="radio" name="q69" value="A">2</label>
+    <label><input type="radio" name="q69" value="B">4</label>
+    <label><input type="radio" name="q69" value="C">6</label>
+    <label><input type="radio" name="q69" value="D">5</label>
+  </div>
+  <input type="hidden" value="B">
+</div>
+<!-- ===== CÂU 70 ===== -->
+<div class="question">
+  <p class="q-title"><span class="stt"></span>Pháp Tục Ðế có mấy loại lớn ?</p>
+  <div class="answers">
+    <label><input type="radio" name="q70" value="A">2</label>
+    <label><input type="radio" name="q70" value="B">3</label>
+    <label><input type="radio" name="q70" value="C">4</label>
+    <label><input type="radio" name="q70" value="D">6</label>
+  </div>
+  <input type="hidden" value="A">
+</div>
+<!-- ===== CÂU 71 ==== -->
+<div class="question">
+  <p class="q-title"><span class="stt"></span>Pháp Tục Ðế Danh Chế Ðịnh có mấy loại ?</p>
+  <div class="answers">
+    <label><input type="radio" name="q71" value="A">5</label>
+    <label><input type="radio" name="q71" value="B">6</label>
+    <label><input type="radio" name="q71" value="C">3</label>
+    <label><input type="radio" name="q71" value="D">7</label>
+  </div>
+  <input type="hidden" value="B">
+</div>
+<!-- ===== CÂU 72 ===== -->
+<div class="question">
+  <p class="q-title"><span class="stt"></span>Pháp Tục Ðế Nghĩa Chế Ðịnh có mấy loại ?</p>
+  <div class="answers">
+    <label><input type="radio" name="q72" value="A">4</label>
+    <label><input type="radio" name="q72" value="B">3</label>
+    <label><input type="radio" name="q72" value="C">7</label>
+    <label><input type="radio" name="q72" value="D">5</label>
+  </div>
+  <input type="hidden" value="C">
+</div>
+
+</div>
+
+<!-- ===== ĐIỀU KHIỂN ===== -->
+<div id="controls">
+  <button onclick="chamDiem()">✅ Chấm điểm</button>
+  <button onclick="location.reload()">🔄 Làm lại</button>
+  <div id="ketqua"></div>
+</div>
+
+<script>
+// ===== RANDOM ĐÁP ÁN =====
+document.querySelectorAll(".answers").forEach(ans=>{
+  const items=[...ans.children];
+  for(let i=items.length-1;i>0;i--){
+    const j=Math.floor(Math.random()*(i+1));
+    [items[i],items[j]]=[items[j],items[i]];
+  }
+  items.forEach(i=>ans.appendChild(i));
+});
+// ===== RANDOM CÂU HỎI =====
+(function(){
+  const soCauLay = 12; // 👉 MUỐN BAO NHIÊU CÂU → SỬA SỐ NÀY
+
+  let qs = [...document.querySelectorAll(".question")];
+  const container = document.getElementById("questions");
+
+  // Xáo trộn toàn bộ 20 câu
+  for(let i=qs.length-1;i>0;i--){
+    const j=Math.floor(Math.random()*(i+1));
+    [qs[i],qs[j]]=[qs[j],qs[i]];
+  }
+
+  // Xóa hết trong khung
+  container.innerHTML = "";
+
+  // Chỉ lấy 10 câu đầu
+  qs.slice(0, soCauLay).forEach(q => container.appendChild(q));
+
+  // Cập nhật lại số thứ tự 1–10
+  capNhatSoThuTu();
+})();
+
+
+// ===== CẬP NHẬT SỐ THỨ TỰ (CÁCH 2) =====
+function capNhatSoThuTu(){
+  document.querySelectorAll(".question").forEach((q,i)=>{
+    q.querySelector(".stt").textContent=(i+1)+".";
+  });
+}
+
+// ===== CHẤM ĐIỂM + HIỆN ĐÁP ÁN =====
+function chamDiem(){
+  let dung=0,tong=0;
+
+  document.querySelectorAll(".question").forEach(q=>{
+    tong++;
+    const dapAn=q.querySelector('input[type="hidden"]').value;
+    const chon=q.querySelector('input[type="radio"]:checked')?.value;
+
+    q.querySelectorAll('input[type="radio"]').forEach(r=>{
+      r.disabled=true;
+      const lb=r.parentElement;
+      if(r.value===dapAn) lb.classList.add("dung");
+      if(r.checked && r.value!==dapAn) lb.classList.add("sai");
+    });
+
+    if(chon===dapAn) dung++;
+  });
+
+  document.getElementById("ketqua").innerHTML=
+    `✅ Bạn đúng <b>${dung}</b> / ${tong} câu`;
+}
+
+</script>
+
+</body>
+</html>
