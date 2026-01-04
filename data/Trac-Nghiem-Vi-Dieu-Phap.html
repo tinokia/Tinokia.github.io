@@ -59,6 +59,14 @@ button{
   font-size:18px;
   font-weight:bold;
 }
+#ketqua span{
+  display:block;
+  margin-top:6px;
+}
+.xep-loai{
+  font-size:20px;
+  color:#2b5aa0;
+}
 </style>
 </head>
 <body>
@@ -1118,29 +1126,46 @@ function capNhatSoThuTu(){
 
 // ===== CHẤM ĐIỂM + HIỆN ĐÁP ÁN =====
 function chamDiem(){
-  let dung=0,tong=0;
+  let dung = 0;
+  let tong = document.querySelectorAll(".question").length;
+  let diemMoiCau = 1; // 👉 mỗi câu 1 điểm
 
   document.querySelectorAll(".question").forEach(q=>{
-    tong++;
-    const dapAn=q.querySelector('input[type="hidden"]').value;
-    const chon=q.querySelector('input[type="radio"]:checked')?.value;
+    const dapAn = q.querySelector('input[type="hidden"]').value;
+    const chon = q.querySelector('input[type="radio"]:checked')?.value;
 
     q.querySelectorAll('input[type="radio"]').forEach(r=>{
-      r.disabled=true;
-      const lb=r.parentElement;
-      if(r.value===dapAn) lb.classList.add("dung");
-      if(r.checked && r.value!==dapAn) lb.classList.add("sai");
+      r.disabled = true;
+      const lb = r.parentElement;
+      if(r.value === dapAn) lb.classList.add("dung");
+      if(r.checked && r.value !== dapAn) lb.classList.add("sai");
     });
 
-    if(chon===dapAn) dung++;
+    if(chon === dapAn) dung++;
   });
 
-  document.getElementById("ketqua").innerHTML=
-    `✅ Bạn đúng <b>${dung}</b> / ${tong} câu`;
+  let tongDiem = tong * diemMoiCau;
+  let diem = dung * diemMoiCau;
+  let phanTram = Math.round((dung / tong) * 100);
+
+  // ===== XẾP LOẠI =====
+  let xepLoai = "";
+  if(phanTram >= 80) xepLoai = "🌟 Giỏi";
+  else if(phanTram >= 65) xepLoai = "👍 Khá";
+  else if(phanTram >= 50) xepLoai = "🙂 Trung bình";
+  else xepLoai = "⚠️ Yếu";
+
+  document.getElementById("ketqua").innerHTML = `
+    <span>✅ Đúng: <b>${dung}</b> / ${tong} câu</span>
+    <span>🎯 Điểm: <b>${diem}</b> / ${tongDiem}</span>
+    <span>📊 Tỷ lệ: <b>${phanTram}%</b></span>
+    <span class="xep-loai">🏆 Xếp loại: <b>${xepLoai}</b></span>
+  `;
 }
 
 </script>
 
 </body>
 </html>
+
 
