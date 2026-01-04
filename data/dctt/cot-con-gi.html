@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <title>Coi Cot Con Gi</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #fdf8f2;
+      padding: 20px;
+      color: #333;
+    }
+    h1 { color: #7d5200; }
+    label, select, button {
+      display: block;
+      margin: 10px 0;
+      font-size: 16px;
+    }
+    .result {
+      margin-top: 20px;
+      padding: 15px;
+      background: #fffbe6;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      white-space: pre-wrap;
+    }
+	iframe {
+  width: 575px;                 /* cố định chiều rộng */
+  height: 300px;                /* cố định chiều cao */
+  flex: 0 0 auto;               /* không co, không giãn */
+  border: none;
+  
+  box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+  background: #fff;
+}
+  </style>
+</head>
+<body>
+  <h1>Diễn Cầm Tam Thế - Coi Cốt Con Gì, Sang Hèn</h1>
+	<table border="0">
+  <tbody>
+    <tr>
+      <td><button><a href="../../index.html" style="color: red" >Trang Chủ</a></button></td>
+      <td><button><a href="../Dien-Cam-Tam-The.html" style="color: red" >Sách DCTT</a></button></td>
+    </tr>
+  </tbody>
+</table>
+
+  <iframe src="can-chi.html"></iframe>
+
+  <label for="tuoi">Chọn tuổi (12 con giáp):</label>
+  <select id="tuoi">
+    <option value="Tý">Tý</option>
+    <option value="Sửu">Sửu</option>
+    <option value="Dần">Dần</option>
+    <option value="Mẹo">Mẹo</option>
+    <option value="Thìn">Thìn</option>
+    <option value="Tỵ">Tỵ</option>
+    <option value="Ngọ">Ngọ</option>
+    <option value="Mùi">Mùi</option>
+    <option value="Thân">Thân</option>
+    <option value="Dậu">Dậu</option>
+    <option value="Tuất">Tuất</option>
+    <option value="Hợi">Hợi</option>
+  </select>
+
+  <label for="thang">Chọn tháng sanh (1–12 âm lịch):</label>
+<select id="thang">
+  <option value="1">Tháng 1</option>
+  <option value="2">Tháng 2</option>
+  <option value="3">Tháng 3</option>
+  <option value="4">Tháng 4</option>
+  <option value="5">Tháng 5</option>
+  <option value="6">Tháng 6</option>
+  <option value="7">Tháng 7</option>
+  <option value="8">Tháng 8</option>
+  <option value="9">Tháng 9</option>
+  <option value="10">Tháng 10</option>
+  <option value="11">Tháng 11</option>
+  <option value="12">Tháng 12</option>
+</select>
+
+  <button onclick="traCuu()">Tra cứu cốt</button>
+
+  <div class="result" id="result"></div>
+
+  <script>
+    const cotConData = {
+	  "Tý": {        
+	11: ["<strong>Cốt con Chó</strong>", "Sanh nhằm cốt Chó người có tánh khẳng khái lắm, ít sợ ai, hay giúp đỡ với đời, ở đời hay có lòng bênh vực anh em và trung tín, không chịu lời nói nặng lời, ít có hoạn nạn, tuổi lớn trở nên sự nghiệp."],
+	12: ["<strong>Cốt con Heo</strong>", "Sanh nhằm cốt Heo người có tánh ngay thẳng, đặng sang trọng nhưng không có ở xứ cha mẹ sanh, bề ăn uống dễ hay mạnh khoẻ, người tử tế ưa yêu chuộng quí thể."],        
+	1: ["<strong>Cốt con Chuột</strong>", "Sanh nhằm cốt chuột tánh không can đảm, hay thù nhỏ mọn, hay có tật bệnh lặt vặt trong mình thường lắm, hay buồn rầu, ít vui, hay tranh luận, ăn mặc như thường."],
+	2: ["<strong>Cốt con Trâu</strong>", "Sanh nhằm cốt Trâu làm người tánh khéo trí sáng, thấy việc chi cũng mau hiểu, tánh ngay thẳng với người, số đi xa xứ có anh em bạn tử tế, những việc làm có ích cho đời không đến ơn mà vẫn làm hoài."],
+	3: ["<strong>Cốt con Cọp</strong>", "Sanh nhằm cốt Cọp không có phát đạt ở xứ cha mẹ sanh, đi xa xứ làm ăn khá, số đặng sang trọng, ăn mặc đầy đủ, luận mưu chi thì có đặng nấy, có quyền hành oai võ, ăn uống dễ, bất luận ngon dở."],
+	4: ["<strong>Cốt con Mèo</strong>", "Sanh nhằm cốt Mèo làm việc gì ban đầu khởi lớn, lúc sau như không có như học nhiều biết ít, có số ở chỗ cha mẹ sanh đặng nên, dẫn dẫn đến khi lớn tuổi cũng đặng khá, ý vui vẻ mà có tánh nhát."],
+	5: ["<strong>Cốt con Rồng</strong>", "Sanh nhằm cốt Rồng người đặng sang trọng lại có oai quyền, tài lợi phát đạt, lại có danh tiếng, ở đặng yên, tánh vui vẻ, không muốn đi xa sứ."],		  
+	6: ["<strong>Cốt con Rắn</strong>", "Sanh nhằm cốt Rắn, tánh ưa chổ yên tịnh, tay chân mau lẹ, tánh nóng nảy, hung tợn, ít bệnh hoạn, ít tai nạn, tánh vui ve, không muốn đi xa xứ."],		  
+	7: ["<strong>Cốt con Ngựa</strong>", "Sanh nhằm cốt Ngụa số đặng sang trọng, ăn mặc đầy đủ, tánh hay đi xứ này, xứ kia, tướng mạo tốt, mưu mô giỏi, tay chân lanh lẹ."],
+	8: ["<strong>Cốt con Dê</strong>", "Sanh nhằm cốt Dê số người lớn tuổi đặng thong thả, ở chỗ bố mẹ sanh không đặng, số hai bàn tay trắng, mới lập nghiệp đặng thành, dầu ở tử tế bao nhiêu, lối xóm cũng hay ghét, ưa ăn trái cây nhiều hơn."],
+	9: ["<strong>Cốt con Khỉ</strong>", "Sanh nhằm cốt Khỉ người khó cầm của, ưa đi chơi, tay chân bộ tướng lẹ làng, có minh ứng biến, nhưng không có tánh dè dặt, không chú ý."],
+	10: ["<strong>Cốt con Gà</strong>", "Sanh nhằm cốt Gà số người đặng sang trọng, đặng gần người quí nhơn, đi đâu thì có nha trảo bộ hạ nhiều theo hộ vệ, có danh tiếng nhiều, của có công mới hưởng, không có công không hưởng, tánh siêng năng mau lẹ."],               
+      },
+		
+	  "Sửu": {        
+	12: ["<strong>Cốt con Chó</strong>", "Sanh nhằm cốt Chó người có tánh khẳng khái lắm, ít sợ ai, hay giúp đỡ với đời, ở đời hay có lòng bênh vực anh em và trung tín, không chịu lời nói nặng lời, ít có hoạn nạn, tuổi lớn trở nên sự nghiệp."],
+	1: ["<strong>Cốt con Heo</strong>", "Sanh nhằm cốt Heo người có tánh ngay thẳng, đặng sang trọng nhưng không có ở xứ cha mẹ sanh, bề ăn uống dễ hay mạnh khoẻ, người tử tế ưa yêu chuộng quí thể."],        
+	2: ["<strong>Cốt con Chuột</strong>", "Sanh nhằm cốt chuột tánh không can đảm, hay thù nhỏ mọn, hay có tật bệnh lặt vặt trong mình thường lắm, hay buồn rầu, ít vui, hay tranh luận, ăn mặc như thường."],
+	3: ["<strong>Cốt con Trâu</strong>", "Sanh nhằm cốt Trâu làm người tánh khéo trí sáng, thấy việc chi cũng mau hiểu, tánh ngay thẳng với người, số đi xa xứ có anh em bạn tử tế, những việc làm có ích cho đời không đến ơn mà vẫn làm hoài."],
+	4: ["<strong>Cốt con Cọp</strong>", "Sanh nhằm cốt Cọp không có phát đạt ở xứ cha mẹ sanh, đi xa xứ làm ăn khá, số đặng sang trọng, ăn mặc đầy đủ, luận mưu chi thì có đặng nấy, có quyền hành oai võ, ăn uống dễ, bất luận ngon dở."],
+	5: ["<strong>Cốt con Mèo</strong>", "Sanh nhằm cốt Mèo làm việc gì ban đầu khởi lớn, lúc sau như không có như học nhiều biết ít, có số ở chỗ cha mẹ sanh đặng nên, dẫn dẫn đến khi lớn tuổi cũng đặng khá, ý vui vẻ mà có tánh nhát."],
+	6: ["<strong>Cốt con Rồng</strong>", "Sanh nhằm cốt Rồng người đặng sang trọng lại có oai quyền, tài lợi phát đạt, lại có danh tiếng, ở đặng yên, tánh vui vẻ, không muốn đi xa sứ."],		  
+	7: ["<strong>Cốt con Rắn</strong>", "Sanh nhằm cốt Rắn, tánh ưa chổ yên tịnh, tay chân mau lẹ, tánh nóng nảy, hung tợn, ít bệnh hoạn, ít tai nạn, tánh vui ve, không muốn đi xa xứ."],		  
+	8: ["<strong>Cốt con Ngựa</strong>", "Sanh nhằm cốt Ngụa số đặng sang trọng, ăn mặc đầy đủ, tánh hay đi xứ này, xứ kia, tướng mạo tốt, mưu mô giỏi, tay chân lanh lẹ."],
+	9: ["<strong>Cốt con Dê</strong>", "Sanh nhằm cốt Dê số người lớn tuổi đặng thong thả, ở chỗ bố mẹ sanh không đặng, số hai bàn tay trắng, mới lập nghiệp đặng thành, dầu ở tử tế bao nhiêu, lối xóm cũng hay ghét, ưa ăn trái cây nhiều hơn."],
+	10: ["<strong>Cốt con Khỉ</strong>", "Sanh nhằm cốt Khỉ người khó cầm của, ưa đi chơi, tay chân bộ tướng lẹ làng, có minh ứng biến, nhưng không có tánh dè dặt, không chú ý."],
+	11: ["<strong>Cốt con Gà</strong>", "Sanh nhằm cốt Gà số người đặng sang trọng, đặng gần người quí nhơn, đi đâu thì có nha trảo bộ hạ nhiều theo hộ vệ, có danh tiếng nhiều, của có công mới hưởng, không có công không hưởng, tánh siêng năng mau lẹ."],                
+      },
+	  
+      "Dần": {        
+		1: ["<strong>Cốt con Chó</strong>", "Sanh nhằm cốt Chó người có tánh khẳng khái lắm, ít sợ ai, hay giúp đỡ với đời, ở đời hay có lòng bênh vực anh em và trung tín, không chịu lời nói nặng lời, ít có hoạn nạn, tuổi lớn trở nên sự nghiệp."],
+		2: ["<strong>Cốt con Heo</strong>", "Sanh nhằm cốt Heo người có tánh ngay thẳng, đặng sang trọng nhưng không có ở xứ cha mẹ sanh, bề ăn uống dễ hay mạnh khoẻ, người tử tế ưa yêu chuộng quí thể."],        
+		3: ["<strong>Cốt con Chuột</strong>", "Sanh nhằm cốt chuột tánh không can đảm, hay thù nhỏ mọn, hay có tật bệnh lặt vặt trong mình thường lắm, hay buồn rầu, ít vui, hay tranh luận, ăn mặc như thường."],
+		4: ["<strong>Cốt con Trâu</strong>", "Sanh nhằm cốt Trâu làm người tánh khéo trí sáng, thấy việc chi cũng mau hiểu, tánh ngay thẳng với người, số đi xa xứ có anh em bạn tử tế, những việc làm có ích cho đời không đến ơn mà vẫn làm hoài."],
+		5: ["<strong>Cốt con Cọp</strong>", "Sanh nhằm cốt Cọp không có phát đạt ở xứ cha mẹ sanh, đi xa xứ làm ăn khá, số đặng sang trọng, ăn mặc đầy đủ, luận mưu chi thì có đặng nấy, có quyền hành oai võ, ăn uống dễ, bất luận ngon dở."],
+		6: ["<strong>Cốt con Mèo</strong>", "Sanh nhằm cốt Mèo làm việc gì ban đầu khởi lớn, lúc sau như không có như học nhiều biết ít, có số ở chỗ cha mẹ sanh đặng nên, dẫn dẫn đến khi lớn tuổi cũng đặng khá, ý vui vẻ mà có tánh nhát."],
+		7: ["<strong>Cốt con Rồng</strong>", "Sanh nhằm cốt Rồng người đặng sang trọng lại có oai quyền, tài lợi phát đạt, lại có danh tiếng, ở đặng yên, tánh vui vẻ, không muốn đi xa sứ."],		  
+		8: ["<strong>Cốt con Rắn</strong>", "Sanh nhằm cốt Rắn, tánh ưa chổ yên tịnh, tay chân mau lẹ, tánh nóng nảy, hung tợn, ít bệnh hoạn, ít tai nạn, tánh vui ve, không muốn đi xa xứ."],		  
+		9: ["<strong>Cốt con Ngựa</strong>", "Sanh nhằm cốt Ngụa số đặng sang trọng, ăn mặc đầy đủ, tánh hay đi xứ này, xứ kia, tướng mạo tốt, mưu mô giỏi, tay chân lanh lẹ."],
+		10: ["<strong>Cốt con Dê</strong>", "Sanh nhằm cốt Dê số người lớn tuổi đặng thong thả, ở chỗ bố mẹ sanh không đặng, số hai bàn tay trắng, mới lập nghiệp đặng thành, dầu ở tử tế bao nhiêu, lối xóm cũng hay ghét, ưa ăn trái cây nhiều hơn."],
+		11: ["<strong>Cốt con Khỉ</strong>", "Sanh nhằm cốt Khỉ người khó cầm của, ưa đi chơi, tay chân bộ tướng lẹ làng, có minh ứng biến, nhưng không có tánh dè dặt, không chú ý."],
+		12: ["<strong>Cốt con Gà</strong>", "Sanh nhằm cốt Gà số người đặng sang trọng, đặng gần người quí nhơn, đi đâu thì có nha trảo bộ hạ nhiều theo hộ vệ, có danh tiếng nhiều, của có công mới hưởng, không có công không hưởng, tánh siêng năng mau lẹ."],                
+      },
+	  "Mẹo": {        
+	2: ["<strong>Cốt con Chó</strong>", "Sanh nhằm cốt Chó người có tánh khẳng khái lắm, ít sợ ai, hay giúp đỡ với đời, ở đời hay có lòng bênh vực anh em và trung tín, không chịu lời nói nặng lời, ít có hoạn nạn, tuổi lớn trở nên sự nghiệp."],
+	3: ["<strong>Cốt con Heo</strong>", "Sanh nhằm cốt Heo người có tánh ngay thẳng, đặng sang trọng nhưng không có ở xứ cha mẹ sanh, bề ăn uống dễ hay mạnh khoẻ, người tử tế ưa yêu chuộng quí thể."],        
+	4: ["<strong>Cốt con Chuột</strong>", "Sanh nhằm cốt chuột tánh không can đảm, hay thù nhỏ mọn, hay có tật bệnh lặt vặt trong mình thường lắm, hay buồn rầu, ít vui, hay tranh luận, ăn mặc như thường."],
+	5: ["<strong>Cốt con Trâu</strong>", "Sanh nhằm cốt Trâu làm người tánh khéo trí sáng, thấy việc chi cũng mau hiểu, tánh ngay thẳng với người, số đi xa xứ có anh em bạn tử tế, những việc làm có ích cho đời không đến ơn mà vẫn làm hoài."],
+	6: ["<strong>Cốt con Cọp</strong>", "Sanh nhằm cốt Cọp không có phát đạt ở xứ cha mẹ sanh, đi xa xứ làm ăn khá, số đặng sang trọng, ăn mặc đầy đủ, luận mưu chi thì có đặng nấy, có quyền hành oai võ, ăn uống dễ, bất luận ngon dở."],
+	7: ["<strong>Cốt con Mèo</strong>", "Sanh nhằm cốt Mèo làm việc gì ban đầu khởi lớn, lúc sau như không có như học nhiều biết ít, có số ở chỗ cha mẹ sanh đặng nên, dẫn dẫn đến khi lớn tuổi cũng đặng khá, ý vui vẻ mà có tánh nhát."],
+	8: ["<strong>Cốt con Rồng</strong>", "Sanh nhằm cốt Rồng người đặng sang trọng lại có oai quyền, tài lợi phát đạt, lại có danh tiếng, ở đặng yên, tánh vui vẻ, không muốn đi xa sứ."],		  
+	9: ["<strong>Cốt con Rắn</strong>", "Sanh nhằm cốt Rắn, tánh ưa chổ yên tịnh, tay chân mau lẹ, tánh nóng nảy, hung tợn, ít bệnh hoạn, ít tai nạn, tánh vui ve, không muốn đi xa xứ."],		  
+	10: ["<strong>Cốt con Ngựa</strong>", "Sanh nhằm cốt Ngụa số đặng sang trọng, ăn mặc đầy đủ, tánh hay đi xứ này, xứ kia, tướng mạo tốt, mưu mô giỏi, tay chân lanh lẹ."],
+	11: ["<strong>Cốt con Dê</strong>", "Sanh nhằm cốt Dê số người lớn tuổi đặng thong thả, ở chỗ bố mẹ sanh không đặng, số hai bàn tay trắng, mới lập nghiệp đặng thành, dầu ở tử tế bao nhiêu, lối xóm cũng hay ghét, ưa ăn trái cây nhiều hơn."],
+	12: ["<strong>Cốt con Khỉ</strong>", "Sanh nhằm cốt Khỉ người khó cầm của, ưa đi chơi, tay chân bộ tướng lẹ làng, có minh ứng biến, nhưng không có tánh dè dặt, không chú ý."],
+	1: ["<strong>Cốt con Gà</strong>", "Sanh nhằm cốt Gà số người đặng sang trọng, đặng gần người quí nhơn, đi đâu thì có nha trảo bộ hạ nhiều theo hộ vệ, có danh tiếng nhiều, của có công mới hưởng, không có công không hưởng, tánh siêng năng mau lẹ."],                
+      },
+	"Thìn": {        
+	3: ["<strong>Cốt con Chó</strong>", "Sanh nhằm cốt Chó người có tánh khẳng khái lắm, ít sợ ai, hay giúp đỡ với đời, ở đời hay có lòng bênh vực anh em và trung tín, không chịu lời nói nặng lời, ít có hoạn nạn, tuổi lớn trở nên sự nghiệp."],
+	4: ["<strong>Cốt con Heo</strong>", "Sanh nhằm cốt Heo người có tánh ngay thẳng, đặng sang trọng nhưng không có ở xứ cha mẹ sanh, bề ăn uống dễ hay mạnh khoẻ, người tử tế ưa yêu chuộng quí thể."],        
+	5: ["<strong>Cốt con Chuột</strong>", "Sanh nhằm cốt chuột tánh không can đảm, hay thù nhỏ mọn, hay có tật bệnh lặt vặt trong mình thường lắm, hay buồn rầu, ít vui, hay tranh luận, ăn mặc như thường."],
+	6: ["<strong>Cốt con Trâu</strong>", "Sanh nhằm cốt Trâu làm người tánh khéo trí sáng, thấy việc chi cũng mau hiểu, tánh ngay thẳng với người, số đi xa xứ có anh em bạn tử tế, những việc làm có ích cho đời không đến ơn mà vẫn làm hoài."],
+	7: ["<strong>Cốt con Cọp</strong>", "Sanh nhằm cốt Cọp không có phát đạt ở xứ cha mẹ sanh, đi xa xứ làm ăn khá, số đặng sang trọng, ăn mặc đầy đủ, luận mưu chi thì có đặng nấy, có quyền hành oai võ, ăn uống dễ, bất luận ngon dở."],
+	8: ["<strong>Cốt con Mèo</strong>", "Sanh nhằm cốt Mèo làm việc gì ban đầu khởi lớn, lúc sau như không có như học nhiều biết ít, có số ở chỗ cha mẹ sanh đặng nên, dẫn dẫn đến khi lớn tuổi cũng đặng khá, ý vui vẻ mà có tánh nhát."],
+	9: ["<strong>Cốt con Rồng</strong>", "Sanh nhằm cốt Rồng người đặng sang trọng lại có oai quyền, tài lợi phát đạt, lại có danh tiếng, ở đặng yên, tánh vui vẻ, không muốn đi xa sứ."],		  
+	10: ["<strong>Cốt con Rắn</strong>", "Sanh nhằm cốt Rắn, tánh ưa chổ yên tịnh, tay chân mau lẹ, tánh nóng nảy, hung tợn, ít bệnh hoạn, ít tai nạn, tánh vui ve, không muốn đi xa xứ."],		  
+	11: ["<strong>Cốt con Ngựa</strong>", "Sanh nhằm cốt Ngụa số đặng sang trọng, ăn mặc đầy đủ, tánh hay đi xứ này, xứ kia, tướng mạo tốt, mưu mô giỏi, tay chân lanh lẹ."],
+	12: ["<strong>Cốt con Dê</strong>", "Sanh nhằm cốt Dê số người lớn tuổi đặng thong thả, ở chỗ bố mẹ sanh không đặng, số hai bàn tay trắng, mới lập nghiệp đặng thành, dầu ở tử tế bao nhiêu, lối xóm cũng hay ghét, ưa ăn trái cây nhiều hơn."],
+	1: ["<strong>Cốt con Khỉ</strong>", "Sanh nhằm cốt Khỉ người khó cầm của, ưa đi chơi, tay chân bộ tướng lẹ làng, có minh ứng biến, nhưng không có tánh dè dặt, không chú ý."],
+	2: ["<strong>Cốt con Gà</strong>", "Sanh nhằm cốt Gà số người đặng sang trọng, đặng gần người quí nhơn, đi đâu thì có nha trảo bộ hạ nhiều theo hộ vệ, có danh tiếng nhiều, của có công mới hưởng, không có công không hưởng, tánh siêng năng mau lẹ."],                
+      },
+	"Tỵ": {        
+	4: ["<strong>Cốt con Chó</strong>", "Sanh nhằm cốt Chó người có tánh khẳng khái lắm, ít sợ ai, hay giúp đỡ với đời, ở đời hay có lòng bênh vực anh em và trung tín, không chịu lời nói nặng lời, ít có hoạn nạn, tuổi lớn trở nên sự nghiệp."],
+	5: ["<strong>Cốt con Heo</strong>", "Sanh nhằm cốt Heo người có tánh ngay thẳng, đặng sang trọng nhưng không có ở xứ cha mẹ sanh, bề ăn uống dễ hay mạnh khoẻ, người tử tế ưa yêu chuộng quí thể."],        
+	6: ["<strong>Cốt con Chuột</strong>", "Sanh nhằm cốt chuột tánh không can đảm, hay thù nhỏ mọn, hay có tật bệnh lặt vặt trong mình thường lắm, hay buồn rầu, ít vui, hay tranh luận, ăn mặc như thường."],
+	7: ["<strong>Cốt con Trâu</strong>", "Sanh nhằm cốt Trâu làm người tánh khéo trí sáng, thấy việc chi cũng mau hiểu, tánh ngay thẳng với người, số đi xa xứ có anh em bạn tử tế, những việc làm có ích cho đời không đến ơn mà vẫn làm hoài."],
+	8: ["<strong>Cốt con Cọp</strong>", "Sanh nhằm cốt Cọp không có phát đạt ở xứ cha mẹ sanh, đi xa xứ làm ăn khá, số đặng sang trọng, ăn mặc đầy đủ, luận mưu chi thì có đặng nấy, có quyền hành oai võ, ăn uống dễ, bất luận ngon dở."],
+	9: ["<strong>Cốt con Mèo</strong>", "Sanh nhằm cốt Mèo làm việc gì ban đầu khởi lớn, lúc sau như không có như học nhiều biết ít, có số ở chỗ cha mẹ sanh đặng nên, dẫn dẫn đến khi lớn tuổi cũng đặng khá, ý vui vẻ mà có tánh nhát."],
+	10: ["<strong>Cốt con Rồng</strong>", "Sanh nhằm cốt Rồng người đặng sang trọng lại có oai quyền, tài lợi phát đạt, lại có danh tiếng, ở đặng yên, tánh vui vẻ, không muốn đi xa sứ."],		  
+	11: ["<strong>Cốt con Rắn</strong>", "Sanh nhằm cốt Rắn, tánh ưa chổ yên tịnh, tay chân mau lẹ, tánh nóng nảy, hung tợn, ít bệnh hoạn, ít tai nạn, tánh vui ve, không muốn đi xa xứ."],		  
+	12: ["<strong>Cốt con Ngựa</strong>", "Sanh nhằm cốt Ngụa số đặng sang trọng, ăn mặc đầy đủ, tánh hay đi xứ này, xứ kia, tướng mạo tốt, mưu mô giỏi, tay chân lanh lẹ."],
+	1: ["<strong>Cốt con Dê</strong>", "Sanh nhằm cốt Dê số người lớn tuổi đặng thong thả, ở chỗ bố mẹ sanh không đặng, số hai bàn tay trắng, mới lập nghiệp đặng thành, dầu ở tử tế bao nhiêu, lối xóm cũng hay ghét, ưa ăn trái cây nhiều hơn."],
+	2: ["<strong>Cốt con Khỉ</strong>", "Sanh nhằm cốt Khỉ người khó cầm của, ưa đi chơi, tay chân bộ tướng lẹ làng, có minh ứng biến, nhưng không có tánh dè dặt, không chú ý."],
+	3: ["<strong>Cốt con Gà</strong>", "Sanh nhằm cốt Gà số người đặng sang trọng, đặng gần người quí nhơn, đi đâu thì có nha trảo bộ hạ nhiều theo hộ vệ, có danh tiếng nhiều, của có công mới hưởng, không có công không hưởng, tánh siêng năng mau lẹ."],                
+      },
+	"Ngọ": {        
+	5: ["<strong>Cốt con Chó</strong>", "Sanh nhằm cốt Chó người có tánh khẳng khái lắm, ít sợ ai, hay giúp đỡ với đời, ở đời hay có lòng bênh vực anh em và trung tín, không chịu lời nói nặng lời, ít có hoạn nạn, tuổi lớn trở nên sự nghiệp."],
+	6: ["<strong>Cốt con Heo</strong>", "Sanh nhằm cốt Heo người có tánh ngay thẳng, đặng sang trọng nhưng không có ở xứ cha mẹ sanh, bề ăn uống dễ hay mạnh khoẻ, người tử tế ưa yêu chuộng quí thể."],        
+	7: ["<strong>Cốt con Chuột</strong>", "Sanh nhằm cốt chuột tánh không can đảm, hay thù nhỏ mọn, hay có tật bệnh lặt vặt trong mình thường lắm, hay buồn rầu, ít vui, hay tranh luận, ăn mặc như thường."],
+	8: ["<strong>Cốt con Trâu</strong>", "Sanh nhằm cốt Trâu làm người tánh khéo trí sáng, thấy việc chi cũng mau hiểu, tánh ngay thẳng với người, số đi xa xứ có anh em bạn tử tế, những việc làm có ích cho đời không đến ơn mà vẫn làm hoài."],
+	9: ["<strong>Cốt con Cọp</strong>", "Sanh nhằm cốt Cọp không có phát đạt ở xứ cha mẹ sanh, đi xa xứ làm ăn khá, số đặng sang trọng, ăn mặc đầy đủ, luận mưu chi thì có đặng nấy, có quyền hành oai võ, ăn uống dễ, bất luận ngon dở."],
+	10: ["<strong>Cốt con Mèo</strong>", "Sanh nhằm cốt Mèo làm việc gì ban đầu khởi lớn, lúc sau như không có như học nhiều biết ít, có số ở chỗ cha mẹ sanh đặng nên, dẫn dẫn đến khi lớn tuổi cũng đặng khá, ý vui vẻ mà có tánh nhát."],
+	11: ["<strong>Cốt con Rồng</strong>", "Sanh nhằm cốt Rồng người đặng sang trọng lại có oai quyền, tài lợi phát đạt, lại có danh tiếng, ở đặng yên, tánh vui vẻ, không muốn đi xa sứ."],		  
+	12: ["<strong>Cốt con Rắn</strong>", "Sanh nhằm cốt Rắn, tánh ưa chổ yên tịnh, tay chân mau lẹ, tánh nóng nảy, hung tợn, ít bệnh hoạn, ít tai nạn, tánh vui ve, không muốn đi xa xứ."],		  
+	1: ["<strong>Cốt con Ngựa</strong>", "Sanh nhằm cốt Ngụa số đặng sang trọng, ăn mặc đầy đủ, tánh hay đi xứ này, xứ kia, tướng mạo tốt, mưu mô giỏi, tay chân lanh lẹ."],
+	2: ["<strong>Cốt con Dê</strong>", "Sanh nhằm cốt Dê số người lớn tuổi đặng thong thả, ở chỗ bố mẹ sanh không đặng, số hai bàn tay trắng, mới lập nghiệp đặng thành, dầu ở tử tế bao nhiêu, lối xóm cũng hay ghét, ưa ăn trái cây nhiều hơn."],
+	3: ["<strong>Cốt con Khỉ</strong>", "Sanh nhằm cốt Khỉ người khó cầm của, ưa đi chơi, tay chân bộ tướng lẹ làng, có minh ứng biến, nhưng không có tánh dè dặt, không chú ý."],
+	4: ["<strong>Cốt con Gà</strong>", "Sanh nhằm cốt Gà số người đặng sang trọng, đặng gần người quí nhơn, đi đâu thì có nha trảo bộ hạ nhiều theo hộ vệ, có danh tiếng nhiều, của có công mới hưởng, không có công không hưởng, tánh siêng năng mau lẹ."],                
+      },
+	"Mùi": {        
+	6: ["<strong>Cốt con Chó</strong>", "Sanh nhằm cốt Chó người có tánh khẳng khái lắm, ít sợ ai, hay giúp đỡ với đời, ở đời hay có lòng bênh vực anh em và trung tín, không chịu lời nói nặng lời, ít có hoạn nạn, tuổi lớn trở nên sự nghiệp."],
+	7: ["<strong>Cốt con Heo</strong>", "Sanh nhằm cốt Heo người có tánh ngay thẳng, đặng sang trọng nhưng không có ở xứ cha mẹ sanh, bề ăn uống dễ hay mạnh khoẻ, người tử tế ưa yêu chuộng quí thể."],        
+	8: ["<strong>Cốt con Chuột</strong>", "Sanh nhằm cốt chuột tánh không can đảm, hay thù nhỏ mọn, hay có tật bệnh lặt vặt trong mình thường lắm, hay buồn rầu, ít vui, hay tranh luận, ăn mặc như thường."],
+	9: ["<strong>Cốt con Trâu</strong>", "Sanh nhằm cốt Trâu làm người tánh khéo trí sáng, thấy việc chi cũng mau hiểu, tánh ngay thẳng với người, số đi xa xứ có anh em bạn tử tế, những việc làm có ích cho đời không đến ơn mà vẫn làm hoài."],
+	10: ["<strong>Cốt con Cọp</strong>", "Sanh nhằm cốt Cọp không có phát đạt ở xứ cha mẹ sanh, đi xa xứ làm ăn khá, số đặng sang trọng, ăn mặc đầy đủ, luận mưu chi thì có đặng nấy, có quyền hành oai võ, ăn uống dễ, bất luận ngon dở."],
+	11: ["<strong>Cốt con Mèo</strong>", "Sanh nhằm cốt Mèo làm việc gì ban đầu khởi lớn, lúc sau như không có như học nhiều biết ít, có số ở chỗ cha mẹ sanh đặng nên, dẫn dẫn đến khi lớn tuổi cũng đặng khá, ý vui vẻ mà có tánh nhát."],
+	12: ["<strong>Cốt con Rồng</strong>", "Sanh nhằm cốt Rồng người đặng sang trọng lại có oai quyền, tài lợi phát đạt, lại có danh tiếng, ở đặng yên, tánh vui vẻ, không muốn đi xa sứ."],		  
+	1: ["<strong>Cốt con Rắn</strong>", "Sanh nhằm cốt Rắn, tánh ưa chổ yên tịnh, tay chân mau lẹ, tánh nóng nảy, hung tợn, ít bệnh hoạn, ít tai nạn, tánh vui ve, không muốn đi xa xứ."],		  
+	2: ["<strong>Cốt con Ngựa</strong>", "Sanh nhằm cốt Ngụa số đặng sang trọng, ăn mặc đầy đủ, tánh hay đi xứ này, xứ kia, tướng mạo tốt, mưu mô giỏi, tay chân lanh lẹ."],
+	3: ["<strong>Cốt con Dê</strong>", "Sanh nhằm cốt Dê số người lớn tuổi đặng thong thả, ở chỗ bố mẹ sanh không đặng, số hai bàn tay trắng, mới lập nghiệp đặng thành, dầu ở tử tế bao nhiêu, lối xóm cũng hay ghét, ưa ăn trái cây nhiều hơn."],
+	4: ["<strong>Cốt con Khỉ</strong>", "Sanh nhằm cốt Khỉ người khó cầm của, ưa đi chơi, tay chân bộ tướng lẹ làng, có minh ứng biến, nhưng không có tánh dè dặt, không chú ý."],
+	5: ["<strong>Cốt con Gà</strong>", "Sanh nhằm cốt Gà số người đặng sang trọng, đặng gần người quí nhơn, đi đâu thì có nha trảo bộ hạ nhiều theo hộ vệ, có danh tiếng nhiều, của có công mới hưởng, không có công không hưởng, tánh siêng năng mau lẹ."],                
+      },
+	"Thân": {        
+	7: ["<strong>Cốt con Chó</strong>", "Sanh nhằm cốt Chó người có tánh khẳng khái lắm, ít sợ ai, hay giúp đỡ với đời, ở đời hay có lòng bênh vực anh em và trung tín, không chịu lời nói nặng lời, ít có hoạn nạn, tuổi lớn trở nên sự nghiệp."],
+	8: ["<strong>Cốt con Heo</strong>", "Sanh nhằm cốt Heo người có tánh ngay thẳng, đặng sang trọng nhưng không có ở xứ cha mẹ sanh, bề ăn uống dễ hay mạnh khoẻ, người tử tế ưa yêu chuộng quí thể."],        
+	9: ["<strong>Cốt con Chuột</strong>", "Sanh nhằm cốt chuột tánh không can đảm, hay thù nhỏ mọn, hay có tật bệnh lặt vặt trong mình thường lắm, hay buồn rầu, ít vui, hay tranh luận, ăn mặc như thường."],
+	10: ["<strong>Cốt con Trâu</strong>", "Sanh nhằm cốt Trâu làm người tánh khéo trí sáng, thấy việc chi cũng mau hiểu, tánh ngay thẳng với người, số đi xa xứ có anh em bạn tử tế, những việc làm có ích cho đời không đến ơn mà vẫn làm hoài."],
+	11: ["<strong>Cốt con Cọp</strong>", "Sanh nhằm cốt Cọp không có phát đạt ở xứ cha mẹ sanh, đi xa xứ làm ăn khá, số đặng sang trọng, ăn mặc đầy đủ, luận mưu chi thì có đặng nấy, có quyền hành oai võ, ăn uống dễ, bất luận ngon dở."],
+	12: ["<strong>Cốt con Mèo</strong>", "Sanh nhằm cốt Mèo làm việc gì ban đầu khởi lớn, lúc sau như không có như học nhiều biết ít, có số ở chỗ cha mẹ sanh đặng nên, dẫn dẫn đến khi lớn tuổi cũng đặng khá, ý vui vẻ mà có tánh nhát."],
+	1: ["<strong>Cốt con Rồng</strong>", "Sanh nhằm cốt Rồng người đặng sang trọng lại có oai quyền, tài lợi phát đạt, lại có danh tiếng, ở đặng yên, tánh vui vẻ, không muốn đi xa sứ."],		  
+	2: ["<strong>Cốt con Rắn</strong>", "Sanh nhằm cốt Rắn, tánh ưa chổ yên tịnh, tay chân mau lẹ, tánh nóng nảy, hung tợn, ít bệnh hoạn, ít tai nạn, tánh vui ve, không muốn đi xa xứ."],		  
+	3: ["<strong>Cốt con Ngựa</strong>", "Sanh nhằm cốt Ngụa số đặng sang trọng, ăn mặc đầy đủ, tánh hay đi xứ này, xứ kia, tướng mạo tốt, mưu mô giỏi, tay chân lanh lẹ."],
+	4: ["<strong>Cốt con Dê</strong>", "Sanh nhằm cốt Dê số người lớn tuổi đặng thong thả, ở chỗ bố mẹ sanh không đặng, số hai bàn tay trắng, mới lập nghiệp đặng thành, dầu ở tử tế bao nhiêu, lối xóm cũng hay ghét, ưa ăn trái cây nhiều hơn."],
+	5: ["<strong>Cốt con Khỉ</strong>", "Sanh nhằm cốt Khỉ người khó cầm của, ưa đi chơi, tay chân bộ tướng lẹ làng, có minh ứng biến, nhưng không có tánh dè dặt, không chú ý."],
+	6: ["<strong>Cốt con Gà</strong>", "Sanh nhằm cốt Gà số người đặng sang trọng, đặng gần người quí nhơn, đi đâu thì có nha trảo bộ hạ nhiều theo hộ vệ, có danh tiếng nhiều, của có công mới hưởng, không có công không hưởng, tánh siêng năng mau lẹ."],                
+      },
+	"Dậu": {        
+	8: ["<strong>Cốt con Chó</strong>", "Sanh nhằm cốt Chó người có tánh khẳng khái lắm, ít sợ ai, hay giúp đỡ với đời, ở đời hay có lòng bênh vực anh em và trung tín, không chịu lời nói nặng lời, ít có hoạn nạn, tuổi lớn trở nên sự nghiệp."],
+	9: ["<strong>Cốt con Heo</strong>", "Sanh nhằm cốt Heo người có tánh ngay thẳng, đặng sang trọng nhưng không có ở xứ cha mẹ sanh, bề ăn uống dễ hay mạnh khoẻ, người tử tế ưa yêu chuộng quí thể."],        
+	10: ["<strong>Cốt con Chuột</strong>", "Sanh nhằm cốt chuột tánh không can đảm, hay thù nhỏ mọn, hay có tật bệnh lặt vặt trong mình thường lắm, hay buồn rầu, ít vui, hay tranh luận, ăn mặc như thường."],
+	11: ["<strong>Cốt con Trâu</strong>", "Sanh nhằm cốt Trâu làm người tánh khéo trí sáng, thấy việc chi cũng mau hiểu, tánh ngay thẳng với người, số đi xa xứ có anh em bạn tử tế, những việc làm có ích cho đời không đến ơn mà vẫn làm hoài."],
+	12: ["<strong>Cốt con Cọp</strong>", "Sanh nhằm cốt Cọp không có phát đạt ở xứ cha mẹ sanh, đi xa xứ làm ăn khá, số đặng sang trọng, ăn mặc đầy đủ, luận mưu chi thì có đặng nấy, có quyền hành oai võ, ăn uống dễ, bất luận ngon dở."],
+	1: ["<strong>Cốt con Mèo</strong>", "Sanh nhằm cốt Mèo làm việc gì ban đầu khởi lớn, lúc sau như không có như học nhiều biết ít, có số ở chỗ cha mẹ sanh đặng nên, dẫn dẫn đến khi lớn tuổi cũng đặng khá, ý vui vẻ mà có tánh nhát."],
+	2: ["<strong>Cốt con Rồng</strong>", "Sanh nhằm cốt Rồng người đặng sang trọng lại có oai quyền, tài lợi phát đạt, lại có danh tiếng, ở đặng yên, tánh vui vẻ, không muốn đi xa sứ."],		  
+	3: ["<strong>Cốt con Rắn</strong>", "Sanh nhằm cốt Rắn, tánh ưa chổ yên tịnh, tay chân mau lẹ, tánh nóng nảy, hung tợn, ít bệnh hoạn, ít tai nạn, tánh vui ve, không muốn đi xa xứ."],		  
+	4: ["<strong>Cốt con Ngựa</strong>", "Sanh nhằm cốt Ngụa số đặng sang trọng, ăn mặc đầy đủ, tánh hay đi xứ này, xứ kia, tướng mạo tốt, mưu mô giỏi, tay chân lanh lẹ."],
+	5: ["<strong>Cốt con Dê</strong>", "Sanh nhằm cốt Dê số người lớn tuổi đặng thong thả, ở chỗ bố mẹ sanh không đặng, số hai bàn tay trắng, mới lập nghiệp đặng thành, dầu ở tử tế bao nhiêu, lối xóm cũng hay ghét, ưa ăn trái cây nhiều hơn."],
+	6: ["<strong>Cốt con Khỉ</strong>", "Sanh nhằm cốt Khỉ người khó cầm của, ưa đi chơi, tay chân bộ tướng lẹ làng, có minh ứng biến, nhưng không có tánh dè dặt, không chú ý."],
+	7: ["<strong>Cốt con Gà</strong>", "Sanh nhằm cốt Gà số người đặng sang trọng, đặng gần người quí nhơn, đi đâu thì có nha trảo bộ hạ nhiều theo hộ vệ, có danh tiếng nhiều, của có công mới hưởng, không có công không hưởng, tánh siêng năng mau lẹ."],                
+      },
+	"Tuất": {        
+	9: ["<strong>Cốt con Chó</strong>", "Sanh nhằm cốt Chó người có tánh khẳng khái lắm, ít sợ ai, hay giúp đỡ với đời, ở đời hay có lòng bênh vực anh em và trung tín, không chịu lời nói nặng lời, ít có hoạn nạn, tuổi lớn trở nên sự nghiệp."],
+	10: ["<strong>Cốt con Heo</strong>", "Sanh nhằm cốt Heo người có tánh ngay thẳng, đặng sang trọng nhưng không có ở xứ cha mẹ sanh, bề ăn uống dễ hay mạnh khoẻ, người tử tế ưa yêu chuộng quí thể."],        
+	11: ["<strong>Cốt con Chuột</strong>", "Sanh nhằm cốt chuột tánh không can đảm, hay thù nhỏ mọn, hay có tật bệnh lặt vặt trong mình thường lắm, hay buồn rầu, ít vui, hay tranh luận, ăn mặc như thường."],
+	12: ["<strong>Cốt con Trâu</strong>", "Sanh nhằm cốt Trâu làm người tánh khéo trí sáng, thấy việc chi cũng mau hiểu, tánh ngay thẳng với người, số đi xa xứ có anh em bạn tử tế, những việc làm có ích cho đời không đến ơn mà vẫn làm hoài."],
+	1: ["<strong>Cốt con Cọp</strong>", "Sanh nhằm cốt Cọp không có phát đạt ở xứ cha mẹ sanh, đi xa xứ làm ăn khá, số đặng sang trọng, ăn mặc đầy đủ, luận mưu chi thì có đặng nấy, có quyền hành oai võ, ăn uống dễ, bất luận ngon dở."],
+	2: ["<strong>Cốt con Mèo</strong>", "Sanh nhằm cốt Mèo làm việc gì ban đầu khởi lớn, lúc sau như không có như học nhiều biết ít, có số ở chỗ cha mẹ sanh đặng nên, dẫn dẫn đến khi lớn tuổi cũng đặng khá, ý vui vẻ mà có tánh nhát."],
+	3: ["<strong>Cốt con Rồng</strong>", "Sanh nhằm cốt Rồng người đặng sang trọng lại có oai quyền, tài lợi phát đạt, lại có danh tiếng, ở đặng yên, tánh vui vẻ, không muốn đi xa sứ."],		  
+	4: ["<strong>Cốt con Rắn</strong>", "Sanh nhằm cốt Rắn, tánh ưa chổ yên tịnh, tay chân mau lẹ, tánh nóng nảy, hung tợn, ít bệnh hoạn, ít tai nạn, tánh vui ve, không muốn đi xa xứ."],		  
+	5: ["<strong>Cốt con Ngựa</strong>", "Sanh nhằm cốt Ngụa số đặng sang trọng, ăn mặc đầy đủ, tánh hay đi xứ này, xứ kia, tướng mạo tốt, mưu mô giỏi, tay chân lanh lẹ."],
+	6: ["<strong>Cốt con Dê</strong>", "Sanh nhằm cốt Dê số người lớn tuổi đặng thong thả, ở chỗ bố mẹ sanh không đặng, số hai bàn tay trắng, mới lập nghiệp đặng thành, dầu ở tử tế bao nhiêu, lối xóm cũng hay ghét, ưa ăn trái cây nhiều hơn."],
+	7: ["<strong>Cốt con Khỉ</strong>", "Sanh nhằm cốt Khỉ người khó cầm của, ưa đi chơi, tay chân bộ tướng lẹ làng, có minh ứng biến, nhưng không có tánh dè dặt, không chú ý."],
+	8: ["<strong>Cốt con Gà</strong>", "Sanh nhằm cốt Gà số người đặng sang trọng, đặng gần người quí nhơn, đi đâu thì có nha trảo bộ hạ nhiều theo hộ vệ, có danh tiếng nhiều, của có công mới hưởng, không có công không hưởng, tánh siêng năng mau lẹ."],                
+      },
+	"Hợi": {        
+	10: ["<strong>Cốt con Chó</strong>", "Sanh nhằm cốt Chó người có tánh khẳng khái lắm, ít sợ ai, hay giúp đỡ với đời, ở đời hay có lòng bênh vực anh em và trung tín, không chịu lời nói nặng lời, ít có hoạn nạn, tuổi lớn trở nên sự nghiệp."],
+	11: ["<strong>Cốt con Heo</strong>", "Sanh nhằm cốt Heo người có tánh ngay thẳng, đặng sang trọng nhưng không có ở xứ cha mẹ sanh, bề ăn uống dễ hay mạnh khoẻ, người tử tế ưa yêu chuộng quí thể."],        
+	12: ["<strong>Cốt con Chuột</strong>", "Sanh nhằm cốt chuột tánh không can đảm, hay thù nhỏ mọn, hay có tật bệnh lặt vặt trong mình thường lắm, hay buồn rầu, ít vui, hay tranh luận, ăn mặc như thường."],
+	1: ["<strong>Cốt con Trâu</strong>", "Sanh nhằm cốt Trâu làm người tánh khéo trí sáng, thấy việc chi cũng mau hiểu, tánh ngay thẳng với người, số đi xa xứ có anh em bạn tử tế, những việc làm có ích cho đời không đến ơn mà vẫn làm hoài."],
+	2: ["<strong>Cốt con Cọp</strong>", "Sanh nhằm cốt Cọp không có phát đạt ở xứ cha mẹ sanh, đi xa xứ làm ăn khá, số đặng sang trọng, ăn mặc đầy đủ, luận mưu chi thì có đặng nấy, có quyền hành oai võ, ăn uống dễ, bất luận ngon dở."],
+	3: ["<strong>Cốt con Mèo</strong>", "Sanh nhằm cốt Mèo làm việc gì ban đầu khởi lớn, lúc sau như không có như học nhiều biết ít, có số ở chỗ cha mẹ sanh đặng nên, dẫn dẫn đến khi lớn tuổi cũng đặng khá, ý vui vẻ mà có tánh nhát."],
+	4: ["<strong>Cốt con Rồng</strong>", "Sanh nhằm cốt Rồng người đặng sang trọng lại có oai quyền, tài lợi phát đạt, lại có danh tiếng, ở đặng yên, tánh vui vẻ, không muốn đi xa sứ."],		  
+	5: ["<strong>Cốt con Rắn</strong>", "Sanh nhằm cốt Rắn, tánh ưa chổ yên tịnh, tay chân mau lẹ, tánh nóng nảy, hung tợn, ít bệnh hoạn, ít tai nạn, tánh vui ve, không muốn đi xa xứ."],		  
+	6: ["<strong>Cốt con Ngựa</strong>", "Sanh nhằm cốt Ngụa số đặng sang trọng, ăn mặc đầy đủ, tánh hay đi xứ này, xứ kia, tướng mạo tốt, mưu mô giỏi, tay chân lanh lẹ."],
+	7: ["<strong>Cốt con Dê</strong>", "Sanh nhằm cốt Dê số người lớn tuổi đặng thong thả, ở chỗ bố mẹ sanh không đặng, số hai bàn tay trắng, mới lập nghiệp đặng thành, dầu ở tử tế bao nhiêu, lối xóm cũng hay ghét, ưa ăn trái cây nhiều hơn."],
+	8: ["<strong>Cốt con Khỉ</strong>", "Sanh nhằm cốt Khỉ người khó cầm của, ưa đi chơi, tay chân bộ tướng lẹ làng, có minh ứng biến, nhưng không có tánh dè dặt, không chú ý."],
+	9: ["<strong>Cốt con Gà</strong>", "Sanh nhằm cốt Gà số người đặng sang trọng, đặng gần người quí nhơn, đi đâu thì có nha trảo bộ hạ nhiều theo hộ vệ, có danh tiếng nhiều, của có công mới hưởng, không có công không hưởng, tánh siêng năng mau lẹ."],                
+      },
+
+      // Các tuổi khác tương tự, có thể tiếp tục điền...
+    };
+
+    function traCuu() {
+      const tuoi = document.getElementById("tuoi").value;
+      const thang = parseInt(document.getElementById("thang").value);
+
+      if (cotConData[tuoi] && cotConData[tuoi][thang]) {
+        const [cot, luan] = cotConData[tuoi][thang];
+        document.getElementById("result").innerHTML = `${cot}<br>${luan}`;
+      } else {
+        document.getElementById("result").innerHTML = "Chưa có dữ liệu cho tuổi này, anh vui lòng bổ sung tiếp.";
+      }
+    }
+  </script>
+</body>
+</html>

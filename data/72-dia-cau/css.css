@@ -1,0 +1,150 @@
+@charset "utf-8";
+body {
+      margin: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(to bottom right, #1e1b4b, #4c1d95, #000);
+      color: white;
+      padding: 20px;
+    }
+    h1 {
+      text-align: center;
+      font-size: 2.5rem;
+      margin-bottom: 30px;
+    }
+    .tabs {
+      max-width: 800px;
+      margin: 0 auto;
+    }
+    .tab-buttons {
+      display: flex;
+      justify-content: space-around;
+      background-color: rgba(129, 140, 248, 0.2);
+      padding: 10px;
+      border-radius: 12px;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+    .tab-buttons button {
+      background: none;
+      border: none;
+      color: white;
+      font-size: 1.1rem;
+      cursor: pointer;
+      padding: 10px 20px;
+    }
+    .tab-buttons button.active {
+      background-color: rgba(255, 255, 255, 0.1);
+      border-radius: 8px;
+    }
+    .tab-content {
+      margin-top: 20px;
+      background-color: rgba(255, 255, 255, 0.05);
+      padding: 5px;
+      border-radius: 12px;
+	  width: 100%;
+	  
+    }
+    ul {
+      padding-left: 20px;
+    }
+    .earth-names {
+      margin-top: 20px;
+      background-color: rgba(255, 255, 255, 0.08);
+      padding: 5px;
+      border-radius: 12px;
+      display: none;
+    }
+    .earth-names.show {
+      display: block;
+    }
+    .earth-names h2 {
+      text-align: center;
+    }
+    .earth-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+      gap: 10px;
+      margin-top: 10px;
+    }
+    .earth-grid div {
+      background-color: rgba(255, 255, 255, 0.1);
+      padding: 8px;
+      border-radius: 8px;
+      text-align: center;
+      cursor: pointer;
+    }
+    .search-container {
+      text-align: center;
+      margin-top: 20px;
+    }
+    .search-container input {
+      padding: 8px 12px;
+      border-radius: 6px;
+      border: none;
+      font-size: 1rem;
+      width: 60%;
+      max-width: 400px;
+    }
+    .realm-buttons {
+      display: flex;
+      justify-content: center;
+      margin-top: 10px;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+    .realm-buttons button {
+      padding: 6px 14px;
+      font-size: 0.95rem;
+      border-radius: 6px;
+      border: none;
+      cursor: pointer;
+      background-color: rgba(255, 255, 255, 0.1);
+      color: white;
+    }
+    .realm-buttons button.active {
+      background-color: rgba(255, 255, 255, 0.3);
+    }
+    .earth-detail-box {
+      background: rgba(255, 255, 255, 0.1);
+      padding: 10px;
+      margin-top: 20px;
+      border-radius: 12px;
+      position: relative;
+      max-width: 90%;
+      margin-left: auto;
+      margin-right: auto;
+    }
+	.label {
+  color: #f11e07;
+  font-weight: bold;
+}
+
+.glow-text {
+  text-shadow: 0 0 8px #facc15;
+}
+
+.glow-gold {
+  color: #facc15;
+  text-shadow: 0 0 6px #fde68a;
+}
+
+.glow-pink {
+  color: #f472b6;
+  text-shadow: 0 0 6px #fbcfe8;
+}
+
+.glow-blue {
+  color: #60a5fa;
+  text-shadow: 0 0 6px #bfdbfe;
+}
+
+.glow-white {
+  color: #e5e7eb;
+  text-shadow: 0 0 6px #f3f4f6;
+}
+
+.glow-purple {
+  color: #c084fc;
+  text-shadow: 0 0 6px #e9d5ff;
+}
+

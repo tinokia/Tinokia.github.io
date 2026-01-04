@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <title>Xem Trường Sinh Vợ Chồng</title>
+  <style>
+    body {
+      background: #f5f7fa;
+      margin: 0;
+      padding: 20px;
+      color: #333;
+    }
+    h2 {
+      text-align: center;
+      color: #2c3e50;
+    }
+    .nav {
+      margin-bottom: 20px;
+      text-align: center;
+    }
+    .nav a {
+      text-decoration: none;
+      padding: 8px 15px;
+      border-radius: 8px;
+      margin: 0 5px;
+      background: #3498db;
+      color: white;
+      font-size: 14px;
+      transition: 0.3s;
+    }
+    .nav a:hover {
+      background: #2980b9;
+    }
+    /* Bố cục chính: form bên trái, kết quả bên phải */
+    .container {
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      gap: 20px;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+    .form {
+      flex: 1;
+      background: white;
+      padding: 20px;
+      border-radius: 12px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    }
+    label {
+      display: block;
+      margin: 12px 0 6px;
+      font-weight: bold;
+    }
+    select, button {
+      width: 100%;
+      font-size: 16px;
+      padding: 10px;
+      margin-bottom: 15px;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+    }
+    button {
+      background: #27ae60;
+      color: white;
+      border: none;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+    button:hover {
+      background: #219150;
+    }
+    .result {
+      flex: 1;
+      font-size: 18px;
+      font-weight: bold;
+      color: #2c3e50;
+      background: #ecf0f1;
+      padding: 20px;
+      border-radius: 12px;
+      min-height: 200px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    }
+    .result i {
+      display: block;
+      margin-top: 10px;
+      font-style: italic;
+      color: #555;
+    }
+	.highlight-month {
+    color: #d35400; /* cam */
+    font-weight: bold;
+  }
+  .highlight-menh {
+    color: #2980b9; /* xanh dương */
+    font-weight: bold;
+  }
+  .highlight-cung {
+    color: #27ae60; /* xanh lá */
+    font-weight: bold;
+  }
+  </style>
+</head>
+<body>
+  <h2>🔮 Xem hào anh em kiết hung 🔮</h2>
+  <div class="nav">
+    <a href="../../index.html">🏠 Trang Chủ</a>
+    <a href="../Dien-Cam-Tam-The.html">📖 Sách DCTT</a>
+  </div>
+
+  <div class="container">
+    <div class="form">
+      <label for="menh">Chọn mệnh:</label>
+      <select id="menh">
+        <option value="Kim">Kim</option>
+        <option value="Mộc">Mộc</option>
+        <option value="Thủy">Thủy</option>
+        <option value="Hỏa">Hỏa</option>
+        <option value="Thổ">Thổ</option>
+      </select>
+
+      <label for="thang">Chọn tháng:</label>
+      <select id="thang">
+        <option value="1">Tháng 1</option>
+        <option value="2">Tháng 2</option>
+        <option value="3">Tháng 3</option>
+        <option value="4">Tháng 4</option>
+        <option value="5">Tháng 5</option>
+        <option value="6">Tháng 6</option>
+        <option value="7">Tháng 7</option>
+        <option value="8">Tháng 8</option>
+        <option value="9">Tháng 9</option>
+        <option value="10">Tháng 10</option>
+        <option value="11">Tháng 11</option>
+        <option value="12">Tháng 12</option>
+      </select>
+
+      <button onclick="xemKetQua()">✨ Xem kết quả ✨</button>
+    </div>
+
+    <div class="result" id="ketqua"></div>
+  </div>
+
+  <script>
+    const tenCung = [
+      "Trường Sinh", "Mộc Dục", "Quan Đái", "Lâm Quan", "Đế Vượng",
+      "Suy", "Bệnh", "Tử", "Mộ", "Tuyệt", "Thai", "Dưỡng"
+    ];
+
+    const yNghiaCung = {
+         "Trường Sinh": 
+      `May thay số phận Trường Sanh,<br>
+       Mến thương cốt nhục phước lành đủ đông,<br> 
+       Anh em khó đặng một dòng,<br>
+       Hoặc khác cha mẹ ở trong số này,<br> 
+       Anh em cách trở đông tây,<br>
+       Một nhà chung ở sanh rầy với nhau,<br> 
+       Thương thì giúp đỡ trước sau,<br>
+       Phải đều riêng ở mới mau nên nhà.`,
+		
+         "Mộc Dục": 
+	  `Đoán xem mộc dục số này,<br>Giúp lo huynh đệ lòng này thêm thương,<br> Việc ta tự liệu lo lường,<br>Nghĩ thầm toan tính khó nương cậy nhờ,<br> Cầm thương lên ngựa buôn cương,<br>Đông xông tây đục tứ phương lo lường,<br> Đoán thương số phận vấn vương,<br>Một mình tự lập gia đình trở nên.`,
+		
+         "Quan Đái": 
+      `Nên xem quan đái số ta,<br>Anh em cốt nhục một nhà hoan vui,<br>Dầu cha xa cách buổi đầu,<br>Rồi sau quy hiệp có đâu xa đường,<br> Đệ huynh hoà hiệp vện toàn,<br>Gia đàn tạo lập bình an vui vầy,<br>Nồi ai nấy nấu đủ đầy,<br>Đứng mừng trong họ sum vầy đệ huynh.`,
+		
+		
+      "Lâm Quan": "Lúc trưởng thành, có chức quyền, rất tốt.",
+      "Đế Vượng": "Lúc phát triển cực thịnh, đỉnh cao nhất, cực tốt.",
+      "Suy": "Bắt đầu suy yếu, đi xuống.",
+      "Bệnh": "Bị bệnh, thể trạng không tốt, xấu.",
+      "Tử": "Chết, kết thúc một chu kỳ sống, xấu.",
+      "Mộ": "Chôn cất, âm khí nặng, xấu.",
+      "Tuyệt": "Tan rã hoàn toàn, tận diệt, cực xấu.",
+      "Thai": "Bắt đầu hình thành thai, mới nhen nhóm, trung bình.",
+      "Dưỡng": "Nuôi dưỡng, chuẩn bị sinh ra lại, trung bình khá."
+    };
+
+    const viTriTruongSinh = {
+      "Kim": 4,
+      "Mộc": 10,
+      "Thủy": 7,
+      "Hỏa": 1,
+      "Thổ": 7
+    };
+
+    function xemKetQua() {
+      const menh = document.getElementById("menh").value;
+      const thang = parseInt(document.getElementById("thang").value);
+      const viTriBatDau = viTriTruongSinh[menh];
+      const viTriCung = (thang - viTriBatDau + 12) % 12;
+      const ten = tenCung[viTriCung];
+      const nghia = yNghiaCung[ten];
+
+      document.getElementById("ketqua").innerHTML =
+  `Tháng <span class="highlight-month">${thang}</span> 
+   đối với mệnh <span class="highlight-menh">${menh}</span> 
+   là cung: <span class="highlight-cung">${ten}</span><br><i>${nghia}</i>`;
+    }
+  </script>
+</body>
+</html>

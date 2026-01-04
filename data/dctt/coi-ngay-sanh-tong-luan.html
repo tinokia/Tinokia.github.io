@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <title>Diễn Cầm Tam Thế - Thai Tháng Sanh Tháng</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 20px;
+      background: #fdfdfd;
+    }
+    h1 {
+      color: #4b0082;
+    }
+    label, input, button {
+      font-size: 18px;
+      margin: 10px 0;
+    }
+    #result {
+      margin-top: 20px;
+      padding: 15px;
+      border: 1px solid #ccc;
+      background: #f5f5f5;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>🔮 Diễn Cầm Tam Thế - Tra Thai Tháng & Sanh Tháng</h1>
+  <button><a href="../../index.html" style="color: red">Trang Chủ</a></button>
+  <button><a href="../Dien-Cam-Tam-The.html" style="color: red">Sách DCTT</a></button><br>
+
+  <label for="combo">Nhập tháng thọ thai: </label>
+  <input type="number" id="combo" min="1" max="12" />
+  <button onclick="traCuu()">Tra cứu</button>
+
+  <div id="result"></div>
+
+  <script>
+    function traCuu() {
+      const val = parseInt(document.getElementById('combo').value);
+      let result = "";
+
+      switch(val) {
+        case 1:
+          result = `<strong>Thọ thai tháng 1, sanh tháng 10</strong><br>
+          Kiếp trước có tánh can đảm, tự tác, tự thị, không phục người, kiếp này phải chịu cô độc một mình, đi lưu lạc tha phương tận khổ, đến lớn 50 tuổi lập nghiệp mới đặng phát tài, diện mạo đặng tốt. `;
+          break;
+        case 2:
+          result = `<strong>Thọ thai tháng 2, sanh tháng 11</strong><br>
+          Kiếp trước có tánh kiêu thái, khinh thị người, kiếp này hay đau trái tim đau ngũ tạng, trả quả, khắc cha mẹ, anh em, khó nuôi con, số này phải làm lành cho nhiều đặng giải oan thì đến 44 tuổi làm ăn đặng phát tài. Có điển viên sự nghiệp có chức phận, phải nên sửa tánh cho sớm.`;
+          break;
+        case 3:
+          result = `<strong>Thọ thai tháng 3, sanh tháng 12</strong><br>
+          Kiếp trước có tánh nói tiên phật, lòng còn rắn độc, kiếp này ăn mặc thiếu, hay đau con mắt, cô thế một mình, phải làm lành cho nhiều đặng trả quả xưa, đặng giải oan khiên, lành có dư thì trời phật cho chuyển hoá ví phước thì đặng tự lập sự nghiệp trở nên lúc cảnh già bằng không ăn năn thì chịu khổ tới già.`;
+          break;
+        case 4:
+          result = `<strong>Thọ thai tháng 4, sanh tháng 1</strong><br>
+          Kiếp trước có tu hành và cứu người, cho nên kiếp này đặng lộc thật đầy đủ, của tiền nhiều, điền viên rộng, chức phận sang trọng, sống lâu, đi xa sứ khá hơn, trong mình có tật kín, vợ chồng lúc đầu không thành, con đầu lòng khó bảo dưỡng.`;
+          break;
+        case 5:
+          result = `<strong>Thọ thai tháng 5, sanh tháng 2</strong><br>
+          Kiếp trước hay bố thí và in kinh phát cho người tu, kiếp này làm lành đặng sang trọng, có phần đi xa sứ làm ăn, lập nên sự nghiệp, điền viên có, cái tính cứng mạnh, không nhờ anh em, khó nuôi con, hay tiết kiệm, hay dạy người.`;
+          break;
+        case 6:
+          result = `<strong>Thọ thai tháng 6, sanh tháng 3</strong><br>
+          Kiếp trước tánh ưa bài bạc là căn nghiệp, kiếp này tánh hay phản phúc người ơn, làm việc gì thấy nên rồi thấy hư không chừng, khó làm con của cha mẹ, làm việc gì trước có sau không, ăn mặc hẹp thiếu, tâm tánh thông minh, đến già mới khá`;
+          break;
+        case 7:
+          result = `<strong>Thọ thai tháng 7, sanh tháng 4</strong><br>
+          Kiếp trước thông minh khôn khéo lắm, kiếp này như sanh trong mùa xuân, mùa hạ thì phát tài, làm ăn thịnh vượng, sự nghiệp lập đặng nên, có điền viên khá, khắc cha mẹ, vợ chồng buổi đầu không thành, con đầu lòng khó bảo dưỡng.`;
+          break;
+        case 8:
+          result = `<strong>Thọ thai tháng 8, sanh tháng 5</strong><br>
+          Kiếp trước có tánh ỷ thế khinh người, kiếp này hay say rượu, khắc cha mẹ, anh em, vợ con đi tứ phương, đồ khổ, khi lớn tuổi ăn mặc đủ, làm ăn khá, nên bít làm lành thì điền viên khá.`;
+          break;
+        case 9:
+          result = `<strong>Thọ thai tháng 9, sanh tháng 6</strong><br>
+          Kiếp trước tánh can trường rồi sau bít làm lành, kiếp này khắc cha mẹ, anh em, vợ chồng và con, trong mình có tiểu tật, có làm lành thì đặng sống lâu, phát tài, có chức phận và minh mẫn.`;
+          break;
+        case 10:
+          result = `<strong>Thọ thai tháng 10, sanh tháng 7</strong><br>
+          Kiếp trước có tánh hay bàn luận điều lành, hay bố thí cho người nghèo hèn bằng tiền gạo, kiếp này đi đến đâu thì người ta kính trọng đến đó, thuở nhỏ làm ăn bình thường, lớn tuổi làm ăn phát đạt, có chức phận, vợ chồng buổi đầu, con đầu lòng khó bảo dưỡng, có nghề lớn, có tật đau lưng hay tật chân.`;
+          break;
+        case 11:
+          result = `<strong>Thọ thai tháng 11, sanh tháng 8</strong><br>
+          Kiếp trước có tu niệm lành, nhỏ ác, lớn thiện lúc này lúc tuổi đang còn trả quả làm ác, thuở nhỏ phải chịu tàn khổ khắc 3 đời chồng vợ, ít con đi nhiều chỗ, không nhờ anh em, lúc 36 tuổi sắp lên làm ăn phát đạt, lập nên sự nghiệp có chức phận, cha mẹ sống không lâu.`;
+          break;
+        case 12:
+          result = `<strong>Thọ thai tháng 12, sanh tháng 9</strong><br>
+          Kiếp trước có tánh vui vẻ, trung tính rộng rãi, kiếp này người hay yêu chuộng, anh em có làm qua không ở đặng gần nhau, số dời chỗ ở 3 lần, còn làm chẳng lành thì dời 5 lần mới đặng bình an, khắc cha mẹ.`;
+          break;
+        default:
+          result = "Vui lòng nhập số từ 1 đến 12 để tra cứu.";
+      }
+
+      document.getElementById('result').innerHTML = result;
+    }
+  </script>
+
+</body>
+</html>

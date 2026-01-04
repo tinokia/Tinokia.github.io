@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8">
+  <title>Tra Cứu Vận Số – Diễn Cầm Tam Thế</title>
+  <style>
+    /* ---------- Phần nền & font ---------- */
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      margin: 0;
+      padding: 0;
+      background: linear-gradient(to right, #f5f7fa, #c3cfe2);
+      color: #333;
+    }
+
+    /* ---------- Bố cục hai khung ---------- */
+    .container {
+      display: flex;              /* chia làm 2 cột linh hoạt */
+      gap: 16px;                  /* khoảng cách giữa 2 khung */
+      padding: 12px;              /* lề ngoài */
+      box-sizing: border-box;
+    }
+
+    .left-panel {
+      flex: 1 1 50%;              /* chiếm 50% – tự co giãn */
+      min-width: 340px;
+    }
+
+    iframe {
+  width: 635px;                 /* cố định chiều rộng */
+  height: 530px;                /* cố định chiều cao */
+  flex: 0 0 auto;               /* không co, không giãn */
+  border: none;
+  border-radius: 6px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+  background: #fff;
+}
+
+    /* ---------- Tiêu đề & tiêu đề con ---------- */
+    h2 {
+      color: #003366;
+      text-shadow: 1px 1px 1px #ccc;
+      margin-top: 0;
+    }
+    h3 {
+      color: #007acc;
+      margin: 0 0 4px 0;
+    }
+
+    /* ---------- Form điều kiện ---------- */
+    label {
+      display: block;
+      margin-top: 6px;
+      font-weight: bold;
+      color: #003366;
+    }
+
+    select,
+    input[type="text"] {
+      width: 48%;                 /* gọn gàng hơn trong hai cột */
+      max-width: 220px;
+      padding: 4px 6px;
+      margin-top: 4px;
+      border: 1px solid #999;
+      border-radius: 5px;
+      background-color: #fdfdfd;
+      box-shadow: inset 0 1px 2px rgba(0,0,0,0.1);
+      font-size: 15px;
+    }
+
+    button {
+      margin-top: 14px;
+      padding: 10px 24px;
+      font-size: 16px;
+      background-color: #007acc;
+      color: #fff;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+    button:hover { background-color: #005fab; }
+
+    /* ---------- Khung kết quả ---------- */
+    #result {
+      margin-top: 8px;
+      white-space: pre-line;
+      background: #fff;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+      padding: 8px 10px;
+      max-width: 100%;
+      overflow-x: auto;
+      display: none;              /* ẩn ban đầu */
+    }
+  body,td,th {
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+a:link {
+    text-decoration: none;
+}
+a:visited {
+    text-decoration: none;
+}
+a:hover {
+    text-decoration: none;
+}
+a:active {
+    text-decoration: none;
+}
+  </style>
+</head>
+<body>
+  <div class="container">
+
+    <!-- Khung bên trái: Form tra cứu 22 điều -->
+    <div class="left-panel">
+      <h2>Tra Cứu 21 điều xem con nít mới sanh mạng gì, kiết hung theo sách Diễn Cầm Tam Thế</h2>
+	  <h3>Vui lòng tra giờ bên khung tra giờ để bít sanh vào giờ nào</h3>
+		<button><a href="../../index.html" style="color: #1CF0D2" >Trang Chủ</a></button>
+		<button><a href="../Dien-Cam-Tam-The.html" style="color: #1CF0D2" >Sách DCTT</a></button>
+      <label for="can">Can:</label>
+      <select id="can">
+        <option value="">-- Chọn Can --</option>
+        <option value="Giáp">Giáp</option>
+        <option value="Ất">Ất</option>
+        <option value="Bính">Bính</option>
+        <option value="Đinh">Đinh</option>
+        <option value="Mậu">Mậu</option>
+        <option value="Kỷ">Kỷ</option>
+        <option value="Canh">Canh</option>
+        <option value="Tân">Tân</option>
+        <option value="Nhâm">Nhâm</option>
+        <option value="Quý">Quý</option>
+      </select>
+
+      <label for="chi">Chi:</label>
+      <select id="chi">
+        <option value="">-- Chọn Chi --</option>
+        <option value="Tý">Tý</option>
+        <option value="Sửu">Sửu</option>
+        <option value="Dần">Dần</option>
+        <option value="Mẹo">Mẹo</option>
+        <option value="Thìn">Thìn</option>
+        <option value="Tỵ">Tỵ</option>
+        <option value="Ngọ">Ngọ</option>
+        <option value="Mùi">Mùi</option>
+        <option value="Thân">Thân</option>
+        <option value="Dậu">Dậu</option>
+        <option value="Tuất">Tuất</option>
+        <option value="Hợi">Hợi</option>
+      </select>
+
+      <label for="month">Tháng sinh (âm lịch):</label>
+      <select id="month">
+        <option value="">-- Chọn Tháng --</option>
+        <option value="1">1</option><option value="2">2</option><option value="3">3</option>
+        <option value="4">4</option><option value="5">5</option><option value="6">6</option>
+        <option value="7">7</option><option value="8">8</option><option value="9">9</option>
+        <option value="10">10</option><option value="11">11</option><option value="12">12</option>
+      </select>
+
+      <label for="hour">Giờ sinh:</label>
+      <select id="hour">
+        <option value="">-- Chọn Giờ --</option>
+        <option value="Tý">Tý</option><option value="Sửu">Sửu</option><option value="Dần">Dần</option>
+        <option value="Mẹo">Mẹo</option><option value="Thìn">Thìn</option><option value="Tỵ">Tỵ</option>
+        <option value="Ngọ">Ngọ</option><option value="Mùi">Mùi</option><option value="Thân">Thân</option>
+        <option value="Dậu">Dậu</option><option value="Tuất">Tuất</option><option value="Hợi">Hợi</option>
+      </select>
+
+      <label for="menh">Mệnh (Ngũ hành):</label>
+      <select id="menh">
+        <option value="">-- Chọn Mệnh --</option>
+        <option value="Kim">Kim</option>
+        <option value="Mộc">Mộc</option>
+        <option value="Thủy">Thủy</option>
+        <option value="Hỏa">Hỏa</option>
+        <option value="Thổ">Thổ</option>
+      </select>
+
+      <button onclick="traCuu()">Tra cứu vận số</button>
+
+      <div id="result">
+        <h3>Kết quả:</h3>
+        <p></p>
+      </div>
+    </div>
+
+    <!-- Khung bên phải: trang tra giờ -->
+    <iframe src="can-chi-gop-tra-gio.html"></iframe>
+  </div>
+
+  <!-- ---------- JavaScript tra cứu 22 điều ---------- -->
+<script>
+    function traCuu() {
+      const can = document.getElementById('can').value;
+      const chi = document.getElementById('chi').value;
+      const month = parseInt(document.getElementById('month').value);
+      const hour = document.getElementById('hour').value;
+      const menh = document.getElementById('menh').value;
+      const namSinh = can + " " + chi;
+
+      let ketQua = "";
+
+// 1) Trời đánh
+if ((["Giáp", "Ất"].includes(can) && hour === "Ngọ") || 
+   (["Bính", "Đinh"].includes(can) && hour === "Tý")||
+   (["Mậu", "Kỷ"].includes(can) && hour === "Tuất")||
+   (["Canh", "Tân"].includes(can) && hour === "Dần")||
+   (["Nhâm", "Quý"].includes(can) && hour === "Dậu"))
+  ketQua += "❌ Điều 1: Có số bị trời đánh.\n(nuôi không được, nếu nuôi được tới lớn thì cũng bị.)\n";
+else ketQua += "✅ Điều 1: Không bị trời đánh.\n";
+
+// 2) Rắn cắn
+if ((["Giáp", "Ất"].includes(can) && ["Tỵ", "Dậu", "Sửu"].includes(hour)) || 
+   (["Bính", "Đinh"].includes(can) && ["Thân", "Tý", "Thìn"].includes(hour))||
+   (["Mậu", "Kỷ"].includes(can) && ["Hợi", "Mẹo", "Mùi"].includes(hour))||
+   (["Nhâm", "Quý"].includes(can) && ["Dần", "Ngọ", "Tuất"].includes(hour)))
+  ketQua += "❌ Điều 2: Có tướng bị rắn cắn.\n(phạm 2 năm, 3 tháng trên, trong 3 năm trở lại nuôi không đặng)\n";
+else ketQua += "✅ Điều 2: Không bị rắn cắn.\n";
+
+      // 3) Chết yểu
+if (([1, 5, 9].includes(month) && hour === "Thìn") ||
+   ([2, 6, 10].includes(month) && hour === "Mùi")||
+   ([3, 7, 11].includes(month) && hour === "Tỵ")||
+   ([4, 8, 12].includes(month) && hour === "Dần"))
+  ketQua += "❌ Điều 3: Có số chết yểu.\n(phạm 3 tháng, 1 giờ trên, khó nuôi đến 12 tuổi hay mới sanh)\n";
+else ketQua += "✅ Điều 3: Không chết yểu.\n";
+
+// 4) Khó nuôi
+if ((month === 2 && hour === "Dậu") || (month === 3 && hour === "Tuất")||
+   (month === 4 && hour === "Hợi")|| (month === 5 && hour === "Tý")||
+   (month === 6 && hour === "Sửu")|| (month === 7 && hour === "Dần")||
+   (month === 8 && hour === "Mẹo")|| (month === 9 && hour === "Thìn")||
+   (month === 10 && hour === "Tỵ")|| (month === 11 && hour === "Ngọ")||
+   (month === 12 && hour === "Mùi"))
+  ketQua += "❌ Điều 4: Số khó nuôi.\n(phạm 1 tháng, 1 giờ trên,lớn tuổi bệnh về ho ra máu)\n";
+else ketQua += "✅ Điều 4: Số dễ nuôi.\n";
+
+// 5) Té sông, giếng
+if ((month === 1 && hour === "Dần") || (month === 2 && hour === "Mẹo") || 
+   (month === 3 && hour === "Thìn")|| (month === 4 && hour === "Tỵ") || 
+   (month === 5 && hour === "Ngọ")|| (month === 6 && hour === "Mùi") || 
+   (month === 7 && hour === "Thân")|| (month === 8 && hour === "Dậu") || 
+   (month === 9 && hour === "Tuất")|| (month === 10 && hour === "Hợi") || 
+   (month === 11 && hour === "Tý")|| (month === 12 && hour === "Sửu"))
+  ketQua += "❌ Điều 5: Có thể té sông, giếng.\n(phạm 1 tháng, 1 giờ trên, coi chừng té sông, giếng nếu qua khỏi 12 tuổi thì khỏi đặng, đến lớn coi chừng chìm ghe)\n";
+else ketQua += "✅ Điều 5: Không té sông, giếng.\n";
+
+// 6) Phạm giờ khóc
+if (([1, 2, 3].includes(month) && hour === "Ngọ") ||
+   ([4, 5, 6].includes(month) && hour === "Tý")||
+   ([7, 8, 9].includes(month) && hour === "Dậu")||
+   ([10, 11, 12].includes(month) && hour === "Mẹo"))
+  ketQua += "❌ Điều 6: Phạm giờ khóc.\n(phạm 3 tháng, 1 giờ trên, mới sanh hay khóc đêm, nhờ thầy giỏi ếm mới hết)\n";
+else ketQua += "✅ Điều 6: Không phạm giờ khóc.\n";
+
+// 7) Kỵ cha mẹ
+if (([1, 7].includes(month) && ["Tỵ", "Hợi"].includes(hour)) ||
+   ([2, 8].includes(month) && ["Tuất", "Thìn"].includes(hour))||
+   ([3, 9].includes(month) && ["Mẹo", "Dậu"].includes(hour))||
+   ([4, 10].includes(month) && ["Dần", "Thân"].includes(hour))||
+   ([5, 11].includes(month) && ["Sửu", "Mùi"].includes(hour))||
+   ([6, 12].includes(month) && ["Tý", "Ngọ"].includes(hour)))
+  ketQua += "❌ Điều 7: Kỵ cha mẹ.\n(phạm 3 tháng, 2 giờ trên, khó nuôi đến lớn, nếu nuôi được thì cha mẹ phải phân ly, nếu không phân ly thì nó lớn sẽ bị chết chém)\n";
+else ketQua += "✅ Điều 7: Không kỵ cha mẹ.\n";
+
+// 8) Bệnh ghẻ
+if (([1, 2, 3].includes(month) && ["Thìn", "Tuất"].includes(hour)) ||
+   ([4, 5, 6].includes(month) && ["Sửu", "Mùi"].includes(hour))||
+   ([7, 8, 9].includes(month) && ["Tuất", "Hợi"].includes(hour))||
+   ([10, 11, 12].includes(month) && ["Sửu", "Dần"].includes(hour)))
+  ketQua += "❌ Điều 8: Dễ bị bệnh ghẻ.\n(phạm 3 tháng, 2 giờ trên thì hay bị ghẻ chóc lúc nhỏ, đến lớn mới hết)\n";
+else ketQua += "✅ Điều 8: Không bị bệnh ghẻ.\n";
+
+// 9) Chầu Diêm Vương
+if (([1, 2, 3].includes(month) && ["Sửu", "Mùi"].includes(hour)) ||
+   ([4, 5, 6].includes(month) && ["Thìn", "Tuất"].includes(hour))||
+   ([7, 8, 9].includes(month) && ["Tý", "Ngọ"].includes(hour))||
+   ([10, 11, 12].includes(month) && ["Mẹo", "Dậu"].includes(hour)))
+  ketQua += "❌ Điều 9: Số chầu Diêm Vương sớm.\n(phạm 3 tháng, 2 giờ trên thì nuôi không đặng)\n";
+else ketQua += "✅ Điều 9: Không chầu Diêm Vương.\n";
+
+// 10) Ngủ giựt mình
+if (([1, 2, 3].includes(month) && ["Thìn", "Dậu"].includes(hour)) ||
+   ([4, 5, 6].includes(month) && ["Tý", "Mẹo"].includes(hour))||
+   ([7, 8, 9].includes(month) && ["Sửu", "Mùi"].includes(hour))||
+   ([10, 11, 12].includes(month) && ["Tý", "Hợi"].includes(hour)))
+  ketQua += "❌ Điều 10: Ngủ hay giựt mình.\n(phạm 3 tháng, 2 giờ trên thì ngủ hay gựt mình, cầu xin mới hết, tuổi kỵ về tên, đạn)\n";
+else ketQua += "✅ Điều 10: Ngủ yên ổn.\n";
+
+// 11) Ma quỷ bắt mạng
+if ((chi === "Tý" && hour === "Dậu") ||
+	(chi === "Tuất" && ["Sửu", "Dần", "Thân", "Tỵ", "Mẹo"].includes(hour))||
+    (chi === "Hợi" && hour === "Thìn"))
+  ketQua += "❌ Điều 11: Dễ bị ma quỷ bắt mạng.\n(phạm tuổi và giờ trên thì khó nuôi, phải nhờ thầy giỏi ếm mới hết, lớn lên dễ bị ma nhát)\n";
+else ketQua += "✅ Điều 11: Không bị ma quỷ bắt mạng.\n";
+
+// 12) Chết vì bị đánh
+if ((["Giáp", "Ất"].includes(can) && ["Thân", "Dậu"].includes(hour)) ||
+   (["Bính", "Đinh"].includes(can) && ["Hợi", "Tý"].includes(hour))||
+   (["Mậu", "Kỷ"].includes(can) && ["Mẹo", "Sửu"].includes(hour))||
+   (["Canh", "Tân"].includes(can) && ["Tỵ", "Ngọ"].includes(hour))||
+   (["Nhâm", "Quý"].includes(can) && ["Thìn", "Tuất", "Sửu", "Mùi"].includes(hour)))
+  ketQua += "❌ Điều 12: Dễ chết do bị đánh bằng cây.\n";
+else ketQua += "✅ Điều 12: Không bị chết vì đánh.\n";
+
+// 13) Có tật
+if (([1, 2, 3].includes(month) && hour === "Dậu") ||
+   ([4, 5, 6].includes(month) && hour === "Tý")||
+   ([7, 8, 9].includes(month) && hour === "Mẹo")||
+   ([10, 11, 12].includes(month) && hour === "Ngọ"))
+  ketQua += "❌ Điều 13: Có số mang tật.\n(phạm 3 tháng, 1 giờ trên thì hay bệnh hoặc có tật, nếu phước đức nhiều thì lớn có công danh, làm ăn phát đạt, phòng kẻ ác chém lén, còn ít phước thì phải đi ăn xin)\n";
+else ketQua += "✅ Điều 13: Không có tật.\n";
+
+// 14) Đau trong 100 ngày
+if (([1, 2].includes(month) && ["Tỵ", "Ngọ", "Thân", "Dậu"].includes(hour)) ||
+   ([3, 6, 9, 12].includes(month) && ["Tý", "Hợi", "Sửu", "Mùi"].includes(hour))||
+   ([4, 5].includes(month) && ["Hợi", "Tý"].includes(hour))||
+   ([7, 8].includes(month) && ["Dần", "Mẹo", "Tỵ", "Ngọ"].includes(hour))||
+   ([10, 11].includes(month) && ["Tý", "Ngọ", "Thìn", "Mẹo"].includes(hour)))
+  ketQua += "❌ Điều 14: Dễ đau trong 100 ngày.\n(phạm những tháng, giờ trên thì đau 100 ngày, nuôi cực khổ, phải thuốc thang nhiều mới khỏi, nếu qua được thì lớn lên hay bệnh lặt vặt)\n";
+else ketQua += "✅ Điều 14: Không bị đau dài ngày.\n";
+
+// 15) Té sông, giếng (lặp nhưng khác điều 5)
+//if (([1, 2, 3].includes(month) && hour === "Mẹo") ||
+//    ([4, 5, 6].includes(month) && hour === "Ngọ"))
+//  ketQua += "❌ Điều 15: Dễ té sông giếng.\n";
+//else ketQua += "✅ Điều 15: Không té sông giếng.\n";
+
+// 16) Mắt sáng hay không
+if ((menh === "Kim" && [1, 4, 5, 10, 11].includes(month)) ||
+   (menh === "Mộc" && [4, 5, 7, 8].includes(month))||
+   (menh === "Thủy" && [1, 4, 5, 9].includes(month))||
+   (menh === "Hỏa" && [1, 4, 5].includes(month))||
+   (menh === "Thổ" && [1, 4, 5, 10, 11].includes(month)))
+  ketQua += "❌ Điều 15: Mắt không sáng rõ.\n(phạm những mạng, tháng trên thì đề phòng mắt hay bệnh, bị mù, nếu làm lành, thi ân trợ khổ thì qua được)\n";
+else ketQua += "✅ Điều 15: Mắt sáng rõ.\n";
+
+// 17) Đau lưng
+if ((menh === "Kim" && [1, 5, 7, 8].includes(month)) ||
+   (menh === "Mộc" && [4, 5, 7, 8].includes(month))||
+   (menh === "Thủy" && [1, 4, 5, 2].includes(month))||
+   (menh === "Hỏa" && [4, 5, 10, 11].includes(month))||
+   (menh === "Thổ" && [4, 5, 10, 11].includes(month)))
+  ketQua += "❌ Điều 16: Dễ bị đau lưng.\n(phạm những mạng, tháng trên thì hay bị đau lưng, tánh thông minh, gia đạo hưng vượng, có phước lộc)\n";
+else ketQua += "✅ Điều 16: Không đau lưng.\n";
+
+// 18) Lửa cháy
+if ((["Tý", "Ngọ"].includes(chi) && [1, 7].includes(month)) ||
+   (["Sửu", "Mùi"].includes(chi) && [2, 8].includes(month))||
+   (["Dần", "Thân"].includes(chi) && [3,9].includes(month))||
+   (["Mẹo", "Dậu"].includes(chi) && [4,10].includes(month))||
+   (["Thìn", "Tuất"].includes(chi) && [5,11].includes(month))||
+   (["Tỵ", "Hợi"].includes(chi) && [6,12].includes(month)))
+  ketQua += "❌ Điều 17: Số gặp hỏa hoạn.\n(vì kiếp trước khi thần, thánh nên sanh những tuổi, tháng trên thì kỵ, nên làm điều âm chất, phước đức nhiều thì qua)\n";
+else ketQua += "✅ Điều 17: Không bị lửa cháy.\n";
+
+// 19) Kỵ cỡi trâu, ngựa, xe
+if ((["Tý", "Dần", "Thìn", "Ngọ", "Thân", "Tuất"].includes(chi) && [1, 7].includes(month)) ||
+   (["Sửu", "Mẹo", "Tỵ", "Mùi", "Dậu", "Hợi"].includes(chi) && [4, 10].includes(month)))
+  ketQua += "❌ Điều 18: Kỵ cỡi trâu, ngựa, xe.\n";
+else ketQua += "✅ Điều 18: Không kỵ cỡi xe.\n";
+
+// 20) Rắn cắn, cọp ăn
+if ((["Tý", "Ngọ"].includes(chi) && [1, 7].includes(month)) ||
+   (["Sửu", "Mùi"].includes(chi) && [2, 8].includes(month))||
+   (["Dần", "Thân"].includes(chi) && [3,9].includes(month))||
+   (["Mẹo", "Dậu"].includes(chi) && [4,10].includes(month))||
+   (["Thìn", "Tuất"].includes(chi) && [5,11].includes(month))||
+   (["Tỵ", "Hợi"].includes(chi) && [6,12].includes(month)))
+  ketQua += "❌ Điều 19: Dễ bị rắn cắn, cọp ăn.\n";
+else ketQua += "✅ Điều 19: Không bị rắn cắn, cọp ăn.\n";
+
+// 21) Té cây, té sông, giếng
+if ((menh === "Kim" && [5, 7].includes(month)) ||
+   (menh === "Mộc" && [5, 7].includes(month))||
+   (menh === "Thủy" && [1, 10].includes(month))||
+   (menh === "Hỏa" && [4, 10].includes(month))|| 
+   (menh === "Thổ" && [4, 10].includes(month)))
+  ketQua += "❌ Điều 20: Dễ bị té cây, té sông.\n(trèo leo phòng té,qua mương, cầu, đi sông suối nên cẩn thận, kẻo té nặng, hại thân)\n";
+else ketQua += "✅ Điều 20: Không té cây, té sông.\n";
+
+      // 22) Không có nhà ở
+      if ((chi === "Tý" && [3, 5, 7].includes(month)) ||
+          (chi === "Sửu" && [2, 6, 9].includes(month)) ||
+          (chi === "Dần" && [1, 4, 10].includes(month)) ||
+          (chi === "Mẹo" && [3, 6, 11].includes(month)) ||
+          (chi === "Thìn" && [2, 5, 8].includes(month)) ||
+          (chi === "Tỵ" && [1, 7, 10].includes(month)) ||
+          (chi === "Ngọ" && [2, 6, 12].includes(month)) ||
+          (chi === "Mùi" && [3, 5, 9].includes(month)) ||
+          (chi === "Thân" && [4, 8, 11].includes(month)) ||
+          (chi === "Dậu" && [2, 5, 7].includes(month)) ||
+          (chi === "Tuất" && [3, 6, 10].includes(month)) ||
+          (chi === "Hợi" && [1, 4, 11].includes(month)))
+        ketQua += "❌ Điều 21: Số không có nhà ở cố định.\n";
+      else ketQua += "✅ Điều 21: Có số nhà ở ổn định.\n";
+
+      const resultDiv = document.getElementById('result');
+      resultDiv.style.display = 'block';
+      resultDiv.querySelector('p').textContent = ketQua;
+    }
+  </script>
+</body>
+</html>

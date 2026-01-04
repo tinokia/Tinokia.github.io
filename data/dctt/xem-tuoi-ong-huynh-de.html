@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <title>Coi tuổi Ông Huỳnh Đế</title>
+  <style>
+    body { font-family: 'Segoe UI', sans-serif; padding: 20px; background: #f9f9f9; }
+    h1 { color: darkred; }
+    select, button { font-size: 16px; padding: 8px; margin: 10px 0; }
+    .result { margin-top: 20px; padding: 10px; background: #fff5e6; border-left: 4px solid orange; white-space: pre-wrap; }
+  </style>
+</head>
+<body>
+  <h1>🌸 Coi tuổi Ông Huỳnh Đế bốn mùa sang hèn</h1>
+  <a href="../../index.html" class="btn-link">🏠 Trang Chủ</a>
+  <a href="../Dien-Cam-Tam-The.html" class="btn-link">📖 Sách DCTT</a><br><br>
+
+  <label>Chọn tháng sinh âm lịch:</label><br>
+  <select id="thang">
+    <option value="">-- Chọn tháng --</option>
+    <option value="1">Tháng 1</option>
+    <option value="2">Tháng 2</option>
+    <option value="3">Tháng 3</option>
+    <option value="4">Tháng 4</option>
+    <option value="5">Tháng 5</option>
+    <option value="6">Tháng 6</option>
+    <option value="7">Tháng 7</option>
+    <option value="8">Tháng 8</option>
+    <option value="9">Tháng 9</option>
+    <option value="10">Tháng 10</option>
+    <option value="11">Tháng 11</option>
+    <option value="12">Tháng 12</option>
+  </select><br>
+
+  <label>Chọn tuổi (12 con giáp):</label><br>
+  <select id="tuoi">
+    <option value="">-- Chọn tuổi --</option>
+    <option value="Tý">Tý</option>
+    <option value="Sửu">Sửu</option>
+    <option value="Dần">Dần</option>
+    <option value="Mẹo">Mẹo</option>
+    <option value="Thìn">Thìn</option>
+    <option value="Tỵ">Tỵ</option>
+    <option value="Ngọ">Ngọ</option>
+    <option value="Mùi">Mùi</option>
+    <option value="Thân">Thân</option>
+    <option value="Dậu">Dậu</option>
+    <option value="Tuất">Tuất</option>
+    <option value="Hợi">Hợi</option>
+  </select><br>
+
+  <button onclick="traCuu()">🧿 Xem vị trí tầm chỗ</button>
+
+  <div id="ketqua" class="result"></div>
+
+  <script>
+    const duLieu = {
+      "Xuan": {
+        "Tý": "ở tại đầu", "Sửu": "ở tại hông", "Dần": "ở tại chân",
+        "Mẹo": "ở tại vai", "Thìn": "ở tại đầu gối", "Tỵ": "ở tại bàn tay",
+        "Ngọ": "ở tại bụng", "Mùi": "ở tại bàn tay", "Thân": "ở tại chân",
+        "Dậu": "ở tại vai", "Tuất": "ở tại đầu gối", "Hợi": "ở tại hông"
+      },
+      "Ha": {
+        "Tý": "ở tại bụng", "Sửu": "ở tại bàn tay", "Dần": "ở tại chân",
+        "Mẹo": "ở tại vai", "Thìn": "ở tại đầu gối", "Tỵ": "ở tại bàn tay",
+        "Ngọ": "ở tại đầu", "Mùi": "ở tại hông", "Thân": "ở tại chân",
+        "Dậu": "ở tại vai", "Tuất": "ở tại đầu gối", "Hợi": "ở tại hông"
+      },
+      "Thu": {
+        "Tý": "ở tại vai", "Sửu": "ở tại bàn tay", "Dần": "ở tại đầu gối",
+        "Mẹo": "ở tại hông", "Thìn": "ở tại chân", "Tỵ": "ở tại bàn tay",
+        "Ngọ": "ở tại vai", "Mùi": "ở tại hông", "Thân": "ở tại bụng",
+        "Dậu": "ở tại đầu gối", "Tuất": "ở tại chân", "Hợi": "ở tại đầu"
+      },
+      "Dong": {
+        "Tý": "ở tại bụng", "Sửu": "ở tại đầu gối", "Dần": "ở tại hông",
+        "Mẹo": "ở tại vai", "Thìn": "ở tại chân", "Tỵ": "ở tại đầu",
+        "Ngọ": "ở tại bàn tay", "Mùi": "ở đầu gối", "Thân": "ở tại hông",
+        "Dậu": "ở tại vai", "Tuất": "ở tại chân", "Hợi": "ở tại bàn tay"
+      }
+    };
+
+    const thoTheoViTri = {
+      "đầu": 
+`Sanh tại trên đầu ông Huỳnh Đế,<br>
+Trong đời vui vẻ khỏi bề nhọc lo.
+Rảnh rang phú quý trời cho,
+Cao lương mỹ vị ăn no thiếu gì.
+Công danh phú quý lo chi,
+Tự nhiên danh giá một khi đặng nhờ.
+Số này dầu giá đào thơ ,
+Gặp cảnh duyên nợ đặng nhờ nào phu.
+Sánh duyên cùng với danh phu,
+Dầu cho nam nữ công phu kịp kỳ.<br>
+(Số này nam nữ cũng đều tốt cả)`,
+
+      "vai": 
+`Sanh nhiều chỗ ở trên vai,
+Tuổi xuân cực khổ nào hay vận thời.
+Ba mươi gặp vận thới lai,
+Sắp lên lớn tuổi tiền tài thiếu chi.
+Chừng ấy trâu ruộng thiếu gì,
+Số trời đã định phải thì thua ai.
+Anh em số phận tiền tài,
+Chuyện mình mình liệu khó bề cậy nương.<br>
+(Số này nhỏ cực lớn khá, không nhờ anh em )`,
+
+      "hông": 
+`Sanh nhằm Huỳnh Đế ở hông,
+Phước hồng thì đặng chờ trông làm giàu.
+Thi thơ kinh sách thông thạo,
+Số có khoa mục đặng hào công danh.
+Lương duyên tơ tóc đặng lành,
+Trăm năm chung hưởng phước sanh an hoà.
+Làm  ăn gặp vận số ta,
+Vợ chồng lo tính vậy mà đặng nên.<br>
+(Số này làm ăn khá, đặng khá công danh)`,
+
+      "bụng": 
+`May sanh nhằm bụng ông vua,
+Của tiền ăn mặc thua ai đâu là. 
+Chẳng văn thì võ số ta,
+Hai bên chầu chực xướng ca vui mừng. 
+Nữa đời sung sướng quá chừng,
+Trong ngoài của cải lẫy lừng thiếu chi. 
+Số này chung thủy khả vi,
+Dầu không chức phận hướng thì giàu sang.<br>
+(Số này dễ làm ăn lắm, có quyền chức, gái có chồng giàu sang )`,
+
+      "bàn tay": 
+`Ở tay Huỳnh Đế tốt thay,
+Phước mà ta đặng tiền tài thiếu chi.
+Ra đi nhiều kẻ yêu vì,
+Trong nhà trăm việc thiếu cho vật dùng.
+Lao tâm tuổi nhỏ chẳng cùng,
+Đến khi lớn tuổi thung dung vẹn toàn.
+Bốn phương lui tới luận  bàn,
+Của tiền tài vật muôn đàn thiếu chi.<br>
+(Số này tuổi nhỏ trung bình đến 35 tuổi sắp lên phát đạt lắm )`,
+
+      "chân": 
+`Số này sanh ở tại chân ,
+Tu hành đắc quả có hơn người thường. 
+Biết đời nên giúp nghĩa thương,
+Khá tu nhơn đức lo lường ngày sau. 
+Chỗ cha mẹ ở đặng nào,
+Vợ chồng thứ nhứt khắc hào,
+Đời sau mới đặng vẹn bề,
+Gia đình khác xứ mới hề lập nên.<br>
+(số này tu đắc quả, vợ chồng thay đổi một lần mới nên)`,
+
+      "đầu gối": 
+`Ở nơi đầu gối khổ ôi!<br>
+Thuở trẻ cực khổ lôi thôi trăm bề.
+Đi nhiều chân chẳng muốn về,
+Xiết bao lao khổ chớ hề ngồi không. 
+Gia đàng trể nải không xong,
+Bốn mươi tám tuổi mới hòng ngồi an. 
+Chừng ấy lo liệu gia đàng,
+Trong ngoài đến đó vững vàng lập nên.
+(Số này tuổi trẻ đi đứng nhiều, 48 tuổi mới nên)`
+    };
+
+    function layMua(thang) {
+      if ([1,2,3].includes(thang)) return "Xuan";
+      if ([4,5,6].includes(thang)) return "Ha";
+      if ([7,8,9].includes(thang)) return "Thu";
+      return "Dong";
+    }
+
+    function traCuu() {
+      const thang = parseInt(document.getElementById("thang").value);
+      const tuoi = document.getElementById("tuoi").value;
+      const mua = layMua(thang);
+
+      if (!thang || !tuoi) {
+        document.getElementById("ketqua").innerHTML = "❗ Vui lòng chọn đủ tháng sinh và tuổi.";
+        return;
+      }
+
+      const viTri = duLieu[mua][tuoi] || "Không rõ";
+      const viTriIn = `<b>Vị trí tầm chỗ:</b> ${tuoi} sinh tháng ${thang} (${mua === 'Xuan' ? 'mùa Xuân' : mua === 'Ha' ? 'mùa Hạ' : mua === 'Thu' ? 'mùa Thu' : 'mùa Đông'}) → <b>${viTri}</b>.`;
+
+      // Tìm thơ tương ứng với vị trí
+      let keyTho = Object.keys(thoTheoViTri).find(k => viTri.includes(k)) || "";
+      let tho = keyTho ? `<br><br><b>Bài thơ ${viTri}:</b><br><br>${thoTheoViTri[keyTho]}` : "";
+
+      document.getElementById("ketqua").innerHTML = viTriIn + tho;
+    }
+  </script>
+</body>
+</html>

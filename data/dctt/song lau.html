@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <title>Tra Cứu Số Sống Lâu Mau - Diễn Cầm Tam Thế</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f7f7f7;
+      padding: 30px 20px;
+      max-width: 1100px;
+      margin: auto;
+      color: #333;
+    }
+
+    .nav-buttons {
+      text-align: left;
+      margin-bottom: 20px;
+    }
+
+    .btn-link {
+      display: inline-block;
+      padding: 10px 20px;
+      margin: 5px 10px 10px 0;
+      background-color: #2c3e50;
+      color: #1CF0D2;
+      text-decoration: none;
+      border-radius: 5px;
+      font-weight: bold;
+      transition: background-color 0.3s ease;
+    }
+
+    .btn-link:hover {
+      background-color: #34495e;
+    }
+
+    h1 {
+      color: #2c3e50;
+      text-align: center;
+      margin-bottom: 30px;
+    }
+
+    h4 {
+      text-align: center;
+      font-weight: normal;
+      color: #555;
+      margin-bottom: 30px;
+    }
+
+    .container {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      gap: 30px;
+      flex-wrap: nowrap;
+    }
+
+    .box {
+      background: #fff;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+      width: 48%;
+    }
+
+    iframe {
+      width: 100%;
+      height: 340px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+    }
+
+    label {
+      display: block;
+      margin: 10px 0 5px;
+      font-weight: bold;
+    }
+
+    select, button {
+      width: 100%;
+      padding: 10px;
+      font-size: 16px;
+      margin-bottom: 20px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+
+    button {
+      background-color: #2c3e50;
+      color: white;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    button:hover {
+      background-color: #34495e;
+    }
+
+    #result {
+      background: #f9f9f9;
+      border: 1px solid #ccc;
+      padding: 15px;
+      font-size: 17px;
+      color: #2c3e50;
+      border-radius: 6px;
+    }
+
+    @media (max-width: 900px) {
+      .container {
+        flex-direction: column;
+      }
+      .box {
+        width: 100%;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="nav-buttons">
+    <a href="../../index.html" class="btn-link">🏠 Trang Chủ</a>
+    <a href="../Dien-Cam-Tam-The.html" class="btn-link">📖 Sách DCTT</a>
+  </div>
+
+  <h1>Tra Cứu Số Sống Lâu Mau theo sách Diễn Cầm Tam Thế</h1>
+  <h4>Tra cứu số sống lâu mau thường đúng với người sống trung dung – không làm lành, cũng chẳng làm ác. Làm việc thiện có thể được gia tăng tuổi thọ, còn làm điều xấu sẽ bị giảm thọ.</h4>
+
+  <div class="container">
+    <div class="box">
+      <h3>📘 Tra Can Chi và Mệnh</h3>
+      <iframe src="can-chi.html"></iframe>
+    </div>
+
+    <div class="box">
+      <h3>🔮 Tra Số Sống Lâu</h3>
+      <label for="menh">Ngũ hành bản mệnh:</label>
+      <select id="menh">
+        <option value="kim">Kim</option>
+        <option value="moc">Mộc</option>
+        <option value="thuy">Thủy</option>
+        <option value="hoa">Hỏa</option>
+        <option value="tho">Thổ</option>
+      </select>
+
+      <label for="thang">Tháng sinh (âm lịch):</label>
+      <select id="thang">
+        <option value="1">Tháng 1</option>
+        <option value="2">Tháng 2</option>
+        <option value="3">Tháng 3</option>
+        <option value="4">Tháng 4</option>
+        <option value="5">Tháng 5</option>
+        <option value="6">Tháng 6</option>
+        <option value="7">Tháng 7</option>
+        <option value="8">Tháng 8</option>
+        <option value="9">Tháng 9</option>
+        <option value="10">Tháng 10</option>
+        <option value="11">Tháng 11</option>
+        <option value="12">Tháng 12</option>
+      </select>
+
+      <button onclick="traCuuSoMenh()">Xem Số Sống</button>
+      <div id="result"></div>
+    </div>
+  </div>
+
+  <script>
+    const bangSoMenh = {
+      kim: [45, 68, 27, 51, 39, 25, 30, 45, 59, 45, 35, 43],
+      kim_dai: [67, 73, 63, 81, 76, 61, 59, 81, 72, 66, 59, 67],
+      moc: [15, 68, 39, 25, 36, 49, 26, 61, 31, 41, 32, 35],
+      moc_dai: [74, 76, 59, 72, 83, 82, 75, 77, 73, 72, 61, 76],
+      thuy: [56, 26, 36, 45, 62, 46, 66, 49, 31, 35, 49, 36],
+      thuy_dai: [81, 72, 90, 62, 75, 82, 62, 64, 73, 69, 81, 79],
+      hoa: [49, 36, 13, 29, 28, 51, 29, 16, 23, 36, 20, 39],
+      hoa_dai: [79, 72, 65, 59, 64, 69, 59, 26, 87, 59, 71, 51],
+      tho: [39, 47, 15, 37, 46, 59, 13, 51, 15, 15, 51, 80],
+      tho_dai: [77, 59, 72, 68, 59, 67, 49, 66, 67, 64, 76, 91]
+    };
+
+    function traCuuSoMenh() {
+      const menh = document.getElementById("menh").value;
+      const thang = parseInt(document.getElementById("thang").value);
+      const index = thang - 1;
+      const tieuSo = bangSoMenh[menh][index];
+      const daiSo = bangSoMenh[menh + '_dai'][index];
+      const result = `🔢 Tiểu số: <strong>${tieuSo}</strong> tuổi<br>🌟 Đại số: <strong>${daiSo}</strong> tuổi.`;
+      document.getElementById("result").innerHTML = result;
+    }
+  </script>
+</body>
+</html>

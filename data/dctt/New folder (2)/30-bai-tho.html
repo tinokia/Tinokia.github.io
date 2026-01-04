@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <title>Tra cứu vận thơ</title>
+  <style>
+    body { font-family: Arial, sans-serif; padding: 20px; background: #f0f0f0; }
+    label, select, input, button {margin: 10px 0; font-size: 16px; }
+    #result { background: #fff; padding: 20px; border-radius: 8px; box-shadow: 0 0 10px rgba(0,0,0,0.1); }
+    h3 { color: darkblue; }
+	.inline { display: flex; align-items: center; gap: 10px; }
+	#result1 { font-size: 18px; color: darkblue;}
+	#tuoi {
+  width: 60px;
+}
+  </style>
+</head>
+<body>
+  <h2>Tra cứu vận thơ - Diễn Cầm Tam Thế</h2>
+  
+  <label>Chọn phần xem: 
+    <select id="xemTheo">
+      <option value="">----</option>
+      <option value="nam">Xem theo Năm</option>
+      <option value="thang">Xem theo Tháng</option>
+      <option value="ngay">Xem theo Ngày</option>
+    </select>
+  </label>&nbsp;&nbsp;
+
+  <label>Chọn giới tính:
+    <select id="gioiTinh">
+      <option value="">----</option>
+      <option value="nam">Nam</option>
+      <option value="nu">Nữ</option>
+    </select>
+  </label>&nbsp;&nbsp;
+
+  <label>Thiên can:
+    <select id="thienCan">
+      <option value="">----</option>
+      <option>Giáp</option><option>Ất</option><option>Bính</option><option>Đinh</option><option>Mậu</option>
+      <option>Kỷ</option><option>Canh</option><option>Tân</option><option>Nhâm</option><option>Quý</option>
+    </select>
+  </label>&nbsp;&nbsp;
+
+  <label>Địa chi:
+    <select id="diaChi">
+      <option value="">----</option>
+      <option>Tý</option><option>Sửu</option><option>Dần</option><option>Mẹo</option><option>Thìn</option>
+      <option>Tỵ</option><option>Ngọ</option><option>Mùi</option><option>Thân</option><option>Dậu</option>
+      <option>Tuất</option><option>Hợi</option>
+    </select>
+  </label>&nbsp;&nbsp;
+
+  
+
+  <label>Nhập số tuổi: <input type="number" id="tuoi"> </label>&nbsp;&nbsp;
+
+  <label>Ngày địa chi:
+    <select id="ngayDiaChi">
+      <option value="">----</option>
+      <option>Tý</option><option>Sửu</option><option>Dần</option><option>Mẹo</option><option>Thìn</option>
+      <option>Tỵ</option><option>Ngọ</option><option>Mùi</option><option>Thân</option><option>Dậu</option>
+      <option>Tuất</option><option>Hợi</option>
+    </select>
+  </label>
+	
+<label class="inline">
+    <button onclick="traChi()">Xem Ngày Địa Chi</button>
+    <div id="result1"></div>
+  </label>
+	
+  <button onclick="traCuu()">Tra cứu</button>
+  <div id="result"></div>
+
+<script src="giapty.js" language="javascript"></script>	
+<script>// <strong>Kỵ:</strong>
+function traCuu() {
+  const xemTheo = document.getElementById('xemTheo').value;
+  const gioiTinh = document.getElementById('gioiTinh').value;
+  const thienCan = document.getElementById('thienCan').value;
+  const diaChi = document.getElementById('diaChi').value;
+  const tuoi = parseInt(document.getElementById('tuoi').value);
+  const ngayDiaChi = document.getElementById('ngayDiaChi').value;
+
+  const nam = `${thienCan} ${diaChi}`;
+  const duLieu = duLieuNam[nam];
+  let ketQua = '';
+
+  if (!thienCan || !diaChi) {
+    document.getElementById('result').innerHTML = `<p>⚠️ Vui lòng chọn đủ Thiên can và Địa chi.</p>`;
+    return;
+  }
+
+  if (!duLieu) {
+    document.getElementById('result').innerHTML = `<p>⚠️ Không có dữ liệu cho năm ${nam}.</p>`;
+    return;
+  }
+
+  // === XEM THEO NĂM ===
+  if (xemTheo === 'nam') {
+    if (!gioiTinh || isNaN(tuoi)) {
+      document.getElementById('result').innerHTML = `<p>⚠️ Vui lòng nhập giới tính và tuổi để xem năm.</p>`;
+      return;
+    }
+
+    const thangPhuHop = Object.entries(duLieu.thang || {}).find(([thang, data]) => {
+      return gioiTinh === 'nam'
+        ? data.tuoiNam.includes(tuoi)
+        : data.tuoiNu.includes(tuoi);
+    });
+
+    const baiThoNam = `🔮 <b>Năm ${nam}:</b><br>${duLieu.thoNam}`;
+
+    if (thangPhuHop) {
+      const [thangTimThay, data] = thangPhuHop;
+      ketQua = baiThoNam + `<br><br>📘 <b>Tháng tương ứng (tháng ${thangTimThay}):</b><br>${data.tho}`;
+    } else {
+      ketQua = baiThoNam + `<br><br>📘 <i>Không tìm thấy tháng phù hợp với tuổi đã nhập.</i>`;
+    }
+  }
+
+  // === XEM THEO THÁNG ===
+else if (xemTheo === 'thang') {
+  if (!gioiTinh || isNaN(tuoi)) {
+    document.getElementById('result').innerHTML = `<p>⚠️ Vui lòng nhập giới tính và tuổi để xem tháng.</p>`;
+    return;
+  }
+
+  const thangPhuHop = Object.entries(duLieu.thang || {}).find(([thang, data]) => {
+    return gioiTinh === 'nam'
+      ? data.tuoiNam.includes(tuoi)
+      : data.tuoiNu.includes(tuoi);
+  });
+
+  if (thangPhuHop) {
+    const [thangTimThay, data] = thangPhuHop;
+    ketQua = `📘 <b>Tháng tương ứng (tháng ${thangTimThay}):</b><br>${data.tho}`;
+  } else {
+    ketQua = `<p>📘 <i>Không tìm thấy tháng phù hợp với tuổi và giới tính đã nhập.</i></p>`;
+  }
+}
+
+
+  // === XEM THEO NGÀY ===
+  else if (xemTheo === 'ngay') {
+    if (!ngayDiaChi) {
+      document.getElementById('result').innerHTML = `<p>⚠️ Vui lòng chọn ngày địa chi.</p>`;
+      return;
+    }
+
+    const dataNgay = duLieu.ngay[ngayDiaChi];
+    if (dataNgay) {
+      ketQua = `📅 <b>Kỵ/Hạp ngày ${ngayDiaChi}:</b><br> ${dataNgay}<br><br><i>(Điều kỵ, hạp đúng ngày, phòng hờ trước sau 1 ngày)</i>`;
+    } else {
+      ketQua = `❌ Không có dữ liệu cho ngày ${ngayDiaChi}`;
+    }
+  } else {
+    ketQua = `<p>⚠️ Vui lòng chọn phần cần xem (Năm, Tháng hoặc Ngày).</p>`;
+  }
+
+  document.getElementById('result').innerHTML = `<div>${ketQua}</div>`;
+}
+
+</script>
+<script>
+    const CHI = ["Tý", "Sửu", "Dần", "Mão", "Thìn", "Tỵ", "Ngọ", "Mùi", "Thân", "Dậu", "Tuất", "Hợi"];
+
+    function jdFromDate(dd, mm, yy) {
+      let a = Math.floor((14 - mm) / 12);
+      let y = yy + 4800 - a;
+      let m = mm + 12 * a - 3;
+      let jd = dd + Math.floor((153 * m + 2) / 5) + 365 * y;
+      jd += Math.floor(y / 4) - Math.floor(y / 100) + Math.floor(y / 400) - 32045;
+      return jd;
+    }
+
+    function traChi() {
+      let today = new Date();
+      let dd = today.getDate();
+      let mm = today.getMonth() + 1;
+      let yy = today.getFullYear();
+
+      let jd = jdFromDate(dd, mm, yy);
+      let chi = CHI[(jd + 1) % 12];
+
+      document.getElementById("result1").innerText = `Hôm nay là ngày ${chi}`;
+    }
+  </script>
+
+</body>
+</html>

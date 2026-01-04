@@ -1,0 +1,193 @@
+<!DOCTYPE html><html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <title>Tra Cứu 36 Giờ Sanh - Diễn Cầm Tam Thế</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #fffbe6;
+      color: #333;
+      padding: 20px;
+      max-width: 800px;
+      margin: auto;
+    }
+    label, select, input {
+      display: block;
+      margin: 12px 0;
+    }
+    #result {
+      border: 1px solid #ccc;
+      padding: 16px;
+      background: #fefefe;
+      margin-top: 20px;
+      white-space: pre-wrap;
+    }
+    button {
+      padding: 10px 16px;
+      background: #b38f00;
+      color: white;
+      border: none;
+      cursor: pointer;
+      margin-top: 10px;
+    }
+    button:hover {
+      background: #a07e00;
+    }
+	a:link {
+    text-decoration: none;
+}
+a:visited {
+    text-decoration: none;
+}
+
+  </style>
+</head>
+<body>
+  <h1>Tra Cứu 36 Giờ Sanh</h1>
+  <button><a href="../../index.html" style="color: #1CF0D2" >Trang Chủ</a></button>
+  <button><a href="../Dien-Cam-Tam-The.html" style="color: #1CF0D2" >Sách DCTT</a></button>
+  <label for="month">Chọn tháng sanh (âm lịch):</label>
+  <select id="month">
+    <option value="">--Chọn tháng--</option>
+    <option value="1">Tháng 1</option>
+	<option value="2">Tháng 2</option>
+	<option value="3">Tháng 3</option>
+	<option value="4">Tháng 4</option>
+	<option value="5">Tháng 5</option>
+	<option value="6">Tháng 6</option>
+	<option value="7">Tháng 7</option>
+	<option value="8">Tháng 8</option>
+	<option value="9">Tháng 9</option>
+	<option value="10">Tháng 10</option>
+	<option value="11">Tháng 11</option>
+	<option value="12">Tháng 12</option>
+  </select><label for="hour">Nhập giờ sanh (0–23):</label> <input type="number" id="hour" min="0" max="23" placeholder="Ví dụ: 15">
+
+<label for="minute">Nhập phút sanh (0–59):</label> <input type="number" id="minute" min="0" max="59" placeholder="Ví dụ: 30">
+
+<button onclick="traCuu()">Tra Cứu</button>
+
+  <div id="result"></div>  <script>
+    const bangGio = {
+      1: [["Tý", "00:20", "02:19"],["Sửu", "02:20", "04:19"],["Dần", "04:20", "06:19"],["Mão", "06:20", "08:19"],["Thìn", "08:20", "10:19"],["Tỵ", "10:20", "12:19"],["Ngọ", "12:20", "14:19"],["Mùi", "14:20", "16:19"],["Thân", "16:20", "18:19"],["Dậu", "18:20", "20:19"],["Tuất", "20:20", "22:19"],["Hợi", "22:20", "00:19"]],
+	
+	2: [["Tý", "00:00", "01:59"],["Sửu", "02:00", "03:59"],["Dần", "04:00", "05:59"],["Mão", "06:00", "07:59"],["Thìn", "08:00", "09:59"],["Tỵ", "10:00", "11:59"],["Ngọ", "12:00", "13:59"],["Mùi", "14:00", "15:59"],["Thân", "16:00", "17:59"],["Dậu", "18:00", "19:59"],["Tuất", "20:00", "21:59"],["Hợi", "22:00", "23:59"]],
+	
+	3: [["Tý", "00:30", "02:29"],["Sửu", "02:30", "04:29"],["Dần", "04:30", "06:29"],["Mão", "06:30", "08:29"],["Thìn", "08:30", "10:29"],["Tỵ", "10:30", "12:29"],["Ngọ", "12:30", "14:29"],["Mùi", "14:30", "16:29"],["Thân", "16:30", "18:29"],["Dậu", "18:30", "20:29"],["Tuất", "20:30", "22:29"],["Hợi", "22:30", "00:29"]],
+	
+	4: [["Tý", "00:40", "02:39"],["Sửu", "02:40", "04:39"],["Dần", "04:40", "06:39"],["Mão", "06:40", "08:39"],["Thìn", "08:40", "10:39"],["Tỵ", "10:40", "12:39"],["Ngọ", "12:40", "14:39"],["Mùi", "14:40", "16:39"],["Thân", "16:40", "18:39"],["Dậu", "18:40", "20:39"],["Tuất", "20:40", "22:39"],["Hợi", "22:40", "00:39"]],
+	
+	5: [["Tý", "01:20", "03:19"],["Sửu", "03:20", "05:19"],["Dần", "05:20", "07:19"],["Mão", "07:20", "09:19"],["Thìn", "09:20", "11:19"],["Tỵ", "11:20", "13:19"],["Ngọ", "13:20", "15:19"],["Mùi", "15:20", "17:19"],["Thân", "17:20", "19:19"],["Dậu", "19:20", "21:19"],["Tuất", "21:20", "23:19"],["Hợi", "23:20", "01:19"]],
+	
+	6: [["Tý", "00:40", "02:39"],["Sửu", "02:40", "04:39"],["Dần", "04:40", "06:39"],["Mão", "06:40", "08:39"],["Thìn", "08:40", "10:39"],["Tỵ", "10:40", "12:39"],["Ngọ", "12:40", "14:39"],["Mùi", "14:40", "16:39"],["Thân", "16:40", "18:39"],["Dậu", "18:40", "20:39"],["Tuất", "20:40", "22:39"],["Hợi", "22:40", "00:39"]],
+
+	7: [["Tý", "00:30", "02:29"],["Sửu", "02:30", "04:29"],["Dần", "04:30", "06:29"],["Mão", "06:30", "08:29"],["Thìn", "08:30", "10:29"],["Tỵ", "10:30", "12:29"],["Ngọ", "12:30", "14:29"],["Mùi", "14:30", "16:29"],["Thân", "16:30", "18:29"],["Dậu", "18:30", "20:29"],["Tuất", "20:30", "22:29"],["Hợi", "22:30", "00:29"]],
+
+	8: [["Tý", "00:00", "01:59"],["Sửu", "02:00", "03:59"],["Dần", "04:00", "05:59"],["Mão", "06:00", "07:59"],["Thìn", "08:00", "09:59"],["Tỵ", "10:00", "11:59"],["Ngọ", "12:00", "13:59"],["Mùi", "14:00", "15:59"],["Thân", "16:00", "17:59"],["Dậu", "18:00", "19:59"],["Tuất", "20:00", "21:59"],["Hợi", "22:00", "23:59"]],
+
+	9: [["Tý", "00:20", "02:19"],["Sửu", "02:20", "04:19"],["Dần", "04:20", "06:19"],["Mão", "06:20", "08:19"],["Thìn", "08:20", "10:19"],["Tỵ", "10:20", "12:19"],["Ngọ", "12:20", "14:19"],["Mùi", "14:20", "16:19"],["Thân", "16:20", "18:19"],["Dậu", "18:20", "20:19"],["Tuất", "20:20", "22:19"],["Hợi", "22:20", "00:19"]],
+	
+	10: [["Tý", "00:00", "01:59"],["Sửu", "02:00", "03:59"],["Dần", "04:00", "05:59"],["Mão", "06:00", "07:59"],["Thìn", "08:00", "09:59"],["Tỵ", "10:00", "11:59"],["Ngọ", "12:00", "13:59"],["Mùi", "14:00", "15:59"],["Thân", "16:00", "17:59"],["Dậu", "18:00", "19:59"],["Tuất", "20:00", "21:59"],["Hợi", "22:00", "23:59"]],
+
+	11: [["Tý", "11:40", "01:39"],["Sửu", "01:40", "03:39"],["Dần", "03:40", "05:39"],["Mão", "05:40", "07:39"],["Thìn", "07:40", "09:39"],["Tỵ", "09:40", "11:39"],["Ngọ", "11:40", "13:39"],["Mùi", "13:40", "15:39"],["Thân", "15:40", "17:39"],["Dậu", "17:40", "19:39"],["Tuất", "19:40", "21:39"],["Hợi", "21:40", "23:39"]],
+
+	12: [["Tý", "00:00", "01:59"],["Sửu", "02:00", "03:59"],["Dần", "04:00", "05:59"],["Mão", "06:00", "07:59"],["Thìn", "08:00", "09:59"],["Tỵ", "10:00", "11:59"],["Ngọ", "12:00", "13:59"],["Mùi", "14:00", "15:59"],["Thân", "16:00", "17:59"],["Dậu", "18:00", "19:59"],["Tuất", "20:00", "21:59"],["Hợi", "22:00", "23:59"]]
+
+    };
+
+    const noiDung36Gio = {
+      "Tý": 
+		["Đầu giờ Tý:\nKhắc mẹ : Làm người tánh lẻ lặng, vợ chồng khác đôi thứ nhứt, khắc con đầu lòng , anh em không hòa , tuổi nhỏ làm ăn không khá , tuổi lớn về sau làm ăn khá.",
+		 "Giữa giờ Tý:\nCha mẹ song toàn , làm người vui vẻ , ăn mặc không thiếu , anh em đều có phần , sanh con đặng nhiều , đi khác xứ làm ăn khá , số có quyền chức . ",
+		 "Sau giờ Tý:\nKhắc cha : Tánh rộng rãi , anh em không khá , sanh con khó dạy , thuở nhỏ cực khổ , làm việc gì có đâu không đui . Số theo quê vợ , xa cha mẹ . "],
+		
+      "Sửu": 
+		["Đầu giờ Sửu:\nCha mẹ song toàn , tuổi nhỏ làm ăn trung bình , 20 tuổi sắp lên làm ăn phát đạt , tánh thông minh , gần người sang trọng , có chức phận , anh em khá , nào con tốt ", 
+		 "Giữa giờ Sửu:\nKhắc cha : Việc ăn mặc trung bình , tánh ý cứng bình , đến 36 tuổi phát tài , anh em không hòa bà con bàn lãng , đi xứ khác , hai bàn tay trắng làm đặng nên sự nghiệp . ",
+		 "Sau giờ Sửu:\nKhắc mẹ : tuổi nhỏ chịu tâm khổ , làm việc lớn ra nhỏ , không nhờ anh em , hào con phát đạt khá , đến 40 tuổi làm ăn thịnh vượng , lớn tuổi khá thêm , tay có nghề nghiệp làm ăn . "],
+		
+      "Dần": 
+		["Đầu giờ Dần:\nKhắc cha : Số gần người sang trọng , việc hung hóa hiền , tuổi nhỏ cực khổ , 37 tuổi sắp lên làm ăn khá , cốt nhục bằng lặng , có nhờ con nuôi lúc tuổi già . ",
+		 "Giữa giờ Dần:\nCha mẹ đặng song toàn , tánh người siêng năng , ăn mặc không thiếu , anh em khá , có con 2,3 đứa thành tốt , văn chương giỏi sự nghiệp nên . ",
+		 "Sau giờ Dần:\nKhắc mẹ : không nhờ anh em, con đầu lòng khó nuôi, tuổi nhỏ phiêu lưu cực khổ . Đến 36 tuổi phát tài , làm ăn khá , làm việc gì hay tính tới tính lui , thường có đau ốm , tật bệnh . "],
+		
+		"Mẹo": [
+		  "Đầu giờ Mẹo:\nKhắc mẹ : Làm việc gì trước có sau không , không nhờ anh em , tuổi nhỏ bôn ba , lặn lội , cực trí , số khắc con , con không chừng , việc ăn mặc tùy thời có , thời không . ",
+		  "Giữa giờ Mẹo:\nCha mẹ song toàn , trai sang gái trọng , quí nhơn yêu chuộng , gái ít chồng anh em khá , con nhiều ăn mặc không thiếu , sự nghiệp kinh vinh , cốt nhục hòa , có chức phận. ",
+		  "Sau giờ Mẹo:\nKhắc cha : thuở nhỏ bôn ba , lao khổ , không nhờ anh em , đến 36 tuổi sắp lên đè làm ăn , chừng ấy mới ít đi , lập sự nghiệp đặng vững bền. "],
+
+		"Thìn": [
+		  "Đầu giờ Thìn:\nCha mẹ song toàn , tánh ý mau lẹ , anh em khá , con đầu lòng nuôi không đặng , cốt nhục bất hòa , tánh hiền từ , tay có nghề nghiệp làm ăn , thuở nhỏ bình thường , đến 12 tuổi phát tài . ",
+		  "Giữa giờ Thìn:\nKhắc cha : Làm người có tánh công bình , lẻ lặng , quí nhơn hay giúp đỡ , ở xa xứ lập nên sự nghiệp , tuổi trẻ khổ nên. 44 tuổi làm ăn phát đạt , anh em không hạp ý ",
+		  "Sau giờ Thìn:\nKhắc mẹ : Có tánh thông minh , làm ăn thịnh vượng , hào con tốt , anh em làm ăn khá số có chức phận , có phước lộc , hưởng đầy đủ , có danh tiếng , sang trọng , một đời đặng thanh thơi . "],
+
+		"Tỵ": [
+		  "Đầu giờ Tỵ:\nKhắc mẹ : Có lúc ăn mặc , anh em không đặng nhờ , con đầu lòng khó nuôi khắc bậu chồng vợ , người nhỏ hơn ba dì nhiều xứ , đến lớn làm ăn phát đạt , có chức phận, có sự nghiệp ",
+		  "Giữa giờ Tỵ:\nCha mẹ song toàn , gần người sang trọng , ăn mặc đầy đủ , anh em làm đặng nên , hào con đặng giàu , có công danh , tánh hạnh khảng khái , làm ăn khá , đi khác xứ lập nên . ",
+		  "Sau giờ Tỵ:\nKhắc cha : Số gần người sang trọng , làm ăn khi thành khi bại không chừng , tính anh em lạt lẽo , khó nuôi con , vợ chồng lỗi thôi , tuổi nhỏ số lưu lạc cực khổ , lớn tuổi làm ăn phát đạt. "],
+
+		"Ngọ": [
+		  "Đầu giờ Ngọ:\nCha mẹ song toàn , làm người tính tính lợi hại , gần người sang , anh em hòa , hai ba dòng con , ăn mặc không thiếu , số có chức phận , quyền hành , vận số hưng vượng ",
+		  "Giữa giờ Ngọ:\nKhắc cha : ăn mặc bình thường , tuổi trẻ bôn ba , khổ trải nhiều phen , 30 tuổi sắp lên làm ăn khá , không nhờ anh em , làm ăn khi nên , khi hư không chừng , không có tự do . ",
+		  "Sau giờ Ngọ:\nKhắc mẹ : tánh người lẻ lặng , không nhờ anh em , con đầu lòng khó nuôi , tánh thông minh , lanh lợi , tuổi nhỏ cực khổ , đến lớn tuổi làm ăn phát đạt , đến cảnh già cũng trở lại cực khổ . "],
+
+		"Mùi": [
+		  "Đầu giờ Mùi:\nCha mẹ song toàn , số đặng gần người sang trọng , trọn đời yên vui , anh em hòa hợp ý , số có chức phận , gái thì có quyền đặng sang trọng , để làm ăn , sự nghiệp kinh vinh . ",
+		  "Giữa giờ Mùi:\nKhắc cha : tánh ý rộng rãi , có quí nhơn thương , đặng nhờ anh em , thuở nhỏ làm ăn bình thường , lo lường lặn lội cực trí , vợ chồng khác đôi thứ nhứt , khắc con , lớn tuổi làm ăn khá . ",
+		  "Sau giờ Mùi:\nKhắc mẹ : quí nhơn hay yêu chuộng , ăn mặc bình thường , tuổi nhỏ làm ăn khi hư khi nên , tuổi trẻ cực khổ , anh em không hòa , sanh con cứng cỏi lớn tuổi làm ăn khá hơn thời tuổi trẻ . "],
+
+		"Thân": [
+		  "Đầu giờ Thân:\nCha mẹ song toàn , tánh thông minh gần người quí thế , nghề văn , nghiệp võ đều thông , hào con có quyền tước , anh em làm ăn khá hào con , dễ làm ăn , số có ruộng đất , dễ lập gia đình . ",
+		  "Giữa giờ Thân:\nKhắc cha : bà con không hòa , anh em không nhờ , bôn ba cực khổ , có vợ chồng sớm , ở đời không đặng , có vợ muộn tốt , làm ăn xa xứ khá , lập tại xứ cha mẹ sanh không khá . ",
+		  "Sau giờ Thân:\nKhắc mẹ : nhơn tình cốt nhục lạt lẽo , thuở nhỏ cực khổ , hình vóc ốm yếu , hào con lôi thôi , đến 30 tuổi vận thời mới bình , đến 40 tuổi làm ăn mới phát đạt . "],
+
+		"Dậu": [
+		  "Đầu giờ Dậu:\nCha mẹ song toàn , đời sang trọng , văn võ đều thông , anh em phân cách , hào con ít , tài lợi khá , nhà cửa tốt , có quyền tước , tánh tốt . ",
+		  "Giữa giờ Dậu:\nKhắc cha : tánh rộng rãi , anh em bất hòa , con đầu lòng khó nuôi , thuở nhỏ làm ăn không hạp thời , trai khắc vợ , gái khắc chồng , đi khác xứ , không ở chỗ cũ ",
+		  "Sau giờ Dậu:\nKhắc mẹ : Việc ăn mặc bình thường , không nhờ anh em , thuở nhỏ khổ tâm , đến 37 tuổi trở lên thì phát tài , vợ chồng khắc nhau , trai thì chậm trễ , gái thì dâm loạn , thất hào con . "],
+
+		"Tuất": [
+		  "Đầu giờ Tuất:\nKhắc mẹ : tánh mau lẹ , lòng hiền lành , không nhờ anh em , làm việc gì đều có quyền , tuổi nhỏ bình thường , cực khổ , đến 37 tuổi sắp lên làm ăn phát đạt , người quí nhơn giúp đỡ . ",
+		  "Giữa giờ Tuất:\nKhắc cha : Anh em thân tộc khó nhờ , vợ chồng không hòa , con đầu lòng khó nuôi , tuổi nhỏ không đậu tài , đến 42 tuổi làm ăn phát đạt , cảnh muộn khá thêm , ăn nói không chừng . ",
+		  "Sau giờ Tuất:\nCha mẹ song toàn , tánh mau lẹ , văn võ đều thông , bà con anh em đều khá , có nghề học đặng tinh xảo , vợ chồng bền lâu , số ở xa xứ mới đặng . "],
+
+		"Hợi": [
+		  "Đầu giờ Hợi:\nKhắc mẹ : tánh lẻ lặng , rộng rãi , bà con anh em lưu lạc xa nhau , con hai ba đứa , làm ăn thu thường , đến lớn tuổi làm ăn khá , sắp đặt gia đình đặng an . ",
+		  "Giữa giờ Hợi:\nCha mẹ song toàn , tánh thông minh , mau lẹ thân tộc anh em hòa thuận , sanh con có quyền tước , lớn tuổi sự nghiệp đặng nên , có mưu kế và công bình . ",
+		  "Sau giờ Hợi:\nKhắc cửa : tánh nóng mà có ý hiền , bà con anh em không hạp ý , tuổi nhỏ cực khổ , trai thì hai đời vợ , gái ba đời chồng , lớn tuổi khá hơn nhỏ , việc làm ăn rất nhọc ý ."]
+    };
+
+    function traCuu() {
+      const thang = parseInt(document.getElementById("month").value);
+      const gio = parseInt(document.getElementById("hour").value);
+      const phut = parseInt(document.getElementById("minute").value);
+      const ketQua = document.getElementById("result");
+
+      if (!thang || isNaN(gio) || isNaN(phut)) {
+        ketQua.innerText = "Vui lòng chọn tháng và nhập giờ, phút hợp lệ.";
+        return;
+      }
+
+      const gioPhut = gio * 60 + phut;
+const khungGio = bangGio[thang].find(([ten, batdau, ketthuc]) => {
+  const [g1, p1] = batdau.split(":").map(Number);
+  const [g2, p2] = ketthuc.split(":").map(Number);
+  const bd = g1 * 60 + p1;
+  const kt = g2 * 60 + p2;
+
+  // Nếu khoảng giờ kết thúc nhỏ hơn bắt đầu (qua nửa đêm), ta xử lý đặc biệt
+  if (kt < bd) {
+    return gioPhut >= bd || gioPhut <= kt;
+  } else {
+    return gioPhut >= bd && gioPhut <= kt;
+  }
+});
+
+      const gioAm = khungGio[0];
+      const viTri = gioPhut % 120 < 40 ? 0 : gioPhut % 120 < 80 ? 1 : 2;
+      const noiDung = noiDung36Gio[gioAm]?.[viTri] || "Chưa có nội dung cho giờ này.";
+
+      ketQua.innerText = `Bạn thuộc giờ: ${gioAm} của tháng ${thang} (${["Đầu", "Giữa", "Cuối"][viTri]} giờ)\n\n${noiDung}`;
+    }
+  </script></body>
+</html>

@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <title>Bộ bài chủng tự OM</title>
+  <style>
+    :root {
+      --card-w: 260px;
+      --card-h: 520px;
+    }
+    body {
+      background: #fffbe6;
+      font-family: 'Segoe UI', sans-serif;
+      margin: 0;
+      padding: 40px 20px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 32px;
+    }
+    h1 {
+      color: #7a5e00;
+      font-size: 28px;
+      margin-bottom: 16px;
+    }
+    table {
+      max-width: 1190px;
+      border-collapse: collapse;
+      background: #fff;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+      margin-bottom: 32px;
+    }
+    td {
+      padding: 12px 16px;
+      font-size: 16px;
+      line-height: 1.6;
+      vertical-align: top;
+    }
+    td[colspan="3"] {
+      background: #f9f3cc;
+      font-weight: bold;
+      text-align: left;
+    }
+    button {
+      padding: 12px 32px;
+      font-size: 18px;
+      border: none;
+      border-radius: 8px;
+      background: #f2b705;
+      color: #fff;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+    button:hover { background: #d99a00; }
+    .number-display {
+      font-size: 56px;
+      font-weight: 700;
+      color: #7a5e00;
+      height: 72px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .result-area {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 600px;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+    .card {
+      display: none;
+      width: var(--card-w);
+      height: var(--card-h);
+      position: relative;
+      background-image: url("hinh/baitrongsuot.jpg");
+      background-size: contain;
+      background-repeat: no-repeat;
+      background-position: center top;
+    }
+    .card.show {
+      display: block;
+    }
+    .number-banner {
+      position: absolute;
+      top: 44px;
+      left: 50%;
+      transform: translateX(-50%);
+      font-size: 20px;
+      font-weight: bold;
+      color: #7a5e00;
+      text-shadow: 0 1px 1px rgba(255, 255, 255, .8);
+    }
+    .inner {
+      position: absolute;
+      top: 38%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 75%;
+      text-align: center;
+      color: #112266;
+      font-size: 16px;
+      line-height: 1.4;
+    }
+  </style>
+</head>
+<body>
+  <h1>Bộ bài chủng tự OM</h1>
+	<button><a href="../index.html" style="color:#EC1220" >Trang Chủ</a></button>
+  <table border="1">
+    <tr>
+      <td colspan="3">Để bắt đầu, bạn hãy nghĩ về vấn đề mà bạn đang băn khoăn&nbsp;Để bắt đầu, bạn hãy nghĩ về vấn đề mà bạn đang băn khoăn và chọn cách trải bài phù hợp. Sau đó, lắng đọng khoảng 3-5 giây để tập trung và rộng mở đón nhận thông điệp. Lúc này bạn có thể cầu nguyện tới nguồn trí tuệ mà bạn tin tưởng (Ví dụ: Vũ trụ, Đức Chúa, Đức Phật, trí tuệ bên trong bạn...) và xin thông điệp từ đó. Cuối cùng, hãy nghĩ đến tình huống của bạn và đặt câu hỏi theo cách trải bài đã chọn. Câu hỏi càng cụ thể thì bạn nhận ra thông điệp càng dễ dàng.</td></tr>
+    <tr>
+      <td colspan="3"><p>Cách 1: Lời khuyên truyền cảm hứng&nbsp;</p>
+      <p>Rút 1 lá bài – Xin một thông điệp truyền cảm hứng cho một giai đoạn nào đó, như: Xin thông điệp cho ngày hôm nay Thông điệp cho 1 tuần Thông điệp cho 1 tháng Thông điệp cho một khoảng thời gian cụ thể Khi bắt đầu một công việc mới Khi xin thông điệp, bạn hãy cầu nguyện đến nguồn trí tuệ mà bạn tin tưởng (như Đức Phật, Đức Chúa, vũ trụ, tiếng nói bên trong mình…)</p></td></tr>
+    <tr>
+      <td colspan="3"><p>Cách 2: Lời khuyên tình huống cụ thể&nbsp;</p>
+      <p>Rút 1 lá bài – Xin lời khuyên cho một tình huống cụ thể Khi đang phân vân, lo lắng Không biết hành động thế nào Không biết nên làm thế nào Không biết cần lưu ý điểm nào Khi xin thông điệp, bạn hãy cầu nguyện đến nguồn trí tuệ mà bạn tin tưởng (như Đức Phật, Đức Chúa, vũ trụ, tiếng nói bên trong mình…)</p></td></tr>
+    <tr>
+      <td colspan="3"><p>Cách 3: Trải bài Bên ngoài - Bên trong - Bí mật&nbsp;</p>
+      <p>Đối với cách trải bài Bên ngoài - Bên trong - Bí mật, bạn sẽ rút ra 3 lá bài tương ứng cho các lời khuyên về Hành động, Suy nghĩ và Bí mật sâu thẳm của bạn. Đây là cách trải bài dùng cho mọi tình huống, khi câu hỏi càng cụ thể thì lời khuyên sẽ càng sắc bén cho tình huống bạn đang hỏi, vì lúc đó bạn dễ dàng liên kết vấn đề thực sự bên trong với giải pháp mà bộ bài gợi mở cho bạn.</p></td></tr>
+    <tr>
+      <td>Lá đầu tiên BÊN NGOÀI – Lời khuyên cho HÀNH ĐỘNG BÊN NGOÀI. Đây là lời khuyên về mặt hành động nên làm trong tình huống mà bạn đang hỏi. Bạn nên làm gì, hành động như thế nào? – Lá này cũng có xu hướng nói về những việc bên ngoài đang xảy ra với bạn. – Kết quả: bạn có phương hướng rõ ràng hơn về hành động bên ngoài.</td>
+      <td>Lá ở giữa BÊN TRONG – Lời khuyên cho CÁCH NHÌN/ THÁI ĐỘ BÊN TRONG. Đây là lời khuyên về thái độ, quan điểm nên có của bạn trong tình huống mà bạn đang hỏi. – Lá này cũng nói về những bài học tinh thần mà bạn có thể nhận được thông qua tình huống này. – Kết quả: bạn có cách nghĩ và thái độ đúng đắn hơn ở bên trong.</td>
+      <td>Lá cuối cùng BÍ MẬT – Lời khuyên về MỘT CHUYỆN BÍ MẬT TRONG LÒNG BẠN. Đây là điều mà sâu thẳm trong lòng bạn tìm kiếm, những người khác hay đôi khi là chính bạn cũng không nhận ra rằng hoá ra mình làm các việc bên ngoài, bên trong… là để tìm thấy bí mật này. – Lá bài này giúp bạn rõ ràng hơn về mục tiêu, động cơ sâu thẳm trong tình huống mà bạn đang hỏi. – Hoặc: Một lời khuyên cho bí mật trong lòng mà chỉ mình bạn biết.</td>
+    </tr>
+    <tr><td colspan="3"><p>Trong 12 luân xa năng lượng của con người, luân xa số 6 (Con mắt Thứ ba) rất quan trọng vì nó tác động đến cách nhìn và trực giác của chúng ta. Khi luân xa số 6 được cân bằng, bạn sẽ nhìn nhận vấn đề một cách sáng tỏ và không bị quá bi quan hay chủ quan. Điều này rất có lợi trong cuộc sống hàng ngày, khi bạn phải đưa ra những quyết định quan trọng, gặp gỡ tiếp xúc với người khác hoặc giải quyết vấn đề trong công việc.&nbsp;</p>
+        <p>Riêng với việc trải bài, luân xa 6 sẽ giúp bạn nhìn nhận vấn để rõ ràng hơn, giúp hiểu và cảm nhận thông điệp một cách chuẩn xác hơn để có những quyết định sáng suốt nhất. Vì vậy trước khi đặt câu hỏi, bạn hãy sử dụng bộ bài để cân bằng luân xa 6 bằng cách:&nbsp;</p>
+      <p>Cầu nguyện “Xin bộ bài giúp cân bằng luân xa Con mắt thứ ba về cách nhìn và trực giác”&nbsp;</p>
+        <p>Nhìn biểu tượng ở mặt lưng lá bài trong 2 phút để luân xa 6 trở về trạng thái cân bằng</p></td></tr>
+  </table>
+
+  <div>
+    <button id="spinBtn">Quay 1 lá</button>
+    <button id="threeBtn">Trải 3 lá</button>
+    <div id="numberDisplay" class="number-display">‑‑</div>
+  </div>
+
+  <div class="result-area" id="cardContainer"></div>
+
+  <script>
+    const btn1 = document.getElementById('spinBtn');
+    const btn3 = document.getElementById('threeBtn');
+    const board = document.getElementById('numberDisplay');
+    const cardContainer = document.getElementById('cardContainer');
+
+    const messages = [
+      "Hãy nói lên sự thật bằng tình thương, những lời nói ngay thẳng mà không có động cơ yêu thương thì đừng vội nói.",
+      "Hãy biến công việc thành phần thưởng bằng cách nhìn nó là nơi để bạn học những bài học quý báu của cuộc đời và thay đổi chính mình",
+      "Thà thua nhưng tạo ra một thói quen đúng, còn hơn là thắng mà nuôi dưỡng một thói quen sai",
+      "Đi tìm sự vĩ đại sẽ dẫn bạn tới lúc bị coi thường. Hãy để sự vĩ đại cho người khác và trở nên tự do hơn.",
+      "Sống trong biết ơn thì ân sủng sẽ tới.",
+      "Mọi chuyện xảy ra trong đời bạn chỉ đến để giúp bạn tăng trưởng trẻ tuệ.",
+      "Kỳ diệu hơn mọi điều Trái tim biết thương yêu.",
+      "Bạn luôn làm điều bạn cho là đúng nhất, và người đó cũng giống như bạn.",
+      "Khi nào mình để cho một người tự do thì bắt đầu gọi là yêu người ta thực sự.",
+      "Mọi thứ sẽ hiện ra đúng lúc, bạn không việc gì phải lo lắng.",
+	  "Tâm thế nào thì đời như thế. Tâm mở rộng rồi thì đời sẽ rộng rãi, thênh thang.",
+	  "Sự việc đã xảy ra rồi thì có gì đâu. Chính sự không chấp nhận nổi mới là vấn đề.",
+	  "Khi bạn thực sự hiểu tình cảm là vô thường, bạn sẽ không cố gắng có chiến đấu để giành tình cảm của một củ đó.",
+	  "Không phải đạt được ước muốn là thành tựu mà khi tâm không còn vướng bận gì mới là thành tựu.",
+	  "Dù có tốt đến thế nào thì bạn vẫn có thể là một con quỷ trong câu chuyện của củ đó Hãy chấp nhận rằng trên đời này có một nửa những người biết đến bạn coi bạn là thiên thần và một nửa coi bạn là ác quỷ   .",
+	  "Mọi việc trên thế gian này vận hành bởi nhân quả chứ không phải bởi cùng bãi.",
+	  "Bạn dễ dàng phán xét một người khi chưa hiểu rõ câu chuyện của họ. Hãy tập đặt mình vào lịch sử của người ấy và thông cảm cho họ.",
+	  "Hạnh phúc thực sự nằm ở trung tâm mỗi người. Biết hài lòng nghĩa là biết hạnh phúc.",
+	  "Hạnh phúc chân thật thì không còn phụ thuộc vào đối tượng nào. người mà bạn đang gắn bé đến với bạn để giúp bạn nhận thấy được điều đó.",
+	  "Người có trí tuệ hiểu rằng giúp người khác cũng là giúp chính mình.",
+	  "Thông minh không bằng may mắn, may mắn không bằng biết hài lòng.",
+	  "Không có gì phải hối tiếc, tất cả chỉ là không phủ.",
+	  "Đồng cảm với người khác là biểu hiện đầu tiên của lòng từ bi.",
+	  "Yêu một người đơn giản là chấp nhận người ấy đúng như họ là, hoàn toàn.",
+	  "Tất cả các bạn đều đủ giàu có để bắt đầu giúp đỡ một ai đó.",
+	  "Một nghiệp tốt hay xấu được quyết định bởi động cơ đằng sau nó.",
+	  "Sự giàu có không đo đếm bằng số tiền nhiều hay ít mà đến từ cảm giác đầy đủ ở trong tâm.",
+	  "Hạnh phúc đang có sẵn ở đây trong mỗi người. Dù bạn khổ đủ chuyện thì hạnh phúc vẫn đang ở đây.",
+	  "Đừng quá mong muốn một cái gì đấy, vì nếu phúc phận của mình không đủ thì chẳng có được. Đừng quá sợ mất một cái gì đấy, vì nếu phúc phận của mình đủ thì không mất đi được.",
+	  "Cái tốt nhất bao giờ cũng đến khi bạn không còn kỳ vọng nữa.",
+	  "Làm việc tốt cho người khác mà chấp nhận họ hiểu sai về mình, đó là Bi - Trí - Dũng.",
+	  "Bạn nên chấp nhận những điều xấu nhất có thể xảy ra trong tương lai nhưng hãy luôn cố gắng làm những điều tốt nhất có thể trong hiện tại.",
+	  "Khi bạn nghĩ về bản thân quá nhiều, bạn sẽ phóng đại nỗi khổ của mình lên.",
+	  "Thong dong một tiếng tr Trên con đường giác ngộ Còn hơn sống cả đời như một người dưới mộ.",
+	  "Hạnh phúc không đến từ việc người khác đối đãi với bạn thế nào mà đến từ việc bạn đối đãi với chính mình ra sao.",
+	  "Bạn quan tâm đến cái gì thì cái đẩy trở nên rõ ràng, lớn lao trong cuộc đời bạn.",
+	  "Mọi điều ước đều sẽ trở thành sự thật.",
+	  "Khi mình sợ điều gì thì mình phải đối diện với nó. Đối diện để hiểu, hiểu rồi thì hết sợ.",
+	  "Hãy bình an với các bạn đang làm trước khi đi tìm một cái mới.",
+	  "Bình tĩnh và sáng suốt chỉ đến khi bạn chấp nhận được điều xấu nhất có thể xảy ra.",
+	  "Đời hết dở khi ta biết niềm nở.",
+	  "yêu thương chính mình quan trọng hơn là có một người bên cạnh yêu thương mình.",
+	  "Hãy nhận ra sự ban phước bí mật trong tình huống này.",
+	  "Phần thưởng chỉ dành cho người dũng cảm.",
+	  "Thành công chân thực bắt đầu từ động lực chân chính.",
+	  "Mở trái tim bạn ra, cho nỗi sợ lùi xa.",
+	  "Yêu thương là liều thuốc tốt nhất để mang lại sức khỏe cho thân thể cũng như cho tâm hồn.",
+	  "Kệ con gà nó đi.",
+	  "Việc ngày mai chớ để hôm nay. Việc tí nữa chở để bây giờ.",
+	  "Thế giới không hề công bằng theo kiểu của suy nghĩ, mà công bằng theo kiểu của nhân quả.",
+      "Điều đang xảy ra với bạn là điều phù hợp nhất, đúng đắn nhất, quan trọng nhất.",
+	  "Bạn hãy biết rằng với lòng tin thì không điều gì là không thể.",
+	  "nếu bạn không tự làm khó chính mình thì mọi việc đều rất OK.",
+
+    ];
+
+    const cards = [];
+    messages.forEach((text, i) => {
+      const div = document.createElement('div');
+      div.className = 'card';
+      div.id = 'card' + (i + 1);
+      div.innerHTML = `<div class="number-banner">${i + 1}</div><div class="inner">${text}</div>`;
+      cardContainer.appendChild(div);
+      cards.push(div);
+    });
+
+    function hideAll() {
+      cards.forEach(c => {
+        c.classList.remove('show');
+        c.querySelector('.number-banner').textContent = c.id.replace('card', '');
+      });
+    }
+
+    btn1.addEventListener('click', () => {
+      hideAll();
+      board.textContent = '‑‑';
+      let ticks = 30;
+      const timer = setInterval(() => {
+        const n = Math.floor(Math.random() * messages.length) + 1;
+        board.textContent = n;
+        ticks--;
+        if (ticks === 0) {
+          clearInterval(timer);
+          document.getElementById('card' + n).classList.add('show');
+        }
+      }, 80);
+    });
+
+    btn3.addEventListener('click', () => {
+      hideAll();
+      board.textContent = '‑‑';
+      const nums = [];
+      while (nums.length < 3) {
+        const n = Math.floor(Math.random() * messages.length) + 1;
+        if (!nums.includes(n)) nums.push(n);
+      }
+      nums.forEach((n, i) => {
+        setTimeout(() => {
+          const el = document.getElementById('card' + n);
+          el.classList.add('show');
+        }, (i + 1) * 300);
+      });
+    });
+  </script>
+</body>
+</html>

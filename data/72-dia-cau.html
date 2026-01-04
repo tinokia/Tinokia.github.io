@@ -1,0 +1,139 @@
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>72 Địa Cầu Huyền Bí </title>
+  <link rel="stylesheet" href="72-dia-cau/css.css">
+</head>
+<body>
+  <h1>🌌 Hệ Thống 72 Địa Cầu Theo Huyền Học</h1>
+
+  <div class="search-container">
+    <input type="text" id="searchInput" placeholder="🔍 Tìm kiếm địa cầu...">
+    <div class="realm-buttons">
+	  <a href="../index.html"><button class="realm-btn active">Tủ sách</button></a>
+      <button onClick="filterByRealm('all')" class="realm-btn active">Tất cả</button>
+      <button onClick="filterByRealm('Thượng Giới')" class="realm-btn">Thượng Giới</button>
+      <button onClick="filterByRealm('Trung Giới')" class="realm-btn">Trung Giới</button>
+	  <button onClick="filterByRealm('Hạ Giới')" class="realm-btn">Hạ Giới</button>
+    </div>
+  </div>
+
+  <div class="tablink active">
+
+    <div id="overview" class="tab-content">
+      <p>Trong hệ thống huyền học, 72 quả địa cầu đại diện cho các cấp độ tiến hóa khác nhau của linh hồn trong vũ trụ. Được chia thành 3 tầng, tầng Thượng Giới có 24 địa cầu, tầng Trung Giới có 24 địa cầu, tầng Hạ Giới có 24 địa cầu. Cùng khám phá hành trình xuyên không gian và linh hồn nhé! 🌠</p>
+    </div>
+
+    <div class="earth-names show" id="earthNamesBox">
+      <h2>🌍 Danh Sách 72 Địa Cầu</h2>
+      <div class="earth-grid"></div>
+	  <p class="earth-count" id="earthCount"></p>
+    </div>
+  </div>
+
+  <script>
+    function showTab(tabId, event) {
+      const contents = document.querySelectorAll('.tab-content');
+      contents.forEach(c => c.style.display = 'none');
+      const tabs = document.querySelectorAll('.tablink');
+      tabs.forEach(t => t.classList.remove('active'));
+      document.getElementById(tabId).style.display = 'block';
+      event.currentTarget.classList.add('active');
+    }
+    
+    const earthNames = [
+      "Địa Cầu 1: Thái Hư", "Địa Cầu 2: Ngọc Minh", "Địa Cầu 3: Bạch Liên", "Địa Cầu 4: Thiên Tâm", "Địa Cầu 5: Ngân Hà", "Địa Cầu 6: Huyễn Ảnh", "Địa Cầu 7: Thiên Hòa", 
+	  "Địa Cầu 8: Bảo Ấn", "Địa Cầu 9: Chiếu Minh", "Địa Cầu 10: Vô Cấu", "Địa Cầu 11: Lưu Quang", "Địa Cầu 12: Nguyệt Tâm", "Địa Cầu 13: Linh Quang", "Địa Cầu 14: Tinh Đạo", 
+	  "Địa Cầu 15: Cực Lạc", "Địa Cầu 16: Thánh Địa", "Địa Cầu 17: Thiên Nhãn", "Địa Cầu 18: Hỏa Diệm", "Địa Cầu 19: Thái Dương", "Địa Cầu 20: Âm Dương Ngẫu", 
+	  "Địa Cầu 21: Đại Hồn", "Địa Cầu 22: Tuyệt Đỉnh", "Địa Cầu 23: Hư Vô", "Địa Cầu 24: Toàn Thể", "Địa Cầu 25: Chuyển Luân","Địa Cầu 26: Ký Ức", "Địa Cầu 27: Tĩnh Thức", 
+	  "Địa Cầu 28: Ánh Trăng", "Địa Cầu 29: Giao Cảm", "Địa Cầu 30: Tự Học", "Địa Cầu 31: Mộng Tưởng", "Địa Cầu 32: Phản Chiếu", "Địa Cầu 33: Ảo Ảnh", "Địa Cầu 34:  Linh Vật", 
+	  "Địa Cầu 35: Thử Thách", "Địa Cầu 36:  Thăng Hoa", "Địa Cầu 37:  Ánh Hồng", "Địa Cầu 38: Tâm Kết", "Địa Cầu 39: Trường Tưởng", "Địa Cầu 40: Hiển Lộ", "Địa Cầu 41: Hồi Ngộ", 
+	  "Địa Cầu 42: Mê Lộ", "Địa Cầu 43: Phát Nguyện", "Địa Cầu 44: Thể Tâm", "Địa Cầu 45: Hội Tụ", "Địa Cầu 46: Tịnh Độ", "Địa Cầu 47: Dạ Ảnh", "Địa Cầu 48: Chuyển Hóa", 
+	  "Địa Cầu 49: Khởi Sinh", "Địa Cầu 50: Tồn Tại", "Địa Cầu 51: Cảm Giác", "Địa Cầu 52: Ý Thức", "Địa Cầu 53: Tham Dục", "Địa Cầu 54: Phân Ly", "Địa Cầu 55: Đối Kháng",
+      "Địa Cầu 56: Khám Phá", "Địa Cầu 57: Phân Biệt", "Địa Cầu 58: Chiếm Hữu", "Địa Cầu 59: Khổ Luyện", "Địa Cầu 60: Tỉnh Ngộ", "Địa Cầu 61: Truy Cầu", "Địa Cầu 62: Hội Ngộ", 
+	  "Địa Cầu 63: Thử Lửa", "Địa Cầu 64: Giải Thoát", "Địa Cầu 65: U Minh", "Địa Cầu 66: Tịnh Tâm", "Địa Cầu 67: Tái Hòa", "Địa Cầu 68: Địa Cầu Xanh ", "Địa Cầu 69: Hồi Ảnh", 
+	  "Địa Cầu 70: Chuông Gọi", "Địa Cầu 71: Tử Môn", "Địa Cầu 72: Phục Sinh"
+    ];
+	
+const realms = Array.from({ length: 72 }, (_, i) => {
+  const index = i + 1;
+  if (index <= 24) return 'Thượng Giới';
+  if (index <= 48) return 'Trung Giới';
+  return 'Hạ Giới';
+});
+
+
+    const grid = document.querySelector('.earth-grid');
+    const earthBox = document.getElementById('earthNamesBox');
+    let currentRealm = 'all';
+
+    function renderEarths(filter = '') {
+  const term = filter.toLowerCase();
+  earthBox.classList.add('show');
+  grid.innerHTML = '';
+  let count = 0;
+
+  earthNames.forEach((name, index) => {
+    const realm = realms[index];
+    const matchRealm = (currentRealm === 'all' || realm === currentRealm);
+    const matchSearch = name.toLowerCase().includes(term);
+    if (matchRealm && matchSearch) {
+      const div = document.createElement('div');
+      div.innerHTML = `<strong>${name}</strong><br/><em>Tầng giới: ${realm}</em>`;
+      div.addEventListener('click', () => showDetail(index));
+      grid.appendChild(div);
+      count++;
+    }
+  });
+
+  document.getElementById('earthCount').textContent = `Hiển thị ${count} địa cầu.`;
+}
+
+
+    function filterByRealm(realm) {
+      currentRealm = realm;
+      document.querySelectorAll('.realm-btn').forEach(btn => btn.classList.remove('active'));
+      document.querySelectorAll('.realm-btn').forEach(btn => {
+        if (btn.textContent === realm || (realm === 'all' && btn.textContent === 'Tất cả')) {
+          btn.classList.add('active');
+        }
+      });
+      renderEarths(document.getElementById('searchInput').value);
+    }
+
+    document.getElementById('searchInput').addEventListener('input', (e) => {
+      renderEarths(e.target.value);
+    });
+	function showDetail(index) {
+      const detailBox = document.createElement('div');
+      detailBox.classList.add('earth-detail-box');
+      const name = earthNames[index];
+      const realm = realms[index];
+const detail = earthDetails[index] || {};
+detailBox.innerHTML = `
+  <h3 class="label-ten glow-text">🔍 Chi Tiết ${earthNames[index]}</h3>
+  <div class="detail-text">
+    <p><strong class="label">Tên:</strong> <span class="glow-gold">${detail.ten || 'Chưa có'}</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+	<strong class="label">Biệt danh:</strong> <span class="glow-pink">${detail.bietDanh || '...'}</span> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;   
+	<strong class="label">Tầng giới:</strong> <span class="glow-blue">${detail.tangGioi || '...'}</span></p>
+    <p><strong class="label">Vai trò:</strong> <span class="glow-white">${detail.vaiTro || '...'}</span></p>
+    <p><strong class="label">Hình ảnh gợi ý:</strong> <span class="glow-white">${detail.hinhAnh || '...'}</span></p>
+  </div>
+  <button onclick="closeDetail()" style="position: absolute; top: 10px; right: 10px; background: #f87171; border: none; color: white; padding: 6px 12px; border-radius: 6px; cursor: pointer;">Đóng</button>
+`;      const existing = document.querySelector('.earth-detail-box');
+      if (existing) existing.remove();
+      document.body.appendChild(detailBox);
+    }
+
+    function closeDetail() {
+      const box = document.querySelector('.earth-detail-box');
+      if (box) box.remove();
+    }
+
+    showTab('overview', { currentTarget: document.querySelector('.tablink.active') });
+    renderEarths();
+  </script>
+  <script src="72-dia-cau/script.js"></script>
+</body>
+</html>

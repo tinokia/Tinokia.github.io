@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <title>Tra Giờ Theo Diễn Cầm Tam Thế (12 Tháng)</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #fffbe6;
+      padding: 30px;
+    }
+    .container {
+      max-width: 600px;
+      margin: auto;
+      background: #fff8dc;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px #ccc;
+    }
+    input, select, button {
+      width: 30%;
+      padding: 10px;
+      margin-top: 10px;
+      font-size: 16px;
+    }
+    #result {
+      margin-top: 20px;
+      padding: 15px;
+      background: #e1f5fe;
+      border-left: 6px solid #0288d1;
+      border-radius: 8px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h2>🔍 Tra Giờ Theo Diễn Cầm Tam Thế (12 Tháng)</h2>
+
+    <label>Chọn Tháng Âm Lịch:</label><br>
+    <select id="month">
+      <option>Chọn tháng</option>
+	  <option value="1">Tháng 1</option>
+      <option value="2">Tháng 2</option>
+      <option value="3">Tháng 3</option>
+      <option value="4">Tháng 4</option>
+      <option value="5">Tháng 5</option>
+      <option value="6">Tháng 6</option>
+      <option value="7">Tháng 7</option>
+      <option value="8">Tháng 8</option>
+      <option value="9">Tháng 9</option>
+      <option value="10">Tháng 10</option>
+      <option value="11">Tháng 11</option>
+      <option value="12">Tháng 12</option>
+    </select>
+<br>
+    <label>Nhập Giờ (0–23):</label><br>
+    <input type="number" id="hour" min="0" max="23" placeholder="VD: 5"><br>
+
+    <label>Nhập Phút (0–59):</label><br>
+    <input type="number" id="minute" min="0" max="59" placeholder="VD: 15"><br>
+
+    <button onclick="traGio()">Xem Giờ Âm Lịch</button>
+
+    <div id="result"></div>
+  </div>
+
+  <script>
+    const gioTheoThang = {
+      1: [
+	    { ten: "Dần",  tu: 260,  den: 379 },
+	    { ten: "Mão",  tu: 380,  den: 499 },
+	    { ten: "Thìn", tu: 500,  den: 619 },
+	    { ten: "Tỵ",   tu: 620,  den: 739 },
+	    { ten: "Ngọ",  tu: 740,  den: 859 },
+	    { ten: "Mùi",  tu: 860,  den: 979 },        
+		{ ten: "Thân", tu: 980,  den: 1099 },
+	    { ten: "Dậu",  tu: 1100, den: 1219 },
+	    { ten: "Tuất", tu: 1220, den: 1339 },
+	    { ten: "Hợi",  tu: 1340, den: 1439 },
+	    { ten: "Hợi",  tu: 0,    den: 19 },
+	    { ten: "Tý",   tu: 20,   den: 139 },
+	    { ten: "Sửu",  tu: 140,  den: 259 }
+      ],
+	  
+	  2: [
+	    { ten: "Dần",  tu: 240, den: 359 },
+	    { ten: "Mão",  tu: 360, den: 479 },
+	    { ten: "Thìn", tu: 480, den: 599 },
+	    { ten: "Tỵ",   tu: 600, den: 719 },
+	    { ten: "Ngọ",  tu: 720, den: 839 },
+	    { ten: "Mùi",  tu: 840, den: 959 },        
+		{ ten: "Thân", tu: 960, den: 1079 },
+        { ten: "Dậu", tu: 1080, den: 1199 },
+        { ten: "Tuất", tu: 1200, den: 1319 },
+        { ten: "Hợi", tu: 1320, den: 1439 },
+        { ten: "Tý", tu: 1440, den: 119 },
+        { ten: "Sửu", tu: 120, den: 239 }
+      ],
+	  
+	  3: [
+        { ten: "Dần", tu: 270, den: 389 },
+        { ten: "Mão", tu: 390, den: 509 },
+        { ten: "Thìn", tu: 510, den: 629 },
+        { ten: "Tỵ", tu: 630, den: 749 },
+        { ten: "Ngọ", tu: 750, den: 869 },
+        { ten: "Mùi", tu: 870, den: 989 },
+        { ten: "Thân", tu: 990, den: 1109 },
+        { ten: "Dậu", tu: 1110, den: 1229 },
+        { ten: "Tuất", tu: 1230, den: 1349 },
+        { ten: "Hợi", tu: 1350, den: 1469 },
+        { ten: "Tý", tu: 1470, den: 149 },
+        { ten: "Sửu", tu: 150, den: 269 }
+      ],
+	  
+	  4: [
+        { ten: "Dần", tu: 280, den: 399 },
+        { ten: "Mão", tu: 400, den: 519 },
+        { ten: "Thìn", tu: 520, den: 639 },
+        { ten: "Tỵ", tu: 640, den: 759 },
+        { ten: "Ngọ", tu: 760, den: 879 },
+        { ten: "Mùi", tu: 880, den: 999 },
+        { ten: "Thân", tu: 1000, den: 1119 },
+        { ten: "Dậu", tu: 1120, den: 1239 },
+        { ten: "Tuất", tu: 1240, den: 1359 },
+        { ten: "Hợi", tu: 1360, den: 1479 },
+        { ten: "Tý", tu: 1480, den: 159 },
+        { ten: "Sửu", tu: 160, den: 279 }
+      ],
+	  
+	  5: [
+        { ten: "Dần", tu: 320, den: 439 },
+        { ten: "Mão", tu: 440, den: 559 },
+        { ten: "Thìn", tu: 560, den: 679 },
+        { ten: "Tỵ", tu: 680, den: 799 },
+        { ten: "Ngọ", tu: 800, den: 919 },
+        { ten: "Mùi", tu: 920, den: 1039 },
+        { ten: "Thân", tu: 1040, den: 1159 },
+        { ten: "Dậu", tu: 1160, den: 1279 },
+        { ten: "Tuất", tu: 1280, den: 1399 },
+        { ten: "Hợi", tu: 1400, den: 79 },
+        { ten: "Tý", tu: 80, den: 199 },
+        { ten: "Sửu", tu: 200, den: 319 }
+      ],
+	  
+      6: [
+        { ten: "Dần", tu: 280, den: 399 },
+        { ten: "Mão", tu: 400, den: 519 },
+        { ten: "Thìn", tu: 520, den: 639 },
+        { ten: "Tỵ", tu: 640, den: 759 },
+        { ten: "Ngọ", tu: 760, den: 879 },
+        { ten: "Mùi", tu: 880, den: 999 },
+        { ten: "Thân", tu: 1000, den: 1119 },
+        { ten: "Dậu", tu: 1120, den: 1239 },
+        { ten: "Tuất", tu: 1240, den: 1359 },
+        { ten: "Hợi", tu: 1360, den: 1479 },
+        { ten: "Tý", tu: 1480, den: 159 },
+        { ten: "Sửu", tu: 160, den: 279 }
+      ],		
+      7: [
+        { ten: "Dần", tu: 270, den: 389 },
+        { ten: "Mão", tu: 390, den: 509 },
+        { ten: "Thìn", tu: 510, den: 629 },
+        { ten: "Tỵ", tu: 630, den: 749 },
+        { ten: "Ngọ", tu: 750, den: 869 },
+        { ten: "Mùi", tu: 870, den: 989 },
+        { ten: "Thân", tu: 990, den: 1109 },
+        { ten: "Dậu", tu: 1110, den: 1229 },
+        { ten: "Tuất", tu: 1230, den: 1349 },
+        { ten: "Hợi", tu: 1350, den: 1469 },
+        { ten: "Tý", tu: 1470, den: 149 },
+        { ten: "Sửu", tu: 150, den: 269 }
+      ],
+		
+      8: [
+	    { ten: "Dần",  tu: 240, den: 359 },
+	    { ten: "Mão",  tu: 360, den: 479 },
+	    { ten: "Thìn", tu: 480, den: 599 },
+	    { ten: "Tỵ",   tu: 600, den: 719 },
+	    { ten: "Ngọ",  tu: 720, den: 839 },
+	    { ten: "Mùi",  tu: 840, den: 959 },        
+		{ ten: "Thân", tu: 960, den: 1079 },
+        { ten: "Dậu", tu: 1080, den: 1199 },
+        { ten: "Tuất", tu: 1200, den: 1319 },
+        { ten: "Hợi", tu: 1320, den: 1439 },
+        { ten: "Tý", tu: 1440, den: 119 },
+        { ten: "Sửu", tu: 120, den: 239 }
+      ],		
+     9: [
+	    { ten: "Dần",  tu: 260,  den: 379 },
+	    { ten: "Mão",  tu: 380,  den: 499 },
+	    { ten: "Thìn", tu: 500,  den: 619 },
+	    { ten: "Tỵ",   tu: 620,  den: 739 },
+	    { ten: "Ngọ",  tu: 740,  den: 859 },
+	    { ten: "Mùi",  tu: 860,  den: 979 },        
+		{ ten: "Thân", tu: 980,  den: 1099 },
+	    { ten: "Dậu",  tu: 1100, den: 1219 },
+	    { ten: "Tuất", tu: 1220, den: 1339 },
+	    { ten: "Hợi",  tu: 1340, den: 1439 },
+	    { ten: "Hợi",  tu: 0,    den: 19 },
+	    { ten: "Tý",   tu: 20,   den: 139 },
+	    { ten: "Sửu",  tu: 140,  den: 259 }
+      ],
+		
+	  10: [
+        { ten: "Dần", tu: 240, den: 359 },
+        { ten: "Mão", tu: 360, den: 479 },
+        { ten: "Thìn", tu: 480, den: 599 },
+        { ten: "Tỵ", tu: 600, den: 719 },
+        { ten: "Ngọ", tu: 720, den: 839 },
+        { ten: "Mùi", tu: 840, den: 959 },
+        { ten: "Thân", tu: 960, den: 1079 },
+        { ten: "Dậu", tu: 1080, den: 1199 },
+        { ten: "Tuất", tu: 1200, den: 1319 },
+        { ten: "Hợi", tu: 1320, den: 1439 },
+        { ten: "Tý", tu: 0, den: 119 },
+        { ten: "Sửu", tu: 120, den: 239 }
+      ],
+	  
+      11: [
+        { ten: "Dần", tu: 220, den: 339 },
+        { ten: "Mão", tu: 340, den: 459 },
+        { ten: "Thìn", tu: 460, den: 579 },
+        { ten: "Tỵ", tu: 580, den: 699 },
+        { ten: "Ngọ", tu: 700, den: 819 },
+        { ten: "Mùi", tu: 820, den: 939 },
+        { ten: "Thân", tu: 940, den: 1059 },
+        { ten: "Dậu", tu: 1060, den: 1179 },
+        { ten: "Tuất", tu: 1180, den: 1299 },
+        { ten: "Hợi", tu: 1300, den: 1419 },
+        { ten: "Tý", tu: 1420, den: 99 },
+        { ten: "Sửu", tu: 100, den: 219 }
+      ],			
+	  12: [
+        { ten: "Dần", tu: 240, den: 359 },
+        { ten: "Mão", tu: 360, den: 479 },
+        { ten: "Thìn", tu: 480, den: 599 },
+        { ten: "Tỵ", tu: 600, den: 719 },
+        { ten: "Ngọ", tu: 720, den: 839 },
+        { ten: "Mùi", tu: 840, den: 959 },
+        { ten: "Thân", tu: 960, den: 1079 },
+        { ten: "Dậu", tu: 1080, den: 1199 },
+        { ten: "Tuất", tu: 1200, den: 1319 },
+        { ten: "Hợi", tu: 1320, den: 1439 },
+        { ten: "Tý", tu: 0, den: 119 },
+        { ten: "Sửu", tu: 120, den: 239 }
+      ]
+      // Các tháng còn lại anh Tí có thể thêm tương tự vào đây.
+    };
+
+    function traGio() {
+      const month = parseInt(document.getElementById("month").value);
+      const hour = parseInt(document.getElementById("hour").value);
+      const minute = parseInt(document.getElementById("minute").value);
+      const resultDiv = document.getElementById("result");
+
+      if (isNaN(hour) || hour < 0 || hour > 23 || isNaN(minute) || minute < 0 || minute > 59) {
+        resultDiv.innerHTML = "⚠️ Vui lòng nhập đúng giờ và phút.";
+        return;
+      }
+
+      const totalMinutes = hour * 60 + minute;
+      const bangGio = gioTheoThang[month];
+
+      if (!bangGio) {
+        resultDiv.innerHTML = `⛔ Chưa có dữ liệu giờ cho tháng ${month}.`;
+        return;
+      }
+
+      let gioAm = "Không xác định";
+      for (const khung of bangGio) {
+        if (totalMinutes >= khung.tu && totalMinutes <= khung.den) {
+          gioAm = khung.ten;
+          break;
+        }
+      }
+
+      resultDiv.innerHTML = `🕓 Lúc ${hour}h${minute.toString().padStart(2, '0')} là <strong>giờ ${gioAm}</strong> theo tháng ${month} (Diễn Cầm Tam Thế).`;
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <title>Diễn Cầm Tam Thế - Xem Nghề Nghiệp Hợp Số</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 20px;
+      background: #fffbea;
+    }
+    h1 {
+      color: #8b0000;
+    }
+    label, select, button {
+      font-size: 18px;
+      margin: 10px 0;
+    }
+    #result {
+      margin-top: 20px;
+      padding: 15px;
+      border: 1px solid #ccc;
+      background: #f5f5f5;
+    }
+	iframe {
+  width: 575px;                 /* cố định chiều rộng */
+  height: 300px;                /* cố định chiều cao */
+  flex: 0 0 auto;               /* không co, không giãn */
+  border: none; 
+  box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+  background: #fff;
+}
+  </style>
+</head>
+<body>
+
+  <h1>🔮 Diễn Cầm Tam Thế - Xem Nghề Nghiệp Hợp Số</h1>
+  <table border="0">
+  <tbody>
+    <tr>
+      <td><button><a href="../../index.html" style="color: red" >Trang Chủ</a></button></td>
+      <td><button><a href="../Dien-Cam-Tam-The.html" style="color: red" >Sách DCTT</a></button></td>
+    </tr>
+  </tbody>
+</table>
+
+  <iframe src="can-chi.html"></iframe><br>
+  <label for="thang">Nhập năm sinh để tra mạng, nhớ chọn mạng theo sách Diễn Cầm Tam Thế</label><br>
+  <label for="thang">Chọn tháng sanh (âm lịch):</label>
+  <select id="thang">
+    <option value="">-- Chọn tháng --</option>
+    <option value="1">Tháng Giêng</option>
+    <option value="2">Tháng 2</option>
+    <option value="3">Tháng 3</option>
+    <option value="4">Tháng 4</option>
+    <option value="5">Tháng 5</option>
+    <option value="6">Tháng 6</option>
+    <option value="7">Tháng 7</option>
+    <option value="8">Tháng 8</option>
+    <option value="9">Tháng 9</option>
+    <option value="10">Tháng 10</option>
+    <option value="11">Tháng 11</option>
+    <option value="12">Tháng 12</option>
+  </select>
+
+  <br>
+
+  <label for="menh">Chọn mạng:</label>
+  <select id="menh">
+    <option value="">-- Chọn mạng --</option>
+    <option value="kim">Kim</option>
+    <option value="moc">Mộc</option>
+    <option value="thuy">Thủy</option>
+    <option value="hoa">Hỏa</option>
+    <option value="tho">Thổ</option>
+  </select>
+
+  <br><br>
+  <button onclick="traCuu()">Tra cứu nghề hợp</button>
+
+  <div id="result"></div>
+
+  <script>
+    function traCuu() {
+      const thang = parseInt(document.getElementById('thang').value);
+      const menh = document.getElementById('menh').value;
+      let result = "";
+
+      if (!thang || !menh) {
+        result = "Vui lòng chọn đầy đủ tháng sanh và mạng.";
+        document.getElementById('result').innerHTML = result;
+        return;
+      }
+
+      const nghe = {
+        kim: {
+          muaban: [4, 5, 8, 10],
+          thuyloi: [1, 3, 9, 10],
+          lamtho: [8, 10]
+        },
+        moc: {
+          muaban: [4, 6, 10, 12],
+          thuyloi: [4, 5, 6, 12],
+          lamtho: [6, 10]
+        },
+        thuy: {
+          muaban: [4, 8, 12],
+          thuyloi: [2, 4, 6, 9, 11],
+          lamtho: [7, 11, 12]
+        },
+        hoa: {
+          muaban: [5, 11],
+          thuyloi: [2, 6, 7, 11],
+          lamtho: [1]
+        },
+        tho: {
+          muaban: [7, 8, 10],
+          thuyloi: [1, 2, 3, 6, 8, 9],
+          lamtho: [1, 3, 7, 10]
+        }
+      };
+
+      const data = nghe[menh];
+
+      result += `<strong>Kết quả tra cứu:</strong><br>`;
+      if (data.muaban.includes(thang)) result += "- Hợp làm nghề <strong>Mua bán</strong><br>";
+      if (data.thuyloi.includes(thang)) result += "- Hợp làm nghề <strong>Câu cá, chài lưới, thủy lợi</strong><br>";
+      if (data.lamtho.includes(thang)) result += "- Hợp làm nghề <strong>Thợ thủ công</strong><br>";
+
+      if (result === `<strong>Kết quả tra cứu:</strong><br>`) {
+        result += "Chưa thấy nghề nào thật thuận số tháng này.";
+      }
+
+      document.getElementById('result').innerHTML = result;
+    }
+  </script>
+
+</body>
+</html>

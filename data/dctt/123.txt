@@ -1,0 +1,93 @@
+1) số có bị trời đánh ko
+vd: giáp, ất sanh giờ ngọ thì phạm
+    bính, đinh sanh giờ tý thì phạm
+
+2) số có bị rắn cắn ko
+vd: giáp, ất sanh giờ tỵ, dậu, sửu thì phạm
+    bính, đinh sanh giờ thân, tý, thìn thì phạm
+
+3) số có bị chết yểu hay ko 
+vd: tháng 1,5,9 giờ thìn thì phạm
+    tháng 2,6,10 giờ mùi thì phạm
+
+4) số có dễ nuôi hay khó
+vd: tháng 2 giờ dậu khó nuôi
+    tháng 3 giờ tuất khó nuôi
+
+5) số có té sông hay té giếng không
+vd: tháng 1 giờ dần thì kỵ
+    tháng 3 giờ mẹo thì kỵ
+
+6) số có phạm giờ khóc không
+vd: tháng 1,2,3 giờ ngọ thì kỵ
+    tháng 4,5,6 giờ tý thì kỵ
+
+7) số có kỵ cha mẹ không
+vd: tháng 1,7 giờ tỵ, hợi thì kỵ
+    tháng 2,8 giờ tuất, thìn thì kỵ
+
+8) số có bệnh ghẻ không
+vd: tháng 1,2,3 giờ thìn, tuất thì kỵ
+    tháng 4,5,6 giờ sửu, mùi thì kỵ
+
+9) số có chầu diêm vương không
+vd: tháng 1,2,3 giờ sửu, mùi  thì kỵ
+    tháng 4,5,6 giờ thìn, tuất thì kỵ
+
+10) số có ngủ giựt mình không
+vd: tháng 1,2,3 giờ thìn, dậu  thì kỵ
+    tháng 4,5,6 giờ tý, mẹo thì kỵ
+
+11) số có dễ bị ma quỹ bắt mạng hay không
+vd: tuổi tý giờ dậu thì kỵ
+    tuổi hợi giờ thìn thì kỵ
+
+12) số có chết bị đánh bằng cây ko
+vd: giáp, ất sanh giờ thân, dậu thì kỵ
+    bính, đinh sanh giờ hợi, tý thì kỵ
+
+13) số có tật không
+vd: tháng 1,2,3 giờ dậu thì kỵ
+    tháng 4,5,6 giờ tý thì kỵ
+
+14) số có đau trong 100 ngày không
+vd: tháng 1,7 giờ tỵ, ngọ, thân, dậu thì kỵ
+    tháng 3,6,9,12 giờ tý, hợi, sửu, mùi thì kỵ
+
+15) số có té sông, giếng không
+vd: tháng 1,2,3 giờ mẹo thì kỵ
+    tháng 4,5,6 giờ ngọ thì kỵ
+
+16) số coi mắt sáng tỏ hay không
+vd: mạng kim, tháng 1,4,5,10,11 thì kỵ
+    mạng mộc, tháng 4,5,7,8 thì kỵ
+
+17) số coi đau lưng không
+vd: mạng kim, tháng 1,5,7,8 thì kỵ
+    mạng mộc, tháng 4,5,7,8 thì kỵ
+
+18) số coi bị lủa cháy không
+vd: tuổi tý, tháng 1,7 thì kỵ
+    tuổi sửu, tháng 2,8 thì kỵ
+
+19) số coi kỵ cỡi trâu, ngựa, xe không
+vd: tuổi tý, tháng 1,7 thì kỵ
+    tuổi sửu, tháng 4,10 thì kỵ
+
+20) số coi rắn cắn, cọp ăn không
+vd: tuổi tý, tháng 1,7 thì kỵ
+    tuổi sửu, tháng 2,8 thì kỵ
+
+21) số coi có té cây, sông, giếng không
+vd: mạng kim, tháng 5,7 thì kỵ
+    mạng mộc, tháng 5,7 thì kỵ
+
+22) số coi không có nhà ở không
+vd: tuổi tý, tháng 3,5,7 thì kỵ
+    tuổi sửu, tháng 4,6,8 thì kỵ
+    tuổi dần, tháng 5,7,9 thì kỵ
+
+
+
+
+

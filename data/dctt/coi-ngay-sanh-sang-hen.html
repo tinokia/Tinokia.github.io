@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <title>Coi Ngày Sanh Sang Hèn</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 20px;
+      background: #fdfdfd;
+    }
+    h1 {
+      color: #4b0082;
+    }
+    label, input, button {
+      font-size: 18px;
+      margin: 10px 0;
+    }
+    #result {
+      margin-top: 20px;
+      padding: 15px;
+      border: 1px solid #ccc;
+      background: #f5f5f5;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>🔮 Diễn Cầm Tam Thế - Coi Ngày Sanh Sang Hèn</h1>
+  <button><a href="../../index.html" style="color: red" >Trang Chủ</a></button>
+  <button><a href="../Dien-Cam-Tam-The.html" style="color: red" >Sách DCTT</a></button><br>
+  <label for="ngay">Nhập ngày sanh (âm lịch): </label>
+  <input type="number" id="ngay" min="1" max="30" />
+  <button onclick="traCuu()">Tra cứu</button>
+
+  <div id="result"></div>
+
+  <script>
+    function traCuu() {
+      const ngay = parseInt(document.getElementById('ngay').value);
+      const thaiDuongNhut = [1, 7, 13, 19, 25];
+      const thaiAmNhut = [2, 8, 14, 20, 26];
+	  const thienPhuNhut = [3, 9, 15, 21, 27];
+	  const thienMauNhut = [4, 10, 16, 22, 28];
+	  const thienDeNhut = [5, 11, 17, 23, 29];
+	  const thienHoangNhut = [6, 12, 18, 24, 30];
+      let result = "";
+
+      if (thaiDuongNhut.includes(ngay)) {
+        result = `<strong>Coi sanh ngày Thái Dương Nhựt</strong><br>
+          Sanh nhầm ngày Thái Dương Nhựt thì lòng sáng láng, phước lộc nhiều, có nghề nghiệp, nếu không có nghề nghiệp thì cha mẹ chết sớm.`;} 
+		else if (thaiAmNhut.includes(ngay)) {
+        result = `<strong>Coi sanh ngày Thái Âm Nhựt</strong><br>
+          Sanh nhầm ngày Thái Âm Nhựt thì đi xa sứ có nhiều người kính trọng, quý nhân thương, 36 tuổi trở lên vận thời làm ăn phát đạt.`;} 
+		else if (thienPhuNhut.includes(ngay)) {
+        result = `<strong>Coi sanh ngày Thiên Phụ Nhựt</strong><br>
+          Sanh nhầm ngày Thiên Phụ Nhựt thì lớn tuổi của nhiều, số đặng sống lâu, phải tu niệm thì phải buồn rầu.`;}
+		else if (thienMauNhut.includes(ngay)) {
+        result = `<strong>Coi sanh ngày Thiên Mẫu Nhựt</strong><br>
+          Sanh nhầm ngày Thiên Mẫu Nhựt thì đặng vinh hoa tốt, gặp đặng ngày làm giàu và sang trọng, của ra vô không chừng.`;}
+		else if (thienDeNhut.includes(ngay)) {
+        result = `<strong>Coi sanh ngày Thiên Đế Nhựt</strong><br>
+          Sanh nhầm ngày Thiên Đế Nhựt thì hay chơi anh em bạn nhiều, tánh hạnh hiền từ và vui vẻ, gái thì khắc chồng`;}
+		else if (thienHoangNhut.includes(ngay)) {
+        result = `<strong>Coi sanh ngày Thiên Hoàng Nhựt</strong><br>
+          Sanh nhầm ngày Thiên Hoàng Nhựt thì khắc cha mẹ, khắc vợ chồng, không ở chỗ cha mẹ sanh, đi tới xứ khác lập thân.`;}
+		
+		
+		else {
+        result = "Chỉ nhập từ 1 đến 30 để tra.";
+      }
+
+      document.getElementById('result').innerHTML = result;
+    }
+  </script>
+
+</body>
+</html>

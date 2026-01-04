@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <title>Xem Có Vợ/Chồng Không</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 20px;
+      margin: 0;
+      background: #f4f8f6;
+    }
+
+    h2, h3 {
+      margin: 5px 0;
+      color: #333;
+      text-align: center;
+    }
+
+    .container {
+      display: flex;
+      gap: 6px;
+      justify-content: center;
+      align-items: flex-start;
+    }
+
+    .box {
+      flex: 0.7;
+      background: #99FF99;
+      padding: 1px;
+	  border-radius: 20px;
+      width: 320px;
+    }
+	.box-small {
+  flex: 0.8; /* nhỏ hơn các ô còn lại */
+  min-width: 200px; /* bề ngang tối thiểu */
+  max-width: 216px; /* không cho nó to quá */
+}
+	.box-can {
+  flex: 0.8; /* nhỏ hơn các ô còn lại */
+  min-width: 200px; /* bề ngang tối thiểu */
+  max-width: 475px; /* không cho nó to quá */
+}
+	.box-gio {
+  flex: 0.8; /* nhỏ hơn các ô còn lại */
+  min-width: 200px; /* bề ngang tối thiểu */
+  max-width: 680px; /* không cho nó to quá */
+}
+
+    iframe {
+      width: 100%;
+      height: 549px;
+      border-radius: 10px;
+    }
+
+    label {
+      display: block;
+      margin-top: 10px;
+      font-weight: bold;
+    }
+
+    select, button {
+      width: 100%;
+      padding: 8px;
+      margin-top: 5px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+    }
+
+    button {
+      background: #007bff;
+      color: #fff;
+      border: none;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    button:hover {
+      background: #0056b3;
+    }
+
+    #result {
+      margin-top: 15px;
+      padding: 12px;
+      border-left: 5px solid #999;
+      background: #f9f9f9;
+      border-radius: 6px;
+      min-height: 40px;
+    }
+  </style>
+</head>
+<body>
+  <h2><a href="../../index.html" class="btn-link">🏠 Trang Chủ</a>&nbsp;&nbsp;&nbsp;&nbsp;
+  <a href="../Dien-Cam-Tam-The.html" class="btn-link">📖 Sách DCTT</a>&nbsp;&nbsp;&nbsp;&nbsp;
+  🔮 Xem Có Vợ/Chồng Không (theo giờ sanh)</h2>
+
+  <div class="container">
+    <div class="box box-can">
+      <iframe src="can-chi.html"></iframe>
+    </div>
+
+    <div class="box box-small">
+      <label>Tuổi:</label>
+      <select id="tuoi">
+        <option value="">-- Chọn tuổi --</option>
+        <option value="Tý">Tý</option>
+        <option value="Sửu">Sửu</option>
+        <option value="Dần">Dần</option>
+        <option value="Mẹo">Mẹo</option>
+        <option value="Thìn">Thìn</option>
+        <option value="Tỵ">Tỵ</option>
+        <option value="Ngọ">Ngọ</option>
+        <option value="Mùi">Mùi</option>
+        <option value="Thân">Thân</option>
+        <option value="Dậu">Dậu</option>
+        <option value="Tuất">Tuất</option>
+        <option value="Hợi">Hợi</option>
+      </select>
+
+      <label>Giờ sanh (âm lịch):</label>
+      <select id="gio">
+        <option value="">-- Chọn giờ sanh --</option>
+        <option value="Tý">Tý (23h – 1h)</option>
+        <option value="Sửu">Sửu (1h – 3h)</option>
+        <option value="Dần">Dần (3h – 5h)</option>
+        <option value="Mẹo">Mẹo (5h – 7h)</option>
+        <option value="Thìn">Thìn (7h – 9h)</option>
+        <option value="Tỵ">Tỵ (9h – 11h)</option>
+        <option value="Ngọ">Ngọ (11h – 13h)</option>
+        <option value="Mùi">Mùi (13h – 15h)</option>
+        <option value="Thân">Thân (15h – 17h)</option>
+        <option value="Dậu">Dậu (17h – 19h)</option>
+        <option value="Tuất">Tuất (19h – 21h)</option>
+        <option value="Hợi">Hợi (21h – 23h)</option>
+      </select>
+
+      <button onclick="traCuu()">Xem kết quả</button>
+      <div id="result"></div>
+    </div>
+	  <div class="box box-gio">
+      <iframe src="tra-gio.html"></iframe>
+    </div>
+  </div>
+
+  <script>
+    const dataPham = [
+      { tuoi: ["Dần", "Mẹo", "Thìn"], gio: ["Tý", "Sửu"] },
+      { tuoi: ["Thân", "Dậu", "Tuất"], gio: ["Hợi", "Mùi"] },
+      { tuoi: ["Hợi", "Tý", "Sửu"], gio: ["Dần", "Tuất"] },
+      { tuoi: ["Tỵ", "Tý", "Mùi"], gio: ["Thân", "Thìn"] }
+    ];
+
+    function traCuu() {
+      const tuoi = document.getElementById("tuoi").value;
+      const gio = document.getElementById("gio").value;
+      const result = document.getElementById("result");
+
+      if (!tuoi || !gio) {
+        result.innerHTML = "⚠️ Vui lòng chọn đầy đủ tuổi và giờ sanh.";
+        result.style.borderLeftColor = "orange";
+        return;
+      }
+
+      let isPham = dataPham.some(entry => entry.tuoi.includes(tuoi) && entry.gio.includes(gio));
+
+      if (isPham) {
+        result.innerHTML = "⚠️ Phạm giờ cô quả – khó có vợ/chồng.";
+        result.style.borderLeftColor = "red";
+      } else {
+        result.innerHTML = "✅ Không phạm – có duyên lập gia thất.";
+        result.style.borderLeftColor = "green";
+      }
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,215 @@
+ <!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <title>Tra Cứu Câu Hồn Đi Đầu Thai</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: #f2f2f2;
+      margin: 0;
+      padding: 20px;
+      color: #333;
+    }
+
+    h1 {
+      text-align: center;
+      font-size: 28px;
+      margin-bottom: 5px;
+    }
+
+    .subtitle {
+      text-align: center;
+      font-size: 16px;
+      color: #666;
+      margin-bottom: 20px;
+    }
+
+    .nav-links {
+      text-align: center;
+      margin-bottom: 25px;
+    }
+
+    .btn-link {
+      text-decoration: none;
+      background: #eee;
+      color: #000;
+      padding: 8px 14px;
+      border-radius: 6px;
+      margin: 0 6px;
+      border: 1px solid #ccc;
+      transition: background 0.2s;
+    }
+
+    .btn-link:hover {
+      background: #ddd;
+    }
+
+    .container {
+      display: flex;
+      gap: 24px;
+      max-width: 1250px;
+      margin: 0 auto;
+    }
+
+    iframe {
+      flex: 1;
+      height: 290px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      background: #fff;
+    }
+
+    .tra-cuu {
+      flex: 1;
+      background: #fff;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+    }
+
+    .tra-cuu h2 {
+      font-size: 20px;
+      margin-bottom: 15px;
+      color: #444;
+    }
+
+    label {
+      font-weight: bold;
+      margin-top: 10px;
+      display: block;
+    }
+
+    select, button {
+      width: 100%;
+      padding: 8px;
+      font-size: 15px;
+      margin-top: 5px;
+      border-radius: 6px;
+      border: 1px solid #ccc;
+    }
+
+    button {
+      margin-top: 15px;
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      cursor: pointer;
+      font-weight: bold;
+    }
+
+    button:hover {
+      background-color: #45a049;
+    }
+
+    #result {
+      margin-top: 20px;
+      white-space: pre-line;
+      padding: 15px;
+      background: #fcfcfc;
+      border-left: 4px solid #666;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.08);
+      border-radius: 6px;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Tra Cứu Câu Hồn Đi Đầu Thai</h1>
+  <div class="subtitle">Luận theo 12 cầu dựa trên Mạng, Tháng sinh và Giới tính</div>
+
+  <div class="nav-links">
+    <a href="../../index.html" class="btn-link">🏠 Trang Chủ</a>
+    <a href="../Dien-Cam-Tam-The.html" class="btn-link">📖 Sách DCTT</a>
+  </div>
+
+  <div class="container">
+    <iframe src="can-chi.html"></iframe>
+
+    <div class="tra-cuu">
+      <h2>Chọn Thông Tin Cần Tra</h2>
+
+      <label for="menh">Chọn Mạng:</label>
+      <select id="menh">
+        <option value="Kim">Kim</option>
+        <option value="Mộc">Mộc</option>
+        <option value="Thủy">Thủy</option>
+        <option value="Hỏa">Hỏa</option>
+        <option value="Thổ">Thổ</option>
+      </select>
+
+      <label for="thang">Chọn Tháng Sinh Âm Lịch:</label>
+      <select id="thang">
+        <option value="1">Tháng 1</option>
+        <option value="2">Tháng 2</option>
+        <option value="3">Tháng 3</option>
+        <option value="4">Tháng 4</option>
+        <option value="5">Tháng 5</option>
+        <option value="6">Tháng 6</option>
+        <option value="7">Tháng 7</option>
+        <option value="8">Tháng 8</option>
+        <option value="9">Tháng 9</option>
+        <option value="10">Tháng 10</option>
+        <option value="11">Tháng 11</option>
+        <option value="12">Tháng 12</option>
+      </select>
+
+      <label for="gioitinh">Chọn Giới Tính:</label>
+      <select id="gioitinh">
+        <option value="Nam">Nam</option>
+        <option value="Nữ">Nữ</option>
+      </select>
+
+      <button onclick="traCuu()">🔍 Xem Câu Hồn</button>
+
+      <div id="result"></div>
+    </div>
+  </div>
+
+  <script>
+    const bangCau = {
+      Nam: {
+        Kim: [1,2,3,4,5,6,7,8,9,10,11,12],
+        Mộc: [7,8,9,10,11,12,1,2,3,4,5,6],
+        Thủy: [10,11,12,1,2,3,4,5,6,7,8,9],
+        Hỏa: [1,2,3,4,5,6,7,8,9,10,11,12],
+
+        Thổ: [4,5,6,7,8,9,10,11,12,1,2,3]
+      },
+      Nữ: {
+        Kim: [4,5,6,7,8,9,10,11,12,1,2,3],
+        Mộc: [10,11,12,1,2,3,4,5,6,7,8,9],
+        Thủy: [7,8,9,10,11,12,1,2,3,4,5,6],
+        Hỏa: [1,2,3,4,5,6,7,8,9,10,11,12],
+        Thổ: [7,8,9,10,11,12,1,2,3,4,5,6]
+      }
+    };
+
+    const noiDungCau = {
+      1: "Số này vợ chồng thay đổi 2, 3 đời. Đứa con đầu khó nuôi. Số có phần tu niệm thì tốt, và có số làm giàu.",
+      2: "Số này vợ chồng thay đổi nhiều đời, hào con cũng lôi thôi, số lưu lạc, đến lúc lớn tuổi, bẻ vợ chồng mới an.",
+      3: "Số này lớn tuổi hay có tai nạn lắm, lúc tuổi trẻ có gian nan nhiều, đến lớn đặng qua, có tu thì đặng ba đứa con, bằng không có tu có một đứa mà thôi.",
+      4: "Số này lớn phải cầu khẩn Trời Đất mới có con đặng một đứa và có Thần Phù Hộ, đến già thì đặng thong thả, cảnh muộn.",
+      5: "Số này lớn tuổi làm ăn khá lắm, nhà cửa sự nghiệp kinh vinh, vợ chồng thuở trẻ hay trắc trở, tuổi lớn mới đặng nên đôi.",
+      6: "Số này gặp quỉ sứ bắt, cho nên đứa nào nằm ngủ hay giật mình, hay khóc, phải kiếm thầy pháp giỏi ếm nó mới hết, rồi cho người ta làm con nuôi đỡ một thời gian, có như vậy nuôi mới đặng.",
+      7: "Số này hồn ở cõi trên, Phật cho xuống đầu thai tánh hay cúng kiến. Lớn tuổi làm ăn khá lắm: ý vui vẻ, cha mẹ đặng sống lâu.",
+      8: "Số này lớn tuổi tánh hay muốn ở núi non, mạng lý đặng an không có hại, có 3 đứa con, có hưởng phước. Ông bà cha mẹ dễ làm ăn.",
+      9: "Số này mới sanh hay giật mình, phải cho người ta làm con nuôi mới đặng mạnh giỏi: người mẹ năm sau còn sanh một đứa nữa.",
+      10: "Số này con trai khó nuôi, con gái dễ nuôi, số này phải chịu làm con nuôi người ta mới đặng mạnh giỏi, khi đến lớn mới dễ làm ăn.",
+      11: "Số này khi mẹ có thai thì hay đau ốm, và hay có hoạn nạn thường, sanh nó ra dễ nuôi, nếu mẹ mạnh giỏi thì sanh nó ra hay đau ốm và nhõng nhẽo lắm.",
+      12: "Số này cũng nuôi đặng đến lớn, nhưng mà lúc đang nuôi thuở nhỏ trục trặc lắm, cha mẹ nên cẩn mà nuôi dưỡng mới đặng."
+    };
+
+    function traCuu() {
+      const menh = document.getElementById("menh").value;
+      const thang = parseInt(document.getElementById("thang").value);
+      const gioi = document.getElementById("gioitinh").value;
+
+      const cau = bangCau[gioi][menh][thang - 1];
+      const ketqua = `🔮 Kết Quả Tra Cứu:\n\nCâu số ${cau}:\n` + noiDungCau[cau];
+      document.getElementById("result").textContent = ketqua;
+    }
+  </script>
+
+</body>
+</html>
