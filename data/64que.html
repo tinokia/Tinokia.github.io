@@ -110,9 +110,12 @@ function drawHexagram(code){
 </div>
 
 <!-- ===== EMAILJS (PHẢI LOAD TRƯỚC) ===== -->
-<script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
+<!-- EmailJS SDK chuẩn mới -->
+<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
 <script>
-  emailjs.init("4grBbyLQjupONTOIZ");
+  emailjs.init({
+    publicKey: "4grBbyLQjupONTOIZ"
+  });
 </script>
 
 <script>
