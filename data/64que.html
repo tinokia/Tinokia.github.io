@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<title>Trắc nghiệm 64 Quẻ Dịch</title>
+
+<style>
+body{
+  font-family:Arial,Helvetica,sans-serif;
+  background:#f2f6ff;
+  padding:20px;
+}
+.quiz{
+  max-width:720px;
+  margin:auto;
+  background:#fff;
+  border-radius:14px;
+  padding:20px;
+  box-shadow:0 10px 30px rgba(0,0,0,.1);
+}
+.question{margin-bottom:22px}
+.q-title{font-weight:bold;margin-bottom:10px}
+.answers label{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  padding:10px 12px;
+  margin:8px 0;
+  border-radius:10px;
+  background:#f8f9fb;
+  border:1px solid #e0e3eb;
+  cursor:pointer;
+  transition:.2s;
+}
+.answers label:hover{
+  background:#eef3ff;
+  border-color:#8aa7ff;
+}
+.answers input[type=radio]{transform:scale(1.3)}
+.answers label.correct{background:#e9f9ef;border-color:#35c26b}
+.answers label.wrong{background:#ffecec;border-color:#ff6b6b}
+
+button{
+  padding:10px 16px;
+  border:none;
+  border-radius:10px;
+  background:#4a6cff;
+  color:#fff;
+  font-size:15px;
+  cursor:pointer;
+}
+button:hover{opacity:.9}
+.result{margin-top:15px;font-weight:bold}
+
+/* ===== HÌNH QUẺ ===== */
+.hexagram{display:flex;flex-direction:column;gap:4px}
+.line{height:6px;width:60px;background:#222;border-radius:4px}
+.line.broken{background:none;display:flex;justify-content:space-between}
+.line.broken span{width:26px;height:6px;background:#222;border-radius:4px}
+</style>
+
+<script>
+/* ===== HÀM VẼ QUẺ – KHÔNG ĐỤNG DỮ LIỆU ===== */
+function drawHexagram(code){
+  let html='<div class="hexagram">';
+  code.split('').reverse().forEach(b=>{
+    if(b==='1') html+='<div class="line"></div>';
+    else html+='<div class="line broken"><span></span><span></span></div>';
+  });
+  return html+'</div>';
+}
+</script>
+</head>
+
+<body>
+<div class="quiz">
+<h2>Trắc nghiệm Kinh Dịch</h2>
+
+<!-- ================== DỮ LIỆU CÂU HỎI ==================
+     A TÍ DÁN NGUYÊN PHẦN DATA CŨ CỦA A VÀO ĐÂY
+====================================================== -->
+
+<div class="question" data-answer="A">
+  <div class="q-title">Quẻ nào là CÀN (Trời)?</div>
+  <div class="answers">
+    <label><input type="radio" name="q1"> <span class="hex" data-code="111111"></span></label>
+    <label><input type="radio" name="q1"> <span class="hex" data-code="000000"></span></label>
+  </div>
+</div>
+
+<!-- ===== NHẬP MAIL (KHÔNG BẮT BUỘC) ===== -->
+<div style="margin:15px 0">
+  <input 
+    type="email"
+    id="userEmail"
+    placeholder="Nhập email (không bắt buộc)"
+    style="
+      width:100%;
+      max-width:360px;
+      padding:10px;
+      border-radius:8px;
+      border:1px solid #ccc;
+      font-size:15px;">
+</div>
+
+<button onclick="grade()">Chấm điểm</button>
+<button onclick="location.reload()">Làm lại</button>
+
+<div class="result" id="result"></div>
+</div>
+
+<!-- ===== EMAILJS (PHẢI LOAD TRƯỚC) ===== -->
+<script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
+<script>
+  emailjs.init("4grBbyLQjupONTOIZ");
+</script>
+
+<script>
+/* ===== GẮN HÌNH QUẺ ===== */
+document.querySelectorAll('.hex').forEach(el=>{
+  el.innerHTML = drawHexagram(el.dataset.code);
+});
+
+/* ===== CHẤM ĐIỂM + GỬI MAIL ===== */
+function grade(){
+  let score=0,total=0;
+
+  document.querySelectorAll('.question').forEach(q=>{
+    total++;
+    let correct=q.dataset.answer;
+    let labels=q.querySelectorAll('label');
+
+    labels.forEach((lb,i)=>{
+      let r=lb.querySelector('input');
+      r.disabled=true;
+      let letter=String.fromCharCode(65+i);
+      if(letter===correct) lb.classList.add('correct');
+      if(r.checked && letter!==correct) lb.classList.add('wrong');
+      if(r.checked && letter===correct) score++;
+    });
+  });
+
+  document.getElementById('result').innerText =
+    `Kết quả: ${score} / ${total}`;
+
+  /* ===== GỬI MAIL NẾU CÓ NHẬP ===== */
+  const email = document.getElementById("userEmail").value.trim();
+
+if(email !== ""){
+  emailjs.send(
+    "service_tiantichuot",
+    "template_mw5ejcz",
+    {
+      user_email: email,
+      time: new Date().toLocaleString("vi-VN")
+    }
+  ).then(
+    res => console.log("✔ Mail đã gửi"),
+    err => console.error("❌ Lỗi gửi mail", err)
+  );
+}
+}
+</script>
+
+</body>
+</html>
