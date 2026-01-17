@@ -2,7 +2,7 @@
 <html lang="vi">
 <head>
 <meta charset="UTF-8">
-<title>Trắc nghiệm 64 Quẻ Dịch</title>
+<title>Trắc nghiệm Quẻ Dịch</title>
 
 <style>
 body{
@@ -11,34 +11,68 @@ body{
   padding:20px;
 }
 .quiz{
-  max-width:720px;
+  max-width:1200px;
   margin:auto;
   background:#fff;
   border-radius:14px;
   padding:20px;
   box-shadow:0 10px 30px rgba(0,0,0,.1);
 }
-.question{margin-bottom:22px}
-.q-title{font-weight:bold;margin-bottom:10px}
+h2{text-align:center}
+
+/* ===== 1 DÒNG 2 CÂU ===== */
+#questionPool{
+  display:grid;
+  grid-template-columns:1fr 1fr 1fr;
+  gap:20px;
+}
+@media(max-width:900px){
+  #questionPool{grid-template-columns:1fr}
+}
+
+.question{
+  border:1px solid #e0e3eb;
+  border-radius:12px;
+  padding:15px;
+  background:#fafbff;
+}
+.q-title{
+  font-weight:bold;
+  margin-bottom:10px;
+  color:#2b4eff;
+}
+
+/* ===== ĐÁP ÁN 2 CỘT ===== */
+.answers{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:8px;
+}
 .answers label{
   display:flex;
+  justify-content:center;
   align-items:center;
-  gap:10px;
-  padding:10px 12px;
-  margin:8px 0;
+  gap:8px;
+  padding:8px;
   border-radius:10px;
-  background:#f8f9fb;
+  background:#fff;
   border:1px solid #e0e3eb;
   cursor:pointer;
-  transition:.2s;
 }
 .answers label:hover{
   background:#eef3ff;
   border-color:#8aa7ff;
 }
-.answers input[type=radio]{transform:scale(1.3)}
-.answers label.correct{background:#e9f9ef;border-color:#35c26b}
-.answers label.wrong{background:#ffecec;border-color:#ff6b6b}
+.answers input{transform:scale(1.2)}
+
+.correct{background:#e9f9ef!important;border-color:#35c26b}
+.wrong{background:#ffecec!important;border-color:#ff6b6b}
+
+/* ===== QUẺ ===== */
+.hexagram{display:flex;flex-direction:column;gap:4px}
+.line{height:3px;width:60px;background:#222;border-radius:4px}
+.line.broken{background:none;display:flex;justify-content:space-between}
+.line.broken span{width:26px;height:3px;background:#222;border-radius:4px}
 
 button{
   padding:10px 16px;
@@ -48,121 +82,224 @@ button{
   color:#fff;
   font-size:15px;
   cursor:pointer;
+  margin:10px 5px;
 }
-button:hover{opacity:.9}
-.result{margin-top:15px;font-weight:bold}
-
-/* ===== HÌNH QUẺ ===== */
-.hexagram{display:flex;flex-direction:column;gap:4px}
-.line{height:6px;width:60px;background:#222;border-radius:4px}
-.line.broken{background:none;display:flex;justify-content:space-between}
-.line.broken span{width:26px;height:6px;background:#222;border-radius:4px}
+.result{font-weight:bold;margin-top:10px}
 </style>
-
-<script>
-/* ===== HÀM VẼ QUẺ – KHÔNG ĐỤNG DỮ LIỆU ===== */
-function drawHexagram(code){
-  let html='<div class="hexagram">';
-  code.split('').reverse().forEach(b=>{
-    if(b==='1') html+='<div class="line"></div>';
-    else html+='<div class="line broken"><span></span><span></span></div>';
-  });
-  return html+'</div>';
-}
-</script>
 </head>
 
 <body>
+
 <div class="quiz">
 <h2>Trắc nghiệm Kinh Dịch</h2>
 
-<!-- ================== DỮ LIỆU CÂU HỎI ==================
-     A TÍ DÁN NGUYÊN PHẦN DATA CŨ CỦA A VÀO ĐÂY
-====================================================== -->
-
-<div class="question" data-answer="A">
-  <div class="q-title">Quẻ nào là CÀN (Trời)?</div>
+<!-- ===== POOL CÂU HỎI ===== -->
+<div id="questionPool">
+<!-- CÂU 1 -->
+<div class="question"><div class="q-title"><span class="stt"></span>Quẻ CÀN VI THIÊN là hình nào?</div>
   <div class="answers">
-    <label><input type="radio" name="q1"> <span class="hex" data-code="111111"></span></label>
-    <label><input type="radio" name="q1"> <span class="hex" data-code="000000"></span></label>
-  </div>
+    <label><input type="radio" name="q1" value="A"><span class="hex" data-code="111111"></span></label>
+    <label><input type="radio" name="q1" value="B"><span class="hex" data-code="000000"></span></label>
+    <label><input type="radio" name="q1" value="C"><span class="hex" data-code="011111"></span></label>
+    <label><input type="radio" name="q1" value="D"><span class="hex" data-code="111110"></span></label>
+  </div><input type="hidden" value="A"></div>
+<!-- CÂU 2 -->
+<div class="question"><div class="q-title"><span class="stt"></span>Quẻ KHÔN VI ĐỊA là hình nào?</div>
+  <div class="answers">
+    <label><input type="radio" name="q2" value="A"><span class="hex" data-code="100000"></span></label>
+    <label><input type="radio" name="q2" value="B"><span class="hex" data-code="000000"></span></label>
+    <label><input type="radio" name="q2" value="C"><span class="hex" data-code="010000"></span></label>
+    <label><input type="radio" name="q2" value="D"><span class="hex" data-code="001000"></span></label>
+  </div><input type="hidden" value="B"></div>
+<!-- CÂU 3 -->
+<div class="question"><div class="q-title"><span class="stt"></span>Quẻ THỦY LÔI TRUÂN là hình nào?</div>
+  <div class="answers">
+    <label><input type="radio" name="q3" value="A"><span class="hex" data-code="001001"></span></label>
+    <label><input type="radio" name="q3" value="B"><span class="hex" data-code="100010"></span></label>
+    <label><input type="radio" name="q3" value="C"><span class="hex" data-code="010001"></span></label>
+    <label><input type="radio" name="q3" value="D"><span class="hex" data-code="000101"></span></label>
+  </div><input type="hidden" value="C"></div>
+<!-- CÂU 4 -->
+<div class="question"><div class="q-title"><span class="stt"></span>Quẻ SƠN THỦY MÔNG là hình nào?</div>
+  <div class="answers">
+    <label><input type="radio" name="q4" value="A"><span class="hex" data-code="001001"></span></label>
+    <label><input type="radio" name="q4" value="B"><span class="hex" data-code="010010"></span></label>
+    <label><input type="radio" name="q4" value="C"><span class="hex" data-code="010001"></span></label>
+    <label><input type="radio" name="q4" value="D"><span class="hex" data-code="100010"></span></label>
+  </div><input type="hidden" value="D"></div>
+<!-- CÂU 5 -->
+<div class="question"><div class="q-title"><span class="stt"></span>Quẻ THỦY THIÊN NHU là hình nào?</div>
+  <div class="answers">
+    <label><input type="radio" name="q5" value="A"><span class="hex" data-code="010111"></span></label>
+    <label><input type="radio" name="q5" value="B"><span class="hex" data-code="010110"></span></label>
+    <label><input type="radio" name="q5" value="C"><span class="hex" data-code="011000"></span></label>
+    <label><input type="radio" name="q5" value="D"><span class="hex" data-code="100010"></span></label>
+  </div><input type="hidden" value="A"></div>
+<!-- CÂU 6 -->
+<div class="question"><div class="q-title"><span class="stt"></span>Quẻ THIÊN THỦY TỤNG là hình nào?</div>
+  <div class="answers">
+    <label><input type="radio" name="q6" value="A"><span class="hex" data-code="110101"></span></label>
+    <label><input type="radio" name="q6" value="B"><span class="hex" data-code="111010"></span></label>
+    <label><input type="radio" name="q6" value="C"><span class="hex" data-code="101011"></span></label>
+    <label><input type="radio" name="q6" value="D"><span class="hex" data-code="111100"></span></label>
+  </div><input type="hidden" value="B"></div>
+<!-- CÂU 7-->
+<div class="question"><div class="q-title"><span class="stt"></span>Quẻ ĐỊA THỦY SƯ là hình nào?</div>
+  <div class="answers">
+    <label><input type="radio" name="q7" value="A"><span class="hex" data-code="000001"></span></label>
+    <label><input type="radio" name="q7" value="B"><span class="hex" data-code="100000"></span></label>
+    <label><input type="radio" name="q7" value="C"><span class="hex" data-code="000010"></span></label>
+    <label><input type="radio" name="q7" value="D"><span class="hex" data-code="010000"></span></label>
+  </div><input type="hidden" value="C"></div>
+<!-- CÂU 8-->
+<div class="question"><div class="q-title"><span class="stt"></span>Quẻ THỦY ĐỊA TỶ là hình nào?</div>
+  <div class="answers">
+    <label><input type="radio" name="q8" value="A"><span class="hex" data-code="000001"></span></label>
+    <label><input type="radio" name="q8" value="B"><span class="hex" data-code="100000"></span></label>
+    <label><input type="radio" name="q8" value="C"><span class="hex" data-code="000010"></span></label>
+    <label><input type="radio" name="q8" value="D"><span class="hex" data-code="010000"></span></label>
+  </div><input type="hidden" value="D"></div>
+<!-- CÂU 9-->
+<div class="question"><div class="q-title"><span class="stt"></span>Quẻ PHONG THIÊN TIỂU SÚC là hình nào?</div>
+  <div class="answers">
+    <label><input type="radio" name="q9" value="A"><span class="hex" data-code="110111"></span></label>
+    <label><input type="radio" name="q9" value="B"><span class="hex" data-code="101111"></span></label>
+    <label><input type="radio" name="q9" value="C"><span class="hex" data-code="111011"></span></label>
+    <label><input type="radio" name="q9" value="D"><span class="hex" data-code="111101"></span></label>
+  </div><input type="hidden" value="A"></div>
+<!-- CÂU 10 -->
+<div class="question"><div class="q-title"><span class="stt"></span>Quẻ THIÊN TRẠCH LÝ là hình nào?</div>
+  <div class="answers">
+    <label><input type="radio" name="q10" value="A"><span class="hex" data-code="101111"></span></label>
+    <label><input type="radio" name="q10" value="B"><span class="hex" data-code="111011"></span></label>
+    <label><input type="radio" name="q10" value="C"><span class="hex" data-code="110111"></span></label>
+    <label><input type="radio" name="q10" value="D"><span class="hex" data-code="111101"></span></label>
+  </div><input type="hidden" value="B"></div>
+<!-- CÂU 11 -->
+<div class="question"><div class="q-title"><span class="stt"></span>Quẻ ĐỊA THIÊN THÁI là hình nào?</div>
+  <div class="answers">
+    <label><input type="radio" name="q11" value="A"><span class="hex" data-code="001111"></span></label>
+    <label><input type="radio" name="q11" value="B"><span class="hex" data-code="111100"></span></label>
+    <label><input type="radio" name="q11" value="C"><span class="hex" data-code="000111"></span></label>
+    <label><input type="radio" name="q11" value="D"><span class="hex" data-code="111000"></span></label>
+  </div><input type="hidden" value="C"></div>
+<!-- CÂU 12 -->
+<div class="question"><div class="q-title"><span class="stt"></span>Quẻ THIÊN ĐỊA BĨ là hình nào?</div>
+  <div class="answers">
+    <label><input type="radio" name="q12" value="A"><span class="hex" data-code="001111"></span></label>
+    <label><input type="radio" name="q12" value="B"><span class="hex" data-code="111100"></span></label>
+    <label><input type="radio" name="q12" value="C"><span class="hex" data-code="000111"></span></label>
+    <label><input type="radio" name="q12" value="D"><span class="hex" data-code="111000"></span></label>
+  </div><input type="hidden" value="D"></div>
+<!-- CÂU 13 -->
+<div class="question"><div class="q-title"><span class="stt"></span>Quẻ THIÊN HỎA ĐỒNG NHÂN là hình nào?</div>
+  <div class="answers">
+    <label><input type="radio" name="q13" value="A"><span class="hex" data-code="111101"></span></label>
+    <label><input type="radio" name="q13" value="B"><span class="hex" data-code="111100"></span></label>
+    <label><input type="radio" name="q13" value="C"><span class="hex" data-code="111000"></span></label>
+    <label><input type="radio" name="q13" value="D"><span class="hex" data-code="110000"></span></label>
+  </div><input type="hidden" value="A"></div>
+<!-- CÂU 14 -->
+<div class="question"><div class="q-title"><span class="stt"></span>Quẻ HỎA THIÊN ĐẠI HỮU là hình nào?</div>
+  <div class="answers">
+    <label><input type="radio" name="q14" value="A"><span class="hex" data-code="110111"></span></label>
+    <label><input type="radio" name="q14" value="B"><span class="hex" data-code="101111"></span></label>
+    <label><input type="radio" name="q14" value="C"><span class="hex" data-code="000100"></span></label>
+    <label><input type="radio" name="q14" value="D"><span class="hex" data-code="001000"></span></label>
+  </div><input type="hidden" value="B"></div>
+<!-- CÂU 15 -->
+<div class="question"><div class="q-title"><span class="stt"></span>Quẻ ĐỊA SƠN KHIÊM là hình nào?</div>
+  <div class="answers">
+    <label><input type="radio" name="q15" value="A"><span class="hex" data-code="110111"></span></label>
+    <label><input type="radio" name="q15" value="B"><span class="hex" data-code="101111"></span></label>
+    <label><input type="radio" name="q15" value="C"><span class="hex" data-code="000100"></span></label>
+    <label><input type="radio" name="q15" value="D"><span class="hex" data-code="001000"></span></label>
+  </div><input type="hidden" value="C"></div>
+<!-- CÂU 16 -->
+<div class="question"><div class="q-title"><span class="stt"></span>Quẻ LÔI ĐỊA DỰ là hình nào?</div>
+  <div class="answers">
+    <label><input type="radio" name="q16" value="A"><span class="hex" data-code="110111"></span></label>
+    <label><input type="radio" name="q16" value="B"><span class="hex" data-code="101111"></span></label>
+    <label><input type="radio" name="q16" value="C"><span class="hex" data-code="000100"></span></label>
+    <label><input type="radio" name="q16" value="D"><span class="hex" data-code="001000"></span></label>
+  </div><input type="hidden" value="D"></div>
+<!-- A TÍ DÁN THÊM CÂU Ở ĐÂY -->
+
 </div>
 
-<!-- ===== NHẬP MAIL (KHÔNG BẮT BUỘC) ===== -->
-<div style="margin:15px 0">
-  <input 
-    type="email"
-    id="userEmail"
-    placeholder="Nhập email (không bắt buộc)"
-    style="
-      width:100%;
-      max-width:360px;
-      padding:10px;
-      border-radius:8px;
-      border:1px solid #ccc;
-      font-size:15px;">
+<div style="text-align:center">
+  <button onclick="grade()">Chấm điểm</button>
+  <button onclick="location.reload()">Làm đề khác</button>
+  <div class="result" id="result"></div>
+</div>
 </div>
 
-<button onclick="grade()">Chấm điểm</button>
-<button onclick="location.reload()">Làm lại</button>
-
-<div class="result" id="result"></div>
-</div>
-
-<!-- ===== EMAILJS (PHẢI LOAD TRƯỚC) ===== -->
-<!-- EmailJS SDK chuẩn mới -->
-<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
 <script>
-  emailjs.init({
-    publicKey: "4grBbyLQjupONTOIZ"
+/* ===== VẼ QUẺ ===== */
+function drawHexagram(code){
+  let html='<div class="hexagram">';
+  code.split('').forEach(b=>{
+    html+=b==="1"
+      ?'<div class="line"></div>'
+      :'<div class="line broken"><span></span><span></span></div>';
   });
-</script>
+  return html+'</div>';
+}
 
-<script>
-/* ===== GẮN HÌNH QUẺ ===== */
-document.querySelectorAll('.hex').forEach(el=>{
-  el.innerHTML = drawHexagram(el.dataset.code);
-});
+/* ===== SHUFFLE ===== */
+function shuffle(arr){
+  for(let i=arr.length-1;i>0;i--){
+    const j=Math.floor(Math.random()*(i+1));
+    [arr[i],arr[j]]=[arr[j],arr[i]];
+  }
+}
 
-/* ===== CHẤM ĐIỂM + GỬI MAIL ===== */
+/* ===== CHUẨN BỊ ĐỀ ===== */
+function prepareQuiz(limit){
+  const pool=document.getElementById("questionPool");
+  if(!pool) return;
+
+  let qs=[...pool.querySelectorAll(".question")];
+  shuffle(qs);
+
+  pool.innerHTML="";
+  qs.slice(0,limit).forEach(q=>{
+    let ans=q.querySelector(".answers");
+    let labels=[...ans.children];
+    shuffle(labels);
+    labels.forEach(l=>ans.appendChild(l));
+    pool.appendChild(q);
+  });
+
+  document.querySelectorAll(".hex").forEach(el=>{
+    el.innerHTML=drawHexagram(el.dataset.code);
+  });
+
+  document.querySelectorAll(".stt").forEach((el,i)=>{
+    el.innerText=(i+1)+". ";
+  });
+}
+
+/* ===== CHẤM ĐIỂM ===== */
 function grade(){
   let score=0,total=0;
-
-  document.querySelectorAll('.question').forEach(q=>{
+  document.querySelectorAll(".question").forEach(q=>{
     total++;
-    let correct=q.dataset.answer;
-    let labels=q.querySelectorAll('label');
-
-    labels.forEach((lb,i)=>{
-      let r=lb.querySelector('input');
+    let correct=q.querySelector("input[type=hidden]").value;
+    q.querySelectorAll("label").forEach(lb=>{
+      let r=lb.querySelector("input");
       r.disabled=true;
-      let letter=String.fromCharCode(65+i);
-      if(letter===correct) lb.classList.add('correct');
-      if(r.checked && letter!==correct) lb.classList.add('wrong');
-      if(r.checked && letter===correct) score++;
+      if(r.value===correct) lb.classList.add("correct");
+      if(r.checked && r.value!==correct) lb.classList.add("wrong");
+      if(r.checked && r.value===correct) score++;
     });
   });
-
-  document.getElementById('result').innerText =
-    `Kết quả: ${score} / ${total}`;
-
-  /* ===== GỬI MAIL NẾU CÓ NHẬP ===== */
-  const email = document.getElementById("userEmail").value.trim();
-
-if(email !== ""){
-  emailjs.send(
-    "service_tiantichuot",
-    "template_mw5ejcz",
-    {
-      user_email: email,
-      time: new Date().toLocaleString("vi-VN")
-    }
-  ).then(
-    res => console.log("✔ Mail đã gửi"),
-    err => console.error("❌ Lỗi gửi mail", err)
-  );
+  document.getElementById("result").innerText=`Kết quả: ${score} / ${total}`;
 }
-}
+
+document.addEventListener("DOMContentLoaded",()=>{
+  prepareQuiz(12);
+});
 </script>
 
 </body>
