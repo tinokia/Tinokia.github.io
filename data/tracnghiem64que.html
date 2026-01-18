@@ -1,0 +1,691 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<title>Trắc nghiệm Quẻ Dịch</title>
+
+<style>
+body{
+  font-family:Arial,Helvetica,sans-serif;
+  background:#f2f6ff;
+  padding:20px;
+}
+.quiz{
+  max-width:1200px;
+  margin:auto;
+  background:#fff;
+  border-radius:14px;
+  padding:20px;
+  box-shadow:0 10px 30px rgba(0,0,0,.1);
+}
+h2{text-align:center}
+
+/* ===== 1 DÒNG 2 CÂU ===== */
+#questionPool{
+  display:grid;
+  grid-template-columns:1fr 1fr 1fr;
+  gap:20px;
+}
+@media(max-width:900px){
+  #questionPool{grid-template-columns:1fr}
+}
+
+.question{
+  border:1px solid #e0e3eb;
+  border-radius:12px;
+  padding:15px;
+  background:#fafbff;
+}
+.q-title{
+  font-weight:bold;
+  margin-bottom:10px;
+  color:#2b4eff;
+}
+
+/* ===== ĐÁP ÁN 2 CỘT ===== */
+.answers{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:8px;
+}
+.answers label{
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  gap:8px;
+  padding:8px;
+  border-radius:10px;
+  background:#fff;
+  border:1px solid #e0e3eb;
+  cursor:pointer;
+}
+.answers label:hover{
+  background:#eef3ff;
+  border-color:#8aa7ff;
+}
+.answers input{transform:scale(1.2)}
+
+.correct{background:#e9f9ef!important;border-color:#35c26b}
+.wrong{background:#ffecec!important;border-color:#ff6b6b}
+
+/* ===== QUẺ ===== */
+.hexagram{display:flex;flex-direction:column;gap:4px}
+.line{height:3px;width:60px;background:#222;border-radius:4px}
+.line.broken{background:none;display:flex;justify-content:space-between}
+.line.broken span{width:26px;height:3px;background:#222;border-radius:4px}
+
+button{
+  padding:10px 16px;
+  border:none;
+  border-radius:10px;
+  background:#4a6cff;
+  color:#fff;
+  font-size:15px;
+  cursor:pointer;
+  margin:10px 5px;
+}
+.result{font-weight:bold;margin-top:10px}
+</style>
+</head>
+
+<body>
+
+<div class="quiz">
+<h2>Trắc nghiệm Kinh Dịch</h2>
+<button><a href="../index.html">Trang Chủ</a></button>
+<!-- ===== POOL CÂU HỎI ===== -->
+<div id="questionPool">
+<!-- CÂU 1 -->
+<div class="question"><div class="q-title"><span class="stt"></span>Quẻ CÀN VI THIÊN là hình nào?</div>
+  <div class="answers">
+    <label><input type="radio" name="q1" value="A"><span class="hex" data-code="111111"></span></label>
+    <label><input type="radio" name="q1" value="B"><span class="hex" data-code="000000"></span></label>
+    <label><input type="radio" name="q1" value="C"><span class="hex" data-code="011111"></span></label>
+    <label><input type="radio" name="q1" value="D"><span class="hex" data-code="111110"></span></label>
+  </div><input type="hidden" value="A"></div>
+<!-- CÂU 2 -->
+<div class="question"><div class="q-title"><span class="stt"></span>Quẻ KHÔN VI ĐỊA là hình nào?</div>
+  <div class="answers">
+    <label><input type="radio" name="q2" value="A"><span class="hex" data-code="100000"></span></label>
+    <label><input type="radio" name="q2" value="B"><span class="hex" data-code="000000"></span></label>
+    <label><input type="radio" name="q2" value="C"><span class="hex" data-code="010000"></span></label>
+    <label><input type="radio" name="q2" value="D"><span class="hex" data-code="001000"></span></label>
+  </div><input type="hidden" value="B"></div>
+<!-- CÂU 3 -->
+<div class="question"><div class="q-title"><span class="stt"></span>Quẻ THỦY LÔI TRUÂN là hình nào?</div>
+  <div class="answers">
+    <label><input type="radio" name="q3" value="A"><span class="hex" data-code="001001"></span></label>
+    <label><input type="radio" name="q3" value="B"><span class="hex" data-code="100010"></span></label>
+    <label><input type="radio" name="q3" value="C"><span class="hex" data-code="010001"></span></label>
+    <label><input type="radio" name="q3" value="D"><span class="hex" data-code="000101"></span></label>
+  </div><input type="hidden" value="C"></div>
+<!-- CÂU 4 -->
+<div class="question"><div class="q-title"><span class="stt"></span>Quẻ SƠN THỦY MÔNG là hình nào?</div>
+  <div class="answers">
+    <label><input type="radio" name="q4" value="A"><span class="hex" data-code="001001"></span></label>
+    <label><input type="radio" name="q4" value="B"><span class="hex" data-code="010010"></span></label>
+    <label><input type="radio" name="q4" value="C"><span class="hex" data-code="010001"></span></label>
+    <label><input type="radio" name="q4" value="D"><span class="hex" data-code="100010"></span></label>
+  </div><input type="hidden" value="D"></div>
+<!-- CÂU 5 -->
+<div class="question"><div class="q-title"><span class="stt"></span>Quẻ THỦY THIÊN NHU là hình nào?</div>
+  <div class="answers">
+    <label><input type="radio" name="q5" value="A"><span class="hex" data-code="010111"></span></label>
+    <label><input type="radio" name="q5" value="B"><span class="hex" data-code="010110"></span></label>
+    <label><input type="radio" name="q5" value="C"><span class="hex" data-code="011000"></span></label>
+    <label><input type="radio" name="q5" value="D"><span class="hex" data-code="100010"></span></label>
+  </div><input type="hidden" value="A"></div>
+<!-- CÂU 6 -->
+<div class="question"><div class="q-title"><span class="stt"></span>Quẻ THIÊN THỦY TỤNG là hình nào?</div>
+  <div class="answers">
+    <label><input type="radio" name="q6" value="A"><span class="hex" data-code="110101"></span></label>
+    <label><input type="radio" name="q6" value="B"><span class="hex" data-code="111010"></span></label>
+    <label><input type="radio" name="q6" value="C"><span class="hex" data-code="101011"></span></label>
+    <label><input type="radio" name="q6" value="D"><span class="hex" data-code="111100"></span></label>
+  </div><input type="hidden" value="B"></div>
+<!-- CÂU 7-->
+<div class="question"><div class="q-title"><span class="stt"></span>Quẻ ĐỊA THỦY SƯ là hình nào?</div>
+  <div class="answers">
+    <label><input type="radio" name="q7" value="A"><span class="hex" data-code="000001"></span></label>
+    <label><input type="radio" name="q7" value="B"><span class="hex" data-code="100000"></span></label>
+    <label><input type="radio" name="q7" value="C"><span class="hex" data-code="000010"></span></label>
+    <label><input type="radio" name="q7" value="D"><span class="hex" data-code="010000"></span></label>
+  </div><input type="hidden" value="C"></div>
+<!-- CÂU 8-->
+<div class="question"><div class="q-title"><span class="stt"></span>Quẻ THỦY ĐỊA TỶ là hình nào?</div>
+  <div class="answers">
+    <label><input type="radio" name="q8" value="A"><span class="hex" data-code="000001"></span></label>
+    <label><input type="radio" name="q8" value="B"><span class="hex" data-code="100000"></span></label>
+    <label><input type="radio" name="q8" value="C"><span class="hex" data-code="000010"></span></label>
+    <label><input type="radio" name="q8" value="D"><span class="hex" data-code="010000"></span></label>
+  </div><input type="hidden" value="D"></div>
+<!-- CÂU 9-->
+<div class="question"><div class="q-title"><span class="stt"></span>Quẻ PHONG THIÊN TIỂU SÚC là hình nào?</div>
+  <div class="answers">
+    <label><input type="radio" name="q9" value="A"><span class="hex" data-code="110111"></span></label>
+    <label><input type="radio" name="q9" value="B"><span class="hex" data-code="101111"></span></label>
+    <label><input type="radio" name="q9" value="C"><span class="hex" data-code="111011"></span></label>
+    <label><input type="radio" name="q9" value="D"><span class="hex" data-code="111101"></span></label>
+  </div><input type="hidden" value="A"></div>
+<!-- CÂU 10 -->
+<div class="question"><div class="q-title"><span class="stt"></span>Quẻ THIÊN TRẠCH LÝ là hình nào?</div>
+  <div class="answers">
+    <label><input type="radio" name="q10" value="A"><span class="hex" data-code="101111"></span></label>
+    <label><input type="radio" name="q10" value="B"><span class="hex" data-code="111011"></span></label>
+    <label><input type="radio" name="q10" value="C"><span class="hex" data-code="110111"></span></label>
+    <label><input type="radio" name="q10" value="D"><span class="hex" data-code="111101"></span></label>
+  </div><input type="hidden" value="B"></div>
+<!-- CÂU 11 -->
+<div class="question"><div class="q-title"><span class="stt"></span>Quẻ ĐỊA THIÊN THÁI là hình nào?</div>
+  <div class="answers">
+    <label><input type="radio" name="q11" value="A"><span class="hex" data-code="001111"></span></label>
+    <label><input type="radio" name="q11" value="B"><span class="hex" data-code="111100"></span></label>
+    <label><input type="radio" name="q11" value="C"><span class="hex" data-code="000111"></span></label>
+    <label><input type="radio" name="q11" value="D"><span class="hex" data-code="111000"></span></label>
+  </div><input type="hidden" value="C"></div>
+<!-- CÂU 12 -->
+<div class="question"><div class="q-title"><span class="stt"></span>Quẻ THIÊN ĐỊA BĨ là hình nào?</div>
+  <div class="answers">
+    <label><input type="radio" name="q12" value="A"><span class="hex" data-code="001111"></span></label>
+    <label><input type="radio" name="q12" value="B"><span class="hex" data-code="111100"></span></label>
+    <label><input type="radio" name="q12" value="C"><span class="hex" data-code="000111"></span></label>
+    <label><input type="radio" name="q12" value="D"><span class="hex" data-code="111000"></span></label>
+  </div><input type="hidden" value="D"></div>
+<!-- CÂU 13 -->
+<div class="question"><div class="q-title"><span class="stt"></span>Quẻ THIÊN HỎA ĐỒNG NHÂN là hình nào?</div>
+  <div class="answers">
+    <label><input type="radio" name="q13" value="A"><span class="hex" data-code="111101"></span></label>
+    <label><input type="radio" name="q13" value="B"><span class="hex" data-code="111100"></span></label>
+    <label><input type="radio" name="q13" value="C"><span class="hex" data-code="111000"></span></label>
+    <label><input type="radio" name="q13" value="D"><span class="hex" data-code="110000"></span></label>
+  </div><input type="hidden" value="A"></div>
+<!-- CÂU 14 -->
+<div class="question"><div class="q-title"><span class="stt"></span>Quẻ HỎA THIÊN ĐẠI HỮU là hình nào?</div>
+  <div class="answers">
+    <label><input type="radio" name="q14" value="A"><span class="hex" data-code="110111"></span></label>
+    <label><input type="radio" name="q14" value="B"><span class="hex" data-code="101111"></span></label>
+    <label><input type="radio" name="q14" value="C"><span class="hex" data-code="000100"></span></label>
+    <label><input type="radio" name="q14" value="D"><span class="hex" data-code="001000"></span></label>
+  </div><input type="hidden" value="B"></div>
+<!-- CÂU 15 -->
+<div class="question"><div class="q-title"><span class="stt"></span>Quẻ ĐỊA SƠN KHIÊM là hình nào?</div>
+  <div class="answers">
+    <label><input type="radio" name="q15" value="A"><span class="hex" data-code="110111"></span></label>
+    <label><input type="radio" name="q15" value="B"><span class="hex" data-code="101111"></span></label>
+    <label><input type="radio" name="q15" value="C"><span class="hex" data-code="000100"></span></label>
+    <label><input type="radio" name="q15" value="D"><span class="hex" data-code="001000"></span></label>
+  </div><input type="hidden" value="C"></div>
+<!-- CÂU 16 -->
+<div class="question"><div class="q-title"><span class="stt"></span>Quẻ LÔI ĐỊA DỰ là hình nào?</div>
+  <div class="answers">
+    <label><input type="radio" name="q16" value="A"><span class="hex" data-code="110111"></span></label>
+    <label><input type="radio" name="q16" value="B"><span class="hex" data-code="101111"></span></label>
+    <label><input type="radio" name="q16" value="C"><span class="hex" data-code="000100"></span></label>
+    <label><input type="radio" name="q16" value="D"><span class="hex" data-code="001000"></span></label>
+  </div><input type="hidden" value="D"></div>
+<!-- CÂU 17 -->
+<div class="question"><div class="q-title"><span class="stt"></span>Quẻ TRẠCH LÔI TÙY là hình nào?</div>
+  <div class="answers">
+    <label><input type="radio" name="q17" value="A"><span class="hex" data-code="011001"></span></label>
+    <label><input type="radio" name="q17" value="B"><span class="hex" data-code="100110"></span></label>
+    <label><input type="radio" name="q17" value="C"><span class="hex" data-code="000011"></span></label>
+    <label><input type="radio" name="q17" value="D"><span class="hex" data-code="110000"></span></label>
+  </div><input type="hidden" value="A"></div>
+<!-- CÂU 18 -->
+<div class="question"><div class="q-title"><span class="stt"></span>Quẻ SƠN PHONG CỐ là hình nào?</div>
+  <div class="answers">
+    <label><input type="radio" name="q18" value="A"><span class="hex" data-code="011001"></span></label>
+    <label><input type="radio" name="q18" value="B"><span class="hex" data-code="100110"></span></label>
+    <label><input type="radio" name="q18" value="C"><span class="hex" data-code="000011"></span></label>
+    <label><input type="radio" name="q18" value="D"><span class="hex" data-code="110000"></span></label>
+  </div><input type="hidden" value="B"></div>
+<!-- CÂU 19 -->
+<div class="question"><div class="q-title"><span class="stt"></span>Quẻ ĐỊA TRẠCH LÂM là hình nào?</div>
+  <div class="answers">
+    <label><input type="radio" name="q19" value="A"><span class="hex" data-code="011001"></span></label>
+    <label><input type="radio" name="q19" value="B"><span class="hex" data-code="100110"></span></label>
+    <label><input type="radio" name="q19" value="C"><span class="hex" data-code="000011"></span></label>
+    <label><input type="radio" name="q19" value="D"><span class="hex" data-code="110000"></span></label>
+  </div><input type="hidden" value="C"></div>
+<!-- CÂU 20 -->
+<div class="question"><div class="q-title"><span class="stt"></span>Quẻ PHONG ĐỊA QUÁN là hình nào?</div>
+  <div class="answers">
+    <label><input type="radio" name="q20" value="A"><span class="hex" data-code="011001"></span></label>
+    <label><input type="radio" name="q20" value="B"><span class="hex" data-code="100110"></span></label>
+    <label><input type="radio" name="q20" value="C"><span class="hex" data-code="000011"></span></label>
+    <label><input type="radio" name="q20" value="D"><span class="hex" data-code="110000"></span></label>
+  </div><input type="hidden" value="D"></div>
+<!-- CÂU 21 -->
+<div class="question"><div class="q-title"><span class="stt"></span>Quẻ HỎA LÔI PHỆ HẠP là hình nào?</div>
+  <div class="answers">
+    <label><input type="radio" name="q21" value="A"><span class="hex" data-code="101001"></span></label>
+    <label><input type="radio" name="q21" value="B"><span class="hex" data-code="100101"></span></label>
+    <label><input type="radio" name="q21" value="C"><span class="hex" data-code="001101"></span></label>
+    <label><input type="radio" name="q21" value="D"><span class="hex" data-code="101100"></span></label>
+  </div><input type="hidden" value="A"></div>
+<!-- CÂU 22 -->
+<div class="question"><div class="q-title"><span class="stt"></span>Quẻ SƠN HỎA BÍ là hình nào?</div>
+  <div class="answers">
+    <label><input type="radio" name="q22" value="A"><span class="hex" data-code="001101"></span></label>
+    <label><input type="radio" name="q22" value="B"><span class="hex" data-code="100101"></span></label>
+    <label><input type="radio" name="q22" value="C"><span class="hex" data-code="100011"></span></label>
+    <label><input type="radio" name="q22" value="D"><span class="hex" data-code="110101"></span></label>
+  </div><input type="hidden" value="B"></div>
+<!-- CÂU 23 -->
+<div class="question"><div class="q-title"><span class="stt"></span>Quẻ SƠN ĐỊA BÁC là hình nào?</div>
+  <div class="answers">
+    <label><input type="radio" name="q23" value="A"><span class="hex" data-code="000001"></span></label>
+    <label><input type="radio" name="q23" value="B"><span class="hex" data-code="101000"></span></label>
+    <label><input type="radio" name="q23" value="C"><span class="hex" data-code="100000"></span></label>
+    <label><input type="radio" name="q23" value="D"><span class="hex" data-code="111000"></span></label>
+  </div><input type="hidden" value="C"></div>
+<!-- CÂU 24 -->
+<div class="question"><div class="q-title"><span class="stt"></span>Quẻ ĐỊA LÔI PHỤC là hình nào?</div>
+  <div class="answers">
+    <label><input type="radio" name="q24" value="A"><span class="hex" data-code="100000"></span></label>
+    <label><input type="radio" name="q24" value="B"><span class="hex" data-code="000011"></span></label>
+    <label><input type="radio" name="q24" value="C"><span class="hex" data-code="010000"></span></label>
+    <label><input type="radio" name="q24" value="D"><span class="hex" data-code="000001"></span></label>
+  </div><input type="hidden" value="D"></div>
+<!-- CÂU 25 -->
+<div class="question"><div class="q-title"><span class="stt"></span>Quẻ THIÊN LÔI VÔ VỌNG là hình nào?</div>
+  <div class="answers">
+    <label><input type="radio" name="q25" value="A"><span class="hex" data-code="111001"></span></label>
+    <label><input type="radio" name="q25" value="B"><span class="hex" data-code="001111"></span></label>
+    <label><input type="radio" name="q25" value="C"><span class="hex" data-code="100111"></span></label>
+    <label><input type="radio" name="q25" value="D"><span class="hex" data-code="010101"></span></label>
+  </div><input type="hidden" value="A"></div>
+<!-- CÂU 26 -->
+<div class="question"><div class="q-title"><span class="stt"></span>Quẻ SƠN THIÊN ĐẠI SÚC là hình nào?</div>
+  <div class="answers">
+    <label><input type="radio" name="q26" value="A"><span class="hex" data-code="111100"></span></label>
+    <label><input type="radio" name="q26" value="B"><span class="hex" data-code="100111"></span></label>
+    <label><input type="radio" name="q26" value="C"><span class="hex" data-code="110111"></span></label>
+    <label><input type="radio" name="q26" value="D"><span class="hex" data-code="111001"></span></label>
+  </div><input type="hidden" value="B"></div>
+<!-- CÂU 27 -->
+<div class="question"><div class="q-title"><span class="stt"></span>Quẻ SƠN LÔI DI là hình nào?</div>
+  <div class="answers">
+    <label><input type="radio" name="q27" value="A"><span class="hex" data-code="001001"></span></label>
+    <label><input type="radio" name="q27" value="B"><span class="hex" data-code="100100"></span></label>
+    <label><input type="radio" name="q27" value="C"><span class="hex" data-code="100001"></span></label>
+    <label><input type="radio" name="q27" value="D"><span class="hex" data-code="101001"></span></label>
+  </div><input type="hidden" value="C"></div>
+<!-- CÂU 28 -->
+<div class="question"><div class="q-title"><span class="stt"></span>Quẻ TRẠCH PHONG ĐẠI QUÁ là hình nào?</div>
+  <div class="answers">
+    <label><input type="radio" name="q28" value="A"><span class="hex" data-code="011110"></span></label>
+    <label><input type="radio" name="q28" value="B"><span class="hex" data-code="110011"></span></label>
+    <label><input type="radio" name="q28" value="C"><span class="hex" data-code="010101"></span></label>
+    <label><input type="radio" name="q28" value="D"><span class="hex" data-code="001001"></span></label>
+  </div><input type="hidden" value="A"></div>
+<!-- CÂU 29 -->
+<div class="question"><div class="q-title"><span class="stt"></span>Quẻ KHẢM VI THỦY là hình nào?</div>
+  <div class="answers">
+    <label><input type="radio" name="q29" value="A"><span class="hex" data-code="010010"></span></label>
+    <label><input type="radio" name="q29" value="B"><span class="hex" data-code="101101"></span></label>
+    <label><input type="radio" name="q29" value="C"><span class="hex" data-code="000111"></span></label>
+    <label><input type="radio" name="q29" value="D"><span class="hex" data-code="111000"></span></label>
+  </div><input type="hidden" value="A"></div>
+<!-- CÂU 30 -->
+<div class="question"><div class="q-title"><span class="stt"></span>Quẻ LY VI HỎA là hình nào?</div>
+  <div class="answers">
+    <label><input type="radio" name="q30" value="A"><span class="hex" data-code="101101"></span></label>
+    <label><input type="radio" name="q30" value="B"><span class="hex" data-code="010010"></span></label>
+    <label><input type="radio" name="q30" value="C"><span class="hex" data-code="111111"></span></label>
+    <label><input type="radio" name="q30" value="D"><span class="hex" data-code="000000"></span></label>
+  </div><input type="hidden" value="A"></div>
+<!-- CÂU 31 -->
+<div class="question"><div class="q-title"><span class="stt"></span>Quẻ TRẠCH SƠN HÀM là hình nào?</div>
+  <div class="answers">
+    <label><input type="radio" name="q31" value="A"><span class="hex" data-code="011100"></span></label>
+    <label><input type="radio" name="q31" value="B"><span class="hex" data-code="001110"></span></label>
+    <label><input type="radio" name="q31" value="C"><span class="hex" data-code="011000"></span></label>
+    <label><input type="radio" name="q31" value="D"><span class="hex" data-code="100011"></span></label>
+  </div><input type="hidden" value="A"></div>
+<!-- CÂU 32 -->
+<div class="question"><div class="q-title"><span class="stt"></span>Quẻ LÔI PHONG HẰNG là hình nào?</div>
+  <div class="answers">
+    <label><input type="radio" name="q32" value="A"><span class="hex" data-code="000110"></span></label>
+    <label><input type="radio" name="q32" value="B"><span class="hex" data-code="001110"></span></label>
+    <label><input type="radio" name="q32" value="C"><span class="hex" data-code="100110"></span></label>
+    <label><input type="radio" name="q32" value="D"><span class="hex" data-code="011001"></span></label>
+  </div><input type="hidden" value="B"></div>
+<!-- CÂU 33 -->
+<div class="question"><div class="q-title"><span class="stt"></span>Quẻ THIÊN SƠN ĐỘN là hình nào?</div>
+  <div class="answers">
+    <label><input type="radio" name="q33" value="A"><span class="hex" data-code="111001"></span></label>
+    <label><input type="radio" name="q33" value="B"><span class="hex" data-code="001111"></span></label>
+    <label><input type="radio" name="q33" value="C"><span class="hex" data-code="111100"></span></label>
+    <label><input type="radio" name="q33" value="D"><span class="hex" data-code="000111"></span></label>
+  </div><input type="hidden" value="C"></div>
+<!-- CÂU 34 -->
+<div class="question"><div class="q-title"><span class="stt"></span>Quẻ LÔI THIÊN ĐẠI TRÁNG là hình nào?</div>
+  <div class="answers">
+    <label><input type="radio" name="q34" value="A"><span class="hex" data-code="001111"></span></label>
+    <label><input type="radio" name="q34" value="B"><span class="hex" data-code="111001"></span></label>
+    <label><input type="radio" name="q34" value="C"><span class="hex" data-code="110100"></span></label>
+    <label><input type="radio" name="q34" value="D"><span class="hex" data-code="011011"></span></label>
+  </div><input type="hidden" value="A"></div>
+<!-- CÂU 35 -->
+<div class="question"><div class="q-title"><span class="stt"></span>Quẻ HỎA ĐỊA TẤN là hình nào?</div>
+  <div class="answers">
+    <label><input type="radio" name="q35" value="A"><span class="hex" data-code="101000"></span></label>
+    <label><input type="radio" name="q35" value="B"><span class="hex" data-code="000101"></span></label>
+    <label><input type="radio" name="q35" value="C"><span class="hex" data-code="111010"></span></label>
+    <label><input type="radio" name="q35" value="D"><span class="hex" data-code="010111"></span></label>
+  </div><input type="hidden" value="A"></div>
+<!-- CÂU 36 -->
+<div class="question"><div class="q-title"><span class="stt"></span>Quẻ ĐỊA HỎA MINH DI là hình nào?</div>
+  <div class="answers">
+    <label><input type="radio" name="q36" value="A"><span class="hex" data-code="000101"></span></label>
+    <label><input type="radio" name="q36" value="B"><span class="hex" data-code="101000"></span></label>
+    <label><input type="radio" name="q36" value="C"><span class="hex" data-code="001011"></span></label>
+    <label><input type="radio" name="q36" value="D"><span class="hex" data-code="110100"></span></label>
+  </div><input type="hidden" value="A"></div>
+<!-- CÂU 37 -->
+<div class="question"><div class="q-title"><span class="stt"></span>Quẻ PHONG HỎA GIA NHÂN là hình nào?</div>
+  <div class="answers">
+    <label><input type="radio" name="q37" value="A"><span class="hex" data-code="011101"></span></label>
+    <label><input type="radio" name="q37" value="B"><span class="hex" data-code="110101"></span></label>
+    <label><input type="radio" name="q37" value="C"><span class="hex" data-code="110001"></span></label>
+    <label><input type="radio" name="q37" value="D"><span class="hex" data-code="001011"></span></label>
+  </div><input type="hidden" value="B"></div>
+<!-- CÂU 38 -->
+<div class="question"><div class="q-title"><span class="stt"></span>Quẻ HỎA TRẠCH KHUÊ là hình nào?</div>
+  <div class="answers">
+    <label><input type="radio" name="q38" value="A"><span class="hex" data-code="101110"></span></label>
+    <label><input type="radio" name="q38" value="B"><span class="hex" data-code="011101"></span></label>
+    <label><input type="radio" name="q38" value="C"><span class="hex" data-code="101011"></span></label>
+    <label><input type="radio" name="q38" value="D"><span class="hex" data-code="001100"></span></label>
+  </div><input type="hidden" value="C"></div>
+<!-- CÂU 39 -->
+<div class="question"><div class="q-title"><span class="stt"></span>Quẻ THỦY SƠN KIỂN là hình nào?</div>
+  <div class="answers">
+    <label><input type="radio" name="q39" value="A"><span class="hex" data-code="010001"></span></label>
+    <label><input type="radio" name="q39" value="B"><span class="hex" data-code="100010"></span></label>
+    <label><input type="radio" name="q39" value="C"><span class="hex" data-code="001010"></span></label>
+    <label><input type="radio" name="q39" value="D"><span class="hex" data-code="010100"></span></label>
+  </div><input type="hidden" value="D"></div>
+<!-- CÂU 40 -->
+<div class="question"><div class="q-title"><span class="stt"></span>Quẻ LÔI THỦY GIẢI là hình nào?</div>
+  <div class="answers">
+    <label><input type="radio" name="q40" value="A"><span class="hex" data-code="001010"></span></label>
+    <label><input type="radio" name="q40" value="B"><span class="hex" data-code="010001"></span></label>
+    <label><input type="radio" name="q40" value="C"><span class="hex" data-code="001100"></span></label>
+    <label><input type="radio" name="q40" value="D"><span class="hex" data-code="110011"></span></label>
+  </div><input type="hidden" value="A"></div>
+<!-- CÂU 41 -->
+<div class="question"><div class="q-title"><span class="stt"></span>Quẻ SƠN TRẠCH TỔN là hình nào?</div>
+  <div class="answers">
+    <label><input type="radio" name="q41" value="A"><span class="hex" data-code="001110"></span></label>
+    <label><input type="radio" name="q41" value="B"><span class="hex" data-code="110001"></span></label>
+    <label><input type="radio" name="q41" value="C"><span class="hex" data-code="100011"></span></label>
+    <label><input type="radio" name="q41" value="D"><span class="hex" data-code="011100"></span></label>
+  </div><input type="hidden" value="C"></div>
+<!-- CÂU 42 -->
+<div class="question"><div class="q-title"><span class="stt"></span>Quẻ PHONG LÔI ÍCH là hình nào?</div>
+  <div class="answers">
+    <label><input type="radio" name="q42" value="A"><span class="hex" data-code="110001"></span></label>
+    <label><input type="radio" name="q42" value="B"><span class="hex" data-code="001110"></span></label>
+    <label><input type="radio" name="q42" value="C"><span class="hex" data-code="011001"></span></label>
+    <label><input type="radio" name="q42" value="D"><span class="hex" data-code="100110"></span></label>
+  </div><input type="hidden" value="A"></div>
+<!-- CÂU 43 -->
+<div class="question"><div class="q-title"><span class="stt"></span>Quẻ TRẠCH THIÊN QUẢI là hình nào?</div>
+  <div class="answers">
+    <label><input type="radio" name="q43" value="A"><span class="hex" data-code="110111"></span></label>
+    <label><input type="radio" name="q43" value="B"><span class="hex" data-code="111011"></span></label>
+    <label><input type="radio" name="q43" value="C"><span class="hex" data-code="011111"></span></label>
+    <label><input type="radio" name="q43" value="D"><span class="hex" data-code="111110"></span></label>
+  </div><input type="hidden" value="C"></div>
+<!-- CÂU 44 -->
+<div class="question"><div class="q-title"><span class="stt"></span>Quẻ THIÊN PHONG CẤU là hình nào?</div>
+  <div class="answers">
+    <label><input type="radio" name="q44" value="A"><span class="hex" data-code="111011"></span></label>
+    <label><input type="radio" name="q44" value="B"><span class="hex" data-code="110111"></span></label>
+    <label><input type="radio" name="q44" value="C"><span class="hex" data-code="111110"></span></label>
+    <label><input type="radio" name="q44" value="D"><span class="hex" data-code="101101"></span></label>
+  </div><input type="hidden" value="C"></div>
+<!-- CÂU 45 -->
+<div class="question"><div class="q-title"><span class="stt"></span>Quẻ TRẠCH ĐỊA TỤY là hình nào?</div>
+  <div class="answers">
+    <label><input type="radio" name="q45" value="A"><span class="hex" data-code="110000"></span></label>
+    <label><input type="radio" name="q45" value="B"><span class="hex" data-code="000110"></span></label>
+    <label><input type="radio" name="q45" value="C"><span class="hex" data-code="011000"></span></label>
+    <label><input type="radio" name="q45" value="D"><span class="hex" data-code="001100"></span></label>
+  </div><input type="hidden" value="C"></div>
+<!-- CÂU 46 -->
+<div class="question"><div class="q-title"><span class="stt"></span>Quẻ ĐỊA PHONG THĂNG là hình nào?</div>
+  <div class="answers">
+    <label><input type="radio" name="q46" value="A"><span class="hex" data-code="000110"></span></label>
+    <label><input type="radio" name="q46" value="B"><span class="hex" data-code="110000"></span></label>
+    <label><input type="radio" name="q46" value="C"><span class="hex" data-code="101001"></span></label>
+    <label><input type="radio" name="q46" value="D"><span class="hex" data-code="001011"></span></label>
+  </div><input type="hidden" value="A"></div>
+<!-- CÂU 47 -->
+<div class="question"><div class="q-title"><span class="stt"></span>Quẻ TRẠCH THỦY KHỐN là hình nào?</div>
+  <div class="answers">
+    <label><input type="radio" name="q47" value="A"><span class="hex" data-code="110010"></span></label>
+    <label><input type="radio" name="q47" value="B"><span class="hex" data-code="011010"></span></label>
+    <label><input type="radio" name="q47" value="C"><span class="hex" data-code="001100"></span></label>
+    <label><input type="radio" name="q47" value="D"><span class="hex" data-code="101001"></span></label>
+  </div><input type="hidden" value="B"></div>
+<!-- CÂU 48 -->
+<div class="question"><div class="q-title"><span class="stt"></span>Quẻ THỦY PHONG TỈNH là hình nào?</div>
+  <div class="answers">
+    <label><input type="radio" name="q48" value="A"><span class="hex" data-code="010110"></span></label>
+    <label><input type="radio" name="q48" value="B"><span class="hex" data-code="110010"></span></label>
+    <label><input type="radio" name="q48" value="C"><span class="hex" data-code="001110"></span></label>
+    <label><input type="radio" name="q48" value="D"><span class="hex" data-code="111000"></span></label>
+  </div><input type="hidden" value="A"></div>
+<!-- CÂU 49 -->
+<div class="question"><div class="q-title"><span class="stt"></span>Quẻ TRẠCH HỎA CÁCH là hình nào?</div>
+  <div class="answers">
+    <label><input type="radio" name="q49" value="A"><span class="hex" data-code="011101"></span></label>
+    <label><input type="radio" name="q49" value="B"><span class="hex" data-code="101110"></span></label>
+    <label><input type="radio" name="q49" value="C"><span class="hex" data-code="011001"></span></label>
+    <label><input type="radio" name="q49" value="D"><span class="hex" data-code="001011"></span></label>
+  </div><input type="hidden" value="A"></div>
+<!-- CÂU 50 -->
+<div class="question"><div class="q-title"><span class="stt"></span>Quẻ HỎA PHONG ĐỈNH là hình nào?</div>
+  <div class="answers">
+    <label><input type="radio" name="q50" value="A"><span class="hex" data-code="101110"></span></label>
+    <label><input type="radio" name="q50" value="B"><span class="hex" data-code="110101"></span></label>
+    <label><input type="radio" name="q50" value="C"><span class="hex" data-code="001101"></span></label>
+    <label><input type="radio" name="q50" value="D"><span class="hex" data-code="010010"></span></label>
+  </div><input type="hidden" value="A"></div>
+<!-- CÂU 51 -->
+<div class="question"><div class="q-title"><span class="stt"></span>Quẻ CHẤN VI LÔI là hình nào?</div>
+  <div class="answers">
+    <label><input type="radio" name="q51" value="A"><span class="hex" data-code="001001"></span></label>
+    <label><input type="radio" name="q51" value="B"><span class="hex" data-code="100100"></span></label>
+    <label><input type="radio" name="q51" value="C"><span class="hex" data-code="010010"></span></label>
+    <label><input type="radio" name="q51" value="D"><span class="hex" data-code="101101"></span></label>
+  </div><input type="hidden" value="A"></div>
+<!-- CÂU 52 -->
+<div class="question"><div class="q-title"><span class="stt"></span>Quẻ CẤN VI SƠN là hình nào?</div>
+  <div class="answers">
+    <label><input type="radio" name="q52" value="A"><span class="hex" data-code="100100"></span></label>
+    <label><input type="radio" name="q52" value="B"><span class="hex" data-code="001001"></span></label>
+    <label><input type="radio" name="q52" value="C"><span class="hex" data-code="111000"></span></label>
+    <label><input type="radio" name="q52" value="D"><span class="hex" data-code="000111"></span></label>
+  </div><input type="hidden" value="A"></div>
+<!-- CÂU 53 -->
+<div class="question"><div class="q-title"><span class="stt"></span>Quẻ PHONG SƠN TIỆM là hình nào?</div>
+  <div class="answers">
+    <label><input type="radio" name="q53" value="A"><span class="hex" data-code="011001"></span></label>
+    <label><input type="radio" name="q53" value="B"><span class="hex" data-code="100110"></span></label>
+    <label><input type="radio" name="q53" value="C"><span class="hex" data-code="001110"></span></label>
+    <label><input type="radio" name="q53" value="D"><span class="hex" data-code="110100"></span></label>
+  </div><input type="hidden" value="D"></div>
+<!-- CÂU 54 -->
+<div class="question"><div class="q-title"><span class="stt"></span>Quẻ LÔI TRẠCH QUY MUỘI là hình nào?</div>
+  <div class="answers">
+    <label><input type="radio" name="q54" value="A"><span class="hex" data-code="100110"></span></label>
+    <label><input type="radio" name="q54" value="B"><span class="hex" data-code="011001"></span></label>
+    <label><input type="radio" name="q54" value="C"><span class="hex" data-code="001011"></span></label>
+    <label><input type="radio" name="q54" value="D"><span class="hex" data-code="110010"></span></label>
+  </div><input type="hidden" value="C"></div>
+<!-- CÂU 55 -->
+<div class="question"><div class="q-title"><span class="stt"></span>Quẻ LÔI HỎA PHONG là hình nào?</div>
+  <div class="answers">
+    <label><input type="radio" name="q55" value="A"><span class="hex" data-code="001101"></span></label>
+    <label><input type="radio" name="q55" value="B"><span class="hex" data-code="101001"></span></label>
+    <label><input type="radio" name="q55" value="C"><span class="hex" data-code="110100"></span></label>
+    <label><input type="radio" name="q55" value="D"><span class="hex" data-code="010011"></span></label>
+  </div><input type="hidden" value="A"></div>
+<!-- CÂU 56 -->
+<div class="question"><div class="q-title"><span class="stt"></span>Quẻ HỎA SƠN LỮ là hình nào?</div>
+  <div class="answers">
+    <label><input type="radio" name="q56" value="A"><span class="hex" data-code="101100"></span></label>
+    <label><input type="radio" name="q56" value="B"><span class="hex" data-code="001101"></span></label>
+    <label><input type="radio" name="q56" value="C"><span class="hex" data-code="110010"></span></label>
+    <label><input type="radio" name="q56" value="D"><span class="hex" data-code="010011"></span></label>
+  </div><input type="hidden" value="A"></div>
+<!-- CÂU 57 -->
+<div class="question"><div class="q-title"><span class="stt"></span>Quẻ TỐN VI PHONG là hình nào?</div>
+  <div class="answers">
+    <label><input type="radio" name="q57" value="A"><span class="hex" data-code="011011"></span></label>
+    <label><input type="radio" name="q57" value="B"><span class="hex" data-code="110110"></span></label>
+    <label><input type="radio" name="q57" value="C"><span class="hex" data-code="101101"></span></label>
+    <label><input type="radio" name="q57" value="D"><span class="hex" data-code="010010"></span></label>
+  </div><input type="hidden" value="B"></div>
+<!-- CÂU 58 -->
+<div class="question"><div class="q-title"><span class="stt"></span>Quẻ ĐOÀI VI TRẠCH là hình nào?</div>
+  <div class="answers">
+    <label><input type="radio" name="q58" value="A"><span class="hex" data-code="110110"></span></label>
+    <label><input type="radio" name="q58" value="B"><span class="hex" data-code="011011"></span></label>
+    <label><input type="radio" name="q58" value="C"><span class="hex" data-code="001001"></span></label>
+    <label><input type="radio" name="q58" value="D"><span class="hex" data-code="100100"></span></label>
+  </div><input type="hidden" value="B"></div>
+<!-- CÂU 59 -->
+<div class="question"><div class="q-title"><span class="stt"></span>Quẻ PHONG THỦY HOÁN là hình nào?</div>
+  <div class="answers">
+    <label><input type="radio" name="q59" value="A"><span class="hex" data-code="011010"></span></label>
+    <label><input type="radio" name="q59" value="B"><span class="hex" data-code="010110"></span></label>
+    <label><input type="radio" name="q59" value="C"><span class="hex" data-code="001101"></span></label>
+    <label><input type="radio" name="q59" value="D"><span class="hex" data-code="110010"></span></label>
+  </div><input type="hidden" value="D"></div>
+<!-- CÂU 60 -->
+<div class="question"><div class="q-title"><span class="stt"></span>Quẻ THỦY TRẠCH TIẾT là hình nào?</div>
+  <div class="answers">
+    <label><input type="radio" name="q60" value="A"><span class="hex" data-code="010110"></span></label>
+    <label><input type="radio" name="q60" value="B"><span class="hex" data-code="010011"></span></label>
+    <label><input type="radio" name="q60" value="C"><span class="hex" data-code="101001"></span></label>
+    <label><input type="radio" name="q60" value="D"><span class="hex" data-code="001101"></span></label>
+  </div><input type="hidden" value="B"></div>
+<!-- CÂU 61 -->
+<div class="question"><div class="q-title"><span class="stt"></span>Quẻ PHONG TRẠCH TRUNG PHU là hình nào?</div>
+  <div class="answers">
+    <label><input type="radio" name="q61" value="A"><span class="hex" data-code="011110"></span></label>
+    <label><input type="radio" name="q61" value="B"><span class="hex" data-code="110011"></span></label>
+    <label><input type="radio" name="q61" value="C"><span class="hex" data-code="001001"></span></label>
+    <label><input type="radio" name="q61" value="D"><span class="hex" data-code="100100"></span></label>
+  </div><input type="hidden" value="B"></div>
+<!-- CÂU 62 -->
+<div class="question"><div class="q-title"><span class="stt"></span>Quẻ LÔI SƠN TIỂU QUÁ là hình nào?</div>
+  <div class="answers">
+    <label><input type="radio" name="q62" value="A"><span class="hex" data-code="001100"></span></label>
+    <label><input type="radio" name="q62" value="B"><span class="hex" data-code="110011"></span></label>
+    <label><input type="radio" name="q62" value="C"><span class="hex" data-code="011110"></span></label>
+    <label><input type="radio" name="q62" value="D"><span class="hex" data-code="100001"></span></label>
+  </div><input type="hidden" value="A"></div>
+<!-- CÂU 63 -->
+<div class="question"><div class="q-title"><span class="stt"></span>Quẻ THỦY HỎA KÝ TẾ là hình nào?</div>
+  <div class="answers">
+    <label><input type="radio" name="q63" value="A"><span class="hex" data-code="010101"></span></label>
+    <label><input type="radio" name="q63" value="B"><span class="hex" data-code="101010"></span></label>
+    <label><input type="radio" name="q63" value="C"><span class="hex" data-code="111000"></span></label>
+    <label><input type="radio" name="q63" value="D"><span class="hex" data-code="000111"></span></label>
+  </div><input type="hidden" value="A"></div>
+<!-- CÂU 64 -->
+<div class="question"><div class="q-title"><span class="stt"></span>Quẻ HỎA THỦY VỊ TẾ là hình nào?</div>
+  <div class="answers">
+    <label><input type="radio" name="q64" value="A"><span class="hex" data-code="101010"></span></label>
+    <label><input type="radio" name="q64" value="B"><span class="hex" data-code="010101"></span></label>
+    <label><input type="radio" name="q64" value="C"><span class="hex" data-code="111111"></span></label>
+    <label><input type="radio" name="q64" value="D"><span class="hex" data-code="000000"></span></label>
+  </div><input type="hidden" value="A"></div>
+
+<!-- A TÍ DÁN THÊM CÂU Ở ĐÂY -->
+
+</div>
+
+<div style="text-align:center">
+  <button onclick="grade()">Chấm điểm</button>
+  <button onclick="location.reload()">Làm đề khác</button>
+  <div class="result" id="result"></div>
+</div>
+</div>
+
+<script>
+/* ===== VẼ QUẺ ===== */
+function drawHexagram(code){
+  let html='<div class="hexagram">';
+  code.split('').forEach(b=>{
+    html+=b==="1"
+      ?'<div class="line"></div>'
+      :'<div class="line broken"><span></span><span></span></div>';
+  });
+  return html+'</div>';
+}
+
+/* ===== SHUFFLE ===== */
+function shuffle(arr){
+  for(let i=arr.length-1;i>0;i--){
+    const j=Math.floor(Math.random()*(i+1));
+    [arr[i],arr[j]]=[arr[j],arr[i]];
+  }
+}
+
+/* ===== CHUẨN BỊ ĐỀ ===== */
+function prepareQuiz(limit){
+  const pool=document.getElementById("questionPool");
+  if(!pool) return;
+
+  let qs=[...pool.querySelectorAll(".question")];
+  shuffle(qs);
+
+  pool.innerHTML="";
+  qs.slice(0,limit).forEach(q=>{
+    let ans=q.querySelector(".answers");
+    let labels=[...ans.children];
+    shuffle(labels);
+    labels.forEach(l=>ans.appendChild(l));
+    pool.appendChild(q);
+  });
+
+  document.querySelectorAll(".hex").forEach(el=>{
+    el.innerHTML=drawHexagram(el.dataset.code);
+  });
+
+  document.querySelectorAll(".stt").forEach((el,i)=>{
+    el.innerText=(i+1)+". ";
+  });
+}
+
+/* ===== CHẤM ĐIỂM ===== */
+function grade(){
+  let score=0,total=0;
+  document.querySelectorAll(".question").forEach(q=>{
+    total++;
+    let correct=q.querySelector("input[type=hidden]").value;
+    q.querySelectorAll("label").forEach(lb=>{
+      let r=lb.querySelector("input");
+      r.disabled=true;
+      if(r.value===correct) lb.classList.add("correct");
+      if(r.checked && r.value!==correct) lb.classList.add("wrong");
+      if(r.checked && r.value===correct) score++;
+    });
+  });
+  document.getElementById("result").innerText=`Kết quả: ${score} / ${total}`;
+}
+
+document.addEventListener("DOMContentLoaded",()=>{
+  prepareQuiz(12);
+});
+</script>
+
+</body>
+</html>
