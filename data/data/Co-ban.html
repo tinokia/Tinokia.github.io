@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<title>Co Ban</title>
+
+<style>
+body{
+  font-family: Arial;
+  max-width: 900px;
+  margin: 0 0 0 10px;
+  padding: 20px;
+}
+input, button{
+  padding: 8px 15px;
+  font-size: 16px;
+}
+.question{
+  margin-bottom: 20px;
+  border-bottom: 1px solid #ddd;
+  padding-bottom: 10px;
+}
+.answers label{
+  display: block;
+  margin: 6px 0;
+  cursor: pointer;
+}
+.correct{ color: green; font-weight: bold; }
+.wrong{ color: red; font-weight: bold; }
+
+.question p{
+  font-size: 16px;   /* giảm nhẹ */
+  font-weight: normal;
+}
+
+.question b{
+  font-weight: bold;
+}
+
+.answers label{
+  font-size: 36px;   /* tăng đáp án lên bằng câu hỏi */
+}
+</style>
+</head>
+
+<body>
+
+<h2>📝 Cơ Bản</h2>
+
+<p>
+  Nhập số bài từ 1 -> 13:
+  <input type="number" id="testNumber" min="1" style="width:80px">
+  <button onclick="loadTest()">Làm Bài</button>
+</p>
+
+<form>
+  <div id="quiz"></div>
+  <div id="hiddenInputs"></div>
+  <button type="button" onclick="submitTest()">Nộp Bài</button>
+</form>
+
+<h3 id="result"></h3>
+
+<script>
+// ================= CẤU HÌNH =================
+const QUESTIONS_PER_TEST  = 15;
+const QUESTIONS_PER_SHEET = 105;
+
+const SHEETS = ["Sheet1","Sheet2"];
+
+const SHEET_BASE =
+"https://opensheet.elk.sh/1Yhzhd3lQTb9jBMGUc4EKHRayjoPHoKJg8Kq1XfYV0Zs/";
+
+// ================= BIẾN =================
+let allQuestions = [];
+let currentQuestions = [];
+let submitted = false;
+
+// ================= TIỆN ÍCH =================
+function shuffle(arr){
+  for(let i = arr.length - 1; i > 0; i--){
+    let j = Math.floor(Math.random() * (i + 1));
+    [arr[i], arr[j]] = [arr[j], arr[i]];
+  }
+}
+
+async function loadSheet(name){
+  let r = await fetch(SHEET_BASE + name);
+  return await r.json();
+}
+
+// ================= HELPER TÍNH BÀI–SHEET =================
+function getTestLocation(testNo){
+  if(!Number.isInteger(testNo) || testNo < 1){
+    return { error: "Số bài không hợp lệ" };
+  }
+
+  const questionsBefore = (testNo - 1) * QUESTIONS_PER_TEST;
+  const sheetIndex =
+    Math.floor(questionsBefore / QUESTIONS_PER_SHEET);
+
+  if(sheetIndex >= SHEETS.length){
+    return { error: "Không có bài này" };
+  }
+
+  const offset =
+    questionsBefore - sheetIndex * QUESTIONS_PER_SHEET;
+
+  return {
+    sheetName: SHEETS[sheetIndex],
+    start: offset,
+    end: offset + QUESTIONS_PER_TEST
+  };
+}
+
+// ================= LOAD BÀI =================
+async function loadTest(){
+  let testNo = parseInt(
+    document.getElementById("testNumber").value
+  );
+
+  const loc = getTestLocation(testNo);
+  if(loc.error){
+    alert(loc.error);
+    return;
+  }
+
+  submitted = false;
+  document.getElementById("result").innerText = "";
+
+  allQuestions = await loadSheet(loc.sheetName);
+
+  if(loc.end > allQuestions.length){
+    alert("Không có bài này");
+    return;
+  }
+
+  currentQuestions =
+    allQuestions.slice(loc.start, loc.end);
+
+  let quizHTML = "";
+  let hiddenHTML = "";
+
+  currentQuestions.forEach((q,i)=>{
+    let answers = [
+      {key:"A", text:q.A},
+      {key:"B", text:q.B},
+      {key:"C", text:q.C},
+      {key:"D", text:q.D}
+    ];
+    shuffle(answers);
+
+    quizHTML += `
+    <div class="question" id="qbox${i}">
+      <p><b>Câu ${i+1}:</b> ${q.question}</p>
+      <div class="answers">
+        ${answers.map(a=>`
+          <label data-key="${a.key}">
+            <input type="radio" name="q${i}"
+              onchange="saveAnswer(${i},'${a.key}')">
+            ${a.text}
+          </label>
+        `).join("")}
+      </div>
+    </div>
+    `;
+    hiddenHTML += `<input type="hidden" id="text${i+1}">`;
+  });
+
+  document.getElementById("quiz").innerHTML = quizHTML;
+  document.getElementById("hiddenInputs").innerHTML = hiddenHTML;
+}
+
+// ================= LƯU ĐÁP ÁN =================
+function saveAnswer(i,val){
+  if(submitted) return;
+  document.getElementById("text"+(i+1)).value = val;
+}
+
+// ================= NỘP BÀI =================
+function submitTest(){
+  if(submitted) return;
+  submitted = true;
+
+  let score = 0;
+
+  document.querySelectorAll("input[type=radio]")
+    .forEach(r=>r.disabled = true);
+
+  currentQuestions.forEach((q,i)=>{
+    let userAns =
+      document.getElementById("text"+(i+1)).value;
+
+    document
+      .querySelectorAll("#qbox"+i+" label")
+      .forEach(lb=>{
+        let k = lb.dataset.key;
+        if(k === q.correct) lb.classList.add("correct");
+        if(k === userAns && userAns !== q.correct)
+          lb.classList.add("wrong");
+      });
+
+    if(userAns === q.correct) score++;
+  });
+
+  document.getElementById("result").innerText =
+    "Your score: " + score + "/" + currentQuestions.length;
+}
+</script>
+
+</body>
+</html>
