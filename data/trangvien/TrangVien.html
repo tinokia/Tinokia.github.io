@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Thơ - Danh Ngôn - Đôi Liễn</title>
+
+<link rel="stylesheet" href="style.css">
+
+</head>
+
+<body>
+
+<header>
+
+<div class="logo">
+
+<h1>📚 Trang Viên</h1>
+
+<p>
+Nơi lưu giữ những bài thơ, danh ngôn và đôi liễn.
+</p>
+
+</div>
+
+<nav>
+
+<ul>
+
+<li><a href="TrangVien.html">Trang Viên</a></li>
+
+<li><a href="tho.html">Thơ</a></li>
+
+<li><a href="danhngon.html">Danh Ngôn</a></li>
+<li><a href="kinhphapcu.html">Kinh Pháp Cú</a></li>
+<li><a href="doi-lien.html">Đôi Liễn</a></li>
+
+</ul>
+
+</nav>
+
+</header>
+
+
+<main>
+
+<div class="search-box">
+
+<input
+type="text"
+id="searchAll"
+placeholder="🔍 Tìm thơ, danh ngôn, kinh pháp cú, đôi liễn..."
+onkeyup="timKiemToanBo()">
+
+
+</div>
+
+<div id="ketQuaTim"></div>
+
+
+
+<!-- THƠ -->
+
+<div class="box">
+
+<h2>
+
+📜 THƠ
+
+<span id="tongTho"></span>
+
+</h2>
+
+<div id="thoMoi"></div>
+
+<br>
+
+<a
+class="button"
+href="tho.html">
+
+Xem tất cả
+
+</a>
+
+</div>
+
+
+
+<!-- TRUYỆN -->
+
+<div class="box">
+
+<h2>
+
+📖 Danh Ngôn
+
+<span id="tongdanhngon"></span>
+
+</h2>
+
+<div id="danhngonMoi"></div>
+
+<br>
+
+<a
+class="button"
+href="danhngon.html">
+
+Xem tất cả
+
+</a>
+
+</div>
+
+
+
+<!-- LIỄN -->
+
+<div class="box">
+
+<h2>
+
+🏮 ĐÔI LIỄN
+
+<span id="tongLien"></span>
+
+</h2>
+
+<div id="lienMoi"></div>
+
+<br>
+
+<a
+class="button"
+href="doi-lien.html">
+
+Xem tất cả
+
+</a>
+
+</div>
+<!-- KINH PHÁP CÚ -->
+
+<div class="box">
+
+<h2>
+📿 KINH PHÁP CÚ
+<span id="tongkinh"></span>
+</h2>
+
+<div id="kinhMoi"></div>
+
+<br>
+
+<a class="button" href="kinhphapcu.html">
+Xem tất cả
+</a>
+
+</div>
+
+  
+</main>
+
+<footer>
+
+© 2026 Thơ - Danh Ngôn - Đôi Liễn
+
+</footer>
+
+<script src="tho.js"></script>
+<script src="danhngon.js"></script>
+<script src="lien.js"></script>
+<script src="kinhphapcu.js"></script>
+<script src="script.js"></script>
+
+<script>
+
+thongKe();
+
+
+
+//========================
+
+// 3 bài thơ mới
+
+//========================
+
+let html="";
+
+tho.slice(-3).reverse().forEach(function(item){
+
+html+=`
+
+<div class="item">
+
+${item.tieude}
+
+</div>
+
+`;
+
+});
+
+document.getElementById("thoMoi").innerHTML=html;
+
+
+
+//========================
+
+// 3 truyện mới
+
+//========================
+
+html="";
+
+danhngon.slice(-3).reverse().forEach(function(item){
+
+html+=`
+
+<div class="item">
+
+${item.tieude}
+
+</div>
+
+`;
+
+});
+
+document.getElementById("danhngonMoi").innerHTML=html;
+
+
+
+//========================
+
+// 3 đôi liễn mới
+
+//========================
+
+html="";
+
+lien.slice(-3).reverse().forEach(function(item){
+
+html+=`
+
+<div class="item">
+
+${item.tieude}
+
+</div>
+
+`;
+
+});
+
+document.getElementById("lienMoi").innerHTML=html;
+
+//======================
+// KINH PHÁP CÚ MỚI
+//======================
+
+html="";
+
+kinhphapcu.slice(-3).reverse().forEach(function(item){
+
+html+=`
+
+<div class="item">
+
+${item.tieude}
+
+</div>
+
+`;
+
+});
+
+document.getElementById("kinhMoi").innerHTML=html;
+thongKe();
+
+</script>
+
+
+</body>
+
+</html>

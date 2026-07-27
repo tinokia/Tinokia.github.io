@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Danh Ngôn</title>
+
+<link rel="stylesheet" href="style.css">
+
+</head>
+
+<body>
+
+<header>
+
+<div class="logo">
+
+<h1>Danh Ngôn</h1>
+
+<p>Thư viện Danh Ngôn</p>
+
+</div>
+
+<nav>
+
+<ul>
+
+<li><a href="TrangVien.html">Trang Viên</a></li>
+
+<li><a href="tho.html">Thơ</a></li>
+
+<li><a href="danhngon.html">Danh Ngôn</a></li>
+<li><a href="kinhphapcu.html">Kinh Pháp Cú</a></li>  
+
+<li><a href="doi-lien.html">Đôi Liễn</a></li>
+
+</ul>
+
+</nav>
+
+</header>
+
+<main>
+
+<h2>
+
+Danh sách Danh Ngôn
+
+<span id="tongdanhngon"></span>
+
+</h2>
+
+<div class="search-box">
+
+<input
+type="text"
+id="search"
+placeholder="🔍 Tìm kiếm Danh Ngôn..."
+onkeyup="timKiem()">
+
+</div>
+
+<div id="danhsach"></div>
+
+<div id="phantrang" class="pagination"></div>
+
+</main>
+
+<footer>
+
+© 2026 Thơ - Danh Ngôn - Đôi Liễn
+
+</footer>
+
+<script src="danhngon.js"></script>
+
+<script src="script.js"></script>
+
+<script>
+
+const ds=document.getElementById("danhsach");
+
+const soBaiMoiTrang=10;
+
+let trangHienTai=1;
+
+let duLieu=[...danhngon];
+
+function hienThidanhngon(){
+
+let batDau=(trangHienTai-1)*soBaiMoiTrang;
+
+let ketThuc=batDau+soBaiMoiTrang;
+
+let dsHien=duLieu.slice(batDau,ketThuc);
+
+let html="";
+
+if(dsHien.length===0){
+
+html=`
+<div class="item">
+
+<h3>Không tìm thấy Danh Ngôn.</h3>
+
+</div>
+`;
+
+}else{
+
+dsHien.forEach(function(item){
+
+html+=`
+
+<div class="item">
+
+<h3>${item.tieude}</h3>
+
+<p>${item.tomtat}</p>
+
+<button
+class="button"
+onclick="docBai('danhngon',${item.id})">
+
+📖 Đọc Danh Ngôn
+
+</button>
+
+</div>
+
+`;
+
+});
+
+}
+
+ds.innerHTML=html;
+
+taoPhanTrang();
+
+}
+
+function taoPhanTrang(){
+
+let tongTrang=Math.ceil(duLieu.length/soBaiMoiTrang);
+
+let html="";
+
+if(tongTrang<=1){
+
+document.getElementById("phantrang").innerHTML="";
+
+return;
+
+}
+
+html+=`
+<button
+class="page"
+onclick="doiTrang(${trangHienTai-1})"
+${trangHienTai==1?"disabled":""}>
+◀
+</button>
+`;
+
+for(let i=1;i<=tongTrang;i++){
+
+html+=`
+
+<button
+class="page ${i==trangHienTai?"active":""}"
+onclick="doiTrang(${i})">
+
+${i}
+
+</button>
+
+`;
+
+}
+
+html+=`
+<button
+class="page"
+onclick="doiTrang(${trangHienTai+1})"
+${trangHienTai==tongTrang?"disabled":""}>
+▶
+</button>
+`;
+
+document.getElementById("phantrang").innerHTML=html;
+
+}
+
+function doiTrang(trang){
+
+let tongTrang=Math.ceil(duLieu.length/soBaiMoiTrang);
+
+if(trang<1||trang>tongTrang){
+
+return;
+
+}
+
+trangHienTai=trang;
+
+hienThidanhngon();
+
+}
+
+function timKiem(){
+
+const tuKhoa=document
+.getElementById("search")
+.value
+.toLowerCase()
+.trim();
+
+duLieu=danhngon.filter(function(item){
+
+return(
+
+item.tieude.toLowerCase().includes(tuKhoa)
+
+||
+
+(item.tomtat||"").toLowerCase().includes(tuKhoa)
+
+||
+
+(item.noidung||"").toLowerCase().includes(tuKhoa)
+
+);
+
+});
+
+trangHienTai=1;
+
+hienThidanhngon();
+
+}
+document.getElementById("tongdanhngon").innerHTML=
+" ("+danhngon.length+" Danh Ngôn)";
+hienThidanhngon();
+
+
+
+</script>
+
+</body>
+
+</html>
