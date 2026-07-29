@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Thư viện sách</title>
+
+<link rel="stylesheet" href="../style.css">
+
+</head>
+
+<body>
+
+<header>
+
+<div class="logo">
+
+<h1>📚 THƯ VIỆN SÁCH</h1>
+
+<p>Nơi lưu trữ các sách dạng Markdown (.md)</p>
+
+</div>
+
+<nav>
+
+<ul>
+
+<li><a href="../index.html">Trang chủ</a></li>
+
+<li><a href="sach.html">Sách</a></li>
+
+</ul>
+
+</nav>
+
+</header>
+
+<main>
+
+<div class="search-box">
+
+<input
+type="text"
+id="search"
+placeholder="🔍 Tìm sách..."
+onkeyup="timSach()">
+
+</div>
+
+<div id="dsSach"></div>
+
+</main>
+
+<footer>
+
+© 2026 Thư viện sách
+
+</footer>
+
+<script src="sach.js"></script>
+
+<script>
+
+let html="";
+
+sach.forEach(function(item){
+
+html+=`
+
+<div class="box">
+
+<h2>
+
+📘 ${item.tieude}
+
+</h2>
+
+<p>
+
+${item.tomtat}
+
+</p>
+
+<br>
+
+<button
+class="button"
+onclick="docSach(${item.id})">
+
+📖 Đọc sách
+
+</button>
+
+</div>
+
+`;
+
+});
+
+document.getElementById("dsSach").innerHTML=html;
+
+
+//==================
+// Đọc sách
+//==================
+
+function docSach(id){
+
+localStorage.setItem("idSach",id);
+
+location.href="docsach.html";
+
+}
+
+
+//==================
+// Tìm sách
+//==================
+
+function timSach(){
+
+let key=document.getElementById("search").value.toLowerCase();
+
+let html="";
+
+sach.forEach(function(item){
+
+if(item.tieude.toLowerCase().includes(key)){
+
+html+=`
+
+<div class="box">
+
+<h2>📘 ${item.tieude}</h2>
+
+<p>${item.tomtat}</p>
+
+<br>
+
+<button
+class="button"
+onclick="docSach(${item.id})">
+
+📖 Đọc sách
+
+</button>
+
+</div>
+
+`;
+
+}
+
+});
+
+document.getElementById("dsSach").innerHTML=html;
+
+}
+
+</script>
+
+</body>
+
+</html>

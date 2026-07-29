@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Đọc sách</title>
+
+<link rel="stylesheet" href="../style.css">
+
+<style>
+
+.doc{
+
+max-width:900px;
+margin:30px auto;
+background:#fff;
+padding:25px;
+border-radius:15px;
+box-shadow:0 3px 12px rgba(0,0,0,.15);
+
+}
+
+.doc h1{
+
+text-align:center;
+color:#7b1e1e;
+margin-bottom:25px;
+
+}
+
+.noidung{
+
+white-space:pre-wrap;
+font-size:21px;
+line-height:2;
+text-align:justify;
+
+}
+
+.back{
+
+margin-top:30px;
+text-align:center;
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<header>
+
+<div class="logo">
+
+<h1>📚 THƯ VIỆN SÁCH</h1>
+
+<p>Đọc sách Markdown</p>
+
+</div>
+
+</header>
+
+<div class="doc">
+
+<h1 id="tieude"></h1>
+
+<div
+id="noidung"
+class="noidung">
+
+Đang tải...
+
+</div>
+
+<div class="back">
+
+<button
+class="button"
+onclick="history.back()">
+
+⬅ Quay lại
+
+</button>
+
+</div>
+
+</div>
+
+<script src="sach.js"></script>
+
+<script>
+
+const id = Number(localStorage.getItem("idSach"));
+
+const book = sach.find(x=>x.id===id);
+
+if(book){
+
+document.getElementById("tieude").innerHTML = book.tieude;
+
+fetch(window.location.pathname.replace("docsach.html","") + book.file)
+
+.then(res=>res.text())
+
+.then(text=>{
+
+document.getElementById("noidung").innerHTML=text;
+
+})
+
+.catch(()=>{
+
+document.getElementById("noidung").innerHTML=
+"Không đọc được file sách.";
+
+});
+
+}
+
+</script>
+
+</body>
+
+</html>
