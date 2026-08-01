@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<title>Nội dung từ điển</title>
+
+<link rel="stylesheet" href="style.css">
+
+<style>
+
+.content{
+    background:#fff;
+    padding:20px;
+    border-radius:10px;
+    box-shadow:0 2px 8px rgba(0,0,0,.15);
+}
+
+#title{
+    color:#0066cc;
+    margin-bottom:20px;
+    font-size:30px;
+    border-bottom:2px solid #ddd;
+    padding-bottom:10px;
+}
+
+#text{
+    font-size:18px;
+    line-height:1.8;
+}
+
+.toolbar{
+    margin-bottom:15px;
+}
+
+.toolbar button{
+    padding:10px 20px;
+    border:none;
+    background:#1976d2;
+    color:#fff;
+    border-radius:6px;
+    cursor:pointer;
+}
+
+.toolbar button:hover{
+    background:#0d47a1;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<header>
+
+📖 CAO ĐÀI TỪ ĐIỂN
+
+</header>
+
+<div class="container">
+
+<div class="toolbar">
+
+<button onclick="history.back()">
+
+← Quay lại
+
+</button>
+
+</div>
+
+<div class="content">
+
+<h1 id="title"></h1>
+
+<div id="text"></div>
+
+</div>
+
+</div>
+
+<script>
+
+const params=new URLSearchParams(location.search);
+
+const file=params.get("file");
+
+if(file){
+
+    const s=document.createElement("script");
+
+    s.src=file;
+
+    s.onload=function(){
+
+        document.getElementById("title").innerHTML=DATA.title;
+
+        document.getElementById("text").innerHTML=DATA.content;
+
+    };
+
+    s.onerror=function(){
+
+        document.getElementById("title").innerHTML="Không tìm thấy dữ liệu";
+
+        document.getElementById("text").innerHTML=file;
+
+    };
+
+    document.body.appendChild(s);
+
+}
+
+</script>
+
+</body>
+</html>

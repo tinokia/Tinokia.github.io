@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Cao Đài Từ Điển</title>
+
+<link rel="stylesheet" href="style.css">
+<link rel="manifest" href="manifest.json">
+
+<meta name="theme-color" content="#1976d2">
+
+<meta name="mobile-web-app-capable" content="yes">
+
+<meta name="apple-mobile-web-app-capable" content="yes">
+
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+
+<meta name="apple-mobile-web-app-title" content="Cao Đài Từ Điển">
+</head>
+
+<body>
+
+<header>
+📖 CAO ĐÀI TỪ ĐIỂN
+</header>
+
+<div class="container">
+
+<div class="search-box">
+<input
+id="txtSearch"
+type="text"
+placeholder="🔍 Nhập từ cần tra..."
+onkeyup="timKiem()">
+</div>
+
+<div class="letters">
+
+<button onclick="taiChu('A')">A</button>
+<button onclick="taiChu('B')">B</button>
+<button onclick="taiChu('C')">C</button>
+<button onclick="taiChu('CH')">CH</button>
+<button onclick="taiChu('D')">D</button>
+<button onclick="taiChu('Đ')">Đ</button>
+<button onclick="taiChu('G')">G</button>
+<button onclick="taiChu('H')">H</button>
+<button onclick="taiChu('K')">K</button>
+<button onclick="taiChu('L')">L</button>
+<button onclick="taiChu('M')">M</button>
+<button onclick="taiChu('N')">N</button>
+<button onclick="taiChu('NG')">NG</button>
+<button onclick="taiChu('NH')">NH</button>
+<button onclick="taiChu('O')">O</button>
+<button onclick="taiChu('P')">P</button>
+<button onclick="taiChu('Q')">Q</button>
+<button onclick="taiChu('R')">R</button>
+<button onclick="taiChu('S')">S</button>
+<button onclick="taiChu('T')">T</button>
+<button onclick="taiChu('TH')">TH</button>
+<button onclick="taiChu('TR')">TR</button>
+<button onclick="taiChu('U')">U</button>
+<button onclick="taiChu('V')">V</button>
+<button onclick="taiChu('X')">X</button>
+<button onclick="taiChu('Y')">Y</button>
+
+</div>
+
+<div id="list"></div>
+
+</div>
+
+<script>
+
+let currentLetter="";
+let currentData=[];
+
+function taiChu(chu){
+
+    currentLetter=chu;
+
+    document.getElementById("list").innerHTML="Đang tải...";
+
+    let old=document.getElementById("dataScript");
+
+    if(old) old.remove();
+
+    let s=document.createElement("script");
+
+    s.id="dataScript";
+
+    s.src="danhsach/"+chu+".js";
+
+    s.onload=function(){
+
+        currentData=window["DATA_"+chu];
+
+        veDanhSach();
+
+    }
+
+    s.onerror=function(){
+
+        document.getElementById("list").innerHTML=
+        "<p>Chưa có dữ liệu.</p>";
+
+    }
+
+    document.body.appendChild(s);
+
+}
+
+function veDanhSach(){
+
+    let html="";
+
+    currentData.forEach(function(item){
+
+        html+=`
+
+<div class="card">
+
+<div class="card-title"
+
+onclick="moNhom('${item.id}')">
+
+<span>▶ ${item.ten}</span>
+
+<span id="count_${item.id}">...</span>
+
+</div>
+
+<div
+class="list"
+id="${item.id}">
+</div>
+
+</div>
+
+`;
+
+    });
+
+    document.getElementById("list").innerHTML=html;
+currentData.forEach(item=>demSoLuong(item));
+}
+function demSoLuong(item){
+
+    let s=document.createElement("script");
+
+    s.src="danhsach/"+currentLetter+"/"+item.id+".js";
+
+    s.onload=function(){
+
+        let ds=window[item.id];
+
+        document.getElementById("count_"+item.id).innerText=ds.length;
+
+    }
+
+    s.onerror=function(){
+
+        document.getElementById("count_"+item.id).innerText=0;
+
+    }
+
+    document.body.appendChild(s);
+
+}
+function moNhom(id){
+
+    
+
+    let box = document.getElementById(id);
+document.querySelectorAll(".list").forEach(function(x){
+    if(x.id != id){
+        x.classList.remove("show");
+    }
+});
+    let s = document.createElement("script");
+
+    s.src = "danhsach/" + currentLetter + "/" + id + ".js";
+
+    s.onload = function(){
+
+    let ds = window[id];
+
+    let html = "";
+
+    ds.forEach(function(x){
+
+        html += `
+<a href="noidung.html?file=danhsach/${currentLetter}/${id}/${x.id}.js">
+${x.ten}
+</a>`;
+
+    });
+
+    box.innerHTML = html;
+if(box.classList.contains("show")){
+    box.classList.remove("show");
+    return;
+}
+    box.classList.add("show");
+
+};
+
+    
+
+    document.body.appendChild(s);
+
+}
+
+function timKiem(){
+
+    let key=document
+    .getElementById("txtSearch")
+    .value
+    .toLowerCase();
+
+    document
+    .querySelectorAll(".card")
+    .forEach(function(card){
+
+        card.style.display=
+        card.innerText
+        .toLowerCase()
+        .includes(key)
+        ?"block":"none";
+
+    });
+
+}
+
+taiChu("A");
+
+</script>
+
+<script>
+if ("serviceWorker" in navigator) {
+    window.addEventListener("load", function () {
+        navigator.serviceWorker.register("./service-worker.js")
+        .then(function () {
+            console.log("Service Worker OK");
+        })
+        .catch(function (err) {
+            console.log(err);
+        });
+    });
+}
+</script>
+</body>
+</html>
