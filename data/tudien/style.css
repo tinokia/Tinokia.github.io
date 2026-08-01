@@ -1,0 +1,142 @@
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial,Helvetica,sans-serif;
+}
+
+body{
+    background:#f5f5f5;
+    color:#333;
+}
+
+header{
+    background:#1976d2;
+    color:#fff;
+    padding:15px;
+    text-align:center;
+    font-size:26px;
+    font-weight:bold;
+    position:sticky;
+    top:0;
+    z-index:1000;
+}
+
+.container{
+    max-width:900px;
+    margin:auto;
+    padding:15px;
+}
+
+.search-box{
+    margin-bottom:15px;
+}
+
+.search-box input{
+    width:100%;
+    padding:12px;
+    font-size:16px;
+    border:1px solid #ccc;
+    border-radius:8px;
+}
+
+.letters{
+    display:flex;
+    flex-wrap:wrap;
+    gap:6px;
+    margin-bottom:15px;
+}
+
+.letters button{
+    border:none;
+    background:#1976d2;
+    color:#fff;
+    border-radius:5px;
+    padding:6px 10px;
+    cursor:pointer;
+}
+
+.letters button:hover{
+    background:#0d47a1;
+}
+
+.card{
+    background:#fff;
+    border-radius:8px;
+    margin-bottom:10px;
+    overflow:hidden;
+    box-shadow:0 2px 5px rgba(0,0,0,.15);
+}
+
+.card-title{
+    background:#2196f3;
+    color:#fff;
+    padding:12px;
+    font-size:18px;
+    cursor:pointer;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+}
+
+.list{
+    display:none;
+}
+
+.list a{
+    display:block;
+    padding:12px;
+    text-decoration:none;
+    color:#333;
+    border-bottom:1px solid #eee;
+}
+
+.list a:last-child{
+    border-bottom:none;
+}
+
+.list a:hover{
+    background:#e3f2fd;
+}
+
+.show{
+    display:block;
+}
+
+.content{
+    background:#fff;
+    border-radius:8px;
+    padding:20px;
+    box-shadow:0 2px 5px rgba(0,0,0,.15);
+}
+
+.content h2{
+    color:#1976d2;
+    margin-bottom:15px;
+}
+
+.content p{
+    line-height:1.8;
+    white-space:pre-wrap;
+}
+
+.nav{
+    display:flex;
+    gap:10px;
+    margin-top:20px;
+}
+
+.nav button{
+    flex:1;
+    padding:10px;
+    border:none;
+    background:#1976d2;
+    color:#fff;
+    border-radius:6px;
+    cursor:pointer;
+}
+
+.nav button:hover{
+    background:#0d47a1;
+}
+
