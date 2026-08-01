@@ -1,0 +1,15 @@
+window.DATA_O = [
+{id:"O1", ten:"OAI", soluong:0},
+{id:"O2", ten:"OAN", soluong:0},
+{id:"O3", ten:"OÁN", soluong:0},
+{id:"O4", ten:"OANH", soluong:0},
+{id:"O5", ten:"OÁT", soluong:0},
+{id:"O6", ten:"OẰN", soluong:0},
+{id:"O7", ten:"ONG", soluong:0},
+{id:"O8", ten:"Ô", soluong:0},
+{id:"O9", ten:"ỐC", soluong:0},
+{id:"O10", ten:"ÔM", soluong:0},
+{id:"O11", ten:"ÔN", soluong:0},
+{id:"O12", ten:"ÔNG", soluong:0},
+{id:"O13", ten:"ƠN", soluong:0},
+];

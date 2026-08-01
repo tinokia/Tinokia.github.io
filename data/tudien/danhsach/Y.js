@@ -1,0 +1,15 @@
+window.DATA_Y = [
+{id:"Y1", ten:"Y", soluong:0},
+{id:"Y2", ten:"Ý", soluong:0},
+{id:"Y3", ten:"Ỷ", soluong:0},
+{id:"Y4", ten:"YÊM", soluong:0},
+{id:"Y5", ten:"YẾM", soluong:0},
+{id:"Y6", ten:"YỂM", soluong:0},
+{id:"Y7", ten:"YÊN", soluong:0},
+{id:"Y8", ten:"YẾN", soluong:0},
+{id:"Y9", ten:"YẾNG", soluong:0},
+{id:"Y10", ten:"YẾT", soluong:0},
+{id:"Y11", ten:"YÊU", soluong:0},
+{id:"Y12", ten:"YẾU", soluong:0},
+{id:"Y13", ten:"YỂU", soluong:0},
+];
