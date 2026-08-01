@@ -1,0 +1,1 @@
+window.Ai2 = [{id:"A6-1",ten:"Ải quan"},];
