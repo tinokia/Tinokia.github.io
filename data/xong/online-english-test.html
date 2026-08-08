@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#1e88e5">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<link rel="manifest" href="./manifest.json">
+<link rel="icon" href="./icon-192.png">
+<title>Online English Test</title>
+<style>
+*{box-sizing:border-box}
+body{
+  margin:0;
+  font-family:Arial;
+  height:100vh;
+}
+header{
+  background:#1e88e5;
+  color:white;
+  padding:15px;
+  text-align:center;
+  font-size:22px;
+}
+.main{
+  display:flex;
+  height:calc(100vh - 60px);
+}
+.left{
+  width:250px;
+  background:#f3f3f3;
+  border-right:1px solid #ccc;
+  padding:10px;
+}
+.item{
+  padding:10px;
+  background:white;
+  margin-bottom:8px;
+  cursor:pointer;
+  border-radius:5px;
+}
+.item:hover{
+  background:#1e88e5;
+  color:white;
+}
+.right{
+  flex:1;
+}
+iframe{
+  width:100%;
+  height:100%;
+  border:none;
+}
+</style>
+</head>
+
+<body>
+
+<header>Online English Test</header>
+
+<div class="main">
+  <!-- MENU LEFT -->
+  <div class="left">
+<div class="item" onclick="loadPage('data/Toeic test Vocabulary.html')">Toeic test Vocabulary</div>
+<div class="item" onclick="loadPage('data/English Level A.html')">English Level A</div>
+<div class="item" onclick="loadPage('data/English Level B.html')">English Level B</div>
+<div class="item" onclick="loadPage('data/English Level C.html')">English Level C</div>
+<div class="item" onclick="loadPage('data/Co-ban.html')">Trình độ cơ bản</div>
+<!--<div class="item" onclick="loadPage('')">Trình độ trung cấp</div>
+<div class="item" onclick="loadPage('')">Trình độ cao cấp</div>
+<div class="item" onclick="loadPage('')">Trình độ TOEFL</div>
+<div class="item" onclick="loadPage('')">Tìm từ sai toefl</div>
+<div class="item" onclick="loadPage('')">Grammar Lesson Plans</div>
+<div class="item" onclick="loadPage('')">Đọc hiểu TOEFL</div>
+<div class="item" onclick="loadPage('')">Từ đồng nghĩa TOEFL</div>
+	<div class="item" onclick="loadPage('')">T</div>-->
+	
+  </div>
+
+  <!-- CONTENT RIGHT -->
+  <div class="right">
+    <iframe id="frame" src=""></iframe>
+  </div>
+</div>
+
+<script>
+function loadPage(page){
+  document.getElementById("frame").src = page;
+}
+</script>
+
+
+<script>
+if ("serviceWorker" in navigator) {
+  window.addEventListener("load", () => {
+    navigator.serviceWorker.register("./service-worker.js")
+      .then(() => console.log("PWA: Service Worker đã đăng ký"))
+      .catch(err => console.error("PWA:", err));
+  });
+}
+</script>
+
+</body>
+</html>
+
+
