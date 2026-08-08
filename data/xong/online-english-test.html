@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#1e88e5">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<link rel="manifest" href="./manifest.json">
+<link rel="icon" href="./icon-192.png">
+<title>Online English Test</title>
+<style>
+*{margin:0; padding:0; box-sizing:border-box; font-family:Arial, sans-serif;}
+html, body{height:100%; overflow:hidden;}
+
+/* Thanh điều hướng cố định */
+.top-bar{
+  position:fixed; top:0; left:0; right:0; height:60px;
+  background:#2196F3; color:white;
+  display:flex; align-items:center; padding:0 15px; z-index:999;
+  box-shadow:0 2px 5px rgba(0,0,0,0.2);
+}
+
+.btn-menu{font-size:28px; cursor:pointer; margin-right:15px; user-select:none;}
+.top-bar h1{font-size:18px; font-weight:normal;}
+
+/* Menu trượt */
+.side-menu{
+  position:fixed; top:60px; left:-280px; width:260px; height:calc(100% - 60px);
+  background:white; box-shadow:2px 0 10px rgba(0,0,0,0.1);
+  transition:left 0.25s ease; z-index:998; overflow-y:auto;
+}
+.side-menu.open{left:0;}
+
+.side-menu a{
+  display:block; padding:14px 20px; color:#333; text-decoration:none;
+  border-bottom:1px solid #eee;
+}
+.side-menu a:hover{background:#e3f2fd; color:#1976D2;}
+
+.overlay{
+  position:fixed; top:60px; left:0; right:0; bottom:0;
+  background:rgba(0,0,0,0.3); z-index:997; display:none;
+}
+.overlay.show{display:block;}
+
+/* Khu vực hiển thị nội dung bài kiểm tra */
+#mainFrame{
+  position:absolute; top:60px; left:0; right:0; bottom:0;
+  width:100%; height:100%; border:none;
+}
+</style>
+</head>
+
+<body>
+<div class="top-bar">
+  <div class="btn-menu" onclick="toggleMenu()">☰</div>
+  <h1>📚 Online English Test</h1>
+</div>
+
+<div class="overlay" id="overlay" onclick="toggleMenu()"></div>
+
+<div class="side-menu" id="menu">
+  <a href="data/Toeic test Vocabulary.html"target="khung">📝 TOEIC Test Vocabulary</a>
+  <a href="data/English Level A.html" target="khung">📘 English Level A</a>
+  <a href="data/English Level B.html"target="khung">📙 English Level B</a>
+  <a href="data/English Level C.html"target="khung">📕 English Level C</a>
+  <a href="data/co-ban.html"target="khung">📓 Trình độ Cơ bản</a>
+</div>
+
+<!-- Khung chứa toàn bộ nội dung bài kiểm tra -->
+<iframe name="khung" id="mainFrame" src="co-ban.html"></iframe>
+
+<script>
+function toggleMenu(){
+  const menu = document.getElementById('menu');
+  const overlay = document.getElementById('overlay');
+  menu.classList.toggle('open');
+  overlay.classList.toggle('show');
+}
+
+// Tự động đóng menu sau khi chọn xong
+document.querySelectorAll('.side-menu a').forEach(link => {
+  link.addEventListener('click', () => toggleMenu());
+});
+</script>
+<script>
+if ("serviceWorker" in navigator) {
+  window.addEventListener("load", () => {
+    navigator.serviceWorker.register("./service-worker.js")
+      .then(() => console.log("PWA: Service Worker đã đăng ký"))
+      .catch(err => console.error("PWA:", err));
+  });
+}
+</script>
+
+</body>
+</html>
+
+
