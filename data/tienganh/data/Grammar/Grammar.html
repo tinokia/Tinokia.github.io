@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<title>Grammar</title>
+
+<style>
+body{
+  font-family: Arial;
+  max-width: 900px;
+  margin: auto;
+  padding: 20px;
+  padding-bottom: 50px;
+}
+
+input, button{
+  padding: 8px 15px;
+  font-size: 16px;
+}
+
+.question{
+  margin-bottom: 20px;
+  border-bottom: 1px solid #ddd;
+  padding-bottom: 10px;
+}
+
+.answers label{
+  display: block;
+  margin: 6px 0;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.correct{
+  color: green;
+  font-weight: bold;
+}
+
+.wrong{
+  color: red;
+  font-weight: bold;
+}
+</style>
+</head>
+
+<body>
+
+<h2>📝 Grammar</h2>
+
+<p>
+  Nhập số bài từ: 1→20
+  <input type="number" id="testNumber" min="1" max="20" style="width:80px">
+  <button id="loadButton" onclick="loadTest()" disabled>
+    Đang tải dữ liệu...
+  </button>
+</p>
+
+<form>
+
+  <div id="quiz"></div>
+
+  <div id="hiddenInputs"></div>
+
+  <button type="button" onclick="submitTest()">
+    Nộp Bài
+  </button>
+
+</form>
+
+<h3 id="result"></h3>
+
+
+<script>
+
+// ===============================
+// KHỞI TẠO DỮ LIỆU
+// ===============================
+
+var Grammar = {};
+
+
+// ===============================
+// TẢI FILE GRAMMAR.JS
+// ===============================
+
+function taiTatCaFile(){
+
+  var s = document.createElement("script");
+
+  s.src = "Grammar.js";
+
+  s.onload = function(){
+
+    console.log("Grammar.js đã tải xong");
+
+    
+
+    document.getElementById("loadButton").disabled = false;
+
+    document.getElementById("loadButton").innerText = "Làm Bài";
+
+  };
+
+  s.onerror = function(){
+
+    alert("Không tải được file Grammar.js");
+
+  };
+
+  document.head.appendChild(s);
+}
+
+
+// ===============================
+// XÁO TRỘN
+// ===============================
+
+function shuffle(arr){
+
+  for(let i = arr.length - 1; i > 0; i--){
+
+    let j = Math.floor(Math.random() * (i + 1));
+
+    [arr[i], arr[j]] = [arr[j], arr[i]];
+
+  }
+
+}
+
+
+// ===============================
+// BIẾN TOÀN CỤC
+// ===============================
+
+let currentQuestions = [];
+
+let submitted = false;
+
+
+// ===============================
+// NẠP BÀI
+// ===============================
+
+function loadTest(){
+
+  let testNo = parseInt(
+    document.getElementById("testNumber").value
+  );
+
+  if(!testNo || testNo < 1 || testNo > 20){
+
+    alert("Vui lòng nhập số bài từ 1 đến 20");
+
+    return;
+
+  }
+
+
+  if(!Grammar[testNo]){
+
+    alert("Không có bài " + testNo);
+
+    console.log("Grammar hiện tại:", Grammar);
+
+    return;
+
+  }
+
+
+  submitted = false;
+
+  document.getElementById("result").innerText = "";
+
+
+  currentQuestions = [...Grammar[testNo]];
+
+
+  let html = "";
+
+  let hid = "";
+
+
+  currentQuestions.forEach((q, i) => {
+
+
+    // ===============================
+    // TỰ ĐỘNG NHẬN A → F
+    // ===============================
+
+    let ans = [];
+
+    ["A","B","C","D","E","F"].forEach(k => {
+
+      if(q[k] !== undefined){
+
+        ans.push({
+          k: k,
+          t: q[k]
+        });
+
+      }
+
+    });
+
+
+    // Xáo trộn đáp án
+
+    shuffle(ans);
+
+
+    html += `
+      <div class="question" id="q${i}">
+
+        <p>
+          <b>Câu ${i + 1}:</b>
+          ${q.question}
+        </p>
+
+        <div class="answers">
+    `;
+
+
+    ans.forEach(a => {
+
+      html += `
+        <label data-k="${a.k}">
+
+          <input
+            type="radio"
+            name="q${i}"
+            onchange="save(${i},'${a.k}')"
+          >
+
+          ${a.t}
+
+        </label>
+      `;
+
+    });
+
+
+    html += `
+        </div>
+      </div>
+    `;
+
+
+    hid += `
+      <input
+        type="hidden"
+        id="a${i}"
+      >
+    `;
+
+  });
+
+
+  document.getElementById("quiz").innerHTML = html;
+
+  document.getElementById("hiddenInputs").innerHTML = hid;
+
+}
+
+
+// ===============================
+// LƯU ĐÁP ÁN
+// ===============================
+
+function save(i, v){
+
+  if(!submitted){
+
+    document.getElementById("a" + i).value = v;
+
+  }
+
+}
+
+
+// ===============================
+// NỘP BÀI
+// ===============================
+
+function submitTest(){
+
+  if(submitted) return;
+
+  submitted = true;
+
+
+  document
+    .querySelectorAll("input[type=radio]")
+    .forEach(r => {
+
+      r.disabled = true;
+
+    });
+
+
+  let d = 0;
+
+
+  currentQuestions.forEach((q, i) => {
+
+    let tr =
+      document.getElementById("a" + i).value;
+
+
+    document
+      .querySelectorAll("#q" + i + " label")
+      .forEach(l => {
+
+
+        // Đáp án đúng
+
+        if(l.dataset.k == q.correct){
+
+          l.classList.add("correct");
+
+        }
+
+
+        // Đáp án người dùng chọn nhưng sai
+
+        if(
+          l.dataset.k == tr &&
+          tr != q.correct
+        ){
+
+          l.classList.add("wrong");
+
+        }
+
+      });
+
+
+    if(tr == q.correct){
+
+      d++;
+
+    }
+
+  });
+
+
+  document.getElementById("result").innerText =
+    `Điểm: ${d}/${currentQuestions.length}`;
+
+}
+
+
+// ===============================
+// CHẠY
+// ===============================
+
+taiTatCaFile();
+
+</script>
+
+</body>
+</html>
