@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<title>Tim Tu Sai</title>
+<style>
+body{
+  font-family: Arial;
+  max-width: 900px;
+  margin: 0 0 0 10px;
+  padding: 20px;
+  padding-bottom: 50px; /* ✅ Thêm dòng này - tạo khoảng trống dưới */
+}
+input, button{
+  padding: 8px 15px;
+  font-size: 16px;
+}
+.question{
+  margin-bottom: 20px;
+  border-bottom: 1px solid #ddd;
+  padding-bottom: 10px;
+}
+.answers label{
+  display: block;
+  margin: 6px 0;
+  cursor: pointer;
+}
+.correct{ color: green; font-weight: bold; }
+.wrong{ color: red; font-weight: bold; }
+
+.question p{
+  font-size: 16px;
+  font-weight: normal;
+}
+.question b{
+  font-weight: bold;
+}
+.answers label{
+  font-size: 16px; /* Đã sửa kích thước cho dễ đọc */
+}
+</style>
+</head>
+
+<body>
+<h2>📝 Tìm Từ Sai</h2>
+<p>
+  Nhập số bài từ 1->8:
+  <input type="number" id="testNumber" min="1" style="width:80px">
+  <button onclick="loadTest()">Làm Bài</button>
+</p>
+
+<form>
+  <div id="quiz"></div>
+  <div id="hiddenInputs"></div>
+  <button type="button" onclick="submitTest()">Nộp Bài</button>
+</form>
+
+<h3 id="result"></h3>
+
+<!-- Gọi file dữ liệu .js của mình -->
+<script src="Tusai.js"></script>
+<script>
+// ================= CẤU HÌNH =================
+const QUESTIONS_PER_TEST = 10; // Mỗi bài 10 câu như chuẩn
+let currentQuestions = [];
+let submitted = false;
+
+// ================= TRỘN ĐÁP ÁN =================
+function shuffle(arr){
+  for(let i = arr.length - 1; i > 0; i--){
+    let j = Math.floor(Math.random() * (i + 1));
+    [arr[i], arr[j]] = [arr[j], arr[i]];
+  }
+}
+
+// ================= LOAD BÀI TỪ FILE JS =================
+function loadTest(){
+  let testNo = parseInt(document.getElementById("testNumber").value);
+  
+  if(!BAI_TAP[testNo]){
+    alert("Không có bài này, vui lòng nhập từ 1-8");
+    return;
+  }
+
+  submitted = false;
+  document.getElementById("result").innerText = "";
+  
+  // ✅ Lấy giới hạn theo cấu hình, không lấy hết
+  currentQuestions = [...BAI_TAP[testNo]].slice(0, QUESTIONS_PER_TEST);
+
+  let quizHTML = "", hiddenHTML = "";
+  currentQuestions.forEach((q,i)=>{
+    let answers = [
+      {key:"A", text:q.A}, {key:"B", text:q.B},
+      {key:"C", text:q.C}, {key:"D", text:q.D}
+    ];
+    shuffle(answers);
+
+    quizHTML += `
+    <div class="question" id="qbox${i}">
+      <p><b>Câu ${i+1}:</b> ${q.question}</p>
+      <div class="answers">
+        ${answers.map(a=>`
+          <label data-key="${a.key}">
+            <input type="radio" name="q${i}" onchange="saveAnswer(${i},'${a.key}')">
+            ${a.text}
+          </label>
+        `).join("")}
+      </div>
+    </div>`;
+    hiddenHTML += `<input type="hidden" id="text${i+1}">`;
+  });
+
+  document.getElementById("quiz").innerHTML = quizHTML;
+  document.getElementById("hiddenInputs").innerHTML = hiddenHTML;
+}
+
+
+// ================= LƯU ĐÁP ÁN =================
+function saveAnswer(i,val){
+  if(!submitted) document.getElementById("text"+(i+1)).value = val;
+}
+
+// ================= NỘP BÀI & CHẤM ĐIỂM =================
+function submitTest(){
+  if(submitted) return;
+  submitted = true;
+  document.querySelectorAll("input[type=radio]").forEach(r=>r.disabled = true);
+
+  let score = 0;
+  currentQuestions.forEach((q,i)=>{
+    let userAns = document.getElementById("text"+(i+1)).value;
+    document.querySelectorAll("#qbox"+i+" label").forEach(lb=>{
+      let k = lb.dataset.key;
+      if(k === q.correct) lb.classList.add("correct");
+      if(k === userAns && userAns !== q.correct) lb.classList.add("wrong");
+    });
+    if(userAns === q.correct) score++;
+  });
+
+  document.getElementById("result").innerText = `Điểm: ${score}/${currentQuestions.length}`;
+}
+</script>
+</body>
+</html>
