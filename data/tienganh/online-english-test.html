@@ -1,0 +1,668 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+
+<meta name="theme-color" content="#1976D2">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+
+<link rel="manifest" href="./manifest.json">
+<link rel="icon" href="./icon-192.png">
+
+<title>Online English Test</title>
+
+<style>
+
+/* =========================================
+   RESET
+========================================= */
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial, Helvetica, sans-serif;
+}
+
+html,
+body{
+    width:100%;
+    height:100%;
+    overflow:hidden;
+    background:#f5f7fa;
+}
+
+
+/* =========================================
+   THANH TRÊN
+========================================= */
+
+.top-bar{
+    position:fixed;
+    top:0;
+    left:0;
+    right:0;
+
+    height:60px;
+
+    display:flex;
+    align-items:center;
+
+    padding:0 16px;
+
+    background:linear-gradient(
+        135deg,
+        #1976D2,
+        #2196F3
+    );
+
+    color:white;
+
+    z-index:999;
+
+    box-shadow:
+        0 2px 8px rgba(0,0,0,.22);
+}
+
+
+/* Nút menu */
+
+.btn-menu{
+    width:42px;
+    height:42px;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    margin-right:10px;
+
+    border-radius:50%;
+
+    font-size:25px;
+
+    cursor:pointer;
+    user-select:none;
+
+    transition:
+        background .2s,
+        transform .2s;
+}
+
+.btn-menu:hover{
+    background:rgba(255,255,255,.18);
+}
+
+.btn-menu:active{
+    transform:scale(.9);
+}
+
+
+/* Tiêu đề */
+
+.top-bar h1{
+    font-size:18px;
+    font-weight:600;
+
+    white-space:nowrap;
+
+    letter-spacing:.2px;
+}
+
+
+/* =========================================
+   MENU BÊN TRÁI
+========================================= */
+
+.side-menu{
+
+    position:fixed;
+
+    top:60px;
+    left:-290px;
+
+    width:280px;
+
+    height:calc(100% - 60px);
+
+    background:#ffffff;
+
+    z-index:998;
+
+    overflow-y:auto;
+
+    padding:12px 10px 20px;
+
+    box-shadow:
+        4px 0 15px rgba(0,0,0,.15);
+
+    transition:
+        left .28s cubic-bezier(.4,0,.2,1);
+}
+
+
+/* Khi mở */
+
+.side-menu.open{
+    left:0;
+}
+
+
+/* =========================================
+   TIÊU ĐỀ MENU
+========================================= */
+
+.menu-title{
+
+    padding:10px 12px 14px;
+
+    color:#1976D2;
+
+    font-size:15px;
+
+    font-weight:bold;
+
+    border-bottom:1px solid #eeeeee;
+
+    margin-bottom:8px;
+}
+
+
+/* =========================================
+   CÁC NÚT MENU
+========================================= */
+
+.side-menu a{
+
+    display:flex;
+    align-items:center;
+
+    min-height:48px;
+
+    margin:5px 0;
+
+    padding:11px 13px;
+
+    color:#333;
+
+    text-decoration:none;
+
+    background:#fafafa;
+
+    border:1px solid #eeeeee;
+
+    border-radius:10px;
+
+    font-size:14px;
+
+    line-height:1.35;
+
+    transition:
+        background .2s,
+        color .2s,
+        transform .15s,
+        box-shadow .2s;
+}
+
+
+/* Hover */
+
+.side-menu a:hover{
+
+    background:#e3f2fd;
+
+    color:#1976D2;
+
+    border-color:#bbdefb;
+
+    box-shadow:
+        0 2px 7px rgba(33,150,243,.12);
+
+    transform:translateX(3px);
+}
+
+
+/* Khi bấm */
+
+.side-menu a:active{
+
+    transform:scale(.97);
+
+    background:#bbdefb;
+}
+
+
+/* =========================================
+   VERSION
+========================================= */
+
+.version{
+
+    display:block;
+
+    margin-top:14px;
+
+    padding:12px;
+
+    text-align:center;
+
+    color:#999;
+
+    font-size:12px;
+
+    border-top:1px solid #eeeeee;
+}
+
+
+/* =========================================
+   OVERLAY
+========================================= */
+
+.overlay{
+
+    position:fixed;
+
+    top:60px;
+    left:0;
+    right:0;
+    bottom:0;
+
+    background:rgba(0,0,0,.38);
+
+    z-index:997;
+
+    opacity:0;
+    visibility:hidden;
+
+    transition:
+        opacity .25s ease,
+        visibility .25s ease;
+}
+
+
+.overlay.show{
+
+    opacity:1;
+
+    visibility:visible;
+}
+
+
+/* =========================================
+   KHUNG NỘI DUNG
+========================================= */
+
+#mainFrame{
+
+    position:fixed;
+
+    top:60px;
+    left:0;
+    right:0;
+    bottom:0;
+
+    width:100%;
+
+    height:calc(100% - 60px);
+
+    border:none;
+
+    background:white;
+}
+
+
+/* =========================================
+   THANH CUỘN MENU
+========================================= */
+
+.side-menu::-webkit-scrollbar{
+    width:5px;
+}
+
+.side-menu::-webkit-scrollbar-track{
+    background:transparent;
+}
+
+.side-menu::-webkit-scrollbar-thumb{
+    background:#cfd8dc;
+    border-radius:10px;
+}
+
+
+/* =========================================
+   ĐIỆN THOẠI
+========================================= */
+
+@media(max-width:600px){
+
+    .top-bar{
+        height:58px;
+        padding:0 12px;
+    }
+
+    .btn-menu{
+        width:40px;
+        height:40px;
+        font-size:24px;
+        margin-right:8px;
+    }
+
+    .top-bar h1{
+        font-size:16px;
+    }
+
+    .side-menu{
+        top:58px;
+        height:calc(100% - 58px);
+        width:285px;
+        left:-295px;
+    }
+
+    #mainFrame{
+        top:58px;
+        height:calc(100% - 58px);
+    }
+
+    .overlay{
+        top:58px;
+    }
+
+}
+
+
+/* =========================================
+   MÀN HÌNH RẤT NHỎ
+========================================= */
+
+@media(max-width:360px){
+
+    .top-bar h1{
+        font-size:15px;
+    }
+
+    .side-menu{
+        width:270px;
+        left:-280px;
+    }
+
+    .side-menu a{
+        font-size:13px;
+    }
+
+}
+
+</style>
+</head>
+
+
+<body>
+
+
+<!-- =====================================
+     THANH TRÊN
+===================================== -->
+
+<div class="top-bar">
+
+    <div
+        class="btn-menu"
+        id="menuButton"
+        onclick="toggleMenu()"
+        aria-label="Mở menu"
+    >
+        ☰
+    </div>
+
+    <h1>📚 Online English Test</h1>
+
+</div>
+
+
+
+<!-- =====================================
+     LỚP PHỦ
+===================================== -->
+
+<div
+    class="overlay"
+    id="overlay"
+    onclick="closeMenu()"
+></div>
+
+
+
+<!-- =====================================
+     MENU
+===================================== -->
+
+<div class="side-menu" id="menu">
+
+    <div class="menu-title">
+        📚 Danh mục học tập
+    </div>
+
+
+    <a
+        href="data/testVocabulary/test Vocabulary.html"
+        target="khung"
+    >
+        📝&nbsp; TOEIC Test Vocabulary
+    </a>
+
+
+    <a
+        href="data/Grammar/Grammar.html"
+        target="khung"
+    >
+        📓&nbsp; Grammar
+    </a>
+
+
+    <a
+        href="data/Tusai.html"
+        target="khung"
+    >
+        📕&nbsp; Từ sai
+    </a>
+
+
+    <a
+        href="data/dochieu/dochieu.html"
+        target="khung"
+    >
+        📖&nbsp; Đọc hiểu
+    </a>
+
+
+    <a
+        href="data/Dongnghia.html"
+        target="khung"
+    >
+        📘&nbsp; Đồng nghĩa
+    </a>
+
+
+    <a
+        href="data/Level Toefl.html"
+        target="khung"
+    >
+        📘&nbsp; English Level TOEFL
+    </a>
+
+
+    <a
+        href="data/Level A.html"
+        target="khung"
+    >
+        📗&nbsp; English Level A
+    </a>
+
+
+    <a
+        href="data/levelB/Level B.html"
+        target="khung"
+    >
+        📙&nbsp; English Level B
+    </a>
+
+
+    <a
+        href="data/levelC/Level C.html"
+        target="khung"
+    >
+        📕&nbsp; English Level C
+    </a>
+
+
+    <a
+        href="data/Coban.html"
+        target="khung"
+    >
+        📓&nbsp; Trình độ Cơ bản
+    </a>
+
+
+    <a
+        href="data/trungcap.html"
+        target="khung"
+    >
+        📓&nbsp; Trình độ Trung cấp
+    </a>
+
+
+    <a
+        href="data/Caocap/caocap.html"
+        target="khung"
+    >
+        📓&nbsp; Trình độ Cao cấp
+    </a>
+
+
+    <div class="version">
+        Online English Test<br>
+        Version 1.0
+    </div>
+
+</div>
+
+
+
+<!-- =====================================
+     KHUNG NỘI DUNG
+===================================== -->
+
+<iframe
+    name="khung"
+    id="mainFrame"
+    src="note.html"
+></iframe>
+
+
+
+<script>
+
+/* =========================================
+   MỞ / ĐÓNG MENU
+========================================= */
+
+function toggleMenu(){
+
+    const menu =
+        document.getElementById("menu");
+
+    const overlay =
+        document.getElementById("overlay");
+
+    menu.classList.toggle("open");
+
+    overlay.classList.toggle("show");
+
+}
+
+
+/* =========================================
+   ĐÓNG MENU
+========================================= */
+
+function closeMenu(){
+
+    const menu =
+        document.getElementById("menu");
+
+    const overlay =
+        document.getElementById("overlay");
+
+    menu.classList.remove("open");
+
+    overlay.classList.remove("show");
+
+}
+
+
+/* =========================================
+   CHỌN MỤC → TỰ ĐÓNG MENU
+========================================= */
+
+document
+    .querySelectorAll(".side-menu a")
+    .forEach(link => {
+
+        link.addEventListener(
+            "click",
+            () => {
+
+                setTimeout(
+                    closeMenu,
+                    100
+                );
+
+            }
+        );
+
+    });
+
+
+/* =========================================
+   SERVICE WORKER
+========================================= */
+
+if("serviceWorker" in navigator){
+
+    window.addEventListener(
+        "load",
+        () => {
+
+            navigator.serviceWorker
+                .register("./service-worker.js")
+
+                .then(() => {
+
+                    console.log(
+                        "PWA: Service Worker đã đăng ký"
+                    );
+
+                })
+
+                .catch(err => {
+
+                    console.error(
+                        "PWA:",
+                        err
+                    );
+
+                });
+
+        }
+    );
+
+}
+
+</script>
+
+
+</body>
+</html>
