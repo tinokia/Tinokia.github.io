@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TOEFL - Đọc hiểu</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: Arial, sans-serif; }
+        body { background: #f0f4f8; padding: 20px; max-width: 900px; margin: 0 auto; }
+        .header { text-align: center; margin-bottom: 20px; }
+        .input-box { text-align: center; margin-bottom: 15px; }
+        input { width: 80px; padding: 8px; font-size: 16px; text-align: center; border-radius: 6px; border: 1px solid #ccc; margin-right: 5px; }
+        .passage { background: white; padding: 18px; border-radius: 8px; margin-bottom: 20px; line-height: 1.6; box-shadow: 0 2px 5px rgba(0,0,0,0.1); white-space: pre-line; }
+        .question-box { background: white; padding: 18px; border-radius: 8px; margin-bottom: 12px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
+        .question { font-weight: bold; margin-bottom: 10px; font-size: 16px; }
+        .option { display: block; padding: 7px; margin: 4px 0; border-radius: 4px; cursor: pointer; border: 1px solid #eee; }
+        .option:hover { background: #f8f9fa; }
+        .correct { background: #d4edda; border-color: #c3e6cb; color: #155724; }
+        .wrong { background: #f8d7da; border-color: #f5c6cb; color: #721c24; }
+        .btn-group { text-align: center; margin-top: 15px; }
+        button { padding: 9px 18px; margin: 0 4px; border: none; border-radius: 5px; background: #007bff; color: white; font-size: 15px; cursor: pointer; }
+        .result { margin-top: 12px; text-align: center; font-weight: bold; font-size: 17px; }
+        .thongbao { color: #dc3545; margin-top: 5px; }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>TOEFL - Đọc hiểu</h1>
+    </div>
+
+    <div class="input-box">
+        <input type="number" id="soBai" min="1" placeholder="Số bài">
+        <button onclick="diDenBai()">Đi đến bài</button>
+        <div class="thongbao" id="thongBao"></div>
+    </div>
+
+    <div class="passage"><strong>Đoạn văn:</strong><br><span id="noiDungDoanVan"></span></div>
+    <div id="danhSachCauHoi"></div>
+
+    <div class="btn-group">
+        <button onclick="nopBai()">Nộp bài</button>
+        <button onclick="lamLai()">Làm lại</button>
+    </div>
+    <div class="result" id="ketQua"></div>
+
+<script src="data.js"></script>
+<script src="data1.js"></script>    
+<script>
+let cauHoiHienTai = [];
+let doanVanHienTai = "";
+let dapAnNguoiDung = [];
+let daNopBai = false;
+const TONG_BAI = DANH_SACH_BAI.length;
+
+window.onload = () => {
+    document.getElementById('soBai');
+};
+
+function diDenBai() {
+    const soBai = parseInt(document.getElementById('soBai').value);
+    document.getElementById('thongBao').innerText = '';
+    if(isNaN(soBai) || soBai < 1 || soBai > TONG_BAI) {
+        document.getElementById('thongBao').innerText = `Chỉ có bài từ 1 đến ${TONG_BAI}`;
+        return;
+    }
+    taiBai(soBai);
+}
+
+function taiBai(bai) {
+    daNopBai = false;
+    document.getElementById('ketQua').innerText = '';
+    document.getElementById('thongBao').innerText = '';
+    const baiDuocChon = DANH_SACH_BAI[bai - 1];
+    doanVanHienTai = baiDuocChon.van;
+    // Tạo bản sao mới để mỗi lần tải/làm lại đều có dữ liệu gốc
+    cauHoiHienTai = baiDuocChon.cauhoi.map(q => ({...q}));
+    dapAnNguoiDung = new Array(cauHoiHienTai.length).fill(null);
+    document.getElementById('noiDungDoanVan').innerText = doanVanHienTai;
+    hienThiCauHoi();
+}
+
+function tronDapAn(dsDa) {
+    // Hàm trộn nội dung, giữ nguyên nhãn A/B/C/D
+    let noiDung = dsDa.map(x => x.nd);
+    noiDung.sort(() => Math.random() - 0.5);
+    return [
+        {nhan:'A', nd: noiDung[0]},
+        {nhan:'B', nd: noiDung[1]},
+        {nhan:'C', nd: noiDung[2]},
+        {nhan:'D', nd: noiDung[3]}
+    ];
+}
+
+function hienThiCauHoi() {
+    document.getElementById('danhSachCauHoi').innerHTML = cauHoiHienTai.map((q, i) => {
+        // Chỉ trộn khi CHƯA nộp bài
+        if(!daNopBai) {
+            let dsDaGoc = [
+                {nhan:'A', nd: q.A},
+                {nhan:'B', nd: q.B},
+                {nhan:'C', nd: q.C},
+                {nhan:'D', nd: q.D}
+            ];
+            let dsDaMoi = tronDapAn(dsDaGoc);
+            q.A = dsDaMoi[0].nd;
+            q.B = dsDaMoi[1].nd;
+            q.C = dsDaMoi[2].nd;
+            q.D = dsDaMoi[3].nd;
+        }
+
+        return `
+        <div class="question-box">
+            <div class="question">${q.question}</div>
+            <label class="option ${daNopBai ? (q.correct === 'A' ? 'correct' : (dapAnNguoiDung[i] === 'A' ? 'wrong' : '')) : ''}">
+                <input type="radio" name="cau${i}" value="A" ${dapAnNguoiDung[i]==='A'?'checked':''} ${daNopBai?'disabled':''} onchange="dapAnNguoiDung[${i}]='A'">
+                A. ${q.A}
+            </label>
+            <label class="option ${daNopBai ? (q.correct === 'B' ? 'correct' : (dapAnNguoiDung[i] === 'B' ? 'wrong' : '')) : ''}">
+                <input type="radio" name="cau${i}" value="B" ${dapAnNguoiDung[i]==='B'?'checked':''} ${daNopBai?'disabled':''} onchange="dapAnNguoiDung[${i}]='B'">
+                B. ${q.B}
+            </label>
+            <label class="option ${daNopBai ? (q.correct === 'C' ? 'correct' : (dapAnNguoiDung[i] === 'C' ? 'wrong' : '')) : ''}">
+                <input type="radio" name="cau${i}" value="C" ${dapAnNguoiDung[i]==='C'?'checked':''} ${daNopBai?'disabled':''} onchange="dapAnNguoiDung[${i}]='C'">
+                C. ${q.C}
+            </label>
+            <label class="option ${daNopBai ? (q.correct === 'D' ? 'correct' : (dapAnNguoiDung[i] === 'D' ? 'wrong' : '')) : ''}">
+                <input type="radio" name="cau${i}" value="D" ${dapAnNguoiDung[i]==='D'?'checked':''} ${daNopBai?'disabled':''} onchange="dapAnNguoiDung[${i}]='D'">
+                D. ${q.D}
+            </label>
+        </div>
+    `}).join('');
+}
+
+function nopBai() {
+    daNopBai = true;
+    let soCauDung = 0;
+    cauHoiHienTai.forEach((q, i) => {
+        if(dapAnNguoiDung[i] === q.correct) soCauDung++;
+    });
+    document.getElementById('ketQua').innerText = `Kết quả: ${soCauDung}/${cauHoiHienTai.length} câu đúng`;
+    hienThiCauHoi();
+}
+
+function lamLai() {
+    daNopBai = false;
+    document.getElementById('ketQua').innerText = '';
+    dapAnNguoiDung.fill(null);
+    // Tải lại dữ liệu gốc để trộn mới hoàn toàn
+    const soBaiHienTai = parseInt(document.getElementById('soBai').value);
+    cauHoiHienTai = DANH_SACH_BAI[soBaiHienTai - 1].cauhoi.map(q => ({...q}));
+    hienThiCauHoi();
+}
+
+</script>
+</body>
+</html>
