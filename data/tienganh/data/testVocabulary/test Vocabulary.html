@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<title>Toeic test Vocabulary</title>
+<style>
+body{
+  font-family: Arial;
+  max-width: 900px;
+  margin: auto;
+  padding: 20px;
+  padding-bottom: 50px;
+}
+input, button{
+  padding: 8px 15px;
+  font-size: 16px;
+}
+.question{
+  margin-bottom: 20px;
+  border-bottom: 1px solid #ddd;
+  padding-bottom: 10px;
+}
+.answers label{
+  display: block;
+  margin: 6px 0;
+  cursor: pointer;
+  font-size: 16px;
+}
+.correct{ color: green; font-weight: bold; }
+.wrong{ color: red; font-weight: bold; }
+</style>
+</head>
+
+<body>
+<h2>📝 Toeic test Vocabulary</h2>
+<p>
+  Nhập số bài từ: 1→20
+  <input type="number" id="testNumber" min="1" max="150" style="width:80px">
+  <button onclick="loadTest()">Làm Bài</button>
+</p>
+
+<form>
+  <div id="quiz"></div>
+  <div id="hiddenInputs"></div>
+  <button type="button" onclick="submitTest()">Nộp Bài</button>
+</form>
+
+<h3 id="result"></h3>
+
+<script>
+// Khởi tạo dữ liệu toàn cục
+var BAI_TOEIC = {};
+
+// TẢI TẤT CẢ FILE DỮ LIỆU NGAY LÚC MỞ TRANG
+function taiTatCaFile(){
+  var dsFile = ["toeic_vocab.js", "toeic_vocab1.js", "toeic_vocab2.js"];
+  dsFile.forEach(tenFile=>{
+    var s = document.createElement("script");
+    s.src = tenFile;
+    document.head.appendChild(s);
+  });
+}
+
+// Xáo trộn đáp án
+function shuffle(arr){
+  for(let i=arr.length-1;i>0;i--){
+    let j=Math.floor(Math.random()*(i+1));
+    [arr[i],arr[j]]=[arr[j],arr[i]];
+  }
+}
+
+let currentQuestions=[], submitted=false;
+
+// Nạp bài kiểm tra - KHÔNG CÓ QUY TẮC CHIA FILE NÀO CẢ
+function loadTest(){
+  let testNo = parseInt(document.getElementById("testNumber").value);
+
+  if(!BAI_TOEIC[testNo]){
+    alert("Không có bài này");
+    return;
+  }
+
+  submitted=false;
+  document.getElementById("result").innerText="";
+  currentQuestions=[...BAI_TOEIC[testNo]];
+
+  let html="", hid="";
+  currentQuestions.forEach((q,i)=>{
+    let ans=[{k:"A",t:q.A},{k:"B",t:q.B},{k:"C",t:q.C},{k:"D",t:q.D}];
+    shuffle(ans);
+    html += `<div class="question" id="q${i}"><p><b>Câu ${i+1}:</b> ${q.question}</p><div class="answers">`;
+    ans.forEach(a=>html+=`<label data-k="${a.k}"><input type="radio" name="q${i}" onchange="save(${i},'${a.k}')"> ${a.t}</label>`);
+    html += `</div></div>`;
+    hid += `<input type="hidden" id="a${i}">`;
+  });
+  document.getElementById("quiz").innerHTML=html;
+  document.getElementById("hiddenInputs").innerHTML=hid;
+}
+
+function save(i,v){if(!submitted)document.getElementById("a"+i).value=v;}
+
+function submitTest(){
+  if(submitted)return; submitted=true;
+  document.querySelectorAll("input[type=radio]").forEach(r=>r.disabled=true);
+  let d=0;
+  currentQuestions.forEach((q,i)=>{
+    let tr=document.getElementById("a"+i).value;
+    document.querySelectorAll("#q"+i+" label").forEach(l=>{
+      if(l.dataset.k==q.correct)l.classList.add("correct");
+      if(l.dataset.k==tr && tr!=q.correct)l.classList.add("wrong");
+    });
+    if(tr==q.correct)d++;
+  });
+  document.getElementById("result").innerText=`Điểm: ${d}/${currentQuestions.length}`;
+}
+
+// Tự động tải hết file khi mở trang
+taiTatCaFile();
+</script>
+
+</body>
+</html>
