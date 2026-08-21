@@ -1,0 +1,381 @@
+<!DOCTYPE html>  
+<html lang="vi">  
+<head>  
+    <meta charset="UTF-8">  
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+    <title>📚 Online English Test</title>  
+    <style>  
+        *{  
+            margin:0;  
+            padding:0;  
+            box-sizing:border-box;  
+            font-family:Arial, Helvetica, sans-serif;  
+        }  
+          
+        body{  
+            background:#f5f7fa;  
+            max-width:700px;  
+            margin:0 auto;  
+            padding:25px 15px 35px;  
+            color:#333;  
+        }  
+          
+        .header{  
+            text-align:center;  
+            margin-bottom:20px;  
+            padding:20px 10px 18px;  
+            background:#ffffff;  
+            border-radius:14px;  
+            box-shadow: 0 3px 12px rgba(0,0,0,.07);  
+        }  
+          
+        .header-icon{  
+            font-size:40px;  
+            margin-bottom:7px;  
+        }  
+          
+        .header h1{  
+            color:#1976D2;  
+            font-size:24px;  
+            font-weight:bold;  
+            margin-bottom:12px;  
+        }  
+          
+        .version{  
+            display:inline-block;  
+            padding:6px 14px;  
+            background:#e8f5e9;  
+            color:#2e7d32;  
+            border-radius:20px;  
+            font-size:14px;  
+            font-weight:bold;  
+            margin-bottom:15px;  
+        }  
+
+        .home-link{  
+            display:inline-block;  
+            width:100%;  
+            max-width:220px;  
+            padding:12px 20px;  
+            background:#1976D2;  
+            color:#ffffff !important;  
+            text-decoration:none;  
+            border-radius:10px;  
+            font-size:15px;  
+            font-weight:bold;  
+            transition: all .25s ease;  
+            box-shadow: 0 2px 8px rgba(25, 118, 210, 0.25);  
+        }  
+          
+        .home-link:hover{  
+            background:#1565C0;  
+            transform: translateY(-2px);  
+            box-shadow: 0 4px 12px rgba(25, 118, 210, 0.35);  
+        }  
+          
+        .home-link:active{  
+            transform: translateY(0);  
+        }  
+          
+        .note{  
+            background:#fff8e1;  
+            border-left:5px solid #ffc107;  
+            padding:15px 16px;  
+            border-radius:10px;  
+            color:#795548;  
+            margin-bottom:20px;  
+            line-height:1.65;  
+            font-size:14px;  
+            box-shadow: 0 3px 10px rgba(0,0,0,.05);  
+        }  
+          
+        .note-title{  
+            display:block;  
+            color:#e65100;  
+            font-weight:bold;  
+            font-size:16px;  
+            margin-bottom:5px;  
+        }  
+          
+        .note a{  
+            display:inline-block;  
+            margin-top:6px;  
+            color:#1976D2;  
+            font-weight:bold;  
+            text-decoration:none;  
+            word-break:break-all;  
+        }  
+          
+        .note a:hover{  
+            text-decoration:underline;  
+        }  
+          
+        .update-info{  
+            background:#ffffff;  
+            padding:18px;  
+            border-radius:14px;  
+            box-shadow: 0 3px 12px rgba(0,0,0,.07);  
+        }  
+          
+        .update-info h3{  
+            color:#1976D2;  
+            font-size:19px;  
+            margin-bottom:14px;  
+            padding-bottom:11px;  
+            border-bottom:1px solid #eeeeee;  
+        }  
+          
+        /* =====================================  
+           CARD TỪNG BỘ BÀI - SÁT NHAU HƠN  
+        ===================================== */  
+        .course{  
+            margin-bottom:9px;  
+            padding:12px 13px;  
+            background:#fafafa;  
+            border:1px solid #eeeeee;  
+            border-radius:10px;  
+            display:flex;           
+            justify-content:flex-start; /* ✅ Đổi: không giãn ra 2 đầu, sát nhau */  
+            align-items:center;     
+            gap:12px;                   /* ✅ Khoảng cách giữa tên và thông tin */  
+            transition: background .2s, transform .15s, box-shadow .2s;  
+        }  
+          
+        .course:last-child{  
+            margin-bottom:0;  
+        }  
+          
+        .course-name{  
+            font-size:15px;  
+            font-weight:bold;  
+            color:#333;  
+            white-space:nowrap;     
+            flex-shrink:0;          
+        }  
+          
+        .course-name span{  
+            color:#1976D2;  
+        }  
+          
+        .course-info{  
+            color:#777;  
+            font-size:13px;  
+            line-height:1.5;  
+            white-space:nowrap;     
+        }  
+          
+        .current{  
+            color:#2e7d32;  
+            font-weight:bold;  
+        }  
+          
+        .new{  
+            display:inline-block;  
+            margin-left:5px;  
+            padding:2px 7px;  
+            background:#ffebee;  
+            color:#d32f2f;  
+            border-radius:10px;  
+            font-size:11px;  
+            font-weight:bold;  
+        }  
+          
+        .footer{  
+            text-align:center;  
+            color:#999;  
+            font-size:12px;  
+            margin-top:18px;  
+            line-height:1.6;  
+        }  
+          
+        /* =====================================  
+           MOBILE  
+        ===================================== */  
+        @media(max-width:600px){  
+            body{  
+                padding: 16px 11px 30px;  
+            }  
+          
+            .header{  
+                padding: 17px 10px;  
+                border-radius:13px;  
+            }  
+          
+            .header-icon{  
+                font-size:36px;  
+            }  
+          
+            .header h1{  
+                font-size:21px;  
+            }  
+
+            .home-link{  
+                font-size:14px;  
+                padding:11px 18px;  
+                max-width:200px;  
+            }  
+          
+            .update-info{  
+                padding:14px;  
+            }  
+          
+            .update-info h3{  
+                font-size:17px;  
+            }  
+          
+            .course{  
+                padding: 11px 12px;  
+                flex-wrap:wrap;      
+                gap:4px;  
+            }  
+          
+            .course-name{  
+                font-size:14px;  
+                width:100%;         
+                margin-bottom:3px;  
+            }  
+          
+            .course-info{  
+                font-size:12.5px;  
+            }  
+        }  
+          
+        @media(max-width:360px){  
+            body{  
+                padding-left:8px;  
+                padding-right:8px;  
+            }  
+          
+            .update-info{  
+                padding:11px;  
+            }  
+          
+            .course{  
+                padding:10px;  
+            }  
+
+            .home-link{  
+                max-width:100%;  
+            }  
+        }  
+    </style>  
+</head>  
+<body>  
+    <div class="header">  
+        <div class="version">  
+            ✅ Cập nhật Version 2.0  
+        </div>
+        <a href="https://tinokia.github.io" target="_parent" class="home-link">🏠 Trang chủ</a>
+  <br> Bạn hãy nhấn vào ☰ để chọn bài làm.
+    </div>  
+
+    <div class="update-info">  
+        <h3>📋 Thông tin các bộ bài</h3>  
+
+        <div class="course">  
+            <div class="course-name">📝 <span>Test Vocabulary</span></div>  
+            <div class="course-info">  
+                Tổng 600 bài &nbsp;→&nbsp;  
+                <span class="current">Hiện có 3 bài</span>  
+                <span class="new">Mới: 20 bài</span>  
+            </div>  
+        </div>  
+
+        <div class="course">  
+            <div class="course-name">📘 <span>Grammar</span></div>  
+            <div class="course-info">  
+                Tổng 163 bài &nbsp;→&nbsp;  
+                <span class="current">Hiện có 4 bài</span>  
+            </div>  
+        </div>  
+
+        <div class="course">  
+            <div class="course-name">📕 <span>Từ sai</span></div>  
+            <div class="course-info">  
+                Tổng 51 bài &nbsp;→&nbsp;  
+                <span class="current">Hiện có 8 bài</span>  
+            </div>  
+        </div>  
+
+        <div class="course">  
+            <div class="course-name">📖 <span>Đọc hiểu</span></div>  
+            <div class="course-info">  
+                Tổng 157 bài &nbsp;→&nbsp;  
+                <span class="current">Hiện có 9 bài</span>  
+            </div>  
+        </div>  
+
+        <div class="course">  
+            <div class="course-name">📘 <span>Đồng nghĩa</span></div>  
+            <div class="course-info">  
+                Tổng 46 bài &nbsp;→&nbsp;  
+                <span class="current">Hiện có 10 bài</span>  
+            </div>  
+        </div>  
+
+        <div class="course">  
+            <div class="course-name">📘 <span>Level TOEFL</span></div>  
+            <div class="course-info">  
+                Tổng 82 bài &nbsp;→&nbsp;  
+                <span class="current">Hiện có 0 bài</span>  
+                <span class="new">Mới: 10 bài</span>  
+            </div>  
+        </div>  
+
+        <div class="course">  
+            <div class="course-name">📗 <span>Level A</span></div>  
+            <div class="course-info">  
+                Tổng 40 bài &nbsp;→&nbsp;  
+                <span class="current">Hiện có 4 bài</span>  
+                <span class="new">Mới: 8 bài</span>  
+            </div>  
+        </div>  
+
+        <div class="course">  
+            <div class="course-name">📙 <span>Level B</span></div>  
+            <div class="course-info">  
+                Tổng 23 bài &nbsp;→&nbsp;  
+                <span class="current">Hiện có 3 bài</span>  
+                <span class="new">Mới: 6 bài</span>  
+            </div>  
+        </div>  
+
+        <div class="course">  
+            <div class="course-name">📕 <span>Level C</span></div>  
+            <div class="course-info">  
+                Tổng 202 bài &nbsp;→&nbsp;  
+                <span class="current">Hiện có 6 bài</span>  
+            </div>  
+        </div>  
+
+        <div class="course">  
+            <div class="course-name">📓 <span>Trình độ Cơ bản</span></div>  
+            <div class="course-info">  
+                Tổng 13 bài &nbsp;→&nbsp;  
+                <span class="current">Hiện có 5 bài</span>  
+            </div>  
+        </div>  
+
+        <div class="course">  
+            <div class="course-name">📗 <span>Trình độ Trung cấp</span></div>  
+            <div class="course-info">  
+                Tổng 30 bài &nbsp;→&nbsp;  
+                <span class="current">Hiện có 6 bài</span>  
+            </div>  
+        </div>  
+
+        <div class="course">  
+            <div class="course-name">📒 <span>Trình độ Cao cấp</span></div>  
+            <div class="course-info">  
+                Tổng 25 bài &nbsp;→&nbsp;  
+                <span class="current">Hiện có 2 bài</span>  
+            </div>  
+        </div>  
+    </div>  
+
+    <div class="footer">  
+        📚 Online English Test<br>  
+        Chúc bạn học tập hiệu quả! 🌱  
+    </div>  
+</body>  
+</html>
