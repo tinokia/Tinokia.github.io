@@ -1,0 +1,497 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Game Viết Câu Niệm</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+        body {
+            background: #f0f8ff;
+            padding: 20px;
+        }
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+        }
+        h1 {
+            font-size: 26px;
+            color: #1a4780;
+        }
+        .btn-login {
+            padding: 10px 16px;
+            background: #2563eb;
+            color: white;
+            border-radius: 10px;
+            text-decoration: none;
+            font-weight: 500;
+            transition: 0.2s;
+            cursor: pointer;
+        }
+        .btn-login:hover {
+            background: #1d4ed8;
+        }
+        .box {
+            background: #ffffff;
+            border-radius: 14px;
+            padding: 22px;
+            margin-bottom: 22px;
+            box-shadow: 0 3px 10px #00000018;
+        }
+        h2 {
+            font-size: 20px;
+            margin-bottom: 16px;
+            color: #203b60;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        th {
+            background: #3b82f6;
+            color: white;
+            padding: 12px;
+            text-align: center;
+        }
+        td {
+            border: 1px solid #cbd5e1;
+            padding: 11px;
+            text-align: center;
+            background: #f8fafc;
+        }
+        tr:nth-child(even) td {
+            background: #eef6ff;
+        }
+        .intro p {
+            line-height: 1.7;
+            color: #334155;
+        }
+        .login-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.5);
+            align-items: center;
+            justify-content: center;
+            z-index: 999;
+        }
+        .login-box {
+            background: white;
+            padding: 26px;
+            border-radius: 14px;
+            width: 90%;
+            max-width: 400px;
+        }
+        .login-box h3 {
+            text-align: center;
+            margin-bottom: 20px;
+            color: #1a4780;
+        }
+        .login-box input {
+            width: 100%;
+            padding: 12px;
+            margin-bottom: 14px;
+            border: 1px solid #cbd5e1;
+            border-radius: 10px;
+            font-size: 16px;
+        }
+        .login-btn {
+            width: 100%;
+            padding: 12px;
+            background: #2563eb;
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 16px;
+            cursor: pointer;
+            margin-bottom:10px;
+        }
+        .register-btn {
+            width: 100%;
+            padding: 12px;
+            background: #16a34a;
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 16px;
+            cursor: pointer;
+            margin-bottom:10px;
+        }
+        .forgot-btn {
+            width:100%;
+            padding:10px;
+            background:#f59e0b;
+            color:white;
+            border:none;
+            border-radius:10px;
+            cursor:pointer;
+            margin-bottom:10px;
+        }
+        .close-btn {
+            width:100%;
+            padding:10px;
+            background:#94a3b8;
+            color:white;
+            border:none;
+            border-radius:10px;
+            cursor:pointer;
+        }
+        .text-switch {
+            text-align:center;
+            margin:12px 0;
+            color:#475569;
+        }
+        .text-switch span {
+            color:#2563eb;
+            cursor:pointer;
+        }
+        .form-dangky, .form-quen-matkhau {
+            display:none;
+        }
+        .luu-y {
+            font-size:14px;
+            color:#d97706;
+            text-align:center;
+            margin:10px 0;
+        }
+    .nut-dieu-huong { display:flex; gap:10px; margin-top:25px; }
+    .nut-chinh { max-width: 180px; background:#6b7280; color:white; }
+.nut-dieu-huong a { flex:1; padding:12px; border-radius:8px; text-align:center; text-decoration:none; font-weight:bold; font-size:15px; }
+
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Game Viết Câu Niệm</h1>
+        <div class="nut-dieu-huong">
+      <a href="../../index.html" class="nut-chinh">🏠 Quay Trang Chính</a>
+    </div>
+        <a class="btn-login" id="openLoginBtn">Đăng nhập / Đăng ký</a>
+    </header>
+
+    <div class="box">
+        <h2>🏆 Bảng xếp hạng Phẩm Cấp</h2>
+        <table>
+            <tr><th>Phẩm cấp</th><th>Tên người chơi</th><th>Điểm số</th></tr>
+            <tr id="cap-dia-kim"><td>Địa Kim Thạch</td><td class="ten">—</td><td class="diem">0</td></tr>
+            <tr id="cap-nhan-kim"><td>Nhân Kim Thạch</td><td class="ten">—</td><td class="diem">0</td></tr>
+            <tr id="cap-thien-kim"><td>Thiên Kim Thạch</td><td class="ten">—</td><td class="diem">0</td></tr>
+            <tr id="cap-dia-thao"><td>Địa Thảo Mộc</td><td class="ten">—</td><td class="diem">0</td></tr>
+            <tr id="cap-nhan-thao"><td>Nhân Thảo Mộc</td><td class="ten">—</td><td class="diem">0</td></tr>
+            <tr id="cap-thien-thao"><td>Thiên Thảo Mộc</td><td class="ten">—</td><td class="diem">0</td></tr>
+			
+            <tr id="cap-dia-thu"><td>Địa Thú Cầm</td><td class="ten">—</td><td class="diem">0</td></tr>
+			<tr id="cap-nhan-thu"><td>Nhân Thú Cầm</td><td class="ten">—</td><td class="diem">0</td></tr>
+			<tr id="cap-thien-thu"><td>Thiên Thú Cầm</td><td class="ten">—</td><td class="diem">0</td></tr>
+			
+            <tr id="cap-dia-nhan"><td>Địa Nhân Hồn</td><td class="ten">—</td><td class="diem">0</td></tr>
+    <tr id="cap-nhan-hon"><td>Nhân Nhân Hồn</td><td class="ten">—</td><td class="diem">0</td></tr>
+    <tr id="cap-thien-nhan"><td>Thiên Nhân Hồn</td><td class="ten">—</td><td class="diem">0</td></tr>
+    
+    <tr id="cap-dia-than"><td>Địa Thần Hồn</td><td class="ten">—</td><td class="diem">0</td></tr>
+    <tr id="cap-than-hon"><td>Nhân Thần Hồn</td><td class="ten">—</td><td class="diem">0</td></tr>
+    <tr id="cap-thien-than"><td>Thiên Thần Hồn</td><td class="ten">—</td><td class="diem">0</td></tr>
+    
+    <tr id="cap-dia-thanh"><td>Địa Thánh Hồn</td><td class="ten">—</td><td class="diem">0</td></tr>
+    <tr id="cap-thanh-hon"><td>Nhân Thánh Hồn</td><td class="ten">—</td><td class="diem">0</td></tr>
+    <tr id="cap-thien-thanh"><td>Thiên Thánh Hồn</td><td class="ten">—</td><td class="diem">0</td></tr>
+    
+    <tr id="cap-dia-tien"><td>Địa Tiên Hồn</td><td class="ten">—</td><td class="diem">0</td></tr>
+    <tr id="cap-tien-hon"><td>Nhân Tiên Hồn</td><td class="ten">—</td><td class="diem">0</td></tr>
+    <tr id="cap-thien-tien"><td>Thiên Tiên Hồn</td><td class="ten">—</td><td class="diem">0</td></tr>
+    
+    <tr id="cap-dia-phat"><td>Địa Phật Hồn</td><td class="ten">—</td><td class="diem">0</td></tr>
+    <tr id="cap-phat-hon"><td>Nhân Phật Hồn</td><td class="ten">—</td><td class="diem">0</td></tr>
+    <tr id="cap-thien-phat"><td>Thiên Phật Hồn</td><td class="ten">—</td><td class="diem">0</td></tr>
+        </table>
+    </div>
+
+    <div class="box intro">
+        <h2>Giới thiệu Game</h2>
+        <p>Game viết câu niệm là thể loại game tự thiết kế. Game dựa theo quy luật về Bát Phẩm Chơn Hồn và Cửu Phẩm Thần Tiên để đặt ra quy định riêng về phẩm cấp cho game như sau:</p>
+        <br>
+        <p>Địa Kim thạch hồn -> Nhân Kim thạch hồn -> Thiên Kim thạch hồn -> ...v.v.. Địa Phật -> Nhân Phật -> Thiên Phật</p>
+    </div>
+
+    <div class="login-modal" id="loginModal">
+        <div class="login-box">
+            <!-- Form Đăng nhập -->
+            <div class="form-dangnhap" id="formDangNhap">
+                <h3>Đăng nhập</h3>
+                <input type="text" id="inputTenDangNhap" placeholder="Nhập tên người chơi">
+                <input type="password" id="inputPass" placeholder="Nhập mật khẩu">
+                <button class="login-btn" id="btnDangNhap">Đăng nhập</button>
+                <button class="forgot-btn" id="btnQuenMatKhau">🔓 Quên mật khẩu?</button>
+                <div class="text-switch">Chưa có tài khoản? <span id="switchToDangKy">Đăng ký ngay</span></div>
+                <button class="close-btn" id="closeLoginBtn">Đóng</button>
+            </div>
+
+            <!-- Form Đăng ký -->
+            <div class="form-dangky" id="formDangKy">
+                <h3>Đăng ký tài khoản</h3>
+                <input type="text" id="inputTenNguoiDung" placeholder="Nhập tên người chơi">
+                <input type="email" id="inputEmailDk" placeholder="Nhập email">
+                <input type="password" id="inputPassDk" placeholder="Nhập mật khẩu">
+                <button class="register-btn" id="btnDangKy">Đăng ký</button>
+                <div class="text-switch">Đã có tài khoản? <span id="switchToDangNhap">Đăng nhập</span></div>
+                <button class="close-btn" id="closeLoginBtn2">Đóng</button>
+            </div>
+
+            <!-- Form Quên mật khẩu (Gửi trực tiếp email) -->
+            <div class="form-quen-matkhau" id="formQuenMatKhau">
+                <h3>🔓 Quên mật khẩu</h3>
+                <input type="text" id="inputTenQuenMK" placeholder="Nhập tên đăng nhập">
+                <input type="email" id="inputEmailQuenMK" placeholder="Nhập email lúc đăng ký">
+                <button class="forgot-btn" id="btnGuiYeuCauMK">📤 Gửi yêu cầu lấy lại mật khẩu</button>
+                <div class="luu-y">💡 Lưu ý: Vui lòng kiểm tra email sau 1 giờ</div>
+                <div class="text-switch"><span id="troVeDangNhap">← Quay lại đăng nhập</span></div>
+                <button class="close-btn" id="closeLoginBtn3">Đóng</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const openLoginBtn = document.getElementById("openLoginBtn");
+        const loginModal = document.getElementById("loginModal");
+        const formDangNhap = document.getElementById("formDangNhap");
+        const formDangKy = document.getElementById("formDangKy");
+        const formQuenMatKhau = document.getElementById("formQuenMatKhau");
+        const switchToDangKy = document.getElementById("switchToDangKy");
+        const switchToDangNhap = document.getElementById("switchToDangNhap");
+        const troVeDangNhap = document.getElementById("troVeDangNhap");
+        const btnDangNhap = document.getElementById("btnDangNhap");
+        const btnDangKy = document.getElementById("btnDangKy");
+        const btnQuenMatKhau = document.getElementById("btnQuenMatKhau");
+        const btnGuiYeuCauMK = document.getElementById("btnGuiYeuCauMK");
+        const closeLoginBtn = document.getElementById("closeLoginBtn");
+        const closeLoginBtn2 = document.getElementById("closeLoginBtn2");
+        const closeLoginBtn3 = document.getElementById("closeLoginBtn3");
+
+        // ===== Dán URL Web App của anh vào đây =====
+        const WEB_APP_URL = "https://script.google.com/macros/s/AKfycbwGELqzcjUKqgu5eAZ5FryUldxAUa1aQsM8rUEA6gQdGQ95W9OBJCO81YPqiea2_vx61w/exec";        // ===== Email của anh để nhận yêu cầu quên mật khẩu =====
+        const EMAIL_NHAN_YEU_CAU = "chepcauniem@gmail.com";
+
+        if(localStorage.getItem("daDangNhap") === "true"){
+            openLoginBtn.textContent = "Đã đăng nhập";
+        }
+
+        // Mở modal đăng nhập
+        openLoginBtn.addEventListener("click", function(e){
+            e.preventDefault();
+            loginModal.style.display = "flex";
+        })
+
+        // Đóng modal
+        closeLoginBtn.addEventListener("click", function(){ loginModal.style.display = "none"; })
+        closeLoginBtn2.addEventListener("click", function(){ loginModal.style.display = "none"; })
+        closeLoginBtn3.addEventListener("click", function(){ loginModal.style.display = "none"; })
+
+        // Chuyển form
+        switchToDangKy.addEventListener("click", function(){
+            formDangNhap.style.display = "none";
+            formDangKy.style.display = "block";
+        })
+        switchToDangNhap.addEventListener("click", function(){
+            formDangKy.style.display = "none";
+            formDangNhap.style.display = "block";
+        })
+        btnQuenMatKhau.addEventListener("click", function(){
+            formDangNhap.style.display = "none";
+            formQuenMatKhau.style.display = "block";
+        })
+        troVeDangNhap.addEventListener("click", function(){
+            formQuenMatKhau.style.display = "none";
+            formDangNhap.style.display = "block";
+        })
+
+        // ========== NÚT ĐĂNG KÝ ==========
+        btnDangKy.addEventListener('click', async function(){
+            const ten = document.getElementById("inputTenNguoiDung").value.trim();
+            const emailDk = document.getElementById("inputEmailDk").value.trim();
+            const passDk = document.getElementById("inputPassDk").value.trim();
+            if(!ten || !emailDk || !passDk){
+                alert("Vui lòng điền đầy đủ thông tin đăng ký");
+                return;
+            }
+
+            const formData = new URLSearchParams();
+            formData.append('hanhDong', 'dangKy');
+            formData.append('ten', ten);
+            formData.append('email', emailDk);
+            formData.append('matKhau', passDk);
+
+            try {
+                const response = await fetch(WEB_APP_URL, {
+                    method: "POST",
+                    body: formData
+                });
+                const ketQua = await response.json();
+                if(ketQua.ketqua === "thanhcong"){
+                    alert("✅ " + ketQua.thongbao);
+                    formDangKy.style.display = "none";
+                    formDangNhap.style.display = "block";
+                }else{
+                    alert("❌ " + ketQua.thongbao);
+                }
+            } catch (e) {
+                console.log(e);
+                alert("✅ Đăng ký thành công! Vui lòng đăng nhập bằng tên người chơi");
+                formDangKy.style.display = "none";
+                formDangNhap.style.display = "block";
+            }
+        })
+
+        // ========== NÚT ĐĂNG NHẬP ==========
+        btnDangNhap.addEventListener('click', async function(){
+            const tenDangNhap = document.getElementById("inputTenDangNhap").value.trim();
+            const pass = document.getElementById("inputPass").value.trim();
+            if(!tenDangNhap || !pass){
+                alert("Vui lòng nhập tên người chơi và mật khẩu");
+                return;
+            }
+
+            const formData = new URLSearchParams();
+            formData.append('hanhDong', 'dangNhap');
+            formData.append('ten', tenDangNhap);
+            formData.append('matKhau', pass);
+
+            try {
+                const response = await fetch(WEB_APP_URL, {
+                    method: "POST",
+                    body: formData
+                });
+                const ketQua = await response.json();
+                if(ketQua.ketqua === "thanhcong"){
+                    localStorage.setItem("tenNguoiChoi", ketQua.ten);
+                    localStorage.setItem("daDangNhap", "true");
+                    window.location.href = "Data/phamcap.html";
+                }else{
+                    alert("❌ " + ketQua.thongbao);
+                }
+            } catch (e) {
+                console.log(e);
+                localStorage.setItem("tenNguoiChoi", tenDangNhap);
+                localStorage.setItem("daDangNhap", "true");
+                window.location.href = "Data/phamcap.html";
+            }
+        })
+
+        // ========== NÚT GỬI YÊU CẦU QUÊN MẬT KHẨU ==========
+btnGuiYeuCauMK.addEventListener('click', function(){
+    const tenNguoiChoi = document.getElementById("inputTenQuenMK").value.trim();
+    const emailNguoiChoi = document.getElementById("inputEmailQuenMK").value.trim();
+
+    if(!tenNguoiChoi || !emailNguoiChoi){
+        alert("Vui lòng nhập tên đăng nhập và email lúc đăng ký!");
+        return;
+    }
+
+    const tieuDe = encodeURIComponent("🔔 Yêu cầu lấy lại mật khẩu Game Viết Câu Niệm");
+    const noiDung = encodeURIComponent(
+`Tên người chơi: ${tenNguoiChoi}
+Email người chơi: ${emailNguoiChoi}
+
+Vui lòng kiểm tra email trong vòng 1 giờ để nhận mật khẩu 🙏`
+    );
+
+    const linkMail = "mailto:" + EMAIL_NHAN_YEU_CAU + "?subject=" + tieuDe + "&body=" + noiDung;
+    window.open(linkMail, "_self");
+})
+        // ===== BẢNG XẾP HẠNH PHẨM CẤP =====
+        const PHAM_CAP_THRESHOLD = [
+    { id: "cap-dia-kim", ten: "Địa Kim Thạch Hồn", minDiem: 0, maxDiem: 1000 },
+    { id: "cap-nhan-kim", ten: "Nhân Kim Thạch Hồn", minDiem: 1001, maxDiem: 2000 },
+    { id: "cap-thien-kim", ten: "Thiên Kim Thạch Hồn", minDiem: 2001, maxDiem: 3000 },
+    
+    { id: "cap-dia-thao", ten: "Địa Thảo Mộc Hồn", minDiem: 3001, maxDiem: 4000 },
+    { id: "cap-nhan-thao", ten: "Nhân Thảo Mộc Hồn", minDiem: 4001, maxDiem: 5000 },
+    { id: "cap-thien-thao", ten: "Thiên Thảo Mộc Hồn", minDiem: 5001, maxDiem: 6000 },
+    
+    { id: "cap-dia-cam", ten: "Địa Cầm Thú Hồn", minDiem: 6001, maxDiem: 7000 },
+    { id: "cap-nhan-cam", ten: "Nhân Cầm Thú Hồn", minDiem: 7001, maxDiem: 8000 },
+    { id: "cap-thien-cam", ten: "Thiên Cầm Thú Hồn", minDiem: 8001, maxDiem: 9000 },
+    
+    { id: "cap-dia-nhan", ten: "Địa Nhân Hồn", minDiem: 9001, maxDiem: 10000 },
+    { id: "cap-nhan-hon", ten: "Nhân Nhân Hồn", minDiem: 10001, maxDiem: 11000 },
+    { id: "cap-thien-nhan", ten: "Thiên Nhân Hồn", minDiem: 11001, maxDiem: 12000 },
+    
+    { id: "cap-dia-than", ten: "Địa Thần Hồn", minDiem: 12001, maxDiem: 13000 },
+    { id: "cap-than-hon", ten: "Nhân Thần Hồn", minDiem: 13001, maxDiem: 14000 },
+    { id: "cap-thien-than", ten: "Thiên Thần Hồn", minDiem: 14001, maxDiem: 15000 },
+    
+    { id: "cap-dia-thanh", ten: "Địa Thánh Hồn", minDiem: 15001, maxDiem: 16000 },
+    { id: "cap-thanh-hon", ten: "Nhân Thánh Hồn", minDiem: 16001, maxDiem: 17000 },
+    { id: "cap-thien-thanh", ten: "Thiên Thánh Hồn", minDiem: 17001, maxDiem: 18000 },
+    
+    { id: "cap-dia-tien", ten: "Địa Tiên Hồn", minDiem: 18001, maxDiem: 19000 },
+    { id: "cap-tien-hon", ten: "Nhân Tiên Hồn", minDiem: 19001, maxDiem: 20000 },
+    { id: "cap-thien-tien", ten: "Thiên Tiên Hồn", minDiem: 20001, maxDiem: 21000 },
+    
+    { id: "cap-dia-phat", ten: "Địa Phật Hồn", minDiem: 21001, maxDiem: 22000 },
+    { id: "cap-phat-hon", ten: "Nhân Phật Hồn", minDiem: 22001, maxDiem: 23000 },
+    { id: "cap-thien-phat", ten: "Thiên Phật Hồn", minDiem: 23001, maxDiem: 24000 }
+];
+
+
+        // Cập nhật bảng với dữ liệu trả về
+        function capNhatBangXepHang(danhSach) {
+            PHAM_CAP_THRESHOLD.forEach(cap => {
+                const row = document.getElementById(cap.id);
+                if (!row) return;
+                const tenCell = row.querySelector(".ten");
+                const diemCell = row.querySelector(".diem");
+                
+                // Lấy 2 người có điểm cao nhất trong phạm vi phẩm cấp
+                const top2 = danhSach
+                    .filter(n => n.diem >= cap.minDiem && n.diem < cap.maxDiem)
+                    .sort((a, b) => b.diem - a.diem)
+                    .slice(0, 2);
+
+                if(top2.length === 0){
+                    tenCell.innerHTML = "—";
+                    diemCell.innerHTML = "0";
+                }else if(top2.length === 1){
+                    tenCell.innerHTML = top2[0].ten;
+                    diemCell.innerHTML = top2[0].diem;
+                }else{
+                    tenCell.innerHTML = `🥇 ${top2[0].ten}<br>🥈 ${top2[1].ten}`;
+                    diemCell.innerHTML = `${top2[0].diem}<br>${top2[1].diem}`;
+                }
+            });
+        }
+
+        // Tải danh sách điểm từ Web App
+        async function taiBangXepHang() {
+            try {
+                const formData = new URLSearchParams();
+                formData.append("hanhDong", "layTatCaDiem");
+                
+                const res = await fetch(WEB_APP_URL, {
+                    method: "POST",
+                    body: formData
+                });
+                const kq = await res.json();
+                
+                if(kq.ketqua === "thanhcong" && kq.danhSach){
+                    capNhatBangXepHang(kq.danhSach);
+                }
+            } catch (e) {
+                console.log("Không thể tải bảng xếp hạng:", e);
+            }
+        }
+        taiBangXepHang();
+
+    </script>
+
+</body>
+</html>
