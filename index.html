@@ -3,58 +3,143 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Thư Viện Phật Pháp</title>
-    <style type="text/css">
-<!--
-.style1 {
-	color: #0000FF;
-	font-weight: bold;
-	font-size: 18px;
-}
--->
+    <title>Tủ Sách Tinokia</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', 'Times New Roman', serif;
+        }
+
+        body {
+            background: linear-gradient(180deg, #e0edff 0%, #f0f4ff 50%, #f8fafc 100%);
+            min-height: 100vh;
+        }
+
+        /* === HEADER XANH DƯƠNG === */
+        .header-bar {
+            background: linear-gradient(135deg, #2563eb 0%, #3b82f6 50%, #60a5fa 100%);
+            padding: 2rem 1.5rem;
+            text-align: center;
+            box-shadow: 0 6px 25px rgba(37, 99, 235, 0.25);
+            position: relative;
+        }
+
+        .header-bar h1 {
+            font-size: 2.2rem;
+            font-weight: 800;
+            color: #fff;
+            letter-spacing: 3px;
+            text-shadow: 2px 3px 6px rgba(0,0,0,0.2);
+            margin-bottom: 0.75rem;
+        }
+
+        /* === ĐỒNG HỒ NGÀY THÁNG NĂM — ĐÃ THÊM GIÂY === */
+        .datetime-box {
+            display: inline-block;
+            padding: 0.5rem 1.5rem;
+            border-radius: 50px;
+            color: #ffffff;
+            font-size: 1.1rem;
+            font-weight: 600;
+            letter-spacing: 1px;
+            backdrop-filter: blur(4px);
+            border: 1px solid rgba(255, 0, 0, 1);
+        }
+
+        /* === CONTAINER === */
+        .books-container {
+            max-width: 1000px;
+            margin: 3rem auto;
+            padding: 0 1.5rem;
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 2rem;
+            justify-items: center;
+        }
+
+        @media (max-width: 800px) { .books-container { grid-template-columns: repeat(4, 1fr); gap: 1.5rem; } }
+        @media (max-width: 620px) { .books-container { grid-template-columns: repeat(3, 1fr); gap: 1.25rem; } }
+        @media (max-width: 420px) { .books-container { grid-template-columns: repeat(2, 1fr); gap: 1.5rem; } }
+        /* === THẺ SÁCH — XANH LÁ + RÚT NGẮN === */
+        .book-card {
+            width: 110px;
+            height: 140px;
+            background: linear-gradient(90deg, #16a34a 0%, #22c55e 8%, #fef9c3 15%, #fef08a 100%);
+            border-radius: 5px 10px 10px 5px;
+            box-shadow: 
+                4px 6px 12px rgba(37, 99, 235, 0.15),
+                inset -4px 0 8px rgba(0,0,0,0.08);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0.75rem 0.5rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: 1px solid #3b82f6;
+            text-decoration: none;
+        }
+        .book-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 
+                6px 10px 20px rgba(37, 99, 235, 0.2),
+                inset -4px 0 8px rgba(0,0,0,0.05);
+        }
+        .book-title {
+            color: #1e293b;
+            font-size: 0.9rem;
+            font-weight: 700;
+            text-align: center;
+            line-height: 1.4;
+        }
+        /* === FOOTER === */
+        .footer-bar {
+            background: linear-gradient(135deg, #1d4ed8 0%, #3b82f6 50%, #60a5fa 100%);
+            padding: 1.5rem;
+            text-align: center;
+            margin-top: 3rem;
+            box-shadow: 0 -4px 15px rgba(37, 99, 235, 0.2);
+        }
+        .footer-bar p {
+            font-size: 1rem;
+            color: white;
+            font-weight: 500;
+            letter-spacing: 0.5px;
+        }
     </style>
 </head>
 <body>
-<table width="100%" border="0">
-  <tr>
-    <td align="center" bgcolor="#FFCC00"><h1>TỦ SÁCH TINOKIA</h1></td>
-  </tr>
-</table>
-<table width="828" border="0" align="center">
-  <tr>
-    <td colspan="4" align="center">&nbsp;</td>
-  </tr>
-  <tr>
-    <td width="200" align="center"><a href="data/72-dia-cau.html"><img src="data/hinh/72-dia-cau-hh.png" width="200" height="150" border="0"></a></td>
-    <td width="200" align="center"><a href="data/Dien-Cam-Tam-The.html"><img src="data/hinh/dien-cam-tam-the.png" width="200" height="150"></a></td>
-    <td width="200" align="center"><a href="data/bai-trong-suot.html"><img src="data/hinh/baitrongsuot.png" width="200" height="150"></a></td>
-    <td width="200" align="center"><a href="data/Trac-Nghiem-Vi-Dieu-Phap.html"><img src="data/hinh/tn-vi-dieu-phap.png" width="200" height="150"></a></td>
-	<td align="center"><a href="data/trangvien/TrangVien.html"><img src="data/hinh/trangvien.png" width="200" height="150"></a></td>
-  </tr>
-  <tr>
-    <td align="center"><a href="data/tracnghiem64que.html"><img src="data/hinh/64que.png" width="200" height="150"></a></td>
-    <td align="center"><a href="data/tienganh/online-english-test.html"><img src="data/hinh/Tracnghiemtienganh.png" width="200" height="150"></a></td>
-    <td align="center">&nbsp;</td>
-    <td align="center">&nbsp;</td>
-	<td align="center">&nbsp;</td>
-  </tr>
-  <tr>
-    <td align="center"><a href="data/Phat-Giao.html"></a></td>
-    <td align="center"><a href="data/sach-noi.html"></a></td>
-    <td align="center">&nbsp;</td>
-    <td align="center">&nbsp;</td>
-	<td align="center">&nbsp;</td>
-  </tr>
-  <tr>
-    <td colspan="4" align="center">&nbsp;</td>
-  </tr>
-</table>
-<table width="100%" border="0">
-  <tr>
-    <td align="center" bgcolor="#66FFFF">© 2025 Thư Viện Tinokia</td>
-  </tr>
-</table>
+
+    <div class="header-bar">
+        <h1>📚 TỦ SÁCH TINOKIA</h1>
+        <!-- ✅ ĐỒNG HỒ ĐẦY ĐỦ: GIỜ PHÚT GIÂY + NGÀY THÁNG NĂM -->
+        <div class="datetime-box" id="datetime"></div>
+    </div>
+
+    <div class="books-container">
+        <!--<a href="data/Dien-Cam-Tam-The.html" class="book-card">
+            <div class="book-title">Diễn<br>Cầm<br>Tam<br>Thế</div>
+        </a>
+        <a href="data/Chuthiendialinh.html" class="book-card">
+            <div class="book-title">Chư<br>Thiên<br>Địa<br>Linh</div>
+        </a>
+
+        <a href="data/KinhDich.html" class="book-card">
+            <div class="book-title">64 Quẻ<br>Kinh<br>Dịch,<br>Trắc<br>Nghiệm</div></a>
+
+        <a href="data/online-english-test.html" class="book-card">
+            <div class="book-title">Trắc<br>Nghiệm<br>Tiếng<br>Anh</div></a>-->
+        <a href="data/Game/game.html" class="book-card">
+            <div class="book-title">Game<br>Viết<br>Câu<br>Niệm</div></a>
+        
+    </div>
+
+    <div class="footer-bar">
+        <p>© 2025 Thư Viện Tinokia</p>
+    </div>
+
+    <script src="data/js-css/dongho.js">    </script>
+
 </body>
 </html>
-
-
