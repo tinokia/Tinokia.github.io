@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Thông Tin Phẩm Cấp</title>
+  <style>
+    * { box-sizing: border-box; font-family: sans-serif; }
+    body { max-width: 580px; margin: 0 auto; padding: 20px; background: #f5f0e6; }
+    .box { background: white; padding: 30px 25px; border-radius: 16px; box-shadow: 0 2px 10px rgba(0,0,0,0.08); text-align: center; }
+    h1 { color: #8b4513; margin-top: 0; }
+    .thong-tin { font-size: 20px; color: #444; margin: 20px 0; line-height: 1.8; }
+    .pham-cap { font-weight: bold; color: #8b4513; font-size: 22px; }
+    .btn { display: inline-block; background: #f59e0b; color: white; padding: 14px 30px; border-radius: 8px; text-decoration: none; font-weight: bold; font-size: 18px; margin-top: 20px; transition: 0.2s; }
+    .btn:hover { background: #d97706; }
+    .loading { color: #888; font-size: 16px; }
+    .nut-dieu-huong { display:flex; gap:10px; margin-top:25px; }
+    .nut-dieu-huong a { flex:1; padding:12px; border-radius:8px; text-align:center; text-decoration:none; font-weight:bold; font-size:15px; }
+    .nut-phamcap { background:#8b5cf6; color:white; }
+    .nut-chinh { max-width: 180px; background:#6b7280; color:white; }
+  </style>
+</head>
+<body>
+  <div class="box">
+    <h1>✨ Thông Tin Phẩm Cấp ✨</h1>
+    
+    <div class="thong-tin">
+      <p>Tên người chơi: <strong id="tenNguoiChoi"></strong></p>
+      <p>Số điểm hiện tại: <span id="soDiemHienTai" class="loading">Đang tải...</span></p>
+      <p>Phẩm cấp hiện tại: <span id="phamCapHienTai" class="pham-cap">—</span></p>
+    </div>
+
+    <a id="nutVaoViet" class="btn">📝 Vào viết câu niệm</a>
+
+    <div class="nut-dieu-huong">
+      <a href="../game.html" class="nut-chinh">🏠 Quay Trang Chính</a>
+    </div>
+  </div>
+
+  <script>
+    // 👇 LINK WEB APP CỦA ANH 👇
+    const LINK_WEB_APP = "https://script.google.com/macros/s/AKfycbwGELqzcjUKqgu5eAZ5FryUldxAUa1aQsM8rUEA6gQdGQ95W9OBJCO81YPqiea2_vx61w/exec";
+    
+    const tenNguoiChoi = localStorage.getItem("tenNguoiChoi");
+    const tenHienThi = document.getElementById("tenNguoiChoi");
+    const soDiemHienTai = document.getElementById("soDiemHienTai");
+    const phamCapHienTai = document.getElementById("phamCapHienTai");
+    const nutVaoViet = document.getElementById("nutVaoViet");
+
+    tenHienThi.textContent = tenNguoiChoi || "Chưa đăng nhập";
+
+    function layPhamCap(tongDiem){
+      if (tongDiem <= 1000) return "Địa Kim Thạch Hồn";
+      if (tongDiem <= 2000) return "Nhân Kim Thạch Hồn";
+      if (tongDiem <= 3000) return "Thiên Kim Thạch Hồn";
+      if (tongDiem <= 4000) return "Địa Thảo Mộc Hồn";
+      if (tongDiem <= 5000) return "Nhân Thảo Mộc Hồn";
+      if (tongDiem <= 6000) return "Thiên Thảo Mộc Hồn";
+      if (tongDiem <= 7000) return "Địa Cầm Thú Hồn";
+      if (tongDiem <= 8000) return "Nhân Cầm Thú Hồn";
+      if (tongDiem <= 9000) return "Thiên Cầm Thú Hồn";
+      if (tongDiem <= 10000) return "Địa Nhân Hồn";
+      if (tongDiem <= 11000) return "Nhân Nhân Hồn";
+      if (tongDiem <= 12000) return "Thiên Nhân Hồn";
+      if (tongDiem <= 13000) return "Địa Thần Hồn";
+      if (tongDiem <= 14000) return "Nhân Thần Hồn";
+      if (tongDiem <= 15000) return "Thiên Thần Hồn";
+      if (tongDiem <= 16000) return "Địa Thánh Hồn";
+      if (tongDiem <= 17000) return "Nhân Thánh Hồn";
+      if (tongDiem <= 18000) return "Thiên Thánh Hồn";
+      if (tongDiem <= 19000) return "Địa Tiên Hồn";
+      if (tongDiem <= 20000) return "Nhân Tiên Hồn";
+      if (tongDiem <= 21000) return "Thiên Tiên Hồn";
+      if (tongDiem <= 22000) return "Địa Phật Hồn";
+      if (tongDiem <= 23000) return "Nhân Phật Hồn";
+      return "Thiên Phật Hồn";
+    }
+
+    function layLinkPhamCap(tongDiem){
+  if (tongDiem <= 1000)  return "diakimthach.html";
+  if (tongDiem <= 2000)  return "nhankimthach.html";
+  if (tongDiem <= 3000)  return "thienkimthach.html";
+
+  if (tongDiem <= 4000) return "diathaomoc.html";
+  if (tongDiem <= 5000) return "nhanthaomoc.html";
+  if (tongDiem <= 6000) return "thienthaomoc.html";
+
+  if (tongDiem <= 7000) return "diacamthu.html";
+  if (tongDiem <= 8000) return "nhancamthu.html";
+  if (tongDiem <= 9000) return "thiencamthu.html";
+
+  if (tongDiem <= 10000) return "dianhanhon.html";
+  if (tongDiem <= 11000) return "nhannhanhon.html";
+  if (tongDiem <= 12000) return "thiennhanhon.html";
+
+  if (tongDiem <= 13000) return "diathanhon.html";
+  if (tongDiem <= 14000) return "nhanthanhon.html";
+  if (tongDiem <= 15000) return "thienthanhon.html";
+
+  if (tongDiem <= 16000) return "diathanhhon.html";
+  if (tongDiem <= 17000) return "nhanthanhhon.html";
+  if (tongDiem <= 18000) return "thienthanhhon.html";
+
+  if (tongDiem <= 19000) return "diatienhon.html";
+  if (tongDiem <= 20000) return "nhantienhon.html";
+  if (tongDiem <= 21000) return "thientienhon.html";
+
+  if (tongDiem <= 22000) return "diaphathon.html";
+  if (tongDiem <= 23000) return "nhanphathon.html";
+  return "thienphathon.html";
+}
+
+    async function capNhatSoDiem() {
+      if (!tenNguoiChoi) {
+        soDiemHienTai.textContent = "0";
+        phamCapHienTai.textContent = "Chưa đăng nhập";
+        nutVaoViet.href = "#";
+        return;
+      }
+
+      const formData = new URLSearchParams();
+      formData.append("hanhDong", "layDiem");
+      formData.append("ten", tenNguoiChoi);
+
+      try {
+        const res = await fetch(LINK_WEB_APP, {
+          method: "POST",
+          body: formData
+        });
+        const kq = await res.json();
+        
+        if (kq.ketqua === "thanhcong") {
+          const diem = kq.tongDiem || 0;
+          soDiemHienTai.textContent = diem;
+          phamCapHienTai.textContent = layPhamCap(diem);
+          nutVaoViet.href = layLinkPhamCap(diem);
+        } else {
+          soDiemHienTai.textContent = "0";
+          phamCapHienTai.textContent = "Địa Kim Thạch Hồn";
+          nutVaoViet.href = "diakimthach.html";
+        }
+      } catch (e) {
+        console.log("Lỗi lấy điểm:", e);
+        soDiemHienTai.textContent = "0";
+        phamCapHienTai.textContent = "Địa Kim Thạch Hồn";
+        nutVaoViet.href = "diakimthach.html";
+      }
+    }
+
+    capNhatSoDiem();
+  </script>
+</body>
+</html>

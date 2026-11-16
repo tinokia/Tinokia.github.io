@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Nhân Kim Thạch Hồn</title>
+  <style>
+    * { box-sizing: border-box; font-family: sans-serif; }
+    body{max-width:480px;margin:0 auto;padding:20px;background-color:#f7ddb8;}
+    .box{background:rgba(255,255,255,0.72);padding:25px;border-radius:16px;box-shadow:0 2px 12px rgba(0,0,0,0.12);margin-bottom:20px;}    h1 { text-align: center; color: #8b4513; margin-top:0; }
+    h2 { color:#6b4226; font-size:20px; }
+    p { color:#444; line-height:1.6; }
+    input, textarea, button { width: 100%; padding: 14px; margin: 8px 0; font-size: 18px; border-radius: 8px; border: 1px solid #ddd; }
+    textarea { min-height: 80px; }
+    button { border: none; font-weight: bold; cursor: pointer; transition: 0.2s; }
+    .btn-gui-tam { background: #f59e0b; color: white; }
+    .btn-luu { background: #2e7d32; color: white; margin-top: 10px; }
+    .danhsach { background: #f8f8f8; padding:12px; border-radius:8px; margin:10px 0; max-height:180px; overflow:auto; }
+    .so-cau { font-size: 32px; font-weight: bold; text-align: center; color: #8b5a2b; margin: 10px 0; }
+    .thongbao { margin-top: 15px; text-align: center; font-size: 16px; }
+    .ten-nguoi { font-size:18px; color:#6b4226; text-align:center; margin-bottom:15px; }
+    .nut-dieu-huong { display:flex; gap:10px; margin:15px 0; }
+    .nut-dieu-huong a { flex:1; padding:12px; border-radius:8px; text-align:center; text-decoration:none; font-weight:bold; font-size:15px; }
+    .nut-phamcap { background:#8b5cf6; color:white; }
+    .nut-chinh { background:#6b7280; color:white; }
+  </style>
+</head>
+<body>
+  <div class="box">
+    <h1>🪨 Nhân Kim Thạch Hồn</h1>
+
+    <div class="nut-dieu-huong">
+      <a href="phamcap.html" class="nut-phamcap">⬅️ Quay Phẩm Cấp</a>
+      <a href="../game.html" class="nut-chinh">🏠 Quay Trang Chính</a>
+    </div>
+
+    <h2>📜 Giới thiệu phẩm cấp</h2>
+    <p>Chúc mừng bạn đã bước vào Nhân Kim Thạch Hồn! Tại cấp này, bạn tiếp tục rèn luyện tâm ý, viết câu niệm và phát tâm cho bạn chơi. Hãy kiên trì tích lũy điểm để tiến lên Thiên Kim Thạch Hồn.</p>
+    <p><strong>Quy tắc:</strong> Viết 1 câu niệm, phát tâm cho bạn, mỗi câu sẽ được cộng 1 điểm phát tâm, bạn được phát tâm sẽ nhận 0.5 điểm được phát tâm.</p>
+  </div>
+
+  <div class="box">
+    <h1>🙏 Viết Câu Niệm</h1>
+    <div class="ten-nguoi">Người chơi: <strong id="tenNguoiChoi"></strong></div>
+
+    <label><strong>Nhập câu niệm (1 câu):</strong></label>
+    <textarea id="noiDungNiem" placeholder="Viết 1 câu niệm..."></textarea>
+
+    <label><strong>Phát tâm cho bạn (nhập tên hoặc email bạn chơi):</strong></label>
+    <input type="text" id="tenBan" placeholder="Tên hoặc email người bạn...">
+
+    <button class="btn-gui-tam" id="btnGuiTam">📥 Gửi tạm (lưu trên máy)</button>
+
+    <div class="so-cau">Số câu chờ gửi: <span id="demTam">0</span></div>
+
+    <div class="danhsach" id="danhSachTam"></div>
+    
+    <button class="btn-luu" id="btnLuu">💾 Lưu tất cả</button>
+    
+    <div class="thongbao" id="thongBao"></div>
+  </div>
+
+  <script>
+    // 👇 LINK WEB APP CỦA ANH 👇
+    const LINK_WEB_APP = "https://script.google.com/macros/s/AKfycbwGELqzcjUKqgu5eAZ5FryUldxAUa1aQsM8rUEA6gQdGQ95W9OBJCO81YPqiea2_vx61w/exec";
+    
+    const btnGuiTam = document.getElementById('btnGuiTam');
+    const btnLuu = document.getElementById('btnLuu');
+    const noiDungInput = document.getElementById('noiDungNiem');
+    const tenBanInput = document.getElementById('tenBan');
+    const demTam = document.getElementById('demTam');
+    const danhSachTam = document.getElementById('danhSachTam');
+    const thongBao = document.getElementById('thongBao');
+    const tenNguoiChoiHienTai = localStorage.getItem("tenNguoiChoi");
+    document.getElementById("tenNguoiChoi").textContent = tenNguoiChoiHienTai || "Chưa đăng nhập";
+
+    let danhSachCauTam = [];
+
+    noiDungInput.addEventListener('keydown', function(e) {
+      if (e.key === 'Enter') {
+        e.preventDefault();
+        alert("❌ Không được nhấn Enter xuống dòng! Chỉ viết 1 câu rồi bấm Gửi tạm 🙏");
+      }
+    });
+
+    noiDungInput.addEventListener('input', function() {
+      const noiDungHienTai = this.value;
+      if (noiDungHienTai.includes('\n')) {
+        this.value = '';
+        alert("❌ Không được xuống dòng!");
+        return;
+      }
+      if (noiDungHienTai.length > 100) {
+        this.value = '';
+        alert("❌ Nội dung quá dài, vui lòng gõ tay từng câu!");
+        return;
+      }
+    });
+
+    noiDungInput.addEventListener('paste', function(e) {
+      e.preventDefault();
+      alert("❌ Không được dán nội dung, vui lòng gõ tay câu niệm!");
+    });
+    noiDungInput.addEventListener('cut', function(e) {
+      e.preventDefault();
+      alert("❌ Không được cắt nội dung!");
+    });
+    noiDungInput.addEventListener('copy', function(e) {
+      e.preventDefault();
+      alert("❌ Không được sao chép nội dung!");
+    });
+    noiDungInput.addEventListener('drop', function(e) {
+      e.preventDefault();
+      alert("❌ Không được kéo thả nội dung vào đây!");
+    });
+
+    function capNhatDanhSachTam() {
+      demTam.textContent = danhSachCauTam.length;
+      danhSachTam.innerHTML = "";
+      danhSachCauTam.forEach((item, index) => {
+        danhSachTam.innerHTML += `<div>${index + 1}. ${item.cau}</div>`;
+      });
+    }
+
+    btnGuiTam.addEventListener('click', () => {
+      const cau = noiDungInput.value.trim();
+      if (!cau) {
+        thongBao.innerHTML = "❌ Chưa viết câu niệm nào!";
+        thongBao.style.color = "#d32f2f";
+        return;
+      }
+
+      danhSachCauTam.push({
+        cau: cau,
+        tenBan: tenBanInput.value.trim()
+      });
+
+      noiDungInput.value = "";
+      capNhatDanhSachTam();
+      thongBao.innerHTML = "✅ Đã gửi tạm 1 câu!";
+      thongBao.style.color = "#2e7d32";
+    });
+
+    btnLuu.addEventListener('click', async () => {
+      if (danhSachCauTam.length === 0) {
+        thongBao.innerHTML = "❌ Chưa có câu nào chờ gửi!";
+        thongBao.style.color = "#d32f2f";
+        return;
+      }
+      if(!tenNguoiChoiHienTai){
+        thongBao.innerHTML = "❌ Bạn chưa đăng nhập!";
+        thongBao.style.color = "#d32f2f";
+        return;
+      }
+
+      thongBao.innerHTML = "⏳ Đang gửi tất cả";
+      thongBao.style.color = "#666";
+
+      let thanhCong = 0;
+      for (const item of danhSachCauTam) {
+        const formDataDiem = new URLSearchParams();
+        formDataDiem.append('hanhDong', 'congDiem');
+        formDataDiem.append('tenChinh', tenNguoiChoiHienTai);
+        formDataDiem.append('tenBan', item.tenBan);
+        formDataDiem.append('noiDungCau', item.cau);
+
+        try {
+          const res = await fetch(LINK_WEB_APP, {
+            method: "POST",
+            body: formDataDiem
+          });
+          const kq = await res.json();
+          if(kq.ketqua === "thanhcong"){
+            thanhCong++;
+          }
+        } catch (e) {
+          console.log("Lỗi gửi câu:", e);
+        }
+      }
+
+      danhSachCauTam = [];
+      capNhatDanhSachTam();
+
+      thongBao.innerHTML = `✅ Đã gửi ${thanhCong} câu và cộng điểm thành công 🙏`;
+      thongBao.style.color = "#2e7d32";
+    });
+  </script>
+</body>
+</html>
