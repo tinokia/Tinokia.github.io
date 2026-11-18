@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chư Thiên Địa Linh</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: Arial, sans-serif; }
+        :root {
+            --phat:#d4af37; --botat:#8b5cf6; --alahan:#10b981;
+            --than:#3b82f6; --thanh:#f59e0b; --tien:#ec4899;
+            --quy:#6366f1;
+            --bg:#f7f3ea; --card:#ffffff; --text:#1e293b;
+            --shadow-sm: 0 2px 6px rgba(0,0,0,.06);
+            --shadow-md: 0 4px 12px rgba(0,0,0,.1);
+        }
+        body { background: var(--bg); color: var(--text); min-height: 100vh; }
+        header { padding: 1.5rem; text-align: center; border-bottom: 2px solid var(--phat); background: #fffaf2; }
+        header h1 { font-size: 1.5rem; color: var(--phat); }
+        
+        nav { position: sticky; top:0; background: rgba(255,255,255,.96); padding: .6rem; display: flex; flex-wrap: wrap; justify-content: center; gap: .5rem; z-index:99; box-shadow: 0 2px 8px rgba(0,0,0,.08); }
+        nav button { padding: .5rem .9rem; border-radius: 20px; border: none; cursor: pointer; font-size: .9rem; transition:.3s; }
+        nav button.active { transform: scale(1.05); box-shadow: 0 0 8px currentColor; }
+        
+        .btn-phat { background: var(--phat); color:#000; }
+        .btn-botat { background: var(--botat); color:#fff; }
+        .btn-quy { background: var(--quy); color:#fff; }
+        .btn-alahan { background: var(--alahan); color:#000; }
+        .btn-than { background: var(--than); color:#fff; }
+        .btn-thanh { background: var(--thanh); color:#000; }
+        .btn-tien { background: var(--tien); color:#fff; }
+        
+        .container { max-width: 900px; margin: 0 auto; padding: 1.5rem; }
+        .tab-content { display: none; }
+        .tab-content.active { display: block; animation: fadeIn .3s ease; }
+        @keyframes fadeIn { from{opacity:0; transform: translateY(5px);} to{opacity:1; transform: translateY(0);} }
+        
+        h2 { font-size: 1.3rem; margin-bottom: 1rem; padding-bottom: .5rem; border-bottom: 1px solid #ddd; display: flex; align-items: center; justify-content: space-between; }
+        .count { font-size: 0.9rem; font-weight: normal; opacity: 0.7; }
+        
+        /* === Mục trong danh sách === */
+        .item { 
+            padding: 1rem; border-bottom: 1px solid #e0e0e0; 
+            background: var(--card); border-radius: 12px; 
+            margin-bottom: .8rem; box-shadow: var(--shadow-sm);
+            cursor: pointer; transition: all .25s ease;
+        }
+        .item:hover { transform: translateY(-2px); box-shadow: var(--shadow-md); }
+        .item:last-child { border-bottom: none; margin-bottom: 0; }
+        .name { font-weight: bold; font-size: 1rem; }
+        .date { font-size: .9rem; opacity: .75; margin-top: .4rem; line-height: 1.5; }
+        
+        /* === Modal Trang Chi Tiết === */
+        .modal-overlay {
+            position: fixed; top: 0; left: 0; right: 0; bottom: 0;
+            background: rgba(0,0,0,.5); display: none; align-items: center; justify-content: center;
+            z-index: 999; padding: 1rem;
+        }
+        .modal-overlay.active { display: flex; }
+        .modal-content {
+            background: #fff; border-radius: 16px; max-width: 500px; width: 100%;
+            max-height: 85vh; overflow-y: auto; box-shadow: var(--shadow-md);
+            animation: modalIn .3s ease;
+        }
+        @keyframes modalIn {
+            from { opacity:0; transform: scale(.95); }
+            to { opacity:1; transform: scale(1); }
+        }
+        .modal-header { padding: 1.25rem; border-bottom: 1px solid #eee; display: flex; justify-content: space-between; align-items: flex-start; }
+        .modal-title { font-size: 1.25rem; font-weight: bold; }
+        .close-btn { background: none; border: none; font-size: 1.5rem; cursor: pointer; color: #888; line-height: 1; padding: 0 .3rem; }
+        .close-btn:hover { color: #000; }
+        .modal-body { padding: 1.25rem; line-height: 1.7; }
+        .modal-body p { margin-bottom: .75rem; }
+        .modal-body strong { color: var(--text); }
+        
+        footer { text-align: center; padding: 2rem; opacity: .6; font-size: .85rem; border-top: 1px solid #ddd; margin-top: 2rem; }
+        
+        @media (max-width: 600px) { 
+            nav button { padding: .4rem .7rem; font-size: .8rem; } 
+            .container { padding: 1rem; } 
+            .modal-header, .modal-body { padding: 1rem; }
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>Chư Thiên Địa Linh</h1>
+</header>
+
+<nav>
+    <button ><a href="../index.html">🏠 Trang Chủ</a></button>
+    <button class="btn-phat active" data-tab="phat">Phật</button>
+    <button class="btn-tien" data-tab="tien">Tiên</button>
+    <button class="btn-botat" data-tab="botat">Bồ Tát</button>
+    <button class="btn-alahan" data-tab="alahan">A La Hán</button>
+    <button class="btn-thanh" data-tab="thanh">Thánh</button>
+    <button class="btn-than" data-tab="than">Thần</button>
+    <button class="btn-quy" data-tab="quy">Quỷ</button>
+</nav>
+
+<div class="container">
+    <div id="phat" class="tab-content active">
+        <h2 style="color:var(--phat)">☸ Phật <span class="count"></span></h2>
+    </div>
+    <div id="botat" class="tab-content">
+        <h2 style="color:var(--botat)">✦ Bồ Tát <span class="count"></span></h2>
+    </div>
+    <div id="alahan" class="tab-content">
+        <h2 style="color:var(--alahan)">❖ A La Hán <span class="count"></span></h2>
+    </div>
+    <div id="than" class="tab-content">
+        <h2 style="color:var(--than)">⚡ Thần <span class="count"></span></h2>
+    </div>
+    <div id="thanh" class="tab-content">
+        <h2 style="color:var(--thanh)">✦ Thánh <span class="count"></span></h2>
+    </div>
+    <div id="tien" class="tab-content">
+        <h2 style="color:var(--tien)">☁ Tiên <span class="count"></span></h2>
+    </div>
+    <div id="quy" class="tab-content">
+        <h2 style="color:var(--quy)">👻 Quỷ <span class="count"></span></h2>
+    </div>
+</div>
+
+<!-- === MODAL CHI TIẾT === -->
+<div class="modal-overlay" id="detailModal">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h3 class="modal-title" id="modalTitle"></h3>
+            <button class="close-btn" id="closeModal">&times;</button>
+        </div>
+        <div class="modal-body" id="modalBody"></div>
+    </div>
+</div>
+<script src="tongiao/tongiao.js"></script>
+<script>
+// === KHỞI TẠO ===
+const modal = document.getElementById('detailModal');
+const modalTitle = document.getElementById('modalTitle');
+const modalBody = document.getElementById('modalBody');
+const closeModal = document.getElementById('closeModal');
+
+// Đóng modal
+closeModal.addEventListener('click', () => {
+    modal.classList.remove('active');
+});
+modal.addEventListener('click', (e) => {
+    if (e.target === modal) modal.classList.remove('active');
+});
+
+// Tạo danh sách
+document.addEventListener('DOMContentLoaded', () => {
+    Object.keys(DATA_LINH_THE).forEach(key => {
+        const tab = document.getElementById(key);
+        const countEl = tab.querySelector('.count');
+        const list = DATA_LINH_THE[key];
+        
+        countEl.textContent = `— ${list.length} vị`;
+        
+        list.forEach((item, index) => {
+            const div = document.createElement('div');
+            div.className = 'item';
+            div.innerHTML = `<div class="name">${item.name}</div>`;
+            div.addEventListener('click', () => {
+                openDetail(item);
+            });
+            tab.appendChild(div);
+        });
+    });
+
+    // Chuyển tab
+    const tabs = document.querySelectorAll('[data-tab]');
+    const contents = document.querySelectorAll('.tab-content');
+    tabs.forEach(btn => {
+        btn.addEventListener('click', () => {
+            tabs.forEach(b => b.classList.remove('active'));
+            contents.forEach(c => c.classList.remove('active'));
+            btn.classList.add('active');
+            document.getElementById(btn.dataset.tab).classList.add('active');
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+    });
+});
+
+// === MỞ TRANG CHI TIẾT ===
+function openDetail(item) {
+    modalTitle.textContent = item.name;
+    modalBody.innerHTML = item.detail || `<p>Không có thông tin chi tiết cho vị này.</p>`;
+    modal.classList.add('active');
+}
+</script>
+
+</body>
+</html>
