@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<title>Trắc nghiệm Quẻ Dịch</title>
+
+<style>
+body{
+  font-family:Arial,Helvetica,sans-serif;
+  background: linear-gradient(180deg, #e6f2ff 0%, #f2f6ff 100%);
+  padding: 80px 20px 30px; /* === Để khoảng trống cho 2 nút trên cùng === */
+  position: relative;
+  min-height: 100vh;
+}
+
+/* === 2 NÚT TRANG CHỦ & KINH DỊCH === */
+.nav-buttons {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  display: flex;
+  gap: 12px;
+  z-index: 10;
+}
+.nav-btn {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 10px 18px;
+  background: rgba(255, 255, 255, 0.9);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(74, 108, 255, 0.3);
+  border-radius: 20px;
+  color: #2b4eff;
+  font-size: 1rem;
+  font-weight: 600;
+  text-decoration: none;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+  transition: all 0.25s ease;
+}
+.nav-btn:hover {
+  background: #4a6cff;
+  color: #fff;
+  border-color: #4a6cff;
+  transform: translateY(-2px);
+}
+.nav-icon {
+  font-size: 1.1rem;
+}
+
+.quiz{
+  max-width: 1200px;
+  margin: auto;
+  background: #fff;
+  border-radius: 14px;
+  padding: 25px;
+  box-shadow: 0 10px 30px rgba(0,0,0,.1);
+}
+h2{
+  text-align: center;
+  color: #2b4eff;
+  margin-bottom: 25px;
+  font-size: 28px;
+}
+
+#questionPool{
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+@media(max-width: 900px){#questionPool{grid-template-columns: 1fr 1fr;}}
+@media(max-width: 600px){#questionPool{grid-template-columns: 1fr;}}
+
+.question{
+  border: 1px solid #e0e3eb;
+  border-radius: 12px;
+  padding: 18px;
+  background: #fafbff;
+  transition: box-shadow 0.2s ease;
+}
+.question:hover {
+  box-shadow: 0 4px 12px rgba(43, 78, 255, 0.08);
+}
+.q-title{
+  font-weight: bold;
+  margin-bottom: 12px;
+  color: #2b4eff;
+  font-size: 16px;
+}
+
+.answers{
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+.answers label{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 8px;
+  border-radius: 10px;
+  background: #fff;
+  border: 1px solid #e0e3eb;
+  cursor: pointer;
+  transition: all .2s;
+  text-align: center;
+}
+.answers label:hover{
+  background: #eef3ff;
+  border-color: #8aa7ff;
+}
+.answers input{transform: scale(1.2)}
+
+.correct{background: #e9f9ef !important; border-color: #35c26b}
+.wrong{background: #ffecec !important; border-color: #ff6b6b}
+
+.hexagram{
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: 4px 0;
+}
+
+.line{
+  height: 3px;
+  width: 60px;
+  background: #222;
+  border-radius: 4px;
+}
+.line.broken{
+  background: none;
+  display: flex;
+  justify-content: space-between;
+}
+.line.broken span{
+  width: 26px;
+  height: 3px;
+  background: #222;
+  border-radius: 4px;
+}
+
+.btn-group {
+  margin-top: 20px;
+  padding-top: 20px;
+  border-top: 1px solid #eef3ff;
+}
+button{
+  padding: 12px 24px;
+  border: none;
+  border-radius: 10px;
+  background: #4a6cff;
+  color: #fff;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  margin: 5px;
+  transition: background .2s;
+}
+button:hover{background: #3858e6}
+button a{color: #fff;text-decoration: none}
+
+.result{
+  font-weight: bold;
+  margin-top: 20px;
+  font-size: 20px;
+  color: #2b4eff;
+  padding: 15px;
+  background: #f0f4ff;
+  border-radius: 10px;
+}
+
+/* === Responsive === */
+@media (max-width: 600px) {
+  body { padding: 75px 12px 20px; }
+  .nav-buttons { left: 12px; top: 15px; }
+  .nav-btn { padding: 8px 14px; font-size: 0.9rem; }
+  .quiz { padding: 18px; }
+  h2 { font-size: 22px; }
+  .answers { grid-template-columns: 1fr; }
+  button { padding: 10px 18px; font-size: 15px; width: 100%; margin: 5px 0; }
+}
+</style>
+</head>
+
+<body>
+    <!-- === 2 NÚT ĐIỀU HƯỚNG === -->
+    <div class="nav-buttons">
+        <a href="../../index.html" class="nav-btn">
+            <span class="nav-icon">🏠</span> Trang Chủ
+        </a>
+        <a href="../KinhDich.html" class="nav-btn">
+            <span class="nav-icon">☯️</span> Kinh Dịch
+        </a>
+    </div>
+
+<div class="quiz">
+<h2>📝 Trắc nghiệm Kinh Dịch</h2>
+<div id="questionPool"></div>
+<div class="btn-group" style="text-align:center">
+  <button onclick="grade()">✅ Chấm điểm</button>
+  <button onclick="location.reload()">🔄 Làm đề khác</button>
+  <div class="result" id="result"></div>
+</div>
+</div>
+<script src="tracnghiem.js"></script>
+<script>
+  
+
+// ==================================================
+// 🚫 KHÔNG CẦN SỬA DƯỚI ĐÂY
+// ==================================================
+
+/* Vẽ hình quẻ */
+function drawHex(code){
+  return code.split('').reduce((h,b)=>
+    h += b==="1"
+      ?'<div class="line"></div>'
+      :'<div class="line broken"><span></span><span></span></div>'
+    ,'<div class="hexagram">')+'</div>';
+}
+
+/* Trộn ngẫu nhiên mảng */
+function shuffle(arr){
+  for(let i=arr.length-1;i>0;i--){
+    const j=Math.floor(Math.random()*(i+1));
+    [arr[i],arr[j]]=[arr[j],arr[i]];
+  }
+  return arr;
+}
+
+/* Tạo HTML 1 câu hỏi */
+function makeQuestion(q, idx){
+  let labels = q.opts.map((opt, i) => {
+    let content = q.type==="hex" ? drawHex(opt) : opt;
+    return `<label><input type="radio" name="q${idx}" value="${i}">${content}</label>`;
+  });
+  labels = shuffle([...labels]);
+  return `
+    <div class="question">
+      <div class="q-title">${idx+1}. ${q.q}</div>
+      <div class="answers">${labels.join('')}</div>
+      <input type="hidden" class="correct-ans" value="${q.ans}">
+    </div>
+  `;
+}
+
+/* Khởi tạo đề */
+function prepareQuiz(limit=10){
+  const pool = document.getElementById("questionPool");
+  let selected = shuffle([...QUESTIONS]).slice(0, limit);
+  pool.innerHTML = selected.map((q, i) => makeQuestion(q, i)).join('');
+}
+
+/* Chấm điểm */
+function grade(){
+  let score=0, total=0;
+  document.querySelectorAll(".question").forEach(q=>{
+    total++;
+    let correct = +q.querySelector(".correct-ans").value;
+    q.querySelectorAll("label").forEach(lb=>{
+      let r = lb.querySelector("input");
+      r.disabled = true;
+      let val = +r.value;
+      if(val===correct) lb.classList.add("correct");
+      if(r.checked && val!==correct) lb.classList.add("wrong");
+      if(r.checked && val===correct) score++;
+    });
+  });
+  document.getElementById("result").innerText = `✅ Kết quả: ${score} / ${total}`;
+}
+
+/* Chạy khi tải xong */
+document.addEventListener("DOMContentLoaded", () => prepareQuiz(10));
+</script>
+</body>
+</html>

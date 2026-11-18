@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>64 Quẻ Kinh Dịch</title>
+    <style>
+        * {margin: 0; padding: 0; box-sizing: border-box; font-family: Arial, sans-serif;}
+        body {
+            background: linear-gradient(180deg, #e6f2e6 0%, #ffffff 100%);
+            padding: 80px 20px 30px; /* === Để khoảng trống cho 2 nút trên cùng === */
+            position: relative;
+        }
+
+        /* === 2 NÚT TRANG CHỦ & KINH DỊCH === */
+        .nav-buttons {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            display: flex;
+            gap: 12px;
+            z-index: 10;
+        }
+        .nav-btn {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            padding: 10px 18px;
+            background: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(67, 160, 71, 0.3);
+            border-radius: 20px;
+            color: #2e7d32;
+            font-size: 1rem;
+            font-weight: 600;
+            text-decoration: none;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+            transition: all 0.25s ease;
+        }
+        .nav-btn:hover {
+            background: #43a047;
+            color: #fff;
+            border-color: #43a047;
+            transform: translateY(-2px);
+        }
+        .nav-icon {
+            font-size: 1.1rem;
+        }
+
+        h1 {
+            text-align: center;
+            color: #2e7d32;
+            font-size: 32px;
+            margin-bottom: 25px;
+            font-weight: bold;
+        }
+
+        .menu-quay {
+            text-align: center;
+            margin-bottom: 25px;
+            padding: 15px;
+            background: #f8faf5;
+            border-radius: 12px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+        }
+        .menu-quay select, .menu-quay button {
+            padding: 10px 16px;
+            font-size: 16px;
+            margin: 5px;
+            border-radius: 8px;
+            border: 1px solid #43a047;
+            cursor: pointer;
+        }
+        .btn-nav {
+            background: #43a047;
+            color: #fff;
+            border: none;
+            cursor: pointer;
+            font-weight: bold;
+            transition: background 0.2s ease;
+        }
+        .btn-nav:hover {background: #388e3c;}
+
+        table {
+            width: 100%;
+            max-width: 900px;
+            margin: 0 auto;
+            border-collapse: collapse;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+            border-radius: 12px;
+            overflow: hidden;
+        }
+
+        th {
+            background: linear-gradient(180deg, #66bb6a, #43a047);
+            color: #fff;
+            padding: 15px 10px;
+            text-align: center;
+            font-size: 18px;
+            font-weight: bold;
+            border: 2px solid #fff;
+        }
+
+        td {
+            padding: 15px 10px;
+            text-align: center;
+            font-size: 18px;
+            border: 2px solid #fff;
+            vertical-align: middle;
+        }
+
+        .col-name {
+            background: linear-gradient(90deg, #43a047, #81c784);
+            color: #fff;
+            font-weight: bold;
+            font-size: 20px;
+            width: 14%;
+        }
+        .circle-num {
+            display: inline-block;
+            width: 40px;
+            height: 40px;
+            line-height: 40px;
+            background: #fff;
+            color: #2e7d32;
+            border-radius: 50%;
+            font-size: 20px;
+            margin-top: 10px;
+        }
+
+        .col-hao {width: 10%; background: #f1f8e9; font-weight: 500;}
+
+        .tag-duong {
+            display: inline-block;
+            background: #ffcdd2;
+            color: #c62828;
+            padding: 6px 14px;
+            border-radius: 6px;
+            font-weight: bold;
+        }
+        .tag-am {
+            display: inline-block;
+            background: #e0e0e0;
+            color: #424242;
+            padding: 6px 14px;
+            border-radius: 6px;
+            font-weight: bold;
+        }
+
+        .hinh-que {text-align: center; vertical-align: middle;}
+        .duong{
+            width:40px;
+            height:6px;
+            background:#000;
+            margin:0 auto;
+            border-radius:3px;
+        }
+        .am{
+            width:40px;
+            height:6px;
+            margin:0 auto;
+            display:flex;
+            justify-content:space-between;
+            align-items:center;
+        }
+        .am::before,
+        .am::after{
+            content:"";
+            width:16px;
+            height:6px;
+            background:#000;
+            border-radius:3px;
+        }
+
+        .phu-mau-the {color: #d32f2f; font-weight: bold;}
+        .phu-mau-ung {color: #1565c0; font-weight: bold;}
+        .huynh-de {color: #333;}
+        .quan-quy {color: #333;}
+        .the-tai {color: #333;}
+        .tu-ton {color: #333;}
+
+        .tho-vang {background: #ffc107; color: #000; font-weight: bold;}
+        .kim-xam {background: #e0e0e0; color: #000; font-weight: bold;}
+        .hoa-do {background: #e53935; color: #fff; font-weight: bold;}
+        .moc-xanh {background: #2e7d32; color: #fff; font-weight: bold;}
+        .thuy-den {background: #000; color: #fff; font-weight: bold;}
+
+        .row-nghia {
+            background: #e8f5e9;
+            font-size: 20px;
+            font-weight: 500;
+            color: #2e7d32;
+            padding: 15px;
+        }
+
+        /* === Responsive === */
+        @media (max-width: 768px) {
+            body { padding: 75px 12px 20px; }
+            .nav-buttons { left: 12px; top: 15px; }
+            .nav-btn { padding: 8px 14px; font-size: 0.9rem; }
+            h1 { font-size: 24px; }
+            th, td { font-size: 15px; padding: 12px 6px; }
+            .col-name { font-size: 17px; }
+            .menu-quay select, .menu-quay button { padding: 8px 12px; font-size: 15px; }
+        }
+    </style>
+</head>
+<body>
+    <!-- === 2 NÚT ĐIỀU HƯỚNG === -->
+    <div class="nav-buttons">
+        <a href="../../index.html" class="nav-btn">
+            <span class="nav-icon">🏠</span> Trang Chủ
+        </a>
+        <a href="../KinhDich.html" class="nav-btn">
+            <span class="nav-icon">☯️</span> Kinh Dịch
+        </a>
+    </div>
+
+    <h1 id="tenQue">Quẻ Kinh Dịch</h1>
+
+    <div class="menu-quay">
+        <button class="btn-nav" onclick="quayLai()">◀ Quẻ Trước</button>
+        <select id="chonQue" onchange="taiQue(this.value)">
+            <option value="">-- Chọn số quẻ --</option>
+        </select>
+        <button class="btn-nav" onclick="tiepTheo()">Quẻ Sau ▶</button>
+    </div>
+
+    <table id="bangQue">
+        <thead>
+            <tr>
+                <th>Tên quẻ</th>
+                <th>Hào</th>
+                <th>Âm Dương</th>
+                <th>Hình quẻ</th>
+                <th>Lục thân</th>
+                <th>Địa chi</th>
+            </tr>
+        </thead>
+        <tbody id="noiDungQue"></tbody>
+    </table>
+
+<script src="64que.js"></script>    
+<script>
+
+let soHienTai = 1;
+const MAP_HANH = {
+  "Thổ":"tho-vang","Kim":"kim-xam","Hỏa":"hoa-do","Mộc":"moc-xanh","Thủy":"thuy-den"
+};
+
+window.onload = function(){
+    let sel = document.getElementById('chonQue');
+    for(let i=1; i<=64; i++){
+        let opt = document.createElement('option');
+        opt.value = i;
+        opt.textContent = `Quẻ số ${i}`;
+        sel.appendChild(opt);
+    }
+    taiQue(1);
+};
+
+function taiQue(so){
+    if(!QUE_DICH[so]) {
+        alert(`Chưa có dữ liệu quẻ số ${so}`);
+        document.getElementById('chonQue').value = soHienTai;
+        return;
+    }
+    soHienTai = parseInt(so);
+    document.getElementById('tenQue').textContent = "Quẻ Kinh Dịch: " + QUE_DICH[so].ten;
+    document.getElementById('chonQue').value = so;
+
+    let tbody = document.getElementById('noiDungQue');
+    tbody.innerHTML = "";
+    let q = QUE_DICH[so];
+
+    q.hao.forEach((h, idx) => {
+        let hanhClass = MAP_HANH[h.hanh];
+        let tagAD = h.amduong==="Dương" 
+            ? `<span class="tag-duong">Dương</span>` 
+            : `<span class="tag-am">Âm</span>`;
+        let hinhDiv = `<div class="${h.hinh}"></div>`;
+        let tenCot = idx===0 
+            ? `${q.ten}<div class="circle-num">${so}</div>` 
+            : "";
+        let rowspan = idx===0 ? "rowspan=\"6\"" : "";
+
+        let clsThan = "";
+        if(h.than.includes("- THẾ") || h.than.includes(" - THẾ")) clsThan = "phu-mau-the";
+        else if(h.than.includes("- ỨNG") || h.than.includes(" - ỨNG")) clsThan = "phu-mau-ung";
+
+        let tr = document.createElement('tr');
+        tr.innerHTML = `
+            ${idx===0 ? `<td class="col-name" ${rowspan}>${tenCot}</td>` : ""}
+            <td class="col-hao">${h.so}</td>
+            <td>${tagAD}</td>
+            <td class="hinh-que">${hinhDiv}</td>
+            <td class="${clsThan}">${h.than}</td>
+            <td class="${hanhClass}">${h.diachi}<br>(${h.hanh})</td>
+        `;
+        tbody.appendChild(tr);
+    });
+
+    let trNghia = document.createElement('tr');
+    trNghia.innerHTML = `<td colspan="6" class="row-nghia">📖 Ý nghĩa quẻ: ${q.ynghia}</td>`;
+    tbody.appendChild(trNghia);
+}
+
+function quayLai(){ if(soHienTai>1) taiQue(soHienTai-1); }
+function tiepTheo(){ if(soHienTai<64 && QUE_DICH[soHienTai+1]) taiQue(soHienTai+1); }
+</script>
+</body>
+</html>
