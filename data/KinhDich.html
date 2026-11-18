@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kinh Dịch</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: "Segoe UI", sans-serif;
+        }
+
+        body {
+            background: linear-gradient(180deg, #4a6cf7 0%, #6384f8 50%, #7b98f9 100%);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 0; /* === BỎ padding trên, cho nội dung lên trên === */
+            color: #fff;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        /* === NÚT TRANG CHỦ === */
+        .home-btn {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            z-index: 10;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            padding: 10px 16px;
+            background: rgba(255, 255, 255, 0.25);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            color: #fff;
+            font-size: 1rem;
+            font-weight: 600;
+            text-decoration: none;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        .home-icon {
+            font-size: 1.2rem;
+        }
+
+        .container {
+            text-align: center;
+            width: 100%;
+            max-width: 420px;
+            padding: 80px 20px 20px; /* === Giảm padding trên rất nhiều === */
+            margin-top: 0; /* === Bỏ khoảng cách thừa trên cùng === */
+        }
+
+        .logo-icon {
+            font-size: 64px;
+            color: #9333ea;
+            margin-bottom: 5px; /* === Giảm khoảng cách dưới biểu tượng === */
+        }
+
+        h1 {
+            font-size: 3.2rem;
+            color: #ffd700;
+            font-weight: 900;
+            margin-bottom: 8px; /* === Giảm khoảng cách dưới tiêu đề === */
+            letter-spacing: 2px;
+        }
+
+        .subtitle {
+            color: #e0f2fe;
+            font-size: 1.2rem;
+            margin-bottom: 50px; /* === Giảm khoảng cách dưới phụ đề === */
+            letter-spacing: 2px;
+            opacity: 0.9;
+        }
+
+        .btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            width: 100%;
+            padding: 22px;
+            margin-bottom: 24px;
+            font-size: 1.4rem;
+            font-weight: bold;
+            border: none;
+            border-radius: 16px;
+            cursor: pointer;
+            transition: all 0.25s ease;
+            text-decoration: none;
+            color: #000;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+        }
+
+        .btn-que {
+            background: linear-gradient(135deg, #ffd700, #ffc107);
+        }
+
+        .btn-test {
+            background: linear-gradient(135deg, #2563eb, #3b82f6);
+            color: #fff;
+        }
+
+        .btn:hover {
+            transform: scale(1.02);
+        }
+
+        .btn-icon {
+            font-size: 1.8rem;
+        }
+
+        /* === Responsive === */
+        @media (max-width: 480px) {
+            .home-btn {
+                top: 15px;
+                left: 15px;
+                padding: 8px 14px;
+                font-size: 0.95rem;
+            }
+            .container {
+                padding: 60px 16px 20px;
+            }
+            .logo-icon { font-size: 52px; }
+            h1 { font-size: 2.4rem; }
+            .subtitle { font-size: 1rem; margin-bottom: 40px; }
+            .btn { padding: 18px; font-size: 1.2rem; }
+        }
+    </style>
+</head>
+<body>
+    <!-- === NÚT TRANG CHỦ === -->
+    <a href="../index.html" class="home-btn">
+        🏠 Trang Chủ
+    </a>
+
+    <div class="container">
+        
+        <h1>☯️ KINH DỊCH</h1>
+        <p class="subtitle">Triết lý · Bát Quái · Số Vận</p>
+
+        <a href="kinhdich/64que.html" class="btn btn-que">
+            📜 64 Quẻ Kinh Dịch
+        </a>
+
+        <a href="kinhdich/Trac-nghiem.html" class="btn btn-test">
+            🧩 Trắc Nghiệm
+        </a>
+    </div>
+</body>
+</html>
